@@ -3,10 +3,11 @@ import { Provider } from "react-redux";
 import appStore from "./store/appStore";
 import Body from "./components/Body";
 import Login from "./components/Login";
-// Placeholders for now
-const Feed = () => <div className="text-3xl font-bold text-center mt-10">Feed - Developer Cards (Coming Soon)</div>;
+import Feed from "./components/Feed";
+import Connections from "./components/Connections";
+import Requests from "./components/Requests";
+
 const Profile = () => <div className="text-2xl mt-10">User Profile Page</div>;
-const Connections = () => <div className="text-2xl mt-10">Connections Page</div>;
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/connections" element={<Connections />} />
+            <Route path="/requests" element={<Requests />} />
           </Route>
         </Routes>
       </BrowserRouter>
