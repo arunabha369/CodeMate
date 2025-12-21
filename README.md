@@ -106,15 +106,7 @@ npm run dev
 
 ---
 
-## 🔌 API Reference
 
-### Auth & Profile
-- `POST /signup` - Register a new user
-- `POST /login` - Login with email/password
-- `GET /auth/github` - Initiate GitHub OAuth
-- `GET /auth/linkedin` - Initiate LinkedIn OAuth
-- `GET /profile/view` - Get current user profile
-- `PATCH /profile/edit` - Update profile details
 
 ### Matchmaking
 - `GET /feed` - Get potential matches (swiping deck)
