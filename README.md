@@ -3,7 +3,6 @@
 > **Swipe. Match. Code.**  
 > The ultimate matchmaking platform for developers to find their perfect coding partner, hackathon teammate, or open-source collaborator.
 
-![CodeMate Banner](https://via.placeholder.com/1200x400?text=CodeMate+Preview+Banner)
 
 ## 📖 Overview
 
