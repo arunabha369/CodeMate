@@ -5,9 +5,11 @@ import { addFeed } from "../store/feedSlice";
 import { useEffect } from "react";
 import UserCard from "./UserCard";
 import { Loader2 } from "lucide-react";
+import LandingPage from "./LandingPage";
 
 const Feed = () => {
     const feed = useSelector((store) => store.feed);
+    const user = useSelector((store) => store.user);
     const dispatch = useDispatch();
 
     const getFeed = async () => {
@@ -23,8 +25,12 @@ const Feed = () => {
     };
 
     useEffect(() => {
-        getFeed();
-    }, []);
+        if (user) {
+            getFeed();
+        }
+    }, [user]);
+
+    if (!user) return <LandingPage />;
 
     if (!feed) return <div className="flex justify-center mt-20"><Loader2 className="h-10 w-10 animate-spin text-primary" /></div>;
 
