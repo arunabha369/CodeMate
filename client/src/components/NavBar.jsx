@@ -8,6 +8,8 @@ import { useState } from "react";
 import { LogOut, User as UserIcon, Users, MessageSquare } from "lucide-react";
 import { ModeToggle } from "./mode-toggle";
 
+import logo from "../assets/logo.png";
+
 const NavBar = () => {
     const user = useSelector((store) => store.user);
     const dispatch = useDispatch();
@@ -23,12 +25,11 @@ const NavBar = () => {
             console.log(err);
         }
     };
-
     return (
         <nav className="w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
-            <div className="container flex h-16 items-center justify-between px-4">
-                <Link to="/" className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                    CodeMate
+            <div className="container flex h-20 items-center justify-between px-4">
+                <Link to="/">
+                    <img src={logo} alt="CodeMate Logo" className="h-44 w-auto -ml-4" />
                 </Link>
 
                 {user ? (
