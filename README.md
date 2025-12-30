@@ -4,7 +4,7 @@
 
 Whether you're looking for a hackathon buddy, open-source partner, or someone who loves the same tech stack — CodeMate helps you find your **code soulmate**.
 
-![CodeMate Interface](/Users/arunabhabanerjee/.gemini/antigravity/brain/28c369b9-80e1-4b83-9e3b-77c936c5367c/uploaded_image_1767118921712.png)
+![CodeMate Interface](./assets/codemate_preview.png)
 
 ---
 
