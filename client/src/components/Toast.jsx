@@ -17,25 +17,17 @@ const Toast = () => {
 
     if (!isVisible) return null;
 
-    const alertType =
-        type === "success"
-            ? "alert-success"
-            : type === "error"
-                ? "alert-error"
-                : type === "warning"
-                    ? "alert-warning"
-                    : "alert-info";
-
-    const bgColor =
-        type === "success" ? "bg-green-500" :
-            type === "error" ? "bg-red-500" :
-                type === "warning" ? "bg-yellow-500" : "bg-blue-500";
+    const indicatorColor =
+        type === "success" ? "bg-green-400" :
+            type === "error" ? "bg-rose-500" :
+                type === "warning" ? "bg-yellow-400" : "bg-blue-400";
 
     return (
-        <div className="toast toast-top toast-center z-50 transition-all duration-300 animate-fade-in pt-20">
-            <div className={`alert ${alertType} text-white shadow-lg glass-card border-none flex items-center gap-2 px-6 py-3 rounded-full`}>
-                <span className={`w-3 h-3 rounded-full ${bgColor} ring-2 ring-white/30 animate-pulse`}></span>
-                <span className="font-semibold tracking-wide">{message}</span>
+    return (
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-[100] transition-all duration-300 animate-in fade-in slide-in-from-top-5">
+            <div className="flex items-center gap-3 px-6 py-3 rounded-full shadow-lg border bg-popover text-popover-foreground">
+                <span className={`w-3 h-3 rounded-full ${indicatorColor} ring-2 ring-background`}></span>
+                <span className="font-medium text-sm">{message}</span>
             </div>
         </div>
     );

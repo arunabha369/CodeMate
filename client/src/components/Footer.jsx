@@ -1,9 +1,11 @@
 const Footer = () => {
     return (
-        <footer className="footer footer-center p-4 bg-base-300 text-base-content fixed bottom-0 w-full">
-            <aside>
-                <p>Copyright © 2024 - All right reserved by CodeMate Inc.</p>
-            </aside>
+        <footer className="w-full py-6 bg-background border-t">
+            <div className="container flex justify-center items-center">
+                <p className="text-sm text-muted-foreground">
+                    Copyright © 2024 - All rights reserved by CodeMate Inc.
+                </p>
+            </div>
         </footer>
     );
 };

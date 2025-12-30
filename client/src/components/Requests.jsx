@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { BASE_URL } from "../utils/constants";
 import { addRequests, removeRequest } from "../store/requestSlice";
 import { showToast } from "../store/toastSlice";
+import { Card, CardContent } from "./ui/card";
+import { Button } from "./ui/button";
 
 const Requests = () => {
     const requests = useSelector((store) => store.requests);
@@ -47,55 +49,54 @@ const Requests = () => {
 
     if (requests.length === 0) {
         return (
-            <div className="flex flex-col justify-center items-center my-10 animate-fade-in">
-                <h1 className="font-bold text-2xl text-gray-400">No Pending Requests</h1>
-                <p className="text-gray-600 mt-2">Check back later for new connections!</p>
+            <div className="flex flex-col justify-center items-center my-10 animate-in fade-in zoom-in-95">
+                <h1 className="font-bold text-2xl text-primary">No Pending Requests</h1>
+                <p className="text-muted-foreground mt-2">Check back later for new connections!</p>
             </div>
         )
     }
 
     return (
-        <div className="text-center my-10 sm:w-8/12 mx-auto animate-fade-in">
-            <h1 className="font-bold text-4xl mb-8 text-white tracking-tight">Connection Requests</h1>
+        <div className="text-center my-10 sm:w-8/12 mx-auto animate-in fade-in slide-in-from-bottom-4 pb-20">
+            <h1 className="font-bold text-4xl mb-8 text-foreground tracking-tight">Connection Requests</h1>
             <div className="space-y-4">
                 {requests.map((request) => {
                     const { _id, firstName, lastName, photoUrl, age, gender, about } =
                         request.fromUserId;
 
                     return (
-                        <div
+                        <Card
                             key={request._id}
-                            className="flex flex-col sm:flex-row justify-between items-center p-6 rounded-2xl glass-card border border-white/10 hover:border-brand-pink/30 transition-all duration-300 transform hover:-translate-y-1"
+                            className="flex flex-col sm:flex-row justify-between items-center p-6 border-border/50 bg-card/80 backdrop-blur-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1"
                         >
                             <div className="flex items-center gap-4 w-full sm:w-auto">
-                                <div className="avatar">
-                                    <div className="w-16 h-16 rounded-full ring ring-brand-purple ring-offset-base-100 ring-offset-2">
-                                        <img src={photoUrl} alt="photo" />
-                                    </div>
+                                <div className="h-16 w-16 shrink-0 overflow-hidden rounded-full ring-2 ring-primary ring-offset-2">
+                                    <img src={photoUrl} alt="photo" className="h-full w-full object-cover" />
                                 </div>
                                 <div className="text-left">
-                                    <h2 className="font-bold text-2xl text-white">
+                                    <h2 className="font-bold text-2xl text-foreground">
                                         {firstName} {lastName}
                                     </h2>
-                                    {age && <p className="text-sm text-gray-400 font-medium">{age} • {gender}</p>}
-                                    <p className="text-sm text-gray-500 mt-1 line-clamp-1 max-w-xs">{about}</p>
+                                    {age && <p className="text-sm text-primary font-medium uppercase tracking-wide">{age} • {gender}</p>}
+                                    <p className="text-sm text-muted-foreground mt-1 line-clamp-1 max-w-xs">{about}</p>
                                 </div>
                             </div>
                             <div className="flex gap-3 mt-4 sm:mt-0 w-full sm:w-auto justify-end">
-                                <button
-                                    className="btn btn-outline btn-error btn-sm sm:btn-md rounded-full px-6 hover:shadow-lg hover:shadow-red-500/20"
+                                <Button
+                                    variant="outline"
+                                    className="rounded-full px-6 border-destructive/30 text-destructive hover:bg-destructive/10 hover:text-destructive"
                                     onClick={() => reviewRequest("rejected", request._id)}
                                 >
                                     Reject
-                                </button>
-                                <button
-                                    className="btn btn-gradient btn-sm sm:btn-md rounded-full px-6 shadow-lg shadow-purple-500/20"
+                                </Button>
+                                <Button
+                                    className="rounded-full px-6 shadow-md bg-gradient-to-r from-primary to-secondary hover:opacity-90"
                                     onClick={() => reviewRequest("accepted", request._id)}
                                 >
                                     Accept
-                                </button>
+                                </Button>
                             </div>
-                        </div>
+                        </Card>
                     );
                 })}
             </div>
