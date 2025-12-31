@@ -24,9 +24,9 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 
-app.use("/", authRouter);
-app.use("/", requestRouter);
-app.use("/", userRouter);
+const routes = [authRouter, requestRouter, userRouter];
+app.use("/", routes);
+app.use("/.netlify/functions/api", routes);
 
 app.get('/test', (req, res) => {
     res.send('CodeMate Server is up and running!');

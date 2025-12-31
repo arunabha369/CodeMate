@@ -31,9 +31,12 @@ authRouter.post("/signup", async (req, res) => {
       expiresIn: "7d",
     });
 
+    const isProduction = process.env.NODE_ENV === "production";
     res.cookie("token", token, {
       expires: new Date(Date.now() + 8 * 3600000), // 8 hours
       httpOnly: true, // Prevent XSS
+      secure: isProduction,
+      sameSite: isProduction ? "None" : "Lax",
     });
 
     res.json({ message: "User Added successfully!", data: savedUser });
@@ -59,9 +62,12 @@ authRouter.post("/login", async (req, res) => {
         expiresIn: "7d",
       });
   
+      const isProduction = process.env.NODE_ENV === "production";
       res.cookie("token", token, {
         expires: new Date(Date.now() + 8 * 3600000), // 8 hours
         httpOnly: true, // Prevent XSS
+        secure: isProduction,
+        sameSite: isProduction ? "None" : "Lax",
       });
 
       res.send(user);
