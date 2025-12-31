@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 import { removeUser } from "../store/userSlice";
 import { Button } from "./ui/button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { LogOut, User as UserIcon, Users, MessageSquare } from "lucide-react";
 import { ModeToggle } from "./mode-toggle";
 
@@ -15,6 +15,39 @@ const NavBar = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [activeSection, setActiveSection] = useState("home");
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const sections = ["home", "features", "contact"];
+            const scrollPosition = window.scrollY + 100; // Offset
+
+            for (const section of sections) {
+                const element = document.getElementById(section);
+                if (element && element.offsetTop <= scrollPosition && (element.offsetTop + element.offsetHeight) > scrollPosition) {
+                    setActiveSection(section);
+                }
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    const scrollToSection = (e, sectionId) => {
+        e.preventDefault();
+        const element = document.getElementById(sectionId);
+        if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+            setActiveSection(sectionId);
+        } else {
+            navigate("/");
+            setTimeout(() => {
+                const el = document.getElementById(sectionId);
+                if (el) el.scrollIntoView({ behavior: "smooth" });
+            }, 100);
+        }
+    };
 
     const handleLogout = async () => {
         try {
@@ -37,15 +70,23 @@ const NavBar = () => {
 
                 {/* Center Navigation Pill */}
                 <div className="absolute left-1/2 -translate-x-1/2 hidden md:flex items-center gap-1 bg-white/5 backdrop-blur-md border border-white/10 rounded-full px-2 py-1.5 shadow-lg">
-                    {["Home", "Features", "Contact"].map((item) => (
-                        <a
-                            key={item}
-                            href={item === "Home" ? "/" : `/#${item.toLowerCase()}`}
-                            className="px-6 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-white/10 rounded-full transition-all"
-                        >
-                            {item}
-                        </a>
-                    ))}
+                    {["Home", "Features", "Contact"].map((item) => {
+                        const sectionId = item.toLowerCase();
+                        const isActive = activeSection === sectionId;
+                        return (
+                            <a
+                                key={item}
+                                href={`#${sectionId}`}
+                                onClick={(e) => scrollToSection(e, sectionId)}
+                                className={`px-6 py-2 text-sm font-medium rounded-full transition-all duration-300 ${isActive
+                                    ? "bg-rose-600 text-white shadow-lg shadow-rose-500/25"
+                                    : "text-gray-300 hover:text-white hover:bg-white/10"
+                                    }`}
+                            >
+                                {item}
+                            </a>
+                        );
+                    })}
                 </div>
 
                 {/* Right Actions */}

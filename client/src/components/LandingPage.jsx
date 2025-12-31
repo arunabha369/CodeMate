@@ -17,7 +17,7 @@ const LandingPage = () => {
             <div className="fixed bottom-0 right-0 w-[600px] h-[600px] bg-purple-600/10 blur-[100px] rounded-full pointer-events-none opacity-20" />
 
             {/* Hero Section */}
-            <section className="relative pt-32 pb-20 px-4 container mx-auto flex flex-col-reverse lg:flex-row items-center justify-between gap-12 min-h-[calc(100vh-100px)]">
+            <section id="home" className="relative pt-32 pb-20 px-4 container mx-auto flex flex-col-reverse lg:flex-row items-center justify-between gap-12 min-h-[calc(100vh-100px)]">
                 <div className="flex-1 space-y-8 z-10 animate-in fade-in slide-in-from-bottom-4 duration-700 text-center lg:text-left">
                     <div className="inline-block px-4 py-1.5 rounded-full border border-rose-500/30 bg-rose-500/10 text-rose-400 text-sm font-medium hover:bg-rose-500/20 transition-colors cursor-default">
                         CodeMate AI 1.0 is live! 🚀
