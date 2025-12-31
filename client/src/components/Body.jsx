@@ -26,10 +26,8 @@ const Body = () => {
             }
         } catch (err) {
             console.error("Profile fetch failed:", err);
-            // If authentication fails or data is invalid, ensure we're logged out
-            if (err.status === 401 || err.message === "Invalid user data") {
-                navigate("/login");
-            }
+            // On error (e.g., 401), we just stay on the current page. 
+            // If on root, Feed.jsx will handle showing the Landing Page.
         }
     };
 
