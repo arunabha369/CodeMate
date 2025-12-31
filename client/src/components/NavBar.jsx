@@ -65,7 +65,7 @@ const NavBar = () => {
 
                 {/* Logo Section */}
                 <Link to="/" className="flex items-center gap-2 relative z-50">
-                    <img src={logo} alt="CodeMate Logo" className="h-16 w-auto" />
+                    <img src={logo} alt="CodeMate Logo" className="h-24 w-auto -my-4" />
 
                 </Link>
 
