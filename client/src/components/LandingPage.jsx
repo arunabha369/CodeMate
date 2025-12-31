@@ -84,7 +84,7 @@ const LandingPage = () => {
             </section>
 
             {/* Why Choose Section */}
-            <section id="features" className="py-32 px-4 container mx-auto relative z-10">
+            <section id="features" className="py-20 px-4 container mx-auto relative z-10">
                 <div className="text-center mb-20 animate-in fade-in slide-in-from-bottom-4 duration-700">
                     <h2 className="text-3xl md:text-5xl font-bold mb-6">
                         Why Choose <span className="text-rose-500">CodeMate?</span>
