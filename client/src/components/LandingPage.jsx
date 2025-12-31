@@ -152,13 +152,13 @@ const LandingPage = () => {
                                 <div className="h-10 w-10 rounded-full bg-rose-500/10 flex items-center justify-center text-rose-500">
                                     <Mail className="h-5 w-5" />
                                 </div>
-                                <span className="text-lg">support@codemate.ai</span>
+                                <span className="text-lg">growwithhustler@gmail.com</span>
                             </div>
                             <div className="flex items-center gap-4 text-gray-300">
                                 <div className="h-10 w-10 rounded-full bg-purple-500/10 flex items-center justify-center text-purple-500">
                                     <MapPin className="h-5 w-5" />
                                 </div>
-                                <span className="text-lg">San Francisco, CA</span>
+                                <span className="text-lg">Kolkata, India</span>
                             </div>
                         </div>
                     </div>
