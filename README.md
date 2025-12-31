@@ -4,7 +4,7 @@
 
 Whether you're looking for a hackathon buddy, open-source partner, or someone who loves the same tech stack — CodeMate helps you find your **code soulmate**.
 
-![CodeMate Interface](./assets/codemate_preview.png)
+![CodeMate Preview](assets/preview.png)
 
 ---
 
@@ -25,10 +25,10 @@ Whether you're looking for a hackathon buddy, open-source partner, or someone wh
 | Layer | Technology |
 | :--- | :--- |
 | **Frontend** | React (Vite), Redux Toolkit, Tailwind CSS, **shadcn/ui** |
-| **Backend** | Node.js, Express.js, Socket.io |
+| **Backend** | Node.js, Express.js (Serverless on Netlify) |
 | **Database** | MongoDB Atlas, Mongoose |
 | **Auth** | JWT (HttpOnly Cookies), bcrypt |
-| **Styling** | "Candyland" Theme (HSL Variables), Lucide React Icons |
+| **Styling** | "Candyland" / Dark Premium Theme, Framer Motion |
 
 ---
 
