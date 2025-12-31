@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-import { Code2, Github, Cpu, Rocket } from "lucide-react";
+import { Code2, Github, Cpu, Rocket, Mail, MapPin } from "lucide-react";
+import { Input } from "./ui/input";
+import heroRobot from "../assets/hero-robot-v2.png";
 
 const LandingPage = () => {
     const scrollToFeatures = () => {
@@ -58,11 +60,10 @@ const LandingPage = () => {
                         {/* Glowing Background */}
                         <div className="absolute inset-0 bg-gradient-to-tr from-rose-500/30 to-purple-600/30 blur-[100px] rounded-full animate-pulse" />
 
-                        {/* 3D Character Image */}
                         <img
-                            src="https://cdni.iconscout.com/illustration/premium/thumb/robot-assistant-public-speaking-9005080-7360064.png"
+                            src={heroRobot}
                             alt="AI Developer Assistant"
-                            className="relative z-10 w-full h-full object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500"
+                            className="relative z-10 w-full h-full object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500 mix-blend-screen"
                         />
 
                         {/* Floating Cards (Decorative) */}
@@ -132,6 +133,64 @@ const LandingPage = () => {
                             </CardContent>
                         </Card>
                     ))}
+                </div>
+            </section>
+
+            {/* Get in Touch Section */}
+            <section id="contact" className="py-24 px-4 container mx-auto relative z-10">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div className="space-y-6 animate-in fade-in slide-in-from-left-4 duration-700">
+                        <h2 className="text-3xl md:text-5xl font-bold">
+                            Get in <span className="text-rose-500">Touch</span>
+                        </h2>
+                        <p className="text-gray-400 text-lg leading-relaxed max-w-lg">
+                            Have questions, feedback, or just want to verify our AI matchmaking? Drop us a line—we're here to help you ship faster.
+                        </p>
+
+                        <div className="space-y-4 pt-4">
+                            <div className="flex items-center gap-4 text-gray-300">
+                                <div className="h-10 w-10 rounded-full bg-rose-500/10 flex items-center justify-center text-rose-500">
+                                    <Mail className="h-5 w-5" />
+                                </div>
+                                <span className="text-lg">support@codemate.ai</span>
+                            </div>
+                            <div className="flex items-center gap-4 text-gray-300">
+                                <div className="h-10 w-10 rounded-full bg-purple-500/10 flex items-center justify-center text-purple-500">
+                                    <MapPin className="h-5 w-5" />
+                                </div>
+                                <span className="text-lg">San Francisco, CA</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-3xl shadow-2xl animate-in fade-in slide-in-from-right-4 duration-700 delay-200">
+                        <form className="space-y-4">
+                            <div className="grid grid-cols-2 gap-4">
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium text-gray-300">First Name</label>
+                                    <Input placeholder="John" className="bg-black/50 border-white/10 focus:border-rose-500/50 text-white" />
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium text-gray-300">Last Name</label>
+                                    <Input placeholder="Doe" className="bg-black/50 border-white/10 focus:border-rose-500/50 text-white" />
+                                </div>
+                            </div>
+                            <div className="space-y-2">
+                                <label className="text-sm font-medium text-gray-300">Email</label>
+                                <Input type="email" placeholder="john@example.com" className="bg-black/50 border-white/10 focus:border-rose-500/50 text-white" />
+                            </div>
+                            <div className="space-y-2">
+                                <label className="text-sm font-medium text-gray-300">Message</label>
+                                <textarea
+                                    className="flex min-h-[120px] w-full rounded-md border border-white/10 bg-black/50 px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500/50 disabled:cursor-not-allowed disabled:opacity-50 text-white"
+                                    placeholder="Tell us about your project..."
+                                />
+                            </div>
+                            <Button className="w-full h-12 bg-gradient-to-r from-rose-600 to-purple-600 hover:from-rose-500 hover:to-purple-500 text-white text-lg rounded-xl font-semibold shadow-lg shadow-rose-500/20">
+                                Send Message
+                            </Button>
+                        </form>
+                    </div>
                 </div>
             </section>
 
