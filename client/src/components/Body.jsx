@@ -18,9 +18,18 @@ const Body = () => {
             const res = await axios.get(BASE_URL + "/profile/view", {
                 withCredentials: true,
             });
-            dispatch(addUser(res.data));
+            // Validate user data structure before dispatching
+            if (res.data && res.data._id) {
+                dispatch(addUser(res.data));
+            } else {
+                throw new Error("Invalid user data");
+            }
         } catch (err) {
-            console.error(err);
+            console.error("Profile fetch failed:", err);
+            // If authentication fails or data is invalid, ensure we're logged out
+            if (err.status === 401 || err.message === "Invalid user data") {
+                navigate("/login");
+            }
         }
     };
 
