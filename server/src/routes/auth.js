@@ -54,6 +54,10 @@ authRouter.post("/login", async (req, res) => {
       throw new Error("Invalid Credentials");
     }
 
+    if (!user.password) {
+      throw new Error("Invalid Credentials");
+    }
+
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (isPasswordValid) {
@@ -75,6 +79,7 @@ authRouter.post("/login", async (req, res) => {
       throw new Error("Invalid Credentials");
     }
   } catch (err) {
+    console.error("Login Error: ", err.message);
     res.status(400).send("ERROR : " + err.message);
   }
 });
