@@ -67,166 +67,178 @@ const Profile = () => {
 
     return (
         <div className="flex justify-center my-10 px-4">
-            <div className="bg-base-300 w-full max-w-2xl p-8 rounded-lg shadow-xl border border-white/10">
-                <div className="flex justify-between items-center mb-6">
-                    <h1 className="text-3xl font-bold text-white">Profile</h1>
+            <div className="bg-black w-full max-w-lg p-8 rounded-2xl border border-stone-800 shadow-2xl">
+                <div className="flex justify-between items-start mb-6">
+                    <h1 className="text-3xl font-bold text-white tracking-tight">Profile</h1>
                     {!isEditing && (
                         <button
                             onClick={() => setIsEditing(true)}
-                            className="btn btn-primary btn-sm"
+                            className="px-4 py-2 text-sm font-semibold text-black bg-white rounded-lg hover:bg-gray-200 transition-colors shadow-lg shadow-white/10"
                         >
                             Edit Profile
                         </button>
                     )}
                 </div>
 
-                {/* Profile Header */}
-                <div className="flex flex-col md:flex-row gap-6 mb-8">
-                    <div className="shrink-0">
+                <div className="flex flex-col items-center mb-8">
+                    <div className="relative group">
+                        <div className="absolute -inset-0.5 bg-gradient-to-r from-pink-600 to-purple-600 rounded-full opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
                         <img
                             src={user.photoUrl}
                             alt="Profile"
-                            className="w-32 h-32 rounded-full object-cover border-4 border-primary"
+                            className="relative w-32 h-32 rounded-full object-cover border-4 border-black"
                         />
                     </div>
-                    <div className="flex-grow">
-                        {isEditing ? (
-                            <div className="space-y-3">
-                                <div className="grid grid-cols-2 gap-4">
+
+                    {isEditing ? (
+                        <div className="mt-8 w-full space-y-4">
+                            <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label className="text-xs text-stone-500 ml-1 mb-1 block">First Name</label>
                                     <input
                                         type="text" name="firstName" value={formData.firstName} onChange={handleInputChange}
-                                        placeholder="First Name" className="input input-bordered w-full"
-                                    />
-                                    <input
-                                        type="text" name="lastName" value={formData.lastName} onChange={handleInputChange}
-                                        placeholder="Last Name" className="input input-bordered w-full"
+                                        className="input input-sm w-full bg-stone-900/50 border-stone-800 focus:border-pink-500 focus:outline-none text-white rounded-lg transition-all"
                                     />
                                 </div>
+                                <div>
+                                    <label className="text-xs text-stone-500 ml-1 mb-1 block">Last Name</label>
+                                    <input
+                                        type="text" name="lastName" value={formData.lastName} onChange={handleInputChange}
+                                        className="input input-sm w-full bg-stone-900/50 border-stone-800 focus:border-pink-500 focus:outline-none text-white rounded-lg transition-all"
+                                    />
+                                </div>
+                            </div>
+                            <div>
+                                <label className="text-xs text-stone-500 ml-1 mb-1 block">Profile Photo URL</label>
                                 <input
                                     type="text" name="photoUrl" value={formData.photoUrl} onChange={handleInputChange}
-                                    placeholder="Photo URL" className="input input-bordered w-full"
+                                    className="input input-sm w-full bg-stone-900/50 border-stone-800 focus:border-pink-500 focus:outline-none text-white rounded-lg transition-all"
                                 />
                             </div>
-                        ) : (
-                            <div>
-                                <h2 className="text-2xl font-bold text-white mt-2">
-                                    {user.firstName} {user.lastName}
-                                    {user.isLinkedInVerified && (
-                                        <span className="ml-2 text-blue-400 tooltip" data-tip="Verified Professional">
-                                            ✓
-                                        </span>
-                                    )}
-                                </h2>
-                                <p className="text-gray-400 mt-1">{user.email}</p>
-                                {user.githubUsername && (
-                                    <a href={user.githubProfileUrl} target="_blank" rel="noreferrer" className="text-sm link link-primary block mt-1">
-                                        @{user.githubUsername} (GitHub)
-                                    </a>
+                        </div>
+                    ) : (
+                        <div className="text-center mt-4">
+                            <h2 className="text-2xl font-bold text-white flex items-center justify-center gap-2">
+                                {user.firstName} {user.lastName}
+                                {user.isLinkedInVerified && (
+                                    <span className="text-blue-500 text-lg" title="Verified Professional">
+                                        <i className="fas fa-check-circle"></i>
+                                    </span>
                                 )}
-                            </div>
-                        )}
-                    </div>
+                            </h2>
+                            <p className="text-gray-400 text-sm mt-1">{user.email}</p>
+                            {user.githubUsername && (
+                                <a href={user.githubProfileUrl} target="_blank" rel="noreferrer" className="text-xs text-stone-500 hover:text-white mt-1 block transition-colors">
+                                    @{user.githubUsername}
+                                </a>
+                            )}
+                        </div>
+                    )}
                 </div>
 
-                {/* Social Integrations */}
-                <div className="bg-base-200 p-4 rounded-lg mb-6">
-                    <h3 className="text-lg font-semibold text-white mb-3">Integrations & Verification</h3>
-                    <div className="flex flex-wrap gap-4">
-                        {!user.githubId ? (
-                            <button onClick={handleLinkGitHub} className="btn btn-outline gap-2 normal-case">
-                                <i className="fab fa-github text-xl"></i> Link GitHub for Skill Analysis
-                            </button>
-                        ) : (
-                            <div className="badge badge-success gap-2 p-3">
-                                <i className="fab fa-github"></i> GitHub Linked
-                            </div>
-                        )}
+                <div className="space-y-8">
+                    {/* Integrations */}
+                    <div>
+                        <h3 className="text-sm font-bold text-stone-300 uppercase tracking-wider mb-4">Integrations</h3>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            {!user.githubId ? (
+                                <button onClick={handleLinkGitHub} className="w-full py-3 px-4 rounded-xl bg-stone-900 hover:bg-black border border-stone-800 hover:border-stone-600 transition-all text-white flex items-center justify-center gap-3 font-medium group">
+                                    <i className="fab fa-github text-xl group-hover:scale-110 transition-transform"></i>
+                                    Link GitHub
+                                </button>
+                            ) : (
+                                <div className="w-full py-3 px-4 rounded-xl bg-green-900/20 border border-green-500/30 text-green-400 flex items-center justify-center gap-3 font-medium cursor-default">
+                                    <i className="fab fa-github text-xl"></i> GitHub Linked
+                                </div>
+                            )}
 
-                        {!user.isLinkedInVerified ? (
-                            <button onClick={handleLinkLinkedIn} className="btn btn-outline btn-info gap-2 normal-case">
-                                <i className="fab fa-linkedin text-xl"></i> Verify with LinkedIn
-                            </button>
-                        ) : (
-                            <div className="badge badge-info gap-2 p-3 text-white">
-                                <i className="fab fa-linkedin"></i> Verified Professional
-                            </div>
-                        )}
+                            {!user.isLinkedInVerified ? (
+                                <button onClick={handleLinkLinkedIn} className="w-full py-3 px-4 rounded-xl bg-[#0077b5] hover:bg-[#006097] border border-transparent transition-all text-white flex items-center justify-center gap-3 font-medium group shadow-lg shadow-blue-900/20">
+                                    <i className="fab fa-linkedin text-xl group-hover:scale-110 transition-transform"></i>
+                                    Verify with LinkedIn
+                                </button>
+                            ) : (
+                                <div className="w-full py-3 px-4 rounded-xl bg-blue-900/20 border border-blue-500/30 text-blue-400 flex items-center justify-center gap-3 font-medium cursor-default">
+                                    <i className="fab fa-linkedin text-xl"></i> Verified Professional
+                                </div>
+                            )}
+                        </div>
                     </div>
-                    <p className="text-xs text-gray-500 mt-2">
-                        Linking GitHub will analyze your public repositories to add skills to your profile.
-                        Linking LinkedIn verifies your professional identity.
-                    </p>
-                </div>
 
-                {/* About & Details */}
-                <div className="space-y-4">
-                    <div className="form-control">
-                        <label className="label"><span className="label-text">About</span></label>
+                    {/* About */}
+                    <div>
+                        <h3 className="text-sm font-bold text-stone-300 uppercase tracking-wider mb-3">About</h3>
                         {isEditing ? (
                             <textarea
                                 name="about" value={formData.about} onChange={handleInputChange}
-                                className="textarea textarea-bordered h-24" placeholder="Tell us about yourself"
+                                className="textarea w-full bg-stone-900/50 border-stone-800 focus:border-pink-500 focus:outline-none text-white rounded-lg transition-all min-h-[100px]" placeholder="Tell us about yourself..."
                             ></textarea>
                         ) : (
-                            <p className="text-gray-300 bg-base-100 p-3 rounded-md min-h-[3rem]">{user.about || "No bio added yet."}</p>
+                            <p className="text-stone-400 text-sm leading-relaxed">
+                                {user.about || "No bio added yet."}
+                            </p>
                         )}
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4">
-                        <div className="form-control">
-                            <label className="label"><span className="label-text">Age</span></label>
+                    {/* Details Grid */}
+                    <div className="grid grid-cols-2 gap-x-8 gap-y-4">
+                        <div>
+                            <h3 className="text-sm font-bold text-stone-300 uppercase tracking-wider mb-2">Age</h3>
                             {isEditing ? (
-                                <input type="number" name="age" value={formData.age} onChange={handleInputChange} className="input input-bordered" />
+                                <input type="number" name="age" value={formData.age} onChange={handleInputChange} className="input input-sm w-full bg-stone-900/50 border-stone-800 focus:border-pink-500 focus:outline-none text-white rounded-lg transition-all" />
                             ) : (
-                                <p className="text-gray-300 px-1">{user.age || "N/A"}</p>
+                                <p className="text-stone-400 text-sm">{user.age || "N/A"}</p>
                             )}
                         </div>
-                        <div className="form-control">
-                            <label className="label"><span className="label-text">Gender</span></label>
+                        <div>
+                            <h3 className="text-sm font-bold text-stone-300 uppercase tracking-wider mb-2">Gender</h3>
                             {isEditing ? (
-                                <select name="gender" value={formData.gender} onChange={handleInputChange} className="select select-bordered">
-                                    <option value="">Select Gender</option>
+                                <select name="gender" value={formData.gender} onChange={handleInputChange} className="select select-sm w-full bg-stone-900/50 border-stone-800 focus:border-pink-500 focus:outline-none text-white rounded-lg transition-all">
+                                    <option value="">Select</option>
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
                                     <option value="other">Other</option>
                                 </select>
                             ) : (
-                                <p className="text-gray-300 px-1 capitalize">{user.gender || "N/A"}</p>
+                                <p className="text-stone-400 text-sm capitalize">{user.gender || "N/A"}</p>
                             )}
                         </div>
                     </div>
 
-                    <div className="form-control">
-                        <label className="label"><span className="label-text">Skills</span></label>
+                    {/* Skills */}
+                    <div>
+                        <h3 className="text-sm font-bold text-stone-300 uppercase tracking-wider mb-3">Skills</h3>
                         {isEditing ? (
                             <input
                                 type="text" name="skills" value={formData.skills} onChange={handleInputChange}
-                                placeholder="Comma separated skills (e.g. React, Node.js)" className="input input-bordered"
+                                placeholder="Comma separated skills (e.g. React, Node.js)" className="input input-sm w-full bg-stone-900/50 border-stone-800 focus:border-pink-500 focus:outline-none text-white rounded-lg transition-all"
                             />
                         ) : (
-                            <div className="flex flex-wrap gap-2">
-                                {user.skills && user.skills.length > 0 ? (
-                                    user.skills.map((skill, index) => (
-                                        <div key={index} className="badge badge-secondary p-3">{skill}</div>
-                                    ))
-                                ) : (
-                                    <span className="text-gray-500 italic">No skills added. Link GitHub to auto-fill!</span>
-                                )}
-                            </div>
+                            user.skills && user.skills.length > 0 ? (
+                                <div className="flex flex-wrap gap-2">
+                                    {user.skills.map((skill, index) => (
+                                        <span key={index} className="px-3 py-1 bg-stone-900 text-stone-400 rounded-full text-xs border border-stone-800 hover:border-stone-600 transition-colors cursor-default">
+                                            {skill}
+                                        </span>
+                                    ))}
+                                </div>
+                            ) : (
+                                <p className="text-stone-500 text-xs italic">No skills added. Link GitHub to auto-fill!</p>
+                            )
                         )}
                     </div>
                 </div>
 
-                {/* Actions */}
+                {/* Edit Actions */}
                 {isEditing && (
-                    <div className="flex gap-4 mt-8 justify-end">
-                        <button onClick={() => setIsEditing(false)} className="btn btn-ghost">Cancel</button>
-                        <button onClick={handleSaveProfile} className="btn btn-primary">Save Changes</button>
+                    <div className="flex gap-4 mt-8 justify-end border-t border-stone-800 pt-6">
+                        <button onClick={() => setIsEditing(false)} className="px-6 py-2 rounded-lg text-stone-400 hover:text-white text-sm transition-colors hover:bg-stone-900">Cancel</button>
+                        <button onClick={handleSaveProfile} className="px-6 py-2 rounded-lg bg-gradient-to-r from-pink-600 to-purple-600 text-white text-sm font-semibold hover:opacity-90 transition-opacity shadow-lg shadow-pink-500/20">Save Changes</button>
                     </div>
                 )}
 
-                {error && <div className="toast toast-end"><div className="alert alert-error"><span>{error}</span></div></div>}
-                {successMessage && <div className="toast toast-end"><div className="alert alert-success"><span>{successMessage}</span></div></div>}
+                {error && <div className="text-red-500 text-xs mt-4 text-center">{error}</div>}
+                {successMessage && <div className="text-green-500 text-xs mt-4 text-center">{successMessage}</div>}
             </div>
         </div>
     );

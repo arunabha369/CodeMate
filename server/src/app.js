@@ -28,7 +28,7 @@ const passport = require("passport");
 require("./utils/passport"); // Import passport configuration
 app.use(passport.initialize());
 
-const routes = [authRouter, requestRouter, userRouter];
+const routes = [authRouter, profileRouter, requestRouter, userRouter];
 app.use("/", routes);
 app.use("/.netlify/functions/api", routes);
 
