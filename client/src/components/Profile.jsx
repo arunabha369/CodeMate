@@ -163,6 +163,10 @@ const Profile = () => {
                                 </div>
                             )}
                         </div>
+                        <p className="text-xs text-stone-500 mt-4 leading-relaxed max-w-md mx-auto text-center">
+                            Connect <span className="text-stone-300 font-medium">GitHub</span> to automatically analyze your skills from your repositories.
+                            Verify with <span className="text-stone-300 font-medium">LinkedIn</span> to get a <span className="text-blue-400">Verified Badge</span> and <span className="text-stone-300">3x more visibility</span>.
+                        </p>
                     </div>
 
                     {/* About */}
