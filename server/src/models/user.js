@@ -57,6 +57,16 @@ const userSchema = new mongoose.Schema(
     linkedinProfileUrl: {
       type: String,
     },
+    // Coding Profiles
+    leetcodeProfileUrl: {
+      type: String,
+    },
+    gfgProfileUrl: {
+      type: String,
+    },
+    tufProfileUrl: {
+      type: String,
+    },
     isLinkedInVerified: {
       type: Boolean,
       default: false,

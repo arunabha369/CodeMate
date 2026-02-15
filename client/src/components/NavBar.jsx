@@ -131,6 +131,10 @@ const NavBar = () => {
                                                 <MessageSquare className="mr-2 h-4 w-4 text-gray-400 group-hover:text-rose-500 transition-colors" />
                                                 <span>Requests</span>
                                             </Link>
+                                            <Link to="/" onClick={() => setIsMenuOpen(false)} className="relative flex cursor-pointer select-none items-center rounded-md px-2 py-2 text-sm outline-none hover:bg-white/10 transition-colors group">
+                                                <Users className="mr-2 h-4 w-4 text-gray-400 group-hover:text-rose-500 transition-colors" />
+                                                <span>Match Feed</span>
+                                            </Link>
                                             <div className="h-px bg-white/10 my-1" />
                                             <div onClick={handleLogout} className="relative flex cursor-pointer select-none items-center rounded-md px-2 py-2 text-sm outline-none hover:bg-white/10 hover:text-rose-500 text-gray-400 transition-colors">
                                                 <LogOut className="mr-2 h-4 w-4" />

@@ -5,6 +5,7 @@ import { BASE_URL } from "../utils/constants";
 import { addRequests, removeRequest } from "../store/requestSlice";
 import { showToast } from "../store/toastSlice";
 import { Button } from "./ui/button";
+import { Link } from "react-router-dom";
 import { User, Check, X } from "lucide-react";
 import LandingPage from "./LandingPage";
 
@@ -61,7 +62,12 @@ const Requests = () => {
                     <User className="w-12 h-12 text-stone-700" />
                 </div>
                 <h1 className="font-bold text-2xl text-foreground">No Pending Requests</h1>
-                <p className="text-muted-foreground mt-2">Check back later for new connections!</p>
+                <p className="text-muted-foreground mt-2 mb-6">Check back later for new connections!</p>
+                <Link to="/">
+                    <Button className="bg-stone-800 hover:bg-stone-700 text-white rounded-full px-6">
+                        Find Connections
+                    </Button>
+                </Link>
             </div>
         )
     }

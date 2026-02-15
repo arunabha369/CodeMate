@@ -37,7 +37,12 @@ const Connections = () => {
                     <MessageCircle className="w-12 h-12 text-stone-700" />
                 </div>
                 <h1 className="font-bold text-2xl text-primary">No Connections Yet</h1>
-                <p className="text-muted-foreground mt-2">Start swiping to find your CodeMate!</p>
+                <p className="text-muted-foreground mt-2 mb-6">Start swiping to find your CodeMate!</p>
+                <Link to="/">
+                    <Button className="bg-primary hover:bg-primary/90 text-white rounded-full px-8">
+                        Start Swiping
+                    </Button>
+                </Link>
             </div>
         )
     }

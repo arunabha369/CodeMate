@@ -4,13 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { addFeed, removeUserFromFeed } from "../store/feedSlice";
 import { useEffect, useState } from "react";
 import UserCard from "./UserCard";
-import { Loader2, Heart, X, RotateCcw, Star, Zap } from "lucide-react";
+import UserDetailModal from "./UserDetailModal";
+import { Loader2, Heart, X, Eye } from "lucide-react";
 import LandingPage from "./LandingPage";
 
 const Feed = () => {
     const feed = useSelector((store) => store.feed);
     const user = useSelector((store) => store.user);
     const dispatch = useDispatch();
+    const [showModal, setShowModal] = useState(false);
     const [direction, setDirection] = useState(null); // 'left' or 'right'
 
     const getFeed = async () => {
@@ -96,29 +98,42 @@ const Feed = () => {
             </div>
 
             {/* Action Buttons */}
-            <div className="flex gap-4 mt-8 z-10">
-                <button className="p-4 rounded-full bg-stone-900 border border-stone-800 text-yellow-500 hover:scale-110 transition-transform shadow-lg">
-                    <RotateCcw className="w-6 h-6" />
-                </button>
+            <div className="flex gap-8 mt-8 z-10 items-center">
                 <button
                     onClick={() => handleSwipe('left')}
-                    className="p-4 rounded-full bg-stone-900 border border-stone-800 text-red-500 hover:scale-110 transition-transform shadow-lg"
+                    className="group relative flex items-center justify-center w-16 h-16 rounded-full bg-stone-900 border border-stone-800 text-red-500 hover:bg-red-500/10 hover:border-red-500/50 hover:scale-110 transition-all duration-300 shadow-lg shadow-black/50"
+                    aria-label="Pass"
                 >
-                    <X className="w-8 h-8" />
+                    <X className="w-8 h-8 group-hover:scale-110 transition-transform" />
+                    <span className="absolute -bottom-8 text-sm font-medium text-stone-400 opacity-0 group-hover:opacity-100 transition-opacity">Pass</span>
                 </button>
-                <button className="p-4 rounded-full bg-stone-900 border border-stone-800 text-blue-500 hover:scale-110 transition-transform shadow-lg">
-                    <Star className="w-6 h-6" />
+
+                <button
+                    onClick={() => setShowModal(true)}
+                    className="group relative flex items-center justify-center w-14 h-14 rounded-full bg-stone-900 border border-stone-800 text-blue-500 hover:bg-blue-500/10 hover:border-blue-500/50 hover:scale-110 transition-all duration-300 shadow-lg shadow-black/50"
+                    aria-label="View Profile"
+                >
+                    <Eye className="w-6 h-6 group-hover:scale-110 transition-transform" />
+                    <span className="absolute -bottom-8 text-sm font-medium text-stone-400 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">View Profile</span>
                 </button>
+
                 <button
                     onClick={() => handleSwipe('right')}
-                    className="p-4 rounded-full bg-stone-900 border border-stone-800 text-green-500 hover:scale-110 transition-transform shadow-lg"
+                    className="group relative flex items-center justify-center w-16 h-16 rounded-full bg-stone-900 border border-stone-800 text-green-500 hover:bg-green-500/10 hover:border-green-500/50 hover:scale-110 transition-all duration-300 shadow-lg shadow-black/50"
+                    aria-label="Connect"
                 >
-                    <Heart className="w-8 h-8" fill="currentColor" />
-                </button>
-                <button className="p-4 rounded-full bg-stone-900 border border-stone-800 text-purple-500 hover:scale-110 transition-transform shadow-lg">
-                    <Zap className="w-6 h-6" />
+                    <Heart className="w-8 h-8 group-hover:scale-110 transition-transform" fill="currentColor" />
+                    <span className="absolute -bottom-8 text-sm font-medium text-stone-400 opacity-0 group-hover:opacity-100 transition-opacity">Connect</span>
                 </button>
             </div>
+
+            {/* Detailed Profile Modal */}
+            {showModal && (
+                <UserDetailModal
+                    user={feed[0]}
+                    onClose={() => setShowModal(false)}
+                />
+            )}
         </div>
     );
 };
