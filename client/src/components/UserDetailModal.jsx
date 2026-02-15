@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 const UserDetailModal = ({ user, onClose }) => {
     if (!user) return null;
 
-    const { firstName, lastName, photoUrl, age, gender, about, skills, githubProfileUrl, linkedinProfileUrl, leetcodeProfileUrl, gfgProfileUrl, tufProfileUrl } = user;
+    const { firstName, lastName, photoUrl, age, gender, about, skills, githubProfileUrl, linkedinProfileUrl, leetcodeProfileUrl, codeforcesProfileUrl, codechefProfileUrl, gfgProfileUrl, tufProfileUrl } = user;
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-in fade-in duration-200">
@@ -95,6 +95,26 @@ const UserDetailModal = ({ user, onClose }) => {
                                         <Code className="w-5 h-5" />
                                     </div>
                                     <span className="font-medium text-stone-300 group-hover:text-white">LeetCode</span>
+                                    <ExternalLink className="w-4 h-4 ml-auto text-stone-600 group-hover:text-stone-400" />
+                                </a>
+                            )}
+
+                            {codeforcesProfileUrl && (
+                                <a href={codeforcesProfileUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-4 rounded-xl bg-stone-900/50 border border-stone-800 hover:bg-stone-900 hover:border-stone-700 transition-all group">
+                                    <div className="p-2 rounded-lg bg-[#1f8dd6] text-white">
+                                        <Code className="w-5 h-5" />
+                                    </div>
+                                    <span className="font-medium text-stone-300 group-hover:text-white">CodeForces</span>
+                                    <ExternalLink className="w-4 h-4 ml-auto text-stone-600 group-hover:text-stone-400" />
+                                </a>
+                            )}
+
+                            {codechefProfileUrl && (
+                                <a href={codechefProfileUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-4 rounded-xl bg-stone-900/50 border border-stone-800 hover:bg-stone-900 hover:border-stone-700 transition-all group">
+                                    <div className="p-2 rounded-lg bg-[#5b4638] text-white">
+                                        <Code className="w-5 h-5" />
+                                    </div>
+                                    <span className="font-medium text-stone-300 group-hover:text-white">CodeChef</span>
                                     <ExternalLink className="w-4 h-4 ml-auto text-stone-600 group-hover:text-stone-400" />
                                 </a>
                             )}

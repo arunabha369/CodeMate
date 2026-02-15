@@ -21,6 +21,11 @@ const validateEditProfileData = (req) => {
     "age",
     "about",
     "skills",
+    "leetcodeProfileUrl",
+    "codeforcesProfileUrl",
+    "codechefProfileUrl",
+    "gfgProfileUrl",
+    "tufProfileUrl",
   ];
 
   const isEditAllowed = Object.keys(req.body).every((field) =>

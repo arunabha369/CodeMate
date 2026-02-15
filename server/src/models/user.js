@@ -61,6 +61,12 @@ const userSchema = new mongoose.Schema(
     leetcodeProfileUrl: {
       type: String,
     },
+    codeforcesProfileUrl: {
+      type: String,
+    },
+    codechefProfileUrl: {
+      type: String,
+    },
     gfgProfileUrl: {
       type: String,
     },

@@ -22,6 +22,11 @@ const Profile = () => {
                 gender: user.gender || "",
                 about: user.about || "",
                 skills: user.skills ? user.skills.join(", ") : "",
+                leetcodeProfileUrl: user.leetcodeProfileUrl || "",
+                codeforcesProfileUrl: user.codeforcesProfileUrl || "",
+                codechefProfileUrl: user.codechefProfileUrl || "",
+                gfgProfileUrl: user.gfgProfileUrl || "",
+                tufProfileUrl: user.tufProfileUrl || "",
             });
         }
     }, [user]);
@@ -229,6 +234,96 @@ const Profile = () => {
                             ) : (
                                 <p className="text-stone-500 text-xs italic">No skills added. Link GitHub to auto-fill!</p>
                             )
+                        )}
+                    </div>
+
+                    {/* Coding Profiles */}
+                    <div>
+                        <h3 className="text-sm font-bold text-stone-300 uppercase tracking-wider mb-3">Coding Profiles</h3>
+                        {isEditing ? (
+                            <div className="space-y-3">
+                                <div className="relative">
+                                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <span className="text-stone-500 text-xs">LeetCode</span>
+                                    </div>
+                                    <input
+                                        type="text" name="leetcodeProfileUrl" value={formData.leetcodeProfileUrl} onChange={handleInputChange}
+                                        placeholder="https://leetcode.com/username"
+                                        className="input input-sm w-full pl-20 bg-stone-900/50 border-stone-800 focus:border-pink-500 focus:outline-none text-white rounded-lg transition-all"
+                                    />
+                                </div>
+                                <div className="relative">
+                                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <span className="text-stone-500 text-xs">CodeForces</span>
+                                    </div>
+                                    <input
+                                        type="text" name="codeforcesProfileUrl" value={formData.codeforcesProfileUrl} onChange={handleInputChange}
+                                        placeholder="https://codeforces.com/profile/username"
+                                        className="input input-sm w-full pl-24 bg-stone-900/50 border-stone-800 focus:border-pink-500 focus:outline-none text-white rounded-lg transition-all"
+                                    />
+                                </div>
+                                <div className="relative">
+                                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <span className="text-stone-500 text-xs">CodeChef</span>
+                                    </div>
+                                    <input
+                                        type="text" name="codechefProfileUrl" value={formData.codechefProfileUrl} onChange={handleInputChange}
+                                        placeholder="https://www.codechef.com/users/username"
+                                        className="input input-sm w-full pl-20 bg-stone-900/50 border-stone-800 focus:border-pink-500 focus:outline-none text-white rounded-lg transition-all"
+                                    />
+                                </div>
+                                <div className="relative">
+                                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <span className="text-stone-500 text-xs">GFG</span>
+                                    </div>
+                                    <input
+                                        type="text" name="gfgProfileUrl" value={formData.gfgProfileUrl} onChange={handleInputChange}
+                                        placeholder="https://auth.geeksforgeeks.org/user/username"
+                                        className="input input-sm w-full pl-12 bg-stone-900/50 border-stone-800 focus:border-pink-500 focus:outline-none text-white rounded-lg transition-all"
+                                    />
+                                </div>
+                                <div className="relative">
+                                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <span className="text-stone-500 text-xs">TUF</span>
+                                    </div>
+                                    <input
+                                        type="text" name="tufProfileUrl" value={formData.tufProfileUrl} onChange={handleInputChange}
+                                        placeholder="https://takeuforward.org/profile/username"
+                                        className="input input-sm w-full pl-12 bg-stone-900/50 border-stone-800 focus:border-pink-500 focus:outline-none text-white rounded-lg transition-all"
+                                    />
+                                </div>
+                            </div>
+                        ) : (
+                            <div className="flex flex-col gap-2">
+                                {user.leetcodeProfileUrl && (
+                                    <a href={user.leetcodeProfileUrl} target="_blank" rel="noreferrer" className="text-sm text-stone-400 hover:text-[#ffa116] transition-colors flex items-center gap-2">
+                                        <i className="fas fa-code"></i> LeetCode Profile
+                                    </a>
+                                )}
+                                {user.codeforcesProfileUrl && (
+                                    <a href={user.codeforcesProfileUrl} target="_blank" rel="noreferrer" className="text-sm text-stone-400 hover:text-[#1f8dd6] transition-colors flex items-center gap-2">
+                                        <i className="fas fa-code"></i> CodeForces Profile
+                                    </a>
+                                )}
+                                {user.codechefProfileUrl && (
+                                    <a href={user.codechefProfileUrl} target="_blank" rel="noreferrer" className="text-sm text-stone-400 hover:text-[#5b4638] transition-colors flex items-center gap-2">
+                                        <i className="fas fa-code"></i> CodeChef Profile
+                                    </a>
+                                )}
+                                {user.gfgProfileUrl && (
+                                    <a href={user.gfgProfileUrl} target="_blank" rel="noreferrer" className="text-sm text-stone-400 hover:text-[#2f8d46] transition-colors flex items-center gap-2">
+                                        <i className="fas fa-code"></i> GeeksForGeeks Profile
+                                    </a>
+                                )}
+                                {user.tufProfileUrl && (
+                                    <a href={user.tufProfileUrl} target="_blank" rel="noreferrer" className="text-sm text-stone-400 hover:text-[#e11d48] transition-colors flex items-center gap-2">
+                                        <i className="fas fa-brain"></i> takeUforward Profile
+                                    </a>
+                                )}
+                                {!user.leetcodeProfileUrl && !user.codeforcesProfileUrl && !user.codechefProfileUrl && !user.gfgProfileUrl && !user.tufProfileUrl && (
+                                    <p className="text-stone-500 text-xs italic">No coding profiles added yet.</p>
+                                )}
+                            </div>
                         )}
                     </div>
                 </div>
