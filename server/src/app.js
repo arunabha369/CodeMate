@@ -23,6 +23,9 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(cookieParser());
+const passport = require("passport");
+require("./utils/passport"); // Import passport configuration
+app.use(passport.initialize());
 
 const routes = [authRouter, requestRouter, userRouter];
 app.use("/", routes);

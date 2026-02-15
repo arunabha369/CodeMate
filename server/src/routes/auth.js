@@ -3,6 +3,7 @@ const { validateSignUpData } = require("../utils/validation");
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const passport = require("passport");
 
 const authRouter = express.Router();
 
@@ -93,5 +94,40 @@ authRouter.post("/logout", async (req, res) => {
   });
   res.send("Logout Successful!!");
 });
+
+authRouter.get(
+  "/auth/google",
+  passport.authenticate("google", {
+    scope: ["profile", "email"],
+  })
+);
+
+authRouter.get(
+  "/auth/google/callback",
+  passport.authenticate("google", {
+    failureRedirect: "/login",
+    session: false,
+  }),
+  async (req, res) => {
+    // Successful authentication, redirect home.
+    try {
+      const token = await jwt.sign({ _id: req.user._id }, "DEV@Tinder$790", {
+        expiresIn: "7d",
+      });
+
+      const isProduction = process.env.NODE_ENV === "production";
+      res.cookie("token", token, {
+        expires: new Date(Date.now() + 8 * 3600000), // 8 hours
+        httpOnly: true,
+        secure: isProduction,
+        sameSite: isProduction ? "None" : "Lax",
+      });
+
+      res.redirect("http://localhost:5173/profile"); // Redirect to frontend profile
+    } catch (err) {
+      res.redirect("/login");
+    }
+  }
+);
 
 module.exports = authRouter;
