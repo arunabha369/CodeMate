@@ -4,9 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { BASE_URL } from "../utils/constants";
 import { addRequests, removeRequest } from "../store/requestSlice";
 import { showToast } from "../store/toastSlice";
-import { Card } from "./ui/card";
 import { Button } from "./ui/button";
-import { Check, X, User } from "lucide-react";
+import { User, Check, X } from "lucide-react";
 import LandingPage from "./LandingPage";
 
 const Requests = () => {
@@ -68,63 +67,66 @@ const Requests = () => {
     }
 
     return (
-        <div className="container mx-auto px-4 py-8 animate-in fade-in slide-in-from-bottom-4 pb-20 max-w-6xl">
-            <h1 className="font-bold text-3xl md:text-4xl mb-8 text-foreground tracking-tight text-center md:text-left">
-                Connection Requests <span className="text-primary text-2xl align-top ml-1">{requests.length}</span>
-            </h1>
+        <div className="mx-auto max-w-4xl py-6 animate-in fade-in slide-in-from-bottom-4 pb-20">
+            <h1 className="font-bold text-3xl mb-6 px-4 text-foreground tracking-tight">Connection Requests <span className="text-primary text-2xl ml-2">{requests.length}</span></h1>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {requests.map((request) => {
-                    const { _id, firstName, lastName, photoUrl, age, gender, about } = request.fromUserId;
+            <div className="bg-stone-950/50 backdrop-blur-sm rounded-xl overflow-hidden border border-stone-800 shadow-sm mx-4 md:mx-0">
+                {requests.map((request, index) => {
+                    const { _id, firstName, lastName, photoUrl, about, age, gender } = request.fromUserId;
 
                     return (
-                        <Card
+                        <div
                             key={request._id}
-                            className="overflow-hidden border-stone-800 bg-stone-950/50 backdrop-blur-sm transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 group"
+                            className={`flex flex-col sm:flex-row items-center gap-4 p-4 hover:bg-stone-900/50 transition-colors cursor-default group ${index !== requests.length - 1 ? "border-b border-stone-800" : ""
+                                }`}
                         >
-                            <div className="relative h-48 w-full overflow-hidden">
-                                <img
-                                    src={photoUrl}
-                                    alt="photo"
-                                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                                <div className="absolute bottom-3 left-4 text-white">
-                                    <h2 className="font-bold text-2xl leading-none">
+                            {/* Avatar */}
+                            <div className="relative shrink-0 w-full sm:w-auto flex justify-center sm:block">
+                                <div className="h-16 w-16 rounded-full overflow-hidden ring-2 ring-stone-800 group-hover:ring-primary/20 transition-all">
+                                    <img
+                                        src={photoUrl}
+                                        alt={firstName}
+                                        className="h-full w-full object-cover"
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Content */}
+                            <div className="flex-1 min-w-0 text-center sm:text-left w-full">
+                                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline mb-1">
+                                    <h2 className="font-semibold text-lg text-foreground truncate">
                                         {firstName} {lastName}
                                     </h2>
                                     {age && (
-                                        <p className="text-sm text-stone-300 font-medium uppercase tracking-wide mt-1">
+                                        <span className="text-xs text-muted-foreground font-medium uppercase tracking-wide">
                                             {age} • {gender}
-                                        </p>
+                                        </span>
                                     )}
                                 </div>
-                            </div>
-
-                            <div className="p-4 space-y-4">
-                                <p className="text-sm text-muted-foreground line-clamp-2 h-10">
+                                <p className="text-sm text-stone-400 line-clamp-2 sm:line-clamp-1">
                                     {about || "No bio available."}
                                 </p>
-
-                                <div className="grid grid-cols-2 gap-3 pt-2">
-                                    <Button
-                                        variant="outline"
-                                        className="w-full rounded-xl border-red-900/50 bg-red-950/10 text-red-500 hover:bg-red-950/30 hover:text-red-400 hover:border-red-800 transition-colors h-12"
-                                        onClick={() => reviewRequest("rejected", request._id)}
-                                    >
-                                        <X className="w-5 h-5 mr-2" />
-                                        Reject
-                                    </Button>
-                                    <Button
-                                        className="w-full rounded-xl shadow-md bg-gradient-to-r from-primary to-rose-600 hover:opacity-90 transition-opacity h-12 font-semibold"
-                                        onClick={() => reviewRequest("accepted", request._id)}
-                                    >
-                                        <Check className="w-5 h-5 mr-2" />
-                                        Accept
-                                    </Button>
-                                </div>
                             </div>
-                        </Card>
+
+                            {/* Actions */}
+                            <div className="flex gap-2 w-full sm:w-auto shrink-0">
+                                <Button
+                                    variant="outline"
+                                    className="flex-1 sm:flex-none rounded-full border-red-900/30 bg-red-950/10 text-red-500 hover:bg-red-950/30 hover:text-red-400 hover:border-red-800"
+                                    onClick={() => reviewRequest("rejected", request._id)}
+                                >
+                                    <X className="w-4 h-4 mr-1" />
+                                    Reject
+                                </Button>
+                                <Button
+                                    className="flex-1 sm:flex-none rounded-full shadow-md bg-gradient-to-r from-primary to-rose-600 hover:opacity-90 transition-opacity"
+                                    onClick={() => reviewRequest("accepted", request._id)}
+                                >
+                                    <Check className="w-4 h-4 mr-1" />
+                                    Accept
+                                </Button>
+                            </div>
+                        </div>
                     );
                 })}
             </div>
