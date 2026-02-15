@@ -70,25 +70,27 @@ const NavBar = () => {
                 </Link>
 
                 {/* Center Navigation Pill */}
-                <div className="absolute left-1/2 -translate-x-1/2 hidden md:flex items-center gap-1 bg-white/5 backdrop-blur-md border border-white/10 rounded-full px-2 py-1.5 shadow-lg">
-                    {["Home", "Features", "Contact"].map((item) => {
-                        const sectionId = item.toLowerCase();
-                        const isActive = activeSection === sectionId;
-                        return (
-                            <a
-                                key={item}
-                                href={`#${sectionId}`}
-                                onClick={(e) => scrollToSection(e, sectionId)}
-                                className={`px-6 py-2 text-sm font-medium rounded-full transition-all duration-300 ${isActive
-                                    ? "bg-rose-600 text-white shadow-lg shadow-rose-500/25"
-                                    : "text-gray-300 hover:text-white hover:bg-white/10"
-                                    }`}
-                            >
-                                {item}
-                            </a>
-                        );
-                    })}
-                </div>
+                {!user && (
+                    <div className="absolute left-1/2 -translate-x-1/2 hidden md:flex items-center gap-1 bg-white/5 backdrop-blur-md border border-white/10 rounded-full px-2 py-1.5 shadow-lg">
+                        {["Home", "Features", "Contact"].map((item) => {
+                            const sectionId = item.toLowerCase();
+                            const isActive = activeSection === sectionId;
+                            return (
+                                <a
+                                    key={item}
+                                    href={`#${sectionId}`}
+                                    onClick={(e) => scrollToSection(e, sectionId)}
+                                    className={`px-6 py-2 text-sm font-medium rounded-full transition-all duration-300 ${isActive
+                                        ? "bg-rose-600 text-white shadow-lg shadow-rose-500/25"
+                                        : "text-gray-300 hover:text-white hover:bg-white/10"
+                                        }`}
+                                >
+                                    {item}
+                                </a>
+                            );
+                        })}
+                    </div>
+                )}
 
                 {/* Right Actions */}
                 <div className="flex items-center gap-4 relative z-50">

@@ -41,6 +41,9 @@ authRouter.post("/signup", async (req, res) => {
 
     res.json({ message: "User Added successfully!", data: savedUser });
   } catch (err) {
+    if (err.code === 11000) {
+      return res.status(400).send("Email ID already exists");
+    }
     res.status(400).send("ERROR : " + err.message);
   }
 });
