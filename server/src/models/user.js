@@ -26,9 +26,11 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: function() { return !this.googleId; }, // Password required only if googleId is not present
+      required: function() { 
+        return !this.googleId && !this.githubId && !this.linkedinId; 
+      }, 
       validate(value) {
-        if (!this.googleId && !validator.isStrongPassword(value)) {
+        if (!this.googleId && !this.githubId && !this.linkedinId && !validator.isStrongPassword(value)) {
           throw new Error("Enter a Strong Password: " + value);
         }
       },
