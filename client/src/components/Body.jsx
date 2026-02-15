@@ -1,6 +1,7 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
+import Toast from "./Toast";
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
@@ -34,10 +35,10 @@ const Body = () => {
     useEffect(() => {
         fetchUser();
     }, []);
-
     return (
         <div className="flex flex-col min-h-[calc(100vh-0px)]">
             <NavBar />
+            <Toast /> {/* Add Toast */}
             <div className="flex-grow container mx-auto px-4 py-8">
                 <Outlet />
             </div>

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BASE_URL } from "../utils/constants";
 import { addUser } from "../store/userSlice";
+import { showToast } from "../store/toastSlice";
 
 const Profile = () => {
     const user = useSelector((store) => store.user);
@@ -10,7 +11,6 @@ const Profile = () => {
     const [formData, setFormData] = useState({});
     const dispatch = useDispatch();
     const [error, setError] = useState("");
-    const [successMessage, setSuccessMessage] = useState("");
 
     useEffect(() => {
         if (user) {
@@ -38,7 +38,6 @@ const Profile = () => {
     const handleSaveProfile = async () => {
         try {
             setError("");
-            setSuccessMessage("");
 
             // Format skills array
             const formattedData = { ...formData };
@@ -54,9 +53,10 @@ const Profile = () => {
 
             dispatch(addUser(res.data.data));
             setIsEditing(false);
-            setSuccessMessage("Profile updated successfully!");
+            dispatch(showToast({ message: "Profile updated successfully!", type: "success" }));
         } catch (err) {
             setError(err.response?.data || "Something went wrong");
+            dispatch(showToast({ message: "Failed to update profile", type: "error" }));
         }
     };
 
@@ -337,7 +337,6 @@ const Profile = () => {
                 )}
 
                 {error && <div className="text-red-500 text-xs mt-4 text-center">{error}</div>}
-                {successMessage && <div className="text-green-500 text-xs mt-4 text-center">{successMessage}</div>}
             </div>
         </div>
     );
