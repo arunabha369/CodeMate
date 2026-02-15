@@ -27,6 +27,8 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: function() { 
+        // Debugging: check what fields are present
+        console.error(`Validating password for ${this.email}. Google: ${this.googleId}, GitHub: ${this.githubId}, LinkedIn: ${this.linkedinId}`);
         return !this.googleId && !this.githubId && !this.linkedinId; 
       }, 
       validate(value) {
@@ -34,6 +36,9 @@ const userSchema = new mongoose.Schema(
           throw new Error("Enter a Strong Password: " + value);
         }
       },
+    },
+    googleId: {
+      type: String,
     },
     // GitHub Integration
     githubId: {

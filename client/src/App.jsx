@@ -10,6 +10,7 @@ import { ThemeProvider } from "./components/theme-provider";
 import React from "react";
 
 import Profile from "./components/Profile";
+import Chat from "./components/Chat";
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -52,6 +53,7 @@ function App() {
                   <Route path="/profile" element={<Profile />} />
                   <Route path="/connections" element={<Connections />} />
                   <Route path="/requests" element={<Requests />} />
+                  <Route path="/chat/:targetUserId" element={<Chat />} />
                 </Route>
               </Routes>
             </div>

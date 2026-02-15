@@ -7,7 +7,13 @@ const PORT = 7778;
 connectDB()
   .then(() => {
     console.log("Database connection established...");
-    app.listen(PORT, () => {
+    const http = require("http");
+    const initSocket = require("./utils/socket"); // We'll create this to keep server.js clean
+
+    const server = http.createServer(app);
+    initSocket(server);
+
+    server.listen(PORT, () => {
       console.log(`Server is successfully listening on port ${PORT}...`);
     });
   })
