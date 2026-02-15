@@ -33,8 +33,26 @@ const userSchema = new mongoose.Schema(
         }
       },
     },
-    googleId: {
+    // GitHub Integration
+    githubId: {
       type: String,
+    },
+    githubUsername: {
+      type: String,
+    },
+    githubProfileUrl: {
+      type: String,
+    },
+    // LinkedIn Integration
+    linkedinId: {
+      type: String,
+    },
+    linkedinProfileUrl: {
+      type: String,
+    },
+    isLinkedInVerified: {
+      type: Boolean,
+      default: false,
     },
     age: {
       type: Number,

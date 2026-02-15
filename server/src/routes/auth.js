@@ -1,5 +1,6 @@
 const express = require("express");
 const { validateSignUpData } = require("../utils/validation");
+const { analyzeGitHubSkills } = require("../utils/socialUtils");
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -125,6 +126,89 @@ authRouter.get(
 
       res.redirect("http://localhost:5173/profile"); // Redirect to frontend profile
     } catch (err) {
+      res.redirect("/login");
+    }
+  }
+);
+
+// GitHub Auth
+authRouter.get(
+  "/auth/github",
+  passport.authenticate("github", { scope: ["user:email", "read:user"] })
+);
+
+authRouter.get(
+  "/auth/github/callback",
+  passport.authenticate("github", {
+    failureRedirect: "/login",
+    session: false,
+  }),
+  async (req, res) => {
+    try {
+      const { user, accessToken } = req.user; // Strategy returns { user, accessToken }
+
+      // Analyze skills if accessToken is present
+      if (accessToken) {
+         const topLanguages = await analyzeGitHubSkills(accessToken);
+         if (topLanguages.length > 0) {
+            // Merge new skills with existing ones, avoiding duplicates
+            const currentSkills = user.skills || [];
+            const newSkills = [...new Set([...currentSkills, ...topLanguages])];
+            user.skills = newSkills;
+            await user.save();
+         }
+      }
+
+      const token = await jwt.sign({ _id: user._id }, "DEV@Tinder$790", {
+        expiresIn: "7d",
+      });
+
+      const isProduction = process.env.NODE_ENV === "production";
+      res.cookie("token", token, {
+        expires: new Date(Date.now() + 8 * 3600000),
+        httpOnly: true,
+        secure: isProduction,
+        sameSite: isProduction ? "None" : "Lax",
+      });
+
+      res.redirect("http://localhost:5173/profile");
+    } catch (err) {
+      console.error("GitHub Auth Error:", err);
+      res.redirect("/login");
+    }
+  }
+);
+
+// LinkedIn Auth
+authRouter.get(
+  "/auth/linkedin",
+  passport.authenticate("linkedin"),
+);
+
+authRouter.get(
+  "/auth/linkedin/callback",
+  passport.authenticate("linkedin", {
+    failureRedirect: "/login",
+    session: false,
+  }),
+  async (req, res) => {
+    try {
+      const user = req.user;
+      const token = await jwt.sign({ _id: user._id }, "DEV@Tinder$790", {
+        expiresIn: "7d",
+      });
+
+      const isProduction = process.env.NODE_ENV === "production";
+      res.cookie("token", token, {
+        expires: new Date(Date.now() + 8 * 3600000),
+        httpOnly: true,
+        secure: isProduction,
+        sameSite: isProduction ? "None" : "Lax",
+      });
+
+      res.redirect("http://localhost:5173/profile");
+    } catch (err) {
+      console.error("LinkedIn Auth Error:", err);
       res.redirect("/login");
     }
   }

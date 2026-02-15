@@ -9,7 +9,7 @@ import Requests from "./components/Requests";
 import { ThemeProvider } from "./components/theme-provider";
 import React from "react";
 
-const Profile = () => <div className="text-2xl mt-10">User Profile Page</div>;
+import Profile from "./components/Profile";
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
