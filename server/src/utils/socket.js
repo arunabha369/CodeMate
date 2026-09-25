@@ -1,14 +1,12 @@
 const socketIo = require("socket.io");
+const { corsOptions } = require("../config/env");
 
 let io;
 
 const initSocket = (server) => {
   io = socketIo(server, {
-    cors: {
-      origin: "http://localhost:5173", // Update with your frontend URL
-      methods: ["GET", "POST"],
-      credentials: true,
-    },
+    // Same allowed origins as the REST API.
+    cors: { ...corsOptions, methods: ["GET", "POST"] },
   });
 
   io.on("connection", (socket) => {

@@ -8,20 +8,11 @@ const userRouter = require("./routes/user");
 const User = require("./models/user");
 const ConnectionRequest = require("./models/connectionRequest");
 const { userAuth } = require("./middlewares/auth");
+const { corsOptions } = require("./config/env");
 
 const app = express();
 
-app.use(cors({
-    origin: (origin, callback) => {
-        // Allow requests with no origin (like mobile apps or curl requests)
-        if (!origin) return callback(null, true);
-        if (origin.startsWith("http://localhost:") || origin.endsWith(".netlify.app")) {
-            return callback(null, true);
-        }
-        return callback(new Error('Not allowed by CORS'));
-    },
-    credentials: true,
-}));
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 const passport = require("passport");

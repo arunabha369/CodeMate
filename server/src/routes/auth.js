@@ -1,12 +1,17 @@
 const express = require("express");
 const { validateSignUpData } = require("../utils/validation");
 const { analyzeGitHubSkills } = require("../utils/socialUtils");
+const { setAuthCookie, clearAuthCookie } = require("../utils/authCookie");
+const { CLIENT_URL } = require("../config/env");
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 const passport = require("passport");
 
 const authRouter = express.Router();
+
+// OAuth flows end on the frontend, never on the API's own paths.
+const redirectToClient = (res, path) => res.redirect(CLIENT_URL + path);
+const oauthFailure = (provider) => `${CLIENT_URL}/login?error=${provider}`;
 
 authRouter.post("/signup", async (req, res) => {
   try {
@@ -27,19 +32,9 @@ authRouter.post("/signup", async (req, res) => {
     });
 
     const savedUser = await user.save();
-    
-    // Create a token and send it in cookie so user is logged in immediately
-    const token = await jwt.sign({ _id: savedUser._id }, "DEV@Tinder$790", {
-      expiresIn: "7d",
-    });
 
-    const isProduction = process.env.NODE_ENV === "production";
-    res.cookie("token", token, {
-      expires: new Date(Date.now() + 8 * 3600000), // 8 hours
-      httpOnly: true, // Prevent XSS
-      secure: isProduction,
-      sameSite: isProduction ? "None" : "Lax",
-    });
+    // Log the user in immediately
+    setAuthCookie(res, savedUser._id);
 
     res.json({ message: "User Added successfully!", data: savedUser });
   } catch (err) {
@@ -66,19 +61,7 @@ authRouter.post("/login", async (req, res) => {
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (isPasswordValid) {
-       // Create a token and send it in cookie so user is logged in immediately
-       const token = await jwt.sign({ _id: user._id }, "DEV@Tinder$790", {
-        expiresIn: "7d",
-      });
-  
-      const isProduction = process.env.NODE_ENV === "production";
-      res.cookie("token", token, {
-        expires: new Date(Date.now() + 8 * 3600000), // 8 hours
-        httpOnly: true, // Prevent XSS
-        secure: isProduction,
-        sameSite: isProduction ? "None" : "Lax",
-      });
-
+      setAuthCookie(res, user._id);
       res.send(user);
     } else {
       throw new Error("Invalid Credentials");
@@ -90,9 +73,7 @@ authRouter.post("/login", async (req, res) => {
 });
 
 authRouter.post("/logout", async (req, res) => {
-  res.cookie("token", null, {
-    expires: new Date(Date.now()),
-  });
+  clearAuthCookie(res);
   res.send("Logout Successful!!");
 });
 
@@ -106,27 +87,16 @@ authRouter.get(
 authRouter.get(
   "/auth/google/callback",
   passport.authenticate("google", {
-    failureRedirect: "/login",
+    failureRedirect: oauthFailure("google"),
     session: false,
   }),
   async (req, res) => {
-    // Successful authentication, redirect home.
     try {
-      const token = await jwt.sign({ _id: req.user._id }, "DEV@Tinder$790", {
-        expiresIn: "7d",
-      });
-
-      const isProduction = process.env.NODE_ENV === "production";
-      res.cookie("token", token, {
-        expires: new Date(Date.now() + 8 * 3600000), // 8 hours
-        httpOnly: true,
-        secure: isProduction,
-        sameSite: isProduction ? "None" : "Lax",
-      });
-
-      res.redirect("http://localhost:5173/profile"); // Redirect to frontend profile
+      setAuthCookie(res, req.user._id);
+      redirectToClient(res, "/profile");
     } catch (err) {
-      res.redirect("/login");
+      console.error("Google Auth Error:", err);
+      res.redirect(oauthFailure("google"));
     }
   }
 );
@@ -140,7 +110,7 @@ authRouter.get(
 authRouter.get(
   "/auth/github/callback",
   passport.authenticate("github", {
-    failureRedirect: "/login",
+    failureRedirect: oauthFailure("github"),
     session: false,
   }),
   async (req, res) => {
@@ -159,22 +129,11 @@ authRouter.get(
          }
       }
 
-      const token = await jwt.sign({ _id: user._id }, "DEV@Tinder$790", {
-        expiresIn: "7d",
-      });
-
-      const isProduction = process.env.NODE_ENV === "production";
-      res.cookie("token", token, {
-        expires: new Date(Date.now() + 8 * 3600000),
-        httpOnly: true,
-        secure: isProduction,
-        sameSite: isProduction ? "None" : "Lax",
-      });
-
-      res.redirect("http://localhost:5173/profile");
+      setAuthCookie(res, user._id);
+      redirectToClient(res, "/profile");
     } catch (err) {
       console.error("GitHub Auth Error:", err);
-      res.redirect("/login");
+      res.redirect(oauthFailure("github"));
     }
   }
 );
@@ -188,28 +147,16 @@ authRouter.get(
 authRouter.get(
   "/auth/linkedin/callback",
   passport.authenticate("linkedin", {
-    failureRedirect: "/login",
+    failureRedirect: oauthFailure("linkedin"),
     session: false,
   }),
   async (req, res) => {
     try {
-      const user = req.user;
-      const token = await jwt.sign({ _id: user._id }, "DEV@Tinder$790", {
-        expiresIn: "7d",
-      });
-
-      const isProduction = process.env.NODE_ENV === "production";
-      res.cookie("token", token, {
-        expires: new Date(Date.now() + 8 * 3600000),
-        httpOnly: true,
-        secure: isProduction,
-        sameSite: isProduction ? "None" : "Lax",
-      });
-
-      res.redirect("http://localhost:5173/profile");
+      setAuthCookie(res, req.user._id);
+      redirectToClient(res, "/profile");
     } catch (err) {
       console.error("LinkedIn Auth Error:", err);
-      res.redirect("/login");
+      res.redirect(oauthFailure("linkedin"));
     }
   }
 );

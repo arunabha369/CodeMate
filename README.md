@@ -65,7 +65,7 @@ cd server
 npm install
 ```
 
-Create a `.env` file in `server/` with the following credentials:
+Copy `server/.env.example` to `server/.env` and fill in your values:
 ```env
 # Server Configuration
 PORT=7778
@@ -74,16 +74,26 @@ NODE_ENV=development
 # Database
 MONGODB_URI=your_mongodb_connection_string
 
-# Authentication
-JWT_SECRET=your_super_secret_key
+# Authentication (required in production)
+JWT_SECRET=your_long_random_secret
+
+# Frontend URL (OAuth redirects + allowed CORS/socket origin)
+CLIENT_URL=http://localhost:5173
 
 # Social Integrations
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+
 GITHUB_CLIENT_ID=your_github_client_id
 GITHUB_CLIENT_SECRET=your_github_client_secret
 
 LINKEDIN_CLIENT_ID=your_linkedin_client_id
 LINKEDIN_CLIENT_SECRET=your_linkedin_client_secret
 ```
+
+> **Deploying?** Set `NODE_ENV=production`, a long random `JWT_SECRET`, `CLIENT_URL` to your live frontend URL,
+> and each `*_CALLBACK_URL` to your live API (e.g. `https://api.example.com/auth/github/callback`).
+> On the frontend, set `VITE_API_URL` to your live API URL.
 
 Start the backend server:
 ```bash

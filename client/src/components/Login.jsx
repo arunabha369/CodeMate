@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { useNavigate, useLocation, Link } from "react-router-dom";
+import { useNavigate, useLocation, useSearchParams, Link } from "react-router-dom";
 import { Mail, Lock, Eye, EyeOff, AlertCircle, Check, ArrowLeft, Github, BadgeCheck, MessageSquare } from "lucide-react";
 import { addUser } from "../store/userSlice";
 import { showToast } from "../store/toastSlice";
@@ -32,6 +32,8 @@ const GoogleIcon = () => (
     </svg>
 );
 
+const OAUTH_PROVIDERS = { google: "Google", github: "GitHub", linkedin: "LinkedIn" };
+
 const highlights = [
     { icon: Github, title: "Import skills from GitHub", desc: "Your repos speak for you — we detect your top languages." },
     { icon: BadgeCheck, title: "Get verified with LinkedIn", desc: "Stand out with a badge and rank higher in feeds." },
@@ -40,10 +42,13 @@ const highlights = [
 
 const Login = () => {
     const location = useLocation();
+    const [searchParams] = useSearchParams();
+    // The server redirects here with ?error=<provider> when an OAuth sign-in fails.
+    const oauthError = OAUTH_PROVIDERS[searchParams.get("error")];
     const [isLoginForm, setIsLoginForm] = useState(location.state?.mode !== "signup");
     const [form, setForm] = useState({ firstName: "", lastName: "", emailId: "", password: "" });
     const [showPassword, setShowPassword] = useState(false);
-    const [error, setError] = useState("");
+    const [error, setError] = useState(oauthError ? `${oauthError} sign-in didn't complete. Please try again.` : "");
     const [fieldErrors, setFieldErrors] = useState({});
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
