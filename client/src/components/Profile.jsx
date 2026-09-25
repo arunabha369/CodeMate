@@ -1,342 +1,393 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Github, Linkedin, BadgeCheck, Check, X, Plus, AlertCircle, Link2, ExternalLink, Save, RotateCcw } from "lucide-react";
 import { BASE_URL } from "../utils/constants";
 import { addUser } from "../store/userSlice";
 import { showToast } from "../store/toastSlice";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import { Textarea } from "./ui/textarea";
+import { Label } from "./ui/label";
+import { Badge } from "./ui/badge";
+import { PageHeader } from "./ui/page-header";
+import UserCard from "./UserCard";
+import { PROFILE_LINKS } from "./profile-links";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
+import { cn, getErrorMessage } from "../lib/utils";
+
+const ABOUT_MAX = 500;
+const EDITABLE_LINKS = PROFILE_LINKS.filter((l) => l.editable !== false);
+
+const toForm = (user) => ({
+    firstName: user.firstName || "",
+    lastName: user.lastName || "",
+    photoUrl: user.photoUrl || "",
+    age: user.age ?? "",
+    gender: user.gender || "",
+    about: user.about || "",
+    skills: user.skills || [],
+    ...Object.fromEntries(EDITABLE_LINKS.map((l) => [l.key, user[l.key] || ""])),
+});
+
+const Section = ({ title, description, children, aside }) => (
+    <section className="rounded-2xl border bg-card">
+        <div className="flex items-start justify-between gap-4 border-b px-5 py-4 sm:px-6">
+            <div>
+                <h2 className="font-semibold">{title}</h2>
+                {description && <p className="mt-0.5 text-sm text-muted-foreground">{description}</p>}
+            </div>
+            {aside}
+        </div>
+        <div className="space-y-5 p-5 sm:p-6">{children}</div>
+    </section>
+);
+
+const Field = ({ label, htmlFor, hint, error, children }) => (
+    <div className="space-y-2">
+        <Label htmlFor={htmlFor}>{label}</Label>
+        {children}
+        {error ? <p className="text-xs text-destructive">{error}</p> : hint && <p className="text-xs text-muted-foreground">{hint}</p>}
+    </div>
+);
+
+const SkillsInput = ({ value, onChange }) => {
+    const [draft, setDraft] = useState("");
+
+    const add = (raw) => {
+        const parts = raw.split(",").map((s) => s.trim()).filter(Boolean);
+        if (!parts.length) return;
+        const existing = new Set(value.map((s) => s.toLowerCase()));
+        const next = [...value];
+        parts.forEach((p) => {
+            if (!existing.has(p.toLowerCase())) {
+                next.push(p);
+                existing.add(p.toLowerCase());
+            }
+        });
+        onChange(next);
+        setDraft("");
+    };
+
+    const onKeyDown = (e) => {
+        if (e.key === "Enter" || e.key === ",") {
+            e.preventDefault();
+            add(draft);
+        } else if (e.key === "Backspace" && !draft && value.length) {
+            onChange(value.slice(0, -1));
+        }
+    };
+
+    return (
+        <div className="flex min-h-10 flex-wrap items-center gap-1.5 rounded-lg border border-input bg-background p-1.5 shadow-sm transition-colors focus-within:border-primary/60 focus-within:ring-4 focus-within:ring-primary/15">
+            {value.map((skill) => (
+                <span key={skill} className="inline-flex items-center gap-1 rounded-md bg-primary/10 py-1 pl-2 pr-1 font-mono text-xs text-primary">
+                    {skill}
+                    <button
+                        type="button"
+                        onClick={() => onChange(value.filter((s) => s !== skill))}
+                        className="rounded p-0.5 hover:bg-primary/20"
+                        aria-label={`Remove ${skill}`}
+                    >
+                        <X className="h-3 w-3" />
+                    </button>
+                </span>
+            ))}
+            <input
+                id="skills"
+                value={draft}
+                onChange={(e) => setDraft(e.target.value)}
+                onKeyDown={onKeyDown}
+                onBlur={() => add(draft)}
+                placeholder={value.length ? "Add another…" : "e.g. React, Node.js, Python"}
+                className="min-w-[8rem] flex-1 bg-transparent px-1.5 py-1 text-sm placeholder:text-muted-foreground/70 focus:outline-none"
+            />
+            {draft && (
+                <button type="button" onClick={() => add(draft)} className="rounded-md p-1 text-muted-foreground hover:bg-accent hover:text-foreground" aria-label="Add skill">
+                    <Plus className="h-4 w-4" />
+                </button>
+            )}
+        </div>
+    );
+};
+
+const Integration = ({ icon: Icon, name, connected, connectedLabel, description, onConnect, href, iconClass }) => (
+    <div className="flex items-center gap-4 rounded-xl border p-4">
+        <span className={cn("flex h-10 w-10 shrink-0 items-center justify-center rounded-lg", iconClass)}>
+            <Icon className="h-5 w-5" />
+        </span>
+        <div className="min-w-0 flex-1">
+            <p className="flex items-center gap-2 text-sm font-medium">
+                {name}
+                {connected && <Badge variant="success"><Check /> {connectedLabel}</Badge>}
+            </p>
+            <p className="text-xs text-muted-foreground">{description}</p>
+        </div>
+        {connected ? (
+            href && (
+                <Button asChild variant="ghost" size="icon-sm" aria-label={`Open ${name}`}>
+                    <a href={href} target="_blank" rel="noopener noreferrer"><ExternalLink /></a>
+                </Button>
+            )
+        ) : (
+            <Button variant="outline" size="sm" onClick={onConnect}>
+                <Link2 /> Connect
+            </Button>
+        )}
+    </div>
+);
 
 const Profile = () => {
     const user = useSelector((store) => store.user);
-    const [isEditing, setIsEditing] = useState(false);
-    const [formData, setFormData] = useState({});
     const dispatch = useDispatch();
+    const [formData, setFormData] = useState(() => toForm(user));
+    const [saving, setSaving] = useState(false);
     const [error, setError] = useState("");
+    const [fieldErrors, setFieldErrors] = useState({});
+    useDocumentTitle("Profile");
 
     useEffect(() => {
-        if (user) {
-            setFormData({
-                firstName: user.firstName || "",
-                lastName: user.lastName || "",
-                photoUrl: user.photoUrl || "",
-                age: user.age || "",
-                gender: user.gender || "",
-                about: user.about || "",
-                skills: user.skills ? user.skills.join(", ") : "",
-                leetcodeProfileUrl: user.leetcodeProfileUrl || "",
-                codeforcesProfileUrl: user.codeforcesProfileUrl || "",
-                codechefProfileUrl: user.codechefProfileUrl || "",
-                gfgProfileUrl: user.gfgProfileUrl || "",
-                tufProfileUrl: user.tufProfileUrl || "",
-            });
-        }
+        setFormData(toForm(user));
     }, [user]);
 
-    const handleInputChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+    const initial = useMemo(() => toForm(user), [user]);
+    const isDirty = JSON.stringify(initial) !== JSON.stringify(formData);
+
+    // Warn before leaving with unsaved edits.
+    useEffect(() => {
+        if (!isDirty) return;
+        const onBeforeUnload = (e) => {
+            e.preventDefault();
+            e.returnValue = "";
+        };
+        window.addEventListener("beforeunload", onBeforeUnload);
+        return () => window.removeEventListener("beforeunload", onBeforeUnload);
+    }, [isDirty]);
+
+    const set = (name, value) => {
+        setFormData((f) => ({ ...f, [name]: value }));
+        if (fieldErrors[name]) setFieldErrors((e) => ({ ...e, [name]: undefined }));
+    };
+    const handleInputChange = (e) => set(e.target.name, e.target.value);
+
+    const completeness = useMemo(() => {
+        const checks = [
+            { label: "Profile photo", done: !!formData.photoUrl },
+            { label: "Age & gender", done: !!formData.age && !!formData.gender },
+            { label: "Bio (40+ characters)", done: formData.about.trim().length >= 40 },
+            { label: "At least 3 skills", done: formData.skills.length >= 3 },
+            { label: "A coding profile", done: EDITABLE_LINKS.some((l) => formData[l.key]) },
+            { label: "GitHub linked", done: !!user.githubId },
+        ];
+        return { checks, percent: Math.round((checks.filter((c) => c.done).length / checks.length) * 100) };
+    }, [formData, user.githubId]);
+
+    const validate = () => {
+        const errs = {};
+        if (formData.firstName.trim().length < 4) errs.firstName = "First name must be at least 4 characters";
+        if (formData.age !== "" && (Number(formData.age) < 18 || Number(formData.age) > 120)) errs.age = "You must be 18 or older";
+        if (formData.photoUrl && !/^https?:\/\/\S+$/i.test(formData.photoUrl)) errs.photoUrl = "Enter a valid image URL (https://…)";
+        EDITABLE_LINKS.forEach(({ key }) => {
+            if (formData[key] && !/^https?:\/\/\S+$/i.test(formData[key])) errs[key] = "Enter a full URL starting with https://";
+        });
+        setFieldErrors(errs);
+        return Object.keys(errs).length === 0;
     };
 
-    const handleSaveProfile = async () => {
+    const handleSaveProfile = async (e) => {
+        e?.preventDefault();
+        setError("");
+        if (!validate()) {
+            dispatch(showToast({ message: "Please fix the highlighted fields", type: "warning" }));
+            return;
+        }
+        setSaving(true);
         try {
-            setError("");
+            const payload = { ...formData, firstName: formData.firstName.trim(), lastName: formData.lastName.trim() };
+            // The server rejects empty values for these, so leave them unchanged instead.
+            if (payload.age === "") delete payload.age;
+            else payload.age = Number(payload.age);
+            if (!payload.gender) delete payload.gender;
+            if (!payload.photoUrl) delete payload.photoUrl;
 
-            // Format skills array
-            const formattedData = { ...formData };
-            if (typeof formattedData.skills === "string") {
-                formattedData.skills = formattedData.skills.split(",").map(skill => skill.trim()).filter(skill => skill !== "");
-            }
-
-            const res = await axios.patch(
-                BASE_URL + "/profile/edit",
-                formattedData,
-                { withCredentials: true }
-            );
-
+            const res = await axios.patch(BASE_URL + "/profile/edit", payload, { withCredentials: true });
             dispatch(addUser(res.data.data));
-            setIsEditing(false);
-            dispatch(showToast({ message: "Profile updated successfully!", type: "success" }));
+            dispatch(showToast({ message: "Profile saved", type: "success" }));
         } catch (err) {
-            setError(err.response?.data || "Something went wrong");
-            dispatch(showToast({ message: "Failed to update profile", type: "error" }));
+            const message = getErrorMessage(err, "Failed to update profile");
+            setError(message);
+            dispatch(showToast({ message: "Couldn't save your profile", description: message, type: "error" }));
+        } finally {
+            setSaving(false);
         }
     };
 
-    const handleLinkGitHub = () => {
-        window.location.href = BASE_URL + "/auth/github";
-    };
-
-    const handleLinkLinkedIn = () => {
-        window.location.href = BASE_URL + "/auth/linkedin";
-    };
-
-    if (!user) return <div className="text-white text-center mt-10">Loading Profile...</div>;
+    const previewUser = { ...user, ...formData, age: formData.age || undefined };
 
     return (
-        <div className="flex justify-center my-10 px-4">
-            <div className="bg-black w-full max-w-lg p-8 rounded-2xl border border-stone-800 shadow-2xl">
-                <div className="flex justify-between items-start mb-6">
-                    <h1 className="text-3xl font-bold text-white tracking-tight">Profile</h1>
-                    {!isEditing && (
-                        <button
-                            onClick={() => setIsEditing(true)}
-                            className="px-4 py-2 text-sm font-semibold text-black bg-white rounded-lg hover:bg-gray-200 transition-colors shadow-lg shadow-white/10"
-                        >
-                            Edit Profile
-                        </button>
-                    )}
-                </div>
+        <div className="container max-w-6xl py-8">
+            <PageHeader title="Your profile" description="This is what other developers see when they discover you." />
 
-                <div className="flex flex-col items-center mb-8">
-                    <div className="relative group">
-                        <div className="absolute -inset-0.5 bg-gradient-to-r from-pink-600 to-purple-600 rounded-full opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
-                        <img
-                            src={user.photoUrl}
-                            alt="Profile"
-                            className="relative w-32 h-32 rounded-full object-cover border-4 border-black"
-                        />
-                    </div>
-
-                    {isEditing ? (
-                        <div className="mt-8 w-full space-y-4">
-                            <div className="grid grid-cols-2 gap-4">
-                                <div>
-                                    <label className="text-xs text-stone-500 ml-1 mb-1 block">First Name</label>
-                                    <input
-                                        type="text" name="firstName" value={formData.firstName} onChange={handleInputChange}
-                                        className="input input-sm w-full bg-stone-900/50 border-stone-800 focus:border-pink-500 focus:outline-none text-white rounded-lg transition-all"
-                                    />
-                                </div>
-                                <div>
-                                    <label className="text-xs text-stone-500 ml-1 mb-1 block">Last Name</label>
-                                    <input
-                                        type="text" name="lastName" value={formData.lastName} onChange={handleInputChange}
-                                        className="input input-sm w-full bg-stone-900/50 border-stone-800 focus:border-pink-500 focus:outline-none text-white rounded-lg transition-all"
-                                    />
-                                </div>
-                            </div>
-                            <div>
-                                <label className="text-xs text-stone-500 ml-1 mb-1 block">Profile Photo URL</label>
-                                <input
-                                    type="text" name="photoUrl" value={formData.photoUrl} onChange={handleInputChange}
-                                    className="input input-sm w-full bg-stone-900/50 border-stone-800 focus:border-pink-500 focus:outline-none text-white rounded-lg transition-all"
-                                />
-                            </div>
+            <div className="grid gap-8 lg:grid-cols-[1fr_340px]">
+                <form id="profile-form" onSubmit={handleSaveProfile} className="space-y-6" noValidate>
+                    <Section title="Basic info" description="Your name and photo appear on your card.">
+                        <div className="grid gap-5 sm:grid-cols-2">
+                            <Field label="First name" htmlFor="firstName" error={fieldErrors.firstName}>
+                                <Input id="firstName" name="firstName" value={formData.firstName} onChange={handleInputChange} autoComplete="given-name" aria-invalid={!!fieldErrors.firstName} />
+                            </Field>
+                            <Field label="Last name" htmlFor="lastName">
+                                <Input id="lastName" name="lastName" value={formData.lastName} onChange={handleInputChange} autoComplete="family-name" />
+                            </Field>
                         </div>
-                    ) : (
-                        <div className="text-center mt-4">
-                            <h2 className="text-2xl font-bold text-white flex items-center justify-center gap-2">
-                                {user.firstName} {user.lastName}
-                                {user.isLinkedInVerified && (
-                                    <span className="text-blue-500 text-lg" title="Verified Professional">
-                                        <i className="fas fa-check-circle"></i>
-                                    </span>
-                                )}
-                            </h2>
-                            <p className="text-gray-400 text-sm mt-1">{user.email}</p>
-                            {user.githubUsername && (
-                                <a href={user.githubProfileUrl} target="_blank" rel="noreferrer" className="text-xs text-stone-500 hover:text-white mt-1 block transition-colors">
-                                    @{user.githubUsername}
-                                </a>
-                            )}
-                        </div>
-                    )}
-                </div>
-
-                <div className="space-y-8">
-                    {/* Integrations */}
-                    <div>
-                        <h3 className="text-sm font-bold text-stone-300 uppercase tracking-wider mb-4">Integrations</h3>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            {!user.githubId ? (
-                                <button onClick={handleLinkGitHub} className="w-full py-3 px-4 rounded-xl bg-stone-900 hover:bg-black border border-stone-800 hover:border-stone-600 transition-all text-white flex items-center justify-center gap-3 font-medium group">
-                                    <i className="fab fa-github text-xl group-hover:scale-110 transition-transform"></i>
-                                    Link GitHub
-                                </button>
-                            ) : (
-                                <div className="w-full py-3 px-4 rounded-xl bg-green-900/20 border border-green-500/30 text-green-400 flex items-center justify-center gap-3 font-medium cursor-default">
-                                    <i className="fab fa-github text-xl"></i> GitHub Linked
-                                </div>
-                            )}
-
-                            {!user.isLinkedInVerified ? (
-                                <button onClick={handleLinkLinkedIn} className="w-full py-3 px-4 rounded-xl bg-[#0077b5] hover:bg-[#006097] border border-transparent transition-all text-white flex items-center justify-center gap-3 font-medium group shadow-lg shadow-blue-900/20">
-                                    <i className="fab fa-linkedin text-xl group-hover:scale-110 transition-transform"></i>
-                                    Verify with LinkedIn
-                                </button>
-                            ) : (
-                                <div className="w-full py-3 px-4 rounded-xl bg-blue-900/20 border border-blue-500/30 text-blue-400 flex items-center justify-center gap-3 font-medium cursor-default">
-                                    <i className="fab fa-linkedin text-xl"></i> Verified Professional
-                                </div>
-                            )}
-                        </div>
-                        <p className="text-xs text-stone-500 mt-4 leading-relaxed max-w-md mx-auto text-center">
-                            Connect <span className="text-stone-300 font-medium">GitHub</span> to automatically analyze your skills from your repositories.
-                            Verify with <span className="text-stone-300 font-medium">LinkedIn</span> to get a <span className="text-blue-400">Verified Badge</span> and <span className="text-stone-300">3x more visibility</span>.
-                        </p>
-                    </div>
-
-                    {/* About */}
-                    <div>
-                        <h3 className="text-sm font-bold text-stone-300 uppercase tracking-wider mb-3">About</h3>
-                        {isEditing ? (
-                            <textarea
-                                name="about" value={formData.about} onChange={handleInputChange}
-                                className="textarea w-full bg-stone-900/50 border-stone-800 focus:border-pink-500 focus:outline-none text-white rounded-lg transition-all min-h-[100px]" placeholder="Tell us about yourself..."
-                            ></textarea>
-                        ) : (
-                            <p className="text-stone-400 text-sm leading-relaxed">
-                                {user.about || "No bio added yet."}
-                            </p>
-                        )}
-                    </div>
-
-                    {/* Details Grid */}
-                    <div className="grid grid-cols-2 gap-x-8 gap-y-4">
-                        <div>
-                            <h3 className="text-sm font-bold text-stone-300 uppercase tracking-wider mb-2">Age</h3>
-                            {isEditing ? (
-                                <input type="number" name="age" value={formData.age} onChange={handleInputChange} className="input input-sm w-full bg-stone-900/50 border-stone-800 focus:border-pink-500 focus:outline-none text-white rounded-lg transition-all" />
-                            ) : (
-                                <p className="text-stone-400 text-sm">{user.age || "N/A"}</p>
-                            )}
-                        </div>
-                        <div>
-                            <h3 className="text-sm font-bold text-stone-300 uppercase tracking-wider mb-2">Gender</h3>
-                            {isEditing ? (
-                                <select name="gender" value={formData.gender} onChange={handleInputChange} className="select select-sm w-full bg-stone-900/50 border-stone-800 focus:border-pink-500 focus:outline-none text-white rounded-lg transition-all">
-                                    <option value="">Select</option>
+                        <Field label="Photo URL" htmlFor="photoUrl" hint="Link to a square image works best." error={fieldErrors.photoUrl}>
+                            <Input id="photoUrl" name="photoUrl" type="url" placeholder="https://…" value={formData.photoUrl} onChange={handleInputChange} aria-invalid={!!fieldErrors.photoUrl} />
+                        </Field>
+                        <div className="grid gap-5 sm:grid-cols-2">
+                            <Field label="Age" htmlFor="age" error={fieldErrors.age}>
+                                <Input id="age" name="age" type="number" inputMode="numeric" min={18} max={120} placeholder="18+" value={formData.age} onChange={handleInputChange} aria-invalid={!!fieldErrors.age} />
+                            </Field>
+                            <Field label="Gender" htmlFor="gender">
+                                <select
+                                    id="gender"
+                                    name="gender"
+                                    value={formData.gender}
+                                    onChange={handleInputChange}
+                                    className="flex h-10 w-full rounded-lg border border-input bg-background px-3 text-sm shadow-sm transition-colors hover:border-muted-foreground/40 focus-visible:border-primary/60 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/15"
+                                >
+                                    <option value="">Prefer not to say</option>
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
                                     <option value="other">Other</option>
                                 </select>
-                            ) : (
-                                <p className="text-stone-400 text-sm capitalize">{user.gender || "N/A"}</p>
-                            )}
+                            </Field>
+                        </div>
+                    </Section>
+
+                    <Section title="About & skills" description="Help others understand what you like to build.">
+                        <Field label="Bio" htmlFor="about">
+                            <Textarea
+                                id="about"
+                                name="about"
+                                rows={4}
+                                maxLength={ABOUT_MAX}
+                                value={formData.about}
+                                onChange={handleInputChange}
+                                placeholder="I'm a full-stack dev who loves building developer tools. Looking for a partner for weekend hackathons…"
+                            />
+                            <p className="text-right text-xs text-muted-foreground">{formData.about.length}/{ABOUT_MAX}</p>
+                        </Field>
+                        <Field label="Skills" htmlFor="skills" hint="Press Enter or comma to add. Link GitHub to import them automatically.">
+                            <SkillsInput value={formData.skills} onChange={(skills) => set("skills", skills)} />
+                        </Field>
+                    </Section>
+
+                    <Section title="Coding profiles" description="Show off your competitive programming and practice history.">
+                        <div className="grid gap-4 sm:grid-cols-2">
+                            {EDITABLE_LINKS.map(({ key, label, icon: Icon, color, placeholder }) => (
+                                <Field key={key} label={label} htmlFor={key} error={fieldErrors[key]}>
+                                    <div className="relative">
+                                        <span className={cn("pointer-events-none absolute left-2 top-1/2 flex h-6 w-6 -translate-y-1/2 items-center justify-center rounded-md", color)}>
+                                            <Icon className="h-3.5 w-3.5" />
+                                        </span>
+                                        <Input id={key} name={key} type="url" className="pl-10" placeholder={placeholder} value={formData[key]} onChange={handleInputChange} aria-invalid={!!fieldErrors[key]} />
+                                    </div>
+                                </Field>
+                            ))}
+                        </div>
+                    </Section>
+
+                    <Section title="Integrations" description="Connected accounts boost your credibility and visibility.">
+                        <div className="grid gap-3">
+                            <Integration
+                                icon={Github}
+                                name="GitHub"
+                                iconClass="bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900"
+                                connected={!!user.githubId}
+                                connectedLabel={user.githubUsername ? `@${user.githubUsername}` : "Linked"}
+                                description="We analyse your repositories to detect your top languages."
+                                onConnect={() => (window.location.href = BASE_URL + "/auth/github")}
+                                href={user.githubProfileUrl}
+                            />
+                            <Integration
+                                icon={Linkedin}
+                                name="LinkedIn"
+                                iconClass="bg-[#0a66c2] text-white"
+                                connected={!!user.isLinkedInVerified}
+                                connectedLabel="Verified"
+                                description="Get a verified badge and priority placement in feeds."
+                                onConnect={() => (window.location.href = BASE_URL + "/auth/linkedin")}
+                                href={user.linkedinProfileUrl}
+                            />
+                        </div>
+                    </Section>
+
+                    {error && (
+                        <div role="alert" className="flex items-start gap-2 rounded-lg border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive">
+                            <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
+                            {error}
+                        </div>
+                    )}
+
+                    {/* Spacer so the floating save bar never covers the last section */}
+                    <div className="h-16" aria-hidden="true" />
+                </form>
+
+                {/* Preview */}
+                <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
+                    <div>
+                        <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Live preview</p>
+                        <div className="mx-auto aspect-[3/4] max-w-[340px]">
+                            <UserCard user={previewUser} />
                         </div>
                     </div>
 
-                    {/* Skills */}
-                    <div>
-                        <h3 className="text-sm font-bold text-stone-300 uppercase tracking-wider mb-3">Skills</h3>
-                        {isEditing ? (
-                            <input
-                                type="text" name="skills" value={formData.skills} onChange={handleInputChange}
-                                placeholder="Comma separated skills (e.g. React, Node.js)" className="input input-sm w-full bg-stone-900/50 border-stone-800 focus:border-pink-500 focus:outline-none text-white rounded-lg transition-all"
+                    <div className="rounded-2xl border bg-card p-5">
+                        <div className="flex items-center justify-between">
+                            <p className="text-sm font-semibold">Profile strength</p>
+                            <span className="text-sm font-semibold text-primary">{completeness.percent}%</span>
+                        </div>
+                        <div className="mt-3 h-2 overflow-hidden rounded-full bg-muted">
+                            <div
+                                className="h-full rounded-full bg-gradient-to-r from-rose-500 to-pink-500 transition-all duration-500"
+                                style={{ width: `${completeness.percent}%` }}
                             />
-                        ) : (
-                            user.skills && user.skills.length > 0 ? (
-                                <div className="flex flex-wrap gap-2">
-                                    {user.skills.map((skill, index) => (
-                                        <span key={index} className="px-3 py-1 bg-stone-900 text-stone-400 rounded-full text-xs border border-stone-800 hover:border-stone-600 transition-colors cursor-default">
-                                            {skill}
-                                        </span>
-                                    ))}
-                                </div>
-                            ) : (
-                                <p className="text-stone-500 text-xs italic">No skills added. Link GitHub to auto-fill!</p>
-                            )
+                        </div>
+                        <ul className="mt-4 space-y-2">
+                            {completeness.checks.map((c) => (
+                                <li key={c.label} className={cn("flex items-center gap-2 text-sm", c.done ? "text-foreground" : "text-muted-foreground")}>
+                                    <span className={cn("flex h-4 w-4 items-center justify-center rounded-full", c.done ? "bg-emerald-500 text-white" : "border")}>
+                                        {c.done && <Check className="h-3 w-3" strokeWidth={3} />}
+                                    </span>
+                                    {c.label}
+                                </li>
+                            ))}
+                        </ul>
+                        {user.isLinkedInVerified && (
+                            <p className="mt-4 flex items-center gap-1.5 text-xs text-sky-600 dark:text-sky-400">
+                                <BadgeCheck className="h-4 w-4" /> You're a verified professional
+                            </p>
                         )}
                     </div>
+                </aside>
+            </div>
 
-                    {/* Coding Profiles */}
-                    <div>
-                        <h3 className="text-sm font-bold text-stone-300 uppercase tracking-wider mb-3">Coding Profiles</h3>
-                        {isEditing ? (
-                            <div className="space-y-3">
-                                <div className="relative">
-                                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                        <span className="text-stone-500 text-xs">LeetCode</span>
-                                    </div>
-                                    <input
-                                        type="text" name="leetcodeProfileUrl" value={formData.leetcodeProfileUrl} onChange={handleInputChange}
-                                        placeholder="https://leetcode.com/username"
-                                        className="input input-sm w-full pl-20 bg-stone-900/50 border-stone-800 focus:border-pink-500 focus:outline-none text-white rounded-lg transition-all"
-                                    />
-                                </div>
-                                <div className="relative">
-                                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                        <span className="text-stone-500 text-xs">CodeForces</span>
-                                    </div>
-                                    <input
-                                        type="text" name="codeforcesProfileUrl" value={formData.codeforcesProfileUrl} onChange={handleInputChange}
-                                        placeholder="https://codeforces.com/profile/username"
-                                        className="input input-sm w-full pl-24 bg-stone-900/50 border-stone-800 focus:border-pink-500 focus:outline-none text-white rounded-lg transition-all"
-                                    />
-                                </div>
-                                <div className="relative">
-                                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                        <span className="text-stone-500 text-xs">CodeChef</span>
-                                    </div>
-                                    <input
-                                        type="text" name="codechefProfileUrl" value={formData.codechefProfileUrl} onChange={handleInputChange}
-                                        placeholder="https://www.codechef.com/users/username"
-                                        className="input input-sm w-full pl-20 bg-stone-900/50 border-stone-800 focus:border-pink-500 focus:outline-none text-white rounded-lg transition-all"
-                                    />
-                                </div>
-                                <div className="relative">
-                                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                        <span className="text-stone-500 text-xs">GFG</span>
-                                    </div>
-                                    <input
-                                        type="text" name="gfgProfileUrl" value={formData.gfgProfileUrl} onChange={handleInputChange}
-                                        placeholder="https://auth.geeksforgeeks.org/user/username"
-                                        className="input input-sm w-full pl-12 bg-stone-900/50 border-stone-800 focus:border-pink-500 focus:outline-none text-white rounded-lg transition-all"
-                                    />
-                                </div>
-                                <div className="relative">
-                                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                        <span className="text-stone-500 text-xs">TUF</span>
-                                    </div>
-                                    <input
-                                        type="text" name="tufProfileUrl" value={formData.tufProfileUrl} onChange={handleInputChange}
-                                        placeholder="https://takeuforward.org/profile/username"
-                                        className="input input-sm w-full pl-12 bg-stone-900/50 border-stone-800 focus:border-pink-500 focus:outline-none text-white rounded-lg transition-all"
-                                    />
-                                </div>
-                            </div>
-                        ) : (
-                            <div className="flex flex-col gap-2">
-                                {user.leetcodeProfileUrl && (
-                                    <a href={user.leetcodeProfileUrl} target="_blank" rel="noreferrer" className="text-sm text-stone-400 hover:text-[#ffa116] transition-colors flex items-center gap-2">
-                                        <i className="fas fa-code"></i> LeetCode Profile
-                                    </a>
-                                )}
-                                {user.codeforcesProfileUrl && (
-                                    <a href={user.codeforcesProfileUrl} target="_blank" rel="noreferrer" className="text-sm text-stone-400 hover:text-[#1f8dd6] transition-colors flex items-center gap-2">
-                                        <i className="fas fa-code"></i> CodeForces Profile
-                                    </a>
-                                )}
-                                {user.codechefProfileUrl && (
-                                    <a href={user.codechefProfileUrl} target="_blank" rel="noreferrer" className="text-sm text-stone-400 hover:text-[#5b4638] transition-colors flex items-center gap-2">
-                                        <i className="fas fa-code"></i> CodeChef Profile
-                                    </a>
-                                )}
-                                {user.gfgProfileUrl && (
-                                    <a href={user.gfgProfileUrl} target="_blank" rel="noreferrer" className="text-sm text-stone-400 hover:text-[#2f8d46] transition-colors flex items-center gap-2">
-                                        <i className="fas fa-code"></i> GeeksForGeeks Profile
-                                    </a>
-                                )}
-                                {user.tufProfileUrl && (
-                                    <a href={user.tufProfileUrl} target="_blank" rel="noreferrer" className="text-sm text-stone-400 hover:text-[#e11d48] transition-colors flex items-center gap-2">
-                                        <i className="fas fa-brain"></i> takeUforward Profile
-                                    </a>
-                                )}
-                                {!user.leetcodeProfileUrl && !user.codeforcesProfileUrl && !user.codechefProfileUrl && !user.gfgProfileUrl && !user.tufProfileUrl && (
-                                    <p className="text-stone-500 text-xs italic">No coding profiles added yet.</p>
-                                )}
-                            </div>
-                        )}
-                    </div>
-                </div>
-
-                {/* Edit Actions */}
-                {isEditing && (
-                    <div className="flex gap-4 mt-8 justify-end border-t border-stone-800 pt-6">
-                        <button onClick={() => setIsEditing(false)} className="px-6 py-2 rounded-lg text-stone-400 hover:text-white text-sm transition-colors hover:bg-stone-900">Cancel</button>
-                        <button onClick={handleSaveProfile} className="px-6 py-2 rounded-lg bg-gradient-to-r from-pink-600 to-purple-600 text-white text-sm font-semibold hover:opacity-90 transition-opacity shadow-lg shadow-pink-500/20">Save Changes</button>
-                    </div>
+            {/* Floating save bar */}
+            <div
+                className={cn(
+                    "fixed inset-x-0 bottom-20 z-40 flex justify-center px-4 transition-all duration-300 md:bottom-6",
+                    isDirty ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"
                 )}
-
-                {error && <div className="text-red-500 text-xs mt-4 text-center">{error}</div>}
+                aria-hidden={!isDirty}
+            >
+                <div className="flex w-full max-w-lg items-center gap-3 rounded-2xl border bg-popover/95 p-2 pl-4 shadow-2xl shadow-black/20 backdrop-blur">
+                    <span className="flex-1 text-sm font-medium">Unsaved changes</span>
+                    <Button type="button" variant="ghost" size="sm" onClick={() => { setFormData(initial); setFieldErrors({}); setError(""); }} disabled={saving} tabIndex={isDirty ? 0 : -1}>
+                        <RotateCcw /> Discard
+                    </Button>
+                    <Button type="submit" form="profile-form" size="sm" loading={saving} tabIndex={isDirty ? 0 : -1}>
+                        {!saving && <Save />} Save changes
+                    </Button>
+                </div>
             </div>
         </div>
     );

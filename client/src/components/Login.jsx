@@ -1,183 +1,261 @@
 import { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
+import { useNavigate, useLocation, Link } from "react-router-dom";
+import { Mail, Lock, Eye, EyeOff, AlertCircle, Check, ArrowLeft, Github, BadgeCheck, MessageSquare } from "lucide-react";
 import { addUser } from "../store/userSlice";
-import { useNavigate, Link } from "react-router-dom";
+import { showToast } from "../store/toastSlice";
 import { BASE_URL } from "../utils/constants";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Button } from "./ui/button";
-import logo from "../assets/logo.png";
+import { Logo } from "./ui/logo";
+import { ModeToggle } from "./mode-toggle";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
+import { cn, getErrorMessage } from "../lib/utils";
+
+// Mirrors the server's validator.isStrongPassword defaults.
+const passwordRules = [
+    { label: "8+ characters", test: (p) => p.length >= 8 },
+    { label: "Uppercase letter", test: (p) => /[A-Z]/.test(p) },
+    { label: "Lowercase letter", test: (p) => /[a-z]/.test(p) },
+    { label: "Number", test: (p) => /\d/.test(p) },
+    { label: "Symbol", test: (p) => /[^A-Za-z0-9]/.test(p) },
+];
+
+const GoogleIcon = () => (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z" />
+        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z" />
+        <path fill="#FBBC05" d="M5.84 14.1A6.6 6.6 0 0 1 5.5 12c0-.73.13-1.44.34-2.1V7.06H2.18A11 11 0 0 0 1 12c0 1.78.43 3.45 1.18 4.94l3.66-2.84z" />
+        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1A11 11 0 0 0 2.18 7.06l3.66 2.84C6.71 7.3 9.14 5.38 12 5.38z" />
+    </svg>
+);
+
+const highlights = [
+    { icon: Github, title: "Import skills from GitHub", desc: "Your repos speak for you — we detect your top languages." },
+    { icon: BadgeCheck, title: "Get verified with LinkedIn", desc: "Stand out with a badge and rank higher in feeds." },
+    { icon: MessageSquare, title: "Chat in real time", desc: "Connect with mutual matches and start planning instantly." },
+];
 
 const Login = () => {
-    const [emailId, setEmailId] = useState("");
-    const [password, setPassword] = useState("");
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [isLoginForm, setIsLoginForm] = useState(true);
+    const location = useLocation();
+    const [isLoginForm, setIsLoginForm] = useState(location.state?.mode !== "signup");
+    const [form, setForm] = useState({ firstName: "", lastName: "", emailId: "", password: "" });
+    const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState("");
+    const [fieldErrors, setFieldErrors] = useState({});
+    const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    useDocumentTitle(isLoginForm ? "Sign in" : "Create account");
 
-    const handleLogin = async () => {
-        try {
-            const res = await axios.post(
-                BASE_URL + "/login",
-                {
-                    emailId,
-                    password,
-                },
-                { withCredentials: true }
-            );
-            dispatch(addUser(res.data));
-            return navigate("/");
-        } catch (err) {
-            setError(err?.response?.data || "Something went wrong");
-        }
+    const update = (e) => {
+        setForm({ ...form, [e.target.name]: e.target.value });
+        if (fieldErrors[e.target.name]) setFieldErrors({ ...fieldErrors, [e.target.name]: undefined });
     };
 
-    const handleSignUp = async () => {
+    const switchMode = () => {
+        setIsLoginForm(!isLoginForm);
+        setError("");
+        setFieldErrors({});
+    };
+
+    const validate = () => {
+        const errs = {};
+        if (!isLoginForm) {
+            if (form.firstName.trim().length < 4) errs.firstName = "At least 4 characters";
+            if (!form.lastName.trim()) errs.lastName = "Required";
+            if (!passwordRules.every((r) => r.test(form.password))) errs.password = "Password doesn't meet all requirements";
+        }
+        if (!/^\S+@\S+\.\S+$/.test(form.emailId)) errs.emailId = "Enter a valid email address";
+        if (isLoginForm && !form.password) errs.password = "Enter your password";
+        setFieldErrors(errs);
+        return Object.keys(errs).length === 0;
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setError("");
+        if (!validate()) return;
+        setLoading(true);
         try {
-            const res = await axios.post(
-                BASE_URL + "/signup",
-                { firstName, lastName, emailId, password },
-                { withCredentials: true }
-            );
-            dispatch(addUser(res.data.data));
-            return navigate("/profile");
+            if (isLoginForm) {
+                const res = await axios.post(
+                    BASE_URL + "/login",
+                    { emailId: form.emailId, password: form.password },
+                    { withCredentials: true }
+                );
+                dispatch(addUser(res.data));
+                dispatch(showToast({ message: `Welcome back, ${res.data.firstName}!`, type: "success" }));
+                navigate(location.state?.from || "/", { replace: true });
+            } else {
+                const res = await axios.post(
+                    BASE_URL + "/signup",
+                    {
+                        firstName: form.firstName.trim(),
+                        lastName: form.lastName.trim(),
+                        emailId: form.emailId,
+                        password: form.password,
+                    },
+                    { withCredentials: true }
+                );
+                dispatch(addUser(res.data.data));
+                dispatch(showToast({ message: "Account created!", description: "Complete your profile to get better matches.", type: "success" }));
+                navigate("/profile", { replace: true });
+            }
         } catch (err) {
-            setError(err?.response?.data || "Something went wrong");
+            setError(getErrorMessage(err));
+        } finally {
+            setLoading(false);
         }
     };
 
     return (
-        <div className="w-full min-h-screen flex items-center justify-center lg:grid lg:grid-cols-2 bg-black text-white selection:bg-rose-500/30">
-            {/* Left Side - Form */}
-            <div className="flex items-center justify-center p-8 lg:p-12">
-                <div className="mx-auto w-full max-w-[450px] space-y-6 animate-in fade-in slide-in-from-left-8 duration-700">
-                    <div className="flex flex-col space-y-2 text-center lg:text-left">
-                        <Link to="/" className="mb-8 mx-auto lg:mx-0">
-                            <img src={logo} alt="CodeMate" className="h-12 w-auto" />
-                        </Link>
-                        <h1 className="text-3xl font-bold tracking-tight text-white">
-                            {isLoginForm ? "Welcome back" : "Create an account"}
-                        </h1>
-                        <p className="text-muted-foreground">
-                            {isLoginForm ? "Please enter your details to sign in." : "Enter your information to get started"}
-                        </p>
+        <div className="grid min-h-screen lg:grid-cols-2">
+            {/* Form */}
+            <div className="flex flex-col px-4 py-6 sm:px-8">
+                <div className="flex items-center justify-between">
+                    <Link to="/" aria-label="CodeMate home"><Logo /></Link>
+                    <div className="flex items-center gap-1">
+                        <Button asChild variant="ghost" size="sm" className="text-muted-foreground">
+                            <Link to="/"><ArrowLeft /> Home</Link>
+                        </Button>
+                        <ModeToggle />
                     </div>
+                </div>
 
-                    <div className="space-y-4">
-                        {!isLoginForm && (
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="space-y-2">
-                                    <Label htmlFor="firstName">First Name</Label>
-                                    <Input
-                                        id="firstName"
-                                        placeholder="John"
-                                        value={firstName}
-                                        onChange={(e) => setFirstName(e.target.value)}
-                                        className="bg-zinc-900/50 border-white/10"
-                                    />
-                                </div>
-                                <div className="space-y-2">
-                                    <Label htmlFor="lastName">Last Name</Label>
-                                    <Input
-                                        id="lastName"
-                                        placeholder="Doe"
-                                        value={lastName}
-                                        onChange={(e) => setLastName(e.target.value)}
-                                        className="bg-zinc-900/50 border-white/10"
-                                    />
-                                </div>
-                            </div>
-                        )}
-
-                        <div className="space-y-2">
-                            <Label htmlFor="email">Email Address</Label>
-                            <Input
-                                id="email"
-                                type="email"
-                                placeholder="name@example.com"
-                                value={emailId}
-                                onChange={(e) => setEmailId(e.target.value)}
-                                className="bg-zinc-900/50 border-white/10"
-                            />
+                <div className="flex flex-1 items-center justify-center py-10">
+                    <div key={isLoginForm ? "login" : "signup"} className="w-full max-w-sm animate-in fade-in slide-in-from-bottom-2 duration-300">
+                        <div className="mb-8">
+                            <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
+                                {isLoginForm ? "Welcome back" : "Create your account"}
+                            </h1>
+                            <p className="mt-2 text-sm text-muted-foreground">
+                                {isLoginForm ? "Sign in to continue finding your coding partner." : "Join CodeMate and meet developers who build like you."}
+                            </p>
                         </div>
 
-                        <div className="space-y-2">
-                            <div className="flex items-center justify-between">
-                                <Label htmlFor="password">Password</Label>
-                                {isLoginForm && (
-                                    <Link to="#" className="text-sm font-medium text-rose-400 hover:text-rose-300">
-                                        Forgot password?
-                                    </Link>
-                                )}
-                            </div>
-                            <Input
-                                id="password"
-                                type="password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                className="bg-zinc-900/50 border-white/10"
-                            />
-                        </div>
-
-                        {error && <div className="text-red-400 text-sm bg-red-950/20 p-2 rounded border border-red-900/50 text-center">{error}</div>}
-
-                        <Button className="w-full bg-rose-600 hover:bg-rose-500 h-11 text-base shadow-lg shadow-rose-900/20" onClick={isLoginForm ? handleLogin : handleSignUp}>
-                            {isLoginForm ? "Sign in" : "Create account"}
+                        <Button
+                            type="button"
+                            variant="outline"
+                            size="lg"
+                            className="w-full"
+                            onClick={() => window.open(BASE_URL + "/auth/google", "_self")}
+                        >
+                            <GoogleIcon /> Continue with Google
                         </Button>
 
-                        <div className="relative">
-                            <div className="absolute inset-0 flex items-center">
-                                <span className="w-full border-t border-white/10" />
-                            </div>
+                        <div className="relative my-6">
+                            <div className="absolute inset-0 flex items-center"><span className="w-full border-t" /></div>
                             <div className="relative flex justify-center text-xs uppercase">
-                                <span className="bg-black px-2 text-muted-foreground">Or continue with</span>
+                                <span className="bg-background px-3 text-muted-foreground">or with email</span>
                             </div>
                         </div>
 
-                        <Button variant="outline" className="w-full border-white/10 hover:bg-white/5 hover:text-white" onClick={() => window.open(BASE_URL + "/auth/google", "_self")}>
-                            <svg className="h-5 w-5 mr-2" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512">
-                                <path fill="currentColor" d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"></path>
-                            </svg>
-                            Google
-                        </Button>
+                        <form onSubmit={handleSubmit} noValidate className="space-y-4">
+                            {!isLoginForm && (
+                                <div className="grid grid-cols-2 gap-3">
+                                    <div className="space-y-2">
+                                        <Label htmlFor="firstName">First name</Label>
+                                        <Input id="firstName" name="firstName" autoComplete="given-name" placeholder="Ada" value={form.firstName} onChange={update} aria-invalid={!!fieldErrors.firstName} />
+                                        {fieldErrors.firstName && <p className="text-xs text-destructive">{fieldErrors.firstName}</p>}
+                                    </div>
+                                    <div className="space-y-2">
+                                        <Label htmlFor="lastName">Last name</Label>
+                                        <Input id="lastName" name="lastName" autoComplete="family-name" placeholder="Lovelace" value={form.lastName} onChange={update} aria-invalid={!!fieldErrors.lastName} />
+                                        {fieldErrors.lastName && <p className="text-xs text-destructive">{fieldErrors.lastName}</p>}
+                                    </div>
+                                </div>
+                            )}
 
-                        <div className="text-center text-sm text-muted-foreground mt-4">
-                            {isLoginForm ? "Don't have an account? " : "Already have an account? "}
-                            <span
-                                className="font-medium text-rose-400 hover:text-rose-300 cursor-pointer underline-offset-4 hover:underline"
-                                onClick={() => {
-                                    setIsLoginForm(!isLoginForm);
-                                    setError("");
-                                }}
-                            >
-                                {isLoginForm ? "Sign up" : "Sign in"}
-                            </span>
-                        </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="email">Email</Label>
+                                <Input id="email" name="emailId" type="email" icon={Mail} autoComplete="email" placeholder="you@example.com" value={form.emailId} onChange={update} aria-invalid={!!fieldErrors.emailId} autoFocus />
+                                {fieldErrors.emailId && <p className="text-xs text-destructive">{fieldErrors.emailId}</p>}
+                            </div>
+
+                            <div className="space-y-2">
+                                <Label htmlFor="password">Password</Label>
+                                <div className="relative">
+                                    <Input
+                                        id="password"
+                                        name="password"
+                                        type={showPassword ? "text" : "password"}
+                                        icon={Lock}
+                                        autoComplete={isLoginForm ? "current-password" : "new-password"}
+                                        placeholder={isLoginForm ? "Your password" : "Create a strong password"}
+                                        value={form.password}
+                                        onChange={update}
+                                        className="pr-10"
+                                        aria-invalid={!!fieldErrors.password}
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowPassword((s) => !s)}
+                                        className="absolute right-1 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-foreground"
+                                        aria-label={showPassword ? "Hide password" : "Show password"}
+                                    >
+                                        {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                                    </button>
+                                </div>
+                                {!isLoginForm && (
+                                    <ul className="grid grid-cols-2 gap-x-3 gap-y-1 pt-1">
+                                        {passwordRules.map((r) => {
+                                            const ok = r.test(form.password);
+                                            return (
+                                                <li key={r.label} className={cn("flex items-center gap-1.5 text-xs transition-colors", ok ? "text-emerald-600 dark:text-emerald-400" : "text-muted-foreground")}>
+                                                    <Check className={cn("h-3 w-3", !ok && "opacity-30")} /> {r.label}
+                                                </li>
+                                            );
+                                        })}
+                                    </ul>
+                                )}
+                                {fieldErrors.password && isLoginForm && <p className="text-xs text-destructive">{fieldErrors.password}</p>}
+                            </div>
+
+                            {error && (
+                                <div role="alert" className="flex items-start gap-2 rounded-lg border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive animate-in fade-in">
+                                    <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
+                                    <span>{error}</span>
+                                </div>
+                            )}
+
+                            <Button type="submit" variant="gradient" size="lg" className="w-full" loading={loading}>
+                                {isLoginForm ? "Sign in" : "Create account"}
+                            </Button>
+                        </form>
+
+                        <p className="mt-6 text-center text-sm text-muted-foreground">
+                            {isLoginForm ? "New to CodeMate? " : "Already have an account? "}
+                            <button type="button" onClick={switchMode} className="font-medium text-primary underline-offset-4 hover:underline">
+                                {isLoginForm ? "Create an account" : "Sign in"}
+                            </button>
+                        </p>
                     </div>
                 </div>
             </div>
 
-            {/* Right Side - Image */}
-            <div className="hidden lg:flex flex-col relative bg-muted text-white">
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent z-10" />
-                <img
-                    src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2670&auto=format&fit=crop"
-                    alt="Corporate Architecture"
-                    className="absolute inset-0 h-full w-full object-cover"
-                />
-                <div className="relative z-20 mt-auto p-12 max-w-2xl">
-                    <blockquote className="space-y-2">
-                        <p className="text-xl font-medium leading-relaxed">
-                            &ldquo;CodeMate has completely transformed how match with other developers. It&apos;s intuitive, powerful, and truly connects you with the right people.&rdquo;
-                        </p>
-                        <footer className="text-sm text-rose-400 font-semibold">
-                            Sofia Davis, Full Stack Developer
-                        </footer>
-                    </blockquote>
+            {/* Brand panel */}
+            <div className="relative hidden overflow-hidden bg-gradient-to-br from-rose-600 via-pink-600 to-violet-700 lg:flex lg:flex-col lg:justify-center lg:p-16">
+                <div className="absolute inset-0 bg-grid opacity-10" />
+                <div className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-white/10 blur-3xl" />
+                <div className="relative max-w-md text-white">
+                    <h2 className="text-4xl font-bold tracking-tight text-balance">Build with people who get your stack.</h2>
+                    <p className="mt-4 text-lg text-white/80">CodeMate is where developers find co-founders, hackathon teammates and side-project partners.</p>
+                    <ul className="mt-10 space-y-6">
+                        {highlights.map(({ icon: Icon, title, desc }) => (
+                            <li key={title} className="flex gap-4">
+                                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/15 backdrop-blur">
+                                    <Icon className="h-5 w-5" />
+                                </span>
+                                <div>
+                                    <p className="font-semibold">{title}</p>
+                                    <p className="text-sm text-white/75">{desc}</p>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
             </div>
         </div>

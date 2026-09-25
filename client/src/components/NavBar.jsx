@@ -1,167 +1,233 @@
-import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { BASE_URL } from "../utils/constants";
-import { removeUser } from "../store/userSlice";
+import { useSelector } from "react-redux";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
+import { LogOut, UserRound, Menu, X, Moon, Sun, ChevronDown } from "lucide-react";
 import { Button } from "./ui/button";
-import { useState, useEffect } from "react";
-import { LogOut, User as UserIcon, Users, MessageSquare } from "lucide-react";
+import { Avatar } from "./ui/avatar";
+import { Logo } from "./ui/logo";
 import { ModeToggle } from "./mode-toggle";
+import { useTheme } from "./theme-provider";
+import { APP_NAV, MARKETING_NAV } from "./nav-items";
+import { useLogout } from "../hooks/useLogout";
+import { cn, fullName } from "../lib/utils";
 
-import logo from "../assets/logo.png";
+const useScrolled = (offset = 8) => {
+    const [scrolled, setScrolled] = useState(false);
+    useEffect(() => {
+        const onScroll = () => setScrolled(window.scrollY > offset);
+        onScroll();
+        window.addEventListener("scroll", onScroll, { passive: true });
+        return () => window.removeEventListener("scroll", onScroll);
+    }, [offset]);
+    return scrolled;
+};
+
+const UserMenu = ({ user }) => {
+    const [open, setOpen] = useState(false);
+    const ref = useRef(null);
+    const logout = useLogout();
+    const { resolvedTheme, setTheme } = useTheme();
+
+    useEffect(() => {
+        if (!open) return;
+        const onClick = (e) => ref.current && !ref.current.contains(e.target) && setOpen(false);
+        const onKey = (e) => e.key === "Escape" && setOpen(false);
+        document.addEventListener("mousedown", onClick);
+        document.addEventListener("keydown", onKey);
+        return () => {
+            document.removeEventListener("mousedown", onClick);
+            document.removeEventListener("keydown", onKey);
+        };
+    }, [open]);
+
+    const itemClass =
+        "flex w-full items-center gap-2.5 rounded-md px-2.5 py-2 text-sm text-foreground/90 transition-colors hover:bg-accent hover:text-foreground [&_svg]:h-4 [&_svg]:w-4 [&_svg]:text-muted-foreground";
+
+    return (
+        <div className="relative" ref={ref}>
+            <button
+                onClick={() => setOpen((o) => !o)}
+                className="flex items-center gap-2 rounded-full p-0.5 pr-2 transition-colors hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring"
+                aria-haspopup="menu"
+                aria-expanded={open}
+                aria-label="Open account menu"
+            >
+                <Avatar src={user.photoUrl} firstName={user.firstName} lastName={user.lastName} size="sm" />
+                <ChevronDown className={cn("hidden h-4 w-4 text-muted-foreground transition-transform sm:block", open && "rotate-180")} />
+            </button>
+
+            {open && (
+                <div
+                    role="menu"
+                    className="absolute right-0 mt-2 w-64 origin-top-right rounded-xl border bg-popover p-1.5 text-popover-foreground shadow-xl shadow-black/10 animate-in fade-in zoom-in-95 slide-in-from-top-2 duration-150"
+                >
+                    <div className="flex items-center gap-3 px-2.5 py-2.5">
+                        <Avatar src={user.photoUrl} firstName={user.firstName} lastName={user.lastName} size="md" />
+                        <div className="min-w-0">
+                            <p className="truncate text-sm font-semibold">{fullName(user)}</p>
+                            {user.email && <p className="truncate text-xs text-muted-foreground">{user.email}</p>}
+                        </div>
+                    </div>
+                    <div className="my-1 h-px bg-border" />
+                    <Link to="/profile" role="menuitem" onClick={() => setOpen(false)} className={itemClass}>
+                        <UserRound /> Your profile
+                    </Link>
+                    <button
+                        role="menuitem"
+                        onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+                        className={itemClass}
+                    >
+                        {resolvedTheme === "dark" ? <Sun /> : <Moon />}
+                        {resolvedTheme === "dark" ? "Light mode" : "Dark mode"}
+                    </button>
+                    <div className="my-1 h-px bg-border" />
+                    <button
+                        role="menuitem"
+                        onClick={() => {
+                            setOpen(false);
+                            logout();
+                        }}
+                        className={cn(itemClass, "text-destructive hover:text-destructive [&_svg]:text-destructive")}
+                    >
+                        <LogOut /> Sign out
+                    </button>
+                </div>
+            )}
+        </div>
+    );
+};
+
+const AppNav = () => {
+    const requests = useSelector((store) => store.requests);
+    const pending = requests?.length || 0;
+
+    return (
+        <nav aria-label="Primary" className="hidden items-center gap-1 md:flex">
+            {APP_NAV.filter((i) => !i.mobileOnly).map(({ to, label, icon: Icon, end, badge }) => (
+                <NavLink
+                    key={to}
+                    to={to}
+                    end={end}
+                    className={({ isActive }) =>
+                        cn(
+                            "relative flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                            isActive ? "bg-accent text-foreground" : "text-muted-foreground hover:bg-accent/60 hover:text-foreground"
+                        )
+                    }
+                >
+                    <Icon className="h-4 w-4" />
+                    {label}
+                    {badge === "requests" && pending > 0 && (
+                        <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-primary px-1.5 text-[11px] font-semibold text-primary-foreground">
+                            {pending > 9 ? "9+" : pending}
+                        </span>
+                    )}
+                </NavLink>
+            ))}
+        </nav>
+    );
+};
+
+const MarketingNav = ({ onNavigate, className }) => (
+    <nav aria-label="Primary" className={className}>
+        {MARKETING_NAV.map(({ id, label }) => (
+            <a
+                key={id}
+                href={`/#${id}`}
+                onClick={(e) => onNavigate(e, id)}
+                className="rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent/60 hover:text-foreground"
+            >
+                {label}
+            </a>
+        ))}
+    </nav>
+);
 
 const NavBar = () => {
     const user = useSelector((store) => store.user);
-    const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [activeSection, setActiveSection] = useState("home");
+    const location = useLocation();
+    const scrolled = useScrolled();
+    // Remember which page the mobile menu was opened on so navigating closes it.
+    const [menuPath, setMenuPath] = useState(null);
+    const mobileOpen = menuPath === location.pathname;
+    const setMobileOpen = (open) => setMenuPath(open ? location.pathname : null);
 
-    useEffect(() => {
-        const handleScroll = () => {
-            const sections = ["home", "features", "contact"];
-            const scrollPosition = window.scrollY + 100; // Offset
-
-            for (const section of sections) {
-                const element = document.getElementById(section);
-                if (element && element.offsetTop <= scrollPosition && (element.offsetTop + element.offsetHeight) > scrollPosition) {
-                    setActiveSection(section);
-                }
-            }
-        };
-
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
-
-    const scrollToSection = (e, sectionId) => {
+    const scrollToSection = (e, id) => {
         e.preventDefault();
-        const element = document.getElementById(sectionId);
-        if (element) {
-            element.scrollIntoView({ behavior: "smooth" });
-            setActiveSection(sectionId);
+        setMobileOpen(false);
+        const el = document.getElementById(id);
+        if (el) {
+            el.scrollIntoView({ behavior: "smooth" });
         } else {
             navigate("/");
-            setTimeout(() => {
-                const el = document.getElementById(sectionId);
-                if (el) el.scrollIntoView({ behavior: "smooth" });
-            }, 100);
+            setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }), 100);
         }
     };
 
-    const handleLogout = async () => {
-        try {
-            await axios.post(BASE_URL + "/logout", {}, { withCredentials: true });
-        } catch (err) {
-            console.error("Logout failed:", err);
-        } finally {
-            dispatch(removeUser());
-            navigate("/login");
-        }
-    };
     return (
-        <div className="fixed top-0 w-full z-50 transition-all duration-300 py-4">
-            <nav className="container mx-auto px-6 flex items-center justify-between">
+        <header
+            className={cn(
+                "sticky top-0 z-50 w-full border-b transition-all duration-300",
+                scrolled || user || mobileOpen
+                    ? "border-border/70 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/70"
+                    : "border-transparent bg-transparent"
+            )}
+        >
+            <div className="container flex h-16 items-center justify-between gap-4">
+                <div className="flex items-center gap-8">
+                    <Link to="/" aria-label="CodeMate home" className="rounded-lg focus-visible:ring-2 focus-visible:ring-ring">
+                        <Logo />
+                    </Link>
+                    {user ? <AppNav /> : <MarketingNav onNavigate={scrollToSection} className="hidden items-center gap-1 md:flex" />}
+                </div>
 
-                {/* Logo Section */}
-                <Link to="/" className="flex items-center gap-2 relative z-50">
-                    <img src={logo} alt="CodeMate Logo" className="h-24 w-auto -my-4" />
-
-                </Link>
-
-                {/* Center Navigation Pill */}
-                {!user && (
-                    <div className="absolute left-1/2 -translate-x-1/2 hidden md:flex items-center gap-1 bg-white/5 backdrop-blur-md border border-white/10 rounded-full px-2 py-1.5 shadow-lg">
-                        {["Home", "Features", "Contact"].map((item) => {
-                            const sectionId = item.toLowerCase();
-                            const isActive = activeSection === sectionId;
-                            return (
-                                <a
-                                    key={item}
-                                    href={`#${sectionId}`}
-                                    onClick={(e) => scrollToSection(e, sectionId)}
-                                    className={`px-6 py-2 text-sm font-medium rounded-full transition-all duration-300 ${isActive
-                                        ? "bg-rose-600 text-white shadow-lg shadow-rose-500/25"
-                                        : "text-gray-300 hover:text-white hover:bg-white/10"
-                                        }`}
-                                >
-                                    {item}
-                                </a>
-                            );
-                        })}
-                    </div>
-                )}
-
-                {/* Right Actions */}
-                <div className="flex items-center gap-4 relative z-50">
+                <div className="flex items-center gap-1.5 sm:gap-2">
                     {user ? (
-                        <div className="flex items-center gap-4">
-                            <span className="hidden lg:inline-block text-sm font-medium text-gray-400">
-                                Welcome, <span className="text-white">{user.firstName}</span>
-                            </span>
-
-                            <div className="relative">
-                                <button
-                                    onClick={() => setIsMenuOpen(!isMenuOpen)}
-                                    className="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full ring-2 ring-rose-500/50 ring-offset-2 ring-offset-black focus:outline-none transition-transform hover:scale-105"
-                                >
-                                    <img
-                                        className="aspect-square h-full w-full object-cover"
-                                        src={user.photoUrl}
-                                        alt={user.firstName}
-                                    />
-                                </button>
-
-                                {isMenuOpen && (
-                                    <>
-                                        <div
-                                            className="fixed inset-0 z-40"
-                                            onClick={() => setIsMenuOpen(false)}
-                                        />
-                                        <div className="absolute right-0 mt-3 w-56 rounded-xl border border-white/10 bg-black/90 backdrop-blur-xl text-white shadow-2xl animate-in fade-in zoom-in-95 p-1 z-50">
-                                            <Link to="/profile" onClick={() => setIsMenuOpen(false)} className="relative flex cursor-pointer select-none items-center rounded-md px-2 py-2 text-sm outline-none hover:bg-white/10 transition-colors group">
-                                                <UserIcon className="mr-2 h-4 w-4 text-gray-400 group-hover:text-rose-500 transition-colors" />
-                                                <span>Profile</span>
-                                            </Link>
-                                            <Link to="/connections" onClick={() => setIsMenuOpen(false)} className="relative flex cursor-pointer select-none items-center rounded-md px-2 py-2 text-sm outline-none hover:bg-white/10 transition-colors group">
-                                                <Users className="mr-2 h-4 w-4 text-gray-400 group-hover:text-rose-500 transition-colors" />
-                                                <span>Connections</span>
-                                            </Link>
-                                            <Link to="/requests" onClick={() => setIsMenuOpen(false)} className="relative flex cursor-pointer select-none items-center rounded-md px-2 py-2 text-sm outline-none hover:bg-white/10 transition-colors group">
-                                                <MessageSquare className="mr-2 h-4 w-4 text-gray-400 group-hover:text-rose-500 transition-colors" />
-                                                <span>Requests</span>
-                                            </Link>
-                                            <Link to="/" onClick={() => setIsMenuOpen(false)} className="relative flex cursor-pointer select-none items-center rounded-md px-2 py-2 text-sm outline-none hover:bg-white/10 transition-colors group">
-                                                <Users className="mr-2 h-4 w-4 text-gray-400 group-hover:text-rose-500 transition-colors" />
-                                                <span>Match Feed</span>
-                                            </Link>
-                                            <div className="h-px bg-white/10 my-1" />
-                                            <div onClick={handleLogout} className="relative flex cursor-pointer select-none items-center rounded-md px-2 py-2 text-sm outline-none hover:bg-white/10 hover:text-rose-500 text-gray-400 transition-colors">
-                                                <LogOut className="mr-2 h-4 w-4" />
-                                                <span>Logout</span>
-                                            </div>
-                                        </div>
-                                    </>
-                                )}
-                            </div>
-                        </div>
+                        <>
+                            <ModeToggle className="hidden sm:inline-flex" />
+                            <UserMenu user={user} />
+                        </>
                     ) : (
-                        <div className="flex items-center gap-4">
-                            <Link to="/login">
-                                <Button className="text-white bg-transparent border border-white/20 hover:border-rose-500 hover:bg-rose-500/10 hover:shadow-[0_0_20px_rgba(244,63,94,0.5)] rounded-full px-8 transition-all duration-300">
-                                    Login
-                                </Button>
-                            </Link>
-                            <Link to="/login">
-                                <Button className="rounded-full px-6 bg-rose-600 hover:bg-rose-500 text-white shadow-lg shadow-rose-500/20 transition-all hover:scale-105">
-                                    Get Started
-                                </Button>
-                            </Link>
-                        </div>
+                        <>
+                            <ModeToggle />
+                            <Button asChild variant="ghost" className="hidden sm:inline-flex">
+                                <Link to="/login">Log in</Link>
+                            </Button>
+                            <Button asChild variant="gradient" className="hidden sm:inline-flex">
+                                <Link to="/login" state={{ mode: "signup" }}>Get started</Link>
+                            </Button>
+                            <Button
+                                variant="ghost"
+                                size="icon"
+                                className="md:hidden"
+                                onClick={() => setMobileOpen(!mobileOpen)}
+                                aria-label={mobileOpen ? "Close menu" : "Open menu"}
+                                aria-expanded={mobileOpen}
+                            >
+                                {mobileOpen ? <X /> : <Menu />}
+                            </Button>
+                        </>
                     )}
                 </div>
-            </nav>
-        </div>
+            </div>
+
+            {!user && mobileOpen && (
+                <div className="border-t bg-background md:hidden animate-in fade-in slide-in-from-top-2 duration-200">
+                    <div className="container flex flex-col gap-1 py-4">
+                        <MarketingNav onNavigate={scrollToSection} className="flex flex-col" />
+                        <div className="mt-3 grid grid-cols-2 gap-2 border-t pt-4">
+                            <Button asChild variant="outline">
+                                <Link to="/login">Log in</Link>
+                            </Button>
+                            <Button asChild variant="gradient">
+                                <Link to="/login" state={{ mode: "signup" }}>Get started</Link>
+                            </Button>
+                        </div>
+                    </div>
+                </div>
+            )}
+        </header>
     );
 };
 export default NavBar;

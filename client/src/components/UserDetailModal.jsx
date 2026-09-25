@@ -1,146 +1,119 @@
-import { X, Github, Linkedin, ExternalLink, Code, Brain } from "lucide-react";
+import { useEffect, useRef } from "react";
+import { X, ExternalLink, BadgeCheck, Heart } from "lucide-react";
 import { Button } from "./ui/button";
+import { Avatar } from "./ui/avatar";
+import { PROFILE_LINKS } from "./profile-links";
+import { fullName, capitalize } from "../lib/utils";
 
-const UserDetailModal = ({ user, onClose }) => {
+const UserDetailModal = ({ user, onClose, actions }) => {
+    const closeRef = useRef(null);
+
+    useEffect(() => {
+        if (!user) return;
+        const onKey = (e) => e.key === "Escape" && onClose();
+        document.addEventListener("keydown", onKey);
+        const prevOverflow = document.body.style.overflow;
+        document.body.style.overflow = "hidden";
+        closeRef.current?.focus();
+        return () => {
+            document.removeEventListener("keydown", onKey);
+            document.body.style.overflow = prevOverflow;
+        };
+    }, [user, onClose]);
+
     if (!user) return null;
 
-    const { firstName, lastName, photoUrl, age, gender, about, skills, githubProfileUrl, linkedinProfileUrl, leetcodeProfileUrl, codeforcesProfileUrl, codechefProfileUrl, gfgProfileUrl, tufProfileUrl } = user;
+    const { photoUrl, age, gender, about, skills = [], isLinkedInVerified } = user;
+    const links = PROFILE_LINKS.filter((l) => user[l.key]);
+    const meta = [age && `${age} years`, capitalize(gender)].filter(Boolean).join(" · ");
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-in fade-in duration-200">
-            <div className="bg-stone-950 border border-stone-800 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl relative animate-in zoom-in-95 duration-200 hide-scrollbar">
+        <div className="fixed inset-0 z-[60] flex items-end justify-center sm:items-center sm:p-4" role="dialog" aria-modal="true" aria-labelledby="user-detail-title">
+            <div className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200" onClick={onClose} />
 
-                {/* Close Button */}
-                <button
-                    onClick={onClose}
-                    className="absolute top-4 right-4 z-10 p-2 rounded-full bg-black/50 hover:bg-stone-800 text-stone-400 hover:text-white transition-colors"
-                >
-                    <X className="w-6 h-6" />
-                </button>
+            <div className="relative flex max-h-[92dvh] w-full flex-col overflow-hidden rounded-t-3xl border bg-background shadow-2xl animate-in slide-in-from-bottom-10 duration-300 sm:max-w-lg sm:rounded-3xl sm:zoom-in-95 sm:slide-in-from-bottom-4">
+                <div className="overflow-y-auto no-scrollbar">
+                    {/* Header */}
+                    <div className="relative h-36 bg-gradient-to-br from-rose-500 via-pink-600 to-violet-600">
+                        <div className="absolute inset-0 bg-grid opacity-20" />
+                        <div className="absolute left-1/2 top-2 h-1 w-10 -translate-x-1/2 rounded-full bg-white/50 sm:hidden" />
+                        <button
+                            ref={closeRef}
+                            onClick={onClose}
+                            className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-black/25 text-white backdrop-blur transition-colors hover:bg-black/40 focus-visible:ring-2 focus-visible:ring-white"
+                            aria-label="Close"
+                        >
+                            <X className="h-5 w-5" />
+                        </button>
+                    </div>
 
-                {/* Cover / Image Section */}
-                <div className="h-64 sm:h-80 w-full relative">
-                    <img
-                        src={photoUrl}
-                        alt={firstName}
-                        className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-transparent to-transparent"></div>
+                    <div className="px-6 pb-6">
+                        <Avatar src={photoUrl} firstName={user.firstName} lastName={user.lastName} size="xl" className="-mt-12 rounded-full ring-4 ring-background" />
+                        <div className="mt-3">
+                            <h2 id="user-detail-title" className="flex items-center gap-2 text-2xl font-bold">
+                                {fullName(user)}
+                                {isLinkedInVerified && <BadgeCheck className="h-5 w-5 text-sky-500" aria-label="Verified" />}
+                            </h2>
+                            {meta && <p className="text-sm text-muted-foreground">{meta}</p>}
+                        </div>
 
-                    <div className="absolute bottom-6 left-6 right-6">
-                        <h2 className="text-3xl sm:text-4xl font-bold text-white mb-2">{firstName} {lastName}</h2>
-                        {age && gender && (
-                            <div className="inline-flex items-center px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-white text-sm font-medium uppercase tracking-wider">
-                                {age} • {gender}
-                            </div>
+                        <section className="mt-6">
+                            <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">About</h3>
+                            <p className="mt-2 whitespace-pre-line leading-relaxed text-foreground/90">{about || "No bio yet."}</p>
+                        </section>
+
+                        {skills.length > 0 && (
+                            <section className="mt-6">
+                                <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Skills</h3>
+                                <div className="mt-2 flex flex-wrap gap-2">
+                                    {skills.map((skill) => (
+                                        <span key={skill} className="rounded-lg border bg-muted/50 px-2.5 py-1 font-mono text-xs">
+                                            {skill}
+                                        </span>
+                                    ))}
+                                </div>
+                            </section>
+                        )}
+
+                        {links.length > 0 && (
+                            <section className="mt-6">
+                                <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Profiles</h3>
+                                <div className="mt-2 grid gap-2 sm:grid-cols-2">
+                                    {links.map(({ key, label, icon: Icon, color }) => (
+                                        <a
+                                            key={key}
+                                            href={user[key]}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="group flex items-center gap-3 rounded-xl border p-3 transition-colors hover:bg-accent"
+                                        >
+                                            <span className={`flex h-8 w-8 items-center justify-center rounded-lg ${color}`}>
+                                                <Icon className="h-4 w-4" />
+                                            </span>
+                                            <span className="text-sm font-medium">{label}</span>
+                                            <ExternalLink className="ml-auto h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
+                                        </a>
+                                    ))}
+                                </div>
+                            </section>
                         )}
                     </div>
                 </div>
 
-                {/* Content Section */}
-                <div className="p-6 sm:p-8 space-y-8">
-
-                    {/* Bio */}
-                    <div>
-                        <h3 className="text-lg font-semibold text-stone-200 mb-3">About</h3>
-                        <p className="text-stone-400 leading-relaxed text-lg">
-                            {about || "No bio available."}
-                        </p>
+                {actions && (
+                    <div className="flex gap-3 border-t bg-background/95 p-4 pb-[max(1rem,env(safe-area-inset-bottom))] backdrop-blur">
+                        {actions.onPass && (
+                            <Button variant="outline" size="lg" className="flex-1" onClick={actions.onPass}>
+                                <X /> Pass
+                            </Button>
+                        )}
+                        {actions.onConnect && (
+                            <Button variant="gradient" size="lg" className="flex-1" onClick={actions.onConnect}>
+                                <Heart fill="currentColor" /> Connect
+                            </Button>
+                        )}
                     </div>
-
-                    {/* Skills */}
-                    {skills && skills.length > 0 && (
-                        <div>
-                            <h3 className="text-lg font-semibold text-stone-200 mb-3">Skills</h3>
-                            <div className="flex flex-wrap gap-2">
-                                {skills.map((skill, index) => (
-                                    <span
-                                        key={index}
-                                        className="px-4 py-2 rounded-lg bg-stone-900 border border-stone-800 text-stone-300 font-medium"
-                                    >
-                                        {skill}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
-                    )}
-
-                    {/* Social / Coding Profiles */}
-                    <div>
-                        <h3 className="text-lg font-semibold text-stone-200 mb-4">Profiles & Socials</h3>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            {githubProfileUrl && (
-                                <a href={githubProfileUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-4 rounded-xl bg-stone-900/50 border border-stone-800 hover:bg-stone-900 hover:border-stone-700 transition-all group">
-                                    <div className="p-2 rounded-lg bg-[#24292e] text-white">
-                                        <Github className="w-5 h-5" />
-                                    </div>
-                                    <span className="font-medium text-stone-300 group-hover:text-white">GitHub</span>
-                                    <ExternalLink className="w-4 h-4 ml-auto text-stone-600 group-hover:text-stone-400" />
-                                </a>
-                            )}
-
-                            {linkedinProfileUrl && (
-                                <a href={linkedinProfileUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-4 rounded-xl bg-stone-900/50 border border-stone-800 hover:bg-stone-900 hover:border-stone-700 transition-all group">
-                                    <div className="p-2 rounded-lg bg-[#0077b5] text-white">
-                                        <Linkedin className="w-5 h-5" />
-                                    </div>
-                                    <span className="font-medium text-stone-300 group-hover:text-white">LinkedIn</span>
-                                    <ExternalLink className="w-4 h-4 ml-auto text-stone-600 group-hover:text-stone-400" />
-                                </a>
-                            )}
-
-                            {leetcodeProfileUrl && (
-                                <a href={leetcodeProfileUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-4 rounded-xl bg-stone-900/50 border border-stone-800 hover:bg-stone-900 hover:border-stone-700 transition-all group">
-                                    <div className="p-2 rounded-lg bg-[#ffa116] text-white">
-                                        <Code className="w-5 h-5" />
-                                    </div>
-                                    <span className="font-medium text-stone-300 group-hover:text-white">LeetCode</span>
-                                    <ExternalLink className="w-4 h-4 ml-auto text-stone-600 group-hover:text-stone-400" />
-                                </a>
-                            )}
-
-                            {codeforcesProfileUrl && (
-                                <a href={codeforcesProfileUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-4 rounded-xl bg-stone-900/50 border border-stone-800 hover:bg-stone-900 hover:border-stone-700 transition-all group">
-                                    <div className="p-2 rounded-lg bg-[#1f8dd6] text-white">
-                                        <Code className="w-5 h-5" />
-                                    </div>
-                                    <span className="font-medium text-stone-300 group-hover:text-white">CodeForces</span>
-                                    <ExternalLink className="w-4 h-4 ml-auto text-stone-600 group-hover:text-stone-400" />
-                                </a>
-                            )}
-
-                            {codechefProfileUrl && (
-                                <a href={codechefProfileUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-4 rounded-xl bg-stone-900/50 border border-stone-800 hover:bg-stone-900 hover:border-stone-700 transition-all group">
-                                    <div className="p-2 rounded-lg bg-[#5b4638] text-white">
-                                        <Code className="w-5 h-5" />
-                                    </div>
-                                    <span className="font-medium text-stone-300 group-hover:text-white">CodeChef</span>
-                                    <ExternalLink className="w-4 h-4 ml-auto text-stone-600 group-hover:text-stone-400" />
-                                </a>
-                            )}
-
-                            {gfgProfileUrl && (
-                                <a href={gfgProfileUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-4 rounded-xl bg-stone-900/50 border border-stone-800 hover:bg-stone-900 hover:border-stone-700 transition-all group">
-                                    <div className="p-2 rounded-lg bg-[#2f8d46] text-white">
-                                        <Code className="w-5 h-5" />
-                                    </div>
-                                    <span className="font-medium text-stone-300 group-hover:text-white">GeeksForGeeks</span>
-                                    <ExternalLink className="w-4 h-4 ml-auto text-stone-600 group-hover:text-stone-400" />
-                                </a>
-                            )}
-
-                            {tufProfileUrl && (
-                                <a href={tufProfileUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-4 rounded-xl bg-stone-900/50 border border-stone-800 hover:bg-stone-900 hover:border-stone-700 transition-all group">
-                                    <div className="p-2 rounded-lg bg-[#e11d48] text-white">
-                                        <Brain className="w-5 h-5" />
-                                    </div>
-                                    <span className="font-medium text-stone-300 group-hover:text-white">takeUforward</span>
-                                    <ExternalLink className="w-4 h-4 ml-auto text-stone-600 group-hover:text-stone-400" />
-                                </a>
-                            )}
-                        </div>
-                    </div>
-                </div>
+                )}
             </div>
         </div>
     );

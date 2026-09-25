@@ -1,29 +1,61 @@
-import { Card, CardContent } from "./ui/card";
+import { useState } from "react";
+import { BadgeCheck, UserRound } from "lucide-react";
+import { cn, fullName, capitalize } from "../lib/utils";
 
-const UserCard = ({ user }) => {
-    const { firstName, lastName, photoUrl, age, gender, about } = user;
-
+const SkillChips = ({ skills = [], max = 4, className }) => {
+    if (!skills.length) return null;
+    const shown = skills.slice(0, max);
+    const rest = skills.length - shown.length;
     return (
-        <Card className="w-96 overflow-hidden hover:shadow-xl transition-all duration-300 border-border/50 bg-card/80 backdrop-blur-sm h-full flex flex-col">
-            <div className="h-3/5 overflow-hidden relative group w-full">
-                <img
-                    src={user.photoUrl}
-                    alt="photo"
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300"></div>
-
-                <div className="absolute bottom-4 left-4 right-4">
-                    <h2 className="text-2xl font-bold text-white drop-shadow-md">
-                        {firstName + " " + lastName}
-                    </h2>
-                    {age && gender && <p className="text-white/90 font-medium text-sm mt-1 uppercase tracking-wide drop-shadow-md">{age + ", " + gender}</p>}
-                </div>
-            </div>
-            <CardContent className="pt-6 relative flex-1">
-                <p className="text-muted-foreground leading-relaxed line-clamp-4">{about || "No bio available."}</p>
-            </CardContent>
-        </Card>
+        <div className={cn("flex flex-wrap gap-1.5", className)}>
+            {shown.map((s) => (
+                <span key={s} className="rounded-md bg-white/15 px-2 py-0.5 text-xs font-medium text-white backdrop-blur-md ring-1 ring-white/20">
+                    {s}
+                </span>
+            ))}
+            {rest > 0 && (
+                <span className="rounded-md bg-white/10 px-2 py-0.5 text-xs font-medium text-white/80 backdrop-blur-md">+{rest}</span>
+            )}
+        </div>
     );
 };
+
+const UserCard = ({ user, className, children }) => {
+    const { photoUrl, age, gender, about, skills, isLinkedInVerified } = user;
+    const [imgFailed, setImgFailed] = useState(false);
+    const meta = [age, capitalize(gender)].filter(Boolean).join(" · ");
+
+    return (
+        <div className={cn("relative h-full w-full select-none overflow-hidden rounded-3xl border bg-muted shadow-xl", className)}>
+            {photoUrl && !imgFailed ? (
+                <img
+                    src={photoUrl}
+                    alt={fullName(user)}
+                    draggable={false}
+                    onError={() => setImgFailed(true)}
+                    className="absolute inset-0 h-full w-full object-cover"
+                />
+            ) : (
+                <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-rose-500 to-violet-600">
+                    <UserRound className="h-24 w-24 text-white/40" />
+                </div>
+            )}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+
+            <div className="absolute inset-x-0 bottom-0 space-y-3 p-5 text-white">
+                <div>
+                    <h2 className="flex items-center gap-2 text-2xl font-bold leading-tight drop-shadow">
+                        <span className="truncate">{fullName(user)}</span>
+                        {isLinkedInVerified && <BadgeCheck className="h-5 w-5 shrink-0 text-sky-400" aria-label="Verified" />}
+                    </h2>
+                    {meta && <p className="mt-0.5 text-sm text-white/75">{meta}</p>}
+                </div>
+                {about && <p className="line-clamp-2 text-sm leading-relaxed text-white/85">{about}</p>}
+                <SkillChips skills={skills} />
+            </div>
+            {children}
+        </div>
+    );
+};
+
 export default UserCard;

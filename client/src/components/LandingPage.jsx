@@ -1,212 +1,311 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import {
+    ArrowRight, Github, MessageSquare, Sparkles, Code2, Heart, X,
+    BadgeCheck, Trophy, Mail, MapPin, UserPlus, Compass, Send, Zap,
+} from "lucide-react";
 import { Button } from "./ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-import { Code2, Github, Cpu, Rocket, Mail, MapPin } from "lucide-react";
 import { Input } from "./ui/input";
-import heroRobot from "../assets/hero-robot-v2.png";
+import { Textarea } from "./ui/textarea";
+import { Label } from "./ui/label";
+import { Badge } from "./ui/badge";
+import { showToast } from "../store/toastSlice";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
+import { cn } from "../lib/utils";
 
-const LandingPage = () => {
-    const scrollToFeatures = () => {
-        document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' });
+const CONTACT_EMAIL = "growwithhustler@gmail.com";
+
+const SectionHeading = ({ eyebrow, title, description }) => (
+    <div className="mx-auto mb-12 max-w-2xl text-center md:mb-16">
+        <p className="text-sm font-semibold uppercase tracking-wider text-primary">{eyebrow}</p>
+        <h2 className="mt-3 text-3xl font-bold tracking-tight text-balance sm:text-4xl">{title}</h2>
+        {description && <p className="mt-4 text-lg text-muted-foreground text-balance">{description}</p>}
+    </div>
+);
+
+/* ----------------------------- Hero mockup ----------------------------- */
+
+const MockCard = ({ name, role, skills, gradient, className }) => (
+    <div className={cn("w-72 overflow-hidden rounded-2xl border bg-card shadow-2xl shadow-black/20", className)}>
+        <div className={cn("relative h-44 bg-gradient-to-br", gradient)}>
+            <div className="absolute inset-0 bg-grid opacity-20" />
+            <div className="absolute bottom-3 left-4 flex items-center gap-1.5 text-white">
+                <span className="text-lg font-semibold">{name}</span>
+                <BadgeCheck className="h-4 w-4 text-sky-300" />
+            </div>
+        </div>
+        <div className="space-y-3 p-4">
+            <p className="text-sm text-muted-foreground">{role}</p>
+            <div className="flex flex-wrap gap-1.5">
+                {skills.map((s) => (
+                    <span key={s} className="rounded-md border bg-muted/60 px-2 py-0.5 font-mono text-[11px] text-foreground/80">
+                        {s}
+                    </span>
+                ))}
+            </div>
+            <div className="flex justify-center gap-4 pt-1">
+                <span className="flex h-10 w-10 items-center justify-center rounded-full border text-rose-500">
+                    <X className="h-5 w-5" />
+                </span>
+                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-rose-500 to-pink-600 text-white shadow-lg shadow-rose-500/30">
+                    <Heart className="h-5 w-5" fill="currentColor" />
+                </span>
+            </div>
+        </div>
+    </div>
+);
+
+const HeroMockup = () => (
+    <div className="relative mx-auto flex h-[420px] w-full max-w-md items-center justify-center" aria-hidden="true">
+        <div className="absolute inset-10 rounded-full bg-gradient-to-tr from-rose-500/30 to-violet-500/30 blur-3xl" />
+        <MockCard
+            name="Priya S."
+            role="Backend engineer · open to hackathons"
+            skills={["Go", "Postgres", "gRPC"]}
+            gradient="from-violet-500 to-indigo-600"
+            className="absolute -rotate-6 -translate-x-10 scale-95 opacity-80"
+        />
+        <MockCard
+            name="Arjun M."
+            role="Full-stack dev · building a SaaS side project"
+            skills={["React", "Node.js", "TypeScript", "AWS"]}
+            gradient="from-rose-500 to-orange-400"
+            className="relative rotate-3 translate-x-6"
+        />
+        <div className="absolute right-0 top-10 flex items-center gap-2 rounded-xl border bg-card/90 px-3 py-2 shadow-lg backdrop-blur animate-float">
+            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-500">
+                <Sparkles className="h-3.5 w-3.5" />
+            </span>
+            <span className="text-xs font-semibold">It's a match!</span>
+        </div>
+        <div className="absolute bottom-12 left-0 flex items-center gap-2 rounded-xl border bg-card/90 px-3 py-2 shadow-lg backdrop-blur animate-float [animation-delay:1.5s]">
+            <Code2 className="h-4 w-4 text-primary" />
+            <span className="font-mono text-xs">92% stack overlap</span>
+        </div>
+    </div>
+);
+
+/* ------------------------------- Sections ------------------------------ */
+
+const features = [
+    {
+        icon: Compass,
+        title: "Skill-based discovery",
+        desc: "Browse developers one card at a time and see their stack, bio and coding profiles at a glance.",
+        className: "md:col-span-2",
+    },
+    {
+        icon: Github,
+        title: "GitHub skill import",
+        desc: "Link GitHub and we read the languages across your repos to fill in your skills automatically.",
+    },
+    {
+        icon: BadgeCheck,
+        title: "Verified professionals",
+        desc: "Verify with LinkedIn to earn a badge and get prioritised in other developers' feeds.",
+    },
+    {
+        icon: MessageSquare,
+        title: "Real-time chat",
+        desc: "Once you both connect, jump straight into a live conversation and start planning.",
+    },
+    {
+        icon: Trophy,
+        title: "Competitive coding profiles",
+        desc: "Show off LeetCode, Codeforces, CodeChef, GFG and takeUforward — all on one profile.",
+    },
+];
+
+const steps = [
+    { icon: UserPlus, title: "Create your profile", desc: "Sign up in seconds, add your skills or import them from GitHub." },
+    { icon: Heart, title: "Discover & connect", desc: "Swipe through developers. When interest is mutual, you're connected." },
+    { icon: Zap, title: "Start building", desc: "Chat in real time, pick a project and ship it together." },
+];
+
+const platforms = ["GitHub", "LinkedIn", "LeetCode", "Codeforces", "CodeChef", "GeeksforGeeks"];
+
+const ContactForm = () => {
+    const dispatch = useDispatch();
+    const [form, setForm] = useState({ name: "", email: "", message: "" });
+    const update = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        const subject = encodeURIComponent(`CodeMate enquiry from ${form.name}`);
+        const body = encodeURIComponent(`${form.message}\n\n— ${form.name} (${form.email})`);
+        window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+        dispatch(showToast({ message: "Opening your email app…", type: "success" }));
     };
 
     return (
-        <div className="flex flex-col min-h-screen bg-black text-white selection:bg-rose-500/30 overflow-x-hidden">
-            {/* Background Glows */}
-            <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-rose-600/20 blur-[120px] rounded-full pointer-events-none opacity-30" />
-            <div className="fixed bottom-0 right-0 w-[600px] h-[600px] bg-purple-600/10 blur-[100px] rounded-full pointer-events-none opacity-20" />
-
-            {/* Hero Section */}
-            <section id="home" className="relative pt-32 pb-20 px-4 container mx-auto flex flex-col-reverse lg:flex-row items-center justify-between gap-12 min-h-[calc(100vh-100px)]">
-                <div className="flex-1 space-y-8 z-10 animate-in fade-in slide-in-from-bottom-4 duration-700 text-center lg:text-left">
-                    <div className="inline-block px-4 py-1.5 rounded-full border border-rose-500/30 bg-rose-500/10 text-rose-400 text-sm font-medium hover:bg-rose-500/20 transition-colors cursor-default">
-                        CodeMate AI 1.0 is live! 🚀
-                    </div>
-
-                    <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 leading-tight">
-                        Your Personalized <br />
-                        <span className="bg-gradient-to-r from-rose-500 to-purple-600 bg-clip-text text-transparent">Developer Match</span> <br />
-                        Powered by AI
-                    </h1>
-
-                    <p className="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                        Discover skilled, passionate, and purely compatible coding partners curated by AI — based on your stack, goals, and coding style.
-                    </p>
-
-                    <p className="text-lg text-gray-500 max-w-2xl mx-auto lg:mx-0">
-                        Track your matches, collaborate on repos, and ship products without the friction. Made for hackers and creators.
-                    </p>
-
-                    <div className="flex flex-wrap gap-4 justify-center lg:justify-start pt-4">
-                        <Link to="/login">
-                            <Button size="lg" className="rounded-full px-10 h-14 text-lg shadow-xl shadow-rose-500/20 bg-gradient-to-r from-rose-600 to-rose-500 text-white hover:opacity-90 transition-all hover:scale-105">
-                                Get Started
-                            </Button>
-                        </Link>
-                        <Button
-                            variant="outline"
-                            size="lg"
-                            onClick={scrollToFeatures}
-                            className="rounded-full px-10 h-14 text-lg border-white/20 hover:bg-white/10 hover:text-white transition-all backdrop-blur-sm"
-                        >
-                            Learn More
-                        </Button>
-                    </div>
+        <form onSubmit={onSubmit} className="space-y-4 rounded-2xl border bg-card p-6 shadow-sm sm:p-8">
+            <div className="grid gap-4 sm:grid-cols-2">
+                <div className="space-y-2">
+                    <Label htmlFor="contact-name">Name</Label>
+                    <Input id="contact-name" name="name" required placeholder="Ada Lovelace" value={form.name} onChange={update} autoComplete="name" />
                 </div>
+                <div className="space-y-2">
+                    <Label htmlFor="contact-email">Email</Label>
+                    <Input id="contact-email" name="email" type="email" required placeholder="ada@example.com" value={form.email} onChange={update} autoComplete="email" />
+                </div>
+            </div>
+            <div className="space-y-2">
+                <Label htmlFor="contact-message">Message</Label>
+                <Textarea id="contact-message" name="message" required rows={5} placeholder="Tell us what's on your mind…" value={form.message} onChange={update} />
+            </div>
+            <Button type="submit" variant="gradient" size="lg" className="w-full">
+                <Send /> Send message
+            </Button>
+        </form>
+    );
+};
 
-                {/* Hero Visual - 3D Illustration */}
-                <div className="flex-1 relative w-full max-w-md lg:max-w-xl animate-in fade-in zoom-in-95 duration-1000 delay-300 flex justify-center">
-                    <div className="relative aspect-square w-full max-w-[500px]">
-                        {/* Glowing Background */}
-                        <div className="absolute inset-0 bg-gradient-to-tr from-rose-500/30 to-purple-600/30 blur-[100px] rounded-full animate-pulse" />
+const LandingPage = () => {
+    useDocumentTitle();
 
-                        <img
-                            src={heroRobot}
-                            alt="AI Developer Assistant"
-                            className="relative z-10 w-full h-full object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500 mix-blend-screen"
-                        />
+    return (
+        <div className="overflow-x-hidden">
+            {/* Hero */}
+            <section id="home" className="relative -mt-16 pt-16">
+                <div className="absolute inset-0 -z-10 bg-grid [mask-image:radial-gradient(ellipse_at_top,black_20%,transparent_70%)]" />
+                <div className="absolute left-1/2 top-0 -z-10 h-[500px] w-[900px] -translate-x-1/2 rounded-full bg-primary/15 blur-[120px]" />
 
-                        {/* Floating Cards (Decorative) */}
-                        <div className="absolute top-10 -right-10 bg-black/60 backdrop-blur-md border border-white/10 p-3 rounded-xl animate-bounce delay-700 hidden lg:block">
-                            <div className="flex items-center gap-2">
-                                <div className="h-3 w-3 bg-green-500 rounded-full" />
-                                <span className="text-xs font-mono text-green-400">Match Found!</span>
-                            </div>
+                <div className="container grid items-center gap-12 py-16 md:py-24 lg:grid-cols-2 lg:py-28">
+                    <div className="text-center lg:text-left animate-in fade-in slide-in-from-bottom-4 duration-700">
+                        <Badge variant="outline" className="mb-6 gap-2 bg-background/60 px-3 py-1 text-sm backdrop-blur">
+                            <span className="relative flex h-2 w-2">
+                                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
+                                <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+                            </span>
+                            Now with GitHub skill import
+                        </Badge>
+                        <h1 className="text-4xl font-extrabold tracking-tight text-balance sm:text-5xl lg:text-6xl">
+                            Find the developer who <span className="text-gradient">codes like you think</span>
+                        </h1>
+                        <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground lg:mx-0">
+                            CodeMate matches you with collaborators based on your stack, goals and coding
+                            style — so you can spend less time searching and more time shipping.
+                        </p>
+                        <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
+                            <Button asChild variant="gradient" size="xl">
+                                <Link to="/login" state={{ mode: "signup" }}>
+                                    Get started — it's free <ArrowRight />
+                                </Link>
+                            </Button>
+                            <Button asChild variant="outline" size="xl">
+                                <a href="#how-it-works">See how it works</a>
+                            </Button>
                         </div>
-                        <div className="absolute bottom-20 -left-10 bg-black/60 backdrop-blur-md border border-white/10 p-3 rounded-xl animate-bounce delay-1000 hidden lg:block">
-                            <div className="flex items-center gap-2">
-                                <Code2 className="h-4 w-4 text-rose-500" />
-                                <span className="text-xs font-mono text-rose-400">React + Node.js</span>
-                            </div>
-                        </div>
+                        <p className="mt-6 text-sm text-muted-foreground">No credit card · Set up in under a minute</p>
+                    </div>
+
+                    <div className="animate-in fade-in zoom-in-95 duration-1000">
+                        <HeroMockup />
                     </div>
                 </div>
             </section>
 
-            {/* Why Choose Section */}
-            <section id="features" className="py-20 px-4 container mx-auto relative z-10">
-                <div className="text-center mb-20 animate-in fade-in slide-in-from-bottom-4 duration-700">
-                    <h2 className="text-3xl md:text-5xl font-bold mb-6">
-                        Why Choose <span className="text-rose-500">CodeMate?</span>
-                    </h2>
-                    <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-                        Experience the power of AI-driven developer networking — rooted in compatibility, skills, and open-source culture.
-                    </p>
+            {/* Platforms strip */}
+            <section className="border-y bg-surface/60">
+                <div className="container flex flex-col items-center gap-4 py-8 md:flex-row md:justify-between">
+                    <p className="text-sm font-medium text-muted-foreground">Bring your profiles from</p>
+                    <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+                        {platforms.map((p) => (
+                            <li key={p} className="text-sm font-semibold text-muted-foreground/80">{p}</li>
+                        ))}
+                    </ul>
                 </div>
+            </section>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-                    {[
-                        {
-                            icon: Code2,
-                            title: "Personalized Dev Matches",
-                            desc: "AI-generated connection recommendations tailored to your tech stack, experience level, and project interests — all 100% relevant.",
-                            color: "text-rose-400"
-                        },
-                        {
-                            icon: Github,
-                            title: "Repo-Based Skill Analysis",
-                            desc: "Just link your GitHub. Our AI instantly analyzes your commits, languages, and coding patterns to build your true profile.",
-                            color: "text-purple-400"
-                        },
-                        {
-                            icon: Cpu,
-                            title: "AI Project Guidance",
-                            desc: "Built on modern engineering principles — including architecture suggestions, repo structure ideas, and stack optimization.",
-                            color: "text-blue-400"
-                        },
-                        {
-                            icon: Rocket,
-                            title: "Smart Idea Generator",
-                            desc: "Tell us what skills you have — we’ll craft exciting, viable hackathon ideas using AI. No block, just code.",
-                            color: "text-green-400"
-                        }
-                    ].map((feature, idx) => (
-                        <Card key={idx} className="border-white/10 bg-white/5 backdrop-blur-md hover:bg-white/10 transition-all hover:border-rose-500/30 group p-2">
-                            <CardHeader className="space-y-4">
-                                <div className={`h-14 w-14 rounded-2xl bg-black/40 flex items-center justify-center ${feature.color} group-hover:scale-110 transition-transform duration-300 border border-white/5`}>
-                                    <feature.icon className="h-8 w-8" />
-                                </div>
-                                <CardTitle className="text-2xl text-white">{feature.title}</CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <p className="text-gray-400 text-lg leading-relaxed">{feature.desc}</p>
-                            </CardContent>
-                        </Card>
+            {/* Features */}
+            <section id="features" className="container scroll-mt-20 py-20 md:py-28">
+                <SectionHeading
+                    eyebrow="Features"
+                    title="Everything you need to find your coding partner"
+                    description="Built for hackers, indie makers and anyone who'd rather build with someone than alone."
+                />
+                <div className="mx-auto grid max-w-5xl gap-4 md:grid-cols-3">
+                    {features.map(({ icon: Icon, title, desc, className }) => (
+                        <div
+                            key={title}
+                            className={cn(
+                                "group relative overflow-hidden rounded-2xl border bg-card p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-lg",
+                                className
+                            )}
+                        >
+                            <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-primary/10 opacity-0 blur-2xl transition-opacity group-hover:opacity-100" />
+                            <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl border bg-primary/10 text-primary">
+                                <Icon className="h-5 w-5" />
+                            </div>
+                            <h3 className="text-lg font-semibold">{title}</h3>
+                            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{desc}</p>
+                        </div>
                     ))}
                 </div>
             </section>
 
-            {/* Get in Touch Section */}
-            <section id="contact" className="py-24 px-4 container mx-auto relative z-10">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                    <div className="space-y-6 animate-in fade-in slide-in-from-left-4 duration-700">
-                        <h2 className="text-3xl md:text-5xl font-bold">
-                            Get in <span className="text-rose-500">Touch</span>
-                        </h2>
-                        <p className="text-gray-400 text-lg leading-relaxed max-w-lg">
-                            Have questions, feedback, or just want to verify our AI matchmaking? Drop us a line—we're here to help you ship faster.
-                        </p>
-
-                        <div className="space-y-4 pt-4">
-                            <div className="flex items-center gap-4 text-gray-300">
-                                <div className="h-10 w-10 rounded-full bg-rose-500/10 flex items-center justify-center text-rose-500">
-                                    <Mail className="h-5 w-5" />
+            {/* How it works */}
+            <section id="how-it-works" className="scroll-mt-20 border-y bg-surface/60 py-20 md:py-28">
+                <div className="container">
+                    <SectionHeading eyebrow="How it works" title="From sign-up to shipping in three steps" />
+                    <ol className="relative mx-auto grid max-w-5xl gap-8 md:grid-cols-3">
+                        <div className="absolute left-[16%] right-[16%] top-6 hidden h-px bg-gradient-to-r from-transparent via-border to-transparent md:block" />
+                        {steps.map(({ icon: Icon, title, desc }, i) => (
+                            <li key={title} className="relative text-center">
+                                <div className="relative mx-auto flex h-12 w-12 items-center justify-center rounded-full border bg-background text-primary shadow-sm">
+                                    <Icon className="h-5 w-5" />
+                                    <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
+                                        {i + 1}
+                                    </span>
                                 </div>
-                                <span className="text-lg">growwithhustler@gmail.com</span>
-                            </div>
-                            <div className="flex items-center gap-4 text-gray-300">
-                                <div className="h-10 w-10 rounded-full bg-purple-500/10 flex items-center justify-center text-purple-500">
-                                    <MapPin className="h-5 w-5" />
-                                </div>
-                                <span className="text-lg">Kolkata, India</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-3xl shadow-2xl animate-in fade-in slide-in-from-right-4 duration-700 delay-200">
-                        <form className="space-y-4">
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="space-y-2">
-                                    <label className="text-sm font-medium text-gray-300">First Name</label>
-                                    <Input placeholder="John" className="bg-black/50 border-white/10 focus:border-rose-500/50 text-white" />
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-sm font-medium text-gray-300">Last Name</label>
-                                    <Input placeholder="Doe" className="bg-black/50 border-white/10 focus:border-rose-500/50 text-white" />
-                                </div>
-                            </div>
-                            <div className="space-y-2">
-                                <label className="text-sm font-medium text-gray-300">Email</label>
-                                <Input type="email" placeholder="john@example.com" className="bg-black/50 border-white/10 focus:border-rose-500/50 text-white" />
-                            </div>
-                            <div className="space-y-2">
-                                <label className="text-sm font-medium text-gray-300">Message</label>
-                                <textarea
-                                    className="flex min-h-[120px] w-full rounded-md border border-white/10 bg-black/50 px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500/50 disabled:cursor-not-allowed disabled:opacity-50 text-white"
-                                    placeholder="Tell us about your project..."
-                                />
-                            </div>
-                            <Button className="w-full h-12 bg-gradient-to-r from-rose-600 to-purple-600 hover:from-rose-500 hover:to-purple-500 text-white text-lg rounded-xl font-semibold shadow-lg shadow-rose-500/20">
-                                Send Message
-                            </Button>
-                        </form>
-                    </div>
+                                <h3 className="mt-5 text-lg font-semibold">{title}</h3>
+                                <p className="mx-auto mt-2 max-w-xs text-sm text-muted-foreground">{desc}</p>
+                            </li>
+                        ))}
+                    </ol>
                 </div>
             </section>
 
-            {/* CTA Section */}
-            <section className="py-24 px-4 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-t from-rose-900/10 to-transparent pointer-events-none" />
-                <div className="container mx-auto max-w-4xl relative z-10 text-center rounded-3xl p-12 border border-white/10 bg-black/40 backdrop-blur-xl">
-                    <h2 className="text-3xl md:text-5xl font-bold mb-8 text-white">Ready to elevate your coding journey?</h2>
-                    <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
-                        Join thousands of developers who have already found their ideal collaborators and launched successful projects.
+            {/* Contact */}
+            <section id="contact" className="container scroll-mt-20 py-20 md:py-28">
+                <div className="mx-auto grid max-w-5xl items-start gap-12 lg:grid-cols-2">
+                    <div>
+                        <p className="text-sm font-semibold uppercase tracking-wider text-primary">Contact</p>
+                        <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">Get in touch</h2>
+                        <p className="mt-4 text-lg text-muted-foreground">
+                            Questions, feedback or partnership ideas? We read every message and usually reply within a day.
+                        </p>
+                        <ul className="mt-8 space-y-4">
+                            <li className="flex items-center gap-4">
+                                <span className="flex h-10 w-10 items-center justify-center rounded-xl border bg-card text-primary"><Mail className="h-4 w-4" /></span>
+                                <a href={`mailto:${CONTACT_EMAIL}`} className="font-medium hover:text-primary">{CONTACT_EMAIL}</a>
+                            </li>
+                            <li className="flex items-center gap-4">
+                                <span className="flex h-10 w-10 items-center justify-center rounded-xl border bg-card text-primary"><MapPin className="h-4 w-4" /></span>
+                                <span className="font-medium">Kolkata, India</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <ContactForm />
+                </div>
+            </section>
+
+            {/* CTA */}
+            <section className="container pb-20 md:pb-28">
+                <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-rose-600 via-pink-600 to-violet-700 px-6 py-16 text-center text-white shadow-2xl shadow-rose-900/20 sm:px-12">
+                    <div className="absolute inset-0 bg-grid opacity-10 [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]" />
+                    <h2 className="relative text-3xl font-bold tracking-tight text-balance sm:text-4xl">
+                        Your next collaborator is one swipe away
+                    </h2>
+                    <p className="relative mx-auto mt-4 max-w-xl text-white/80">
+                        Create your profile, import your skills, and start meeting developers who want to build what you want to build.
                     </p>
-                    <Link to="/login">
-                        <Button size="lg" className="rounded-full px-12 h-16 text-xl shadow-2xl shadow-rose-500/30 bg-rose-600 text-white hover:bg-rose-500 transition-all hover:scale-105">
-                            Create Free Account
-                        </Button>
-                    </Link>
+                    <Button asChild size="xl" className="relative mt-8 bg-white text-rose-600 shadow-lg hover:bg-white/90">
+                        <Link to="/login" state={{ mode: "signup" }}>
+                            Create your free account <ArrowRight />
+                        </Link>
+                    </Button>
                 </div>
             </section>
         </div>

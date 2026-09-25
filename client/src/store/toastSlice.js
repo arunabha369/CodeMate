@@ -1,22 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+let nextId = 1;
+
 const toastSlice = createSlice({
   name: "toast",
-  initialState: {
-    message: null,
-    type: "info", // info, success, error, warning
-    isVisible: false,
-  },
+  initialState: [],
   reducers: {
-    showToast: (state, action) => {
-      state.message = action.payload.message;
-      state.type = action.payload.type || "info";
-      state.isVisible = true;
+    showToast: {
+      reducer: (state, action) => {
+        state.push(action.payload);
+        // Keep the stack short so it never covers the page.
+        if (state.length > 3) state.shift();
+      },
+      prepare: ({ message, type = "info", description, duration = 4000 }) => ({
+        payload: { id: nextId++, message, type, description, duration },
+      }),
     },
-    hideToast: (state) => {
-      state.isVisible = false;
-      // We don't clear message immediately to allow fade out animation
-    },
+    hideToast: (state, action) => state.filter((t) => t.id !== action.payload),
   },
 });
 
