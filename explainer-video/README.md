@@ -4,6 +4,7 @@
 |---|---|
 | `PROMPT.md` | The master prompt to paste into Claude Code. It contains the full style guide (colours, fonts, motion, components), the Remotion build pipeline, voice-over/caption setup, QA checklist, and a short template for any future topic. |
 | `SCRIPT_BN.md` | An original 9–10 minute Bengali script: "গঙ্গার নিচে মেট্রো" (how Kolkata's under-river metro works). It has 56 scenes with visuals, on-screen text, narration, a 5-second hook, duration controls and a sourced fact table. |
+| `project/` | **The built video project** (Remotion). It contains all 56 scenes, captions, sound effects and music, plus a voice-over tool. See `project/README.md` to preview, add the Bengali narration, and render. |
 
 ## Quick start
 
