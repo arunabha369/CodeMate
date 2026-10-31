@@ -50,6 +50,10 @@ It also uses Bengali kinetic headlines with one coloured keyword, fake app/UI wi
 
 ## 1. Workflow and checkpoints
 
+**Shortcuts:**
+- If `HOWRAH_SCRIPT_BN.md` is in the folder, it is the approved script. Copy it to `SCRIPT_BN.md`, re-check its fact table (§3), and skip Phase B.
+- If narration clips already exist (`S01.mp3 …` from ElevenLabs, in the folder or in `public/vo/`), use them as the voice. Run `make_vo.py --engine files` and skip TTS in Phase C.
+
 | Phase | What happens | Checkpoint |
 |---|---|---|
 | A. Research | Web-search the facts in §3, then write `research/facts.md` with a table: claim · value · source URL · confidence. | — |
