@@ -1,9 +1,10 @@
 import React from "react";
-import { Composition } from "remotion";
+import { Composition, Still } from "remotion";
 import "./fonts";
 import { Film, filmDuration } from "./Film";
 import { Showcase } from "./showcase/Showcase";
 import { Teaser, teaserDuration } from "./Teaser";
+import { Thumbnail } from "./Thumbnail";
 
 const VIDEO = { width: 1920, height: 1080, fps: 30 } as const;
 
@@ -38,6 +39,8 @@ export const RemotionRoot: React.FC = () => (
     />
     {/* Phase 8: vertical teaser for Shorts / Reels. */}
     <Composition id="TeaserVertical" component={Teaser} width={1080} height={1920} fps={30} durationInFrames={teaserDuration()} />
+    {/* Phase 7: YouTube thumbnail (render with: npx remotion still Thumbnail out/thumbnail.png). */}
+    <Still id="Thumbnail" component={Thumbnail} width={1280} height={720} />
     {/* Phase 5: component showcase. */}
     <Composition id="Showcase" component={Showcase} {...VIDEO} durationInFrames={300} defaultProps={{ demo: "map-full" }} />
   </>
