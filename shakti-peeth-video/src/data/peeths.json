@@ -1,0 +1,481 @@
+{
+  "_meta": {
+    "title": "৫১ সতীপীঠ — Pithanirnaya / Mahapithanirupana (Bengal tradition)",
+    "draft": true,
+    "built": "2026-10-31",
+    "list": "51 entries following the Pithanirnaya (Mahapithanirupana) as reproduced in the Peetha Nirnaya Tantra pages and Shakti Peetha lists found by web search. The order follows the usual Pithanirnaya order.",
+    "fields": {
+      "status": "standard | disputed. 'disputed' = the location or the body part differs between sources. The map draws a dashed ring.",
+      "checked": "web-search = name/body part/Shakti/Bhairava confirmed in this session's web search (see sources) · pending = from the standard Pithanirnaya list, not yet re-checked against Banglapedia/Wikipedia",
+      "coordStatus": "approx = placeholder coordinate, NOT from Wikidata. Every lat/lon must be replaced with Wikidata P625 once wikidata.org is reachable · null = location unidentified (shown in the 'স্থান অনির্ণীত' tray, not on the map)",
+      "altLocations": "other claimed sites for disputed entries",
+      "bodyPartDisputed": "true = show the body part with an asterisk in PeethGrid; don't state it in narration"
+    },
+    "counts": {
+      "total": 51,
+      "westBengal": 13,
+      "westBengalBanglapedia": 14,
+      "bangladesh": 6,
+      "bangladeshBanglapedia": 7,
+      "note": "Banglapedia says 14 in West Bengal and 7 in Bangladesh. This draft has 13 + 6. The 7th Bangladesh entry is probably Kanyashram's alternative site (Kumarikunda, Sitakunda). The 14th West Bengal entry still has to be identified from the Banglapedia table."
+    },
+    "blockedSources": ["en.wikipedia.org", "www.wikidata.org", "query.wikidata.org", "en.banglapedia.org"]
+  },
+  "peeths": [
+    {
+      "id": "hinglaj", "nameEn": "Hinglaj", "nameBn": "হিংলাজ",
+      "placeBn": "হিঙ্গোল নদীর গুহা, লাসবেলা", "regionBn": "বালুচিস্তান, পাকিস্তান",
+      "bodyPartBn": "ব্রহ্মরন্ধ্র", "shaktiBn": "কোট্টরী", "bhairavaBn": "ভীমলোচন",
+      "lat": 25.514, "lon": 65.515, "coordStatus": "approx",
+      "status": "standard", "checked": "web-search",
+      "sources": ["https://en.wikipedia.org/wiki/Hinglaj_Mata_Temple", "https://shreemaa.org/shakti-pithas/"]
+    },
+    {
+      "id": "karavira", "nameEn": "Karavira / Sharkarara", "nameBn": "করবীর",
+      "placeBn": "কোলহাপুর", "regionBn": "মহারাষ্ট্র",
+      "bodyPartBn": "ত্রিনেত্র", "shaktiBn": "মহিষমর্দিনী", "bhairavaBn": "ক্রোধীশ",
+      "lat": 16.695, "lon": 74.224, "coordStatus": "approx",
+      "status": "disputed", "checked": "web-search",
+      "altLocations": [{ "placeBn": "শর্করার, করাচির কাছে (পাকিস্তান)", "lat": null, "lon": null }],
+      "note": "Some lists read the verse as Sharkarara near Karachi; another table gives Karavira = Kolhapur.",
+      "sources": ["https://anantamias.com/51-shakti-peethas/"]
+    },
+    {
+      "id": "sugandha", "nameEn": "Sugandha", "nameBn": "সুগন্ধা",
+      "placeBn": "শিকারপুর, বরিশাল", "regionBn": "বাংলাদেশ",
+      "bodyPartBn": "নাসিকা", "shaktiBn": "সুনন্দা", "bhairavaBn": "ত্র্যম্বক",
+      "lat": 22.83, "lon": 90.22, "coordStatus": "approx",
+      "status": "standard", "checked": "web-search",
+      "sources": ["https://en.wikipedia.org/wiki/Sugandha_Shaktipeeth"]
+    },
+    {
+      "id": "kashmir", "nameEn": "Kashmir (Amarnath)", "nameBn": "কাশ্মীর (অমরনাথ)",
+      "placeBn": "অমরনাথ গুহা", "regionBn": "কাশ্মীর",
+      "bodyPartBn": "কণ্ঠ", "shaktiBn": "মহামায়া", "bhairavaBn": "ত্রিসন্ধ্যেশ্বর",
+      "lat": 34.215, "lon": 75.501, "coordStatus": "approx",
+      "status": "standard", "checked": "pending",
+      "sources": ["pending: https://en.wikipedia.org/wiki/Shakta_pithas"]
+    },
+    {
+      "id": "jwalamukhi", "nameEn": "Jwalamukhi", "nameBn": "জ্বালামুখী",
+      "placeBn": "কাংড়া", "regionBn": "হিমাচল প্রদেশ",
+      "bodyPartBn": "জিহ্বা", "shaktiBn": "সিদ্ধিদা (অম্বিকা)", "bhairavaBn": "উন্মত্ত",
+      "lat": 31.876, "lon": 76.322, "coordStatus": "approx",
+      "status": "standard", "checked": "web-search",
+      "sources": ["https://hpkangra.nic.in/tourist-place/shri-jawalamukhi-mata-temple/"]
+    },
+    {
+      "id": "jalandhar", "nameEn": "Jalandhar (Devi Talab)", "nameBn": "জলন্ধর",
+      "placeBn": "দেবী তালাব মন্দির", "regionBn": "পঞ্জাব",
+      "bodyPartBn": "বাম স্তন", "shaktiBn": "ত্রিপুরমালিনী", "bhairavaBn": "ভীষণ",
+      "lat": 31.319, "lon": 75.584, "coordStatus": "approx",
+      "status": "standard", "checked": "pending",
+      "sources": ["pending: https://en.wikipedia.org/wiki/Shakta_pithas"]
+    },
+    {
+      "id": "vaidyanath", "nameEn": "Vaidyanath", "nameBn": "বৈদ্যনাথ",
+      "placeBn": "দেওঘর", "regionBn": "ঝাড়খণ্ড",
+      "bodyPartBn": "হৃদয়", "shaktiBn": "জয়দুর্গা", "bhairavaBn": "বৈদ্যনাথ",
+      "lat": 24.492, "lon": 86.700, "coordStatus": "approx",
+      "status": "disputed", "checked": "pending",
+      "altLocations": [{ "placeBn": "অম্বাজি, গুজরাত", "lat": 24.335, "lon": 72.850 }],
+      "note": "The Pithanirnaya gives the heart at Vaidyanath; some modern lists put it at Ambaji.",
+      "sources": ["pending: https://en.banglapedia.org/index.php/Sakta-pitha"]
+    },
+    {
+      "id": "guhyeshwari", "nameEn": "Guhyeshwari", "nameBn": "গুহ্যেশ্বরী",
+      "placeBn": "পশুপতিনাথের কাছে, কাঠমান্ডু", "regionBn": "নেপাল",
+      "bodyPartBn": "জানুদ্বয়", "bodyPartDisputed": true,
+      "shaktiBn": "মহামায়া (মহাশিরা)", "bhairavaBn": "কপালী",
+      "lat": 27.711, "lon": 85.354, "coordStatus": "approx",
+      "status": "disputed", "checked": "pending",
+      "note": "Body part conflicts between sources; don't state it in narration (brief).",
+      "sources": ["pending: https://en.wikipedia.org/wiki/Guhyeshwari_Temple"]
+    },
+    {
+      "id": "manas", "nameEn": "Manasa (Manasarovar)", "nameBn": "মানস",
+      "placeBn": "মানস সরোবর", "regionBn": "তিব্বত",
+      "bodyPartBn": "ডান হাত", "shaktiBn": "দাক্ষায়ণী", "bhairavaBn": "অমর",
+      "lat": 30.67, "lon": 81.47, "coordStatus": "approx",
+      "status": "standard", "checked": "web-search",
+      "sources": ["https://www.greenmesg.org/bharatavarsha/scriptures/agamas/peetha_nirnaya_tantra/shakti_peethas/manasa_shakti_peetha.php"]
+    },
+    {
+      "id": "vimala", "nameEn": "Utkala (Vimala)", "nameBn": "বিমলা (উৎকল)",
+      "placeBn": "জগন্নাথ মন্দির চত্বর, পুরী", "regionBn": "ওড়িশা",
+      "bodyPartBn": "নাভি", "bodyPartDisputed": true,
+      "shaktiBn": "বিমলা", "bhairavaBn": "জগন্নাথ",
+      "lat": 19.805, "lon": 85.818, "coordStatus": "approx",
+      "status": "disputed", "checked": "pending",
+      "altLocations": [{ "placeBn": "বিরজা, যাজপুর", "lat": 20.85, "lon": 86.34 }],
+      "note": "Utkala peeth is identified either with Vimala at Puri or with Biraja at Jajpur; body part conflicts — don't state.",
+      "sources": ["pending: https://en.wikipedia.org/wiki/Vimala_Temple"]
+    },
+    {
+      "id": "gandaki", "nameEn": "Gandaki (Muktinath)", "nameBn": "গণ্ডকী",
+      "placeBn": "মুক্তিনাথ", "regionBn": "নেপাল",
+      "bodyPartBn": "গণ্ড (গাল)", "bodyPartDisputed": true,
+      "shaktiBn": "গণ্ডকী চণ্ডী", "bhairavaBn": "চক্রপাণি",
+      "lat": 28.817, "lon": 83.871, "coordStatus": "approx",
+      "status": "disputed", "checked": "web-search",
+      "note": "Sources give cheek or forehead.",
+      "sources": ["https://shreemaa.org/shakti-pithas/"]
+    },
+    {
+      "id": "bahula", "nameEn": "Bahula", "nameBn": "বহুলা",
+      "placeBn": "কেতুগ্রাম, পূর্ব বর্ধমান", "regionBn": "পশ্চিমবঙ্গ",
+      "bodyPartBn": "বাম বাহু", "shaktiBn": "বহুলা", "bhairavaBn": "ভীরুক",
+      "lat": 23.70, "lon": 88.04, "coordStatus": "approx",
+      "status": "standard", "checked": "web-search",
+      "sources": ["https://en.wikipedia.org/wiki/Ketugram", "https://greenmesg.org/bharatavarsha/scriptures/agamas/peetha_nirnaya_tantra/shakti_peethas/bahula_shakti_peetha.php"]
+    },
+    {
+      "id": "ujani", "nameEn": "Ujani (Mangal Chandika)", "nameBn": "উজানি (মঙ্গলচণ্ডী)",
+      "placeBn": "কোগ্রাম, পূর্ব বর্ধমান", "regionBn": "পশ্চিমবঙ্গ",
+      "bodyPartBn": "ডান কনুই / কবজি", "bodyPartDisputed": true,
+      "shaktiBn": "মঙ্গলচণ্ডী", "bhairavaBn": "কপিলাম্বর",
+      "lat": 23.55, "lon": 87.91, "coordStatus": "approx",
+      "status": "disputed", "checked": "pending",
+      "note": "Right elbow vs right wrist — don't state in narration (brief).",
+      "sources": ["pending: https://en.banglapedia.org/index.php/Sakta-pitha"]
+    },
+    {
+      "id": "tripura", "nameEn": "Tripura Sundari", "nameBn": "ত্রিপুরাসুন্দরী",
+      "placeBn": "উদয়পুর (মাতাবাড়ি)", "regionBn": "ত্রিপুরা",
+      "bodyPartBn": "ডান পা", "shaktiBn": "ত্রিপুরাসুন্দরী", "bhairavaBn": "ত্রিপুরেশ",
+      "lat": 23.511, "lon": 91.506, "coordStatus": "approx",
+      "status": "standard", "checked": "pending",
+      "sources": ["pending: https://en.wikipedia.org/wiki/Tripura_Sundari_Temple"]
+    },
+    {
+      "id": "chattal", "nameEn": "Chattal (Chandranath)", "nameBn": "চট্টল (চন্দ্রনাথ)",
+      "placeBn": "সীতাকুণ্ড, চট্টগ্রাম", "regionBn": "বাংলাদেশ",
+      "bodyPartBn": "ডান বাহু", "bodyPartDisputed": true,
+      "shaktiBn": "ভবানী", "bhairavaBn": "চন্দ্রশেখর",
+      "lat": 22.63, "lon": 91.69, "coordStatus": "approx",
+      "status": "disputed", "checked": "web-search",
+      "note": "Body part conflicts — don't state (brief).",
+      "sources": ["https://en.wikipedia.org/wiki/Chandranath_Temple"]
+    },
+    {
+      "id": "trisrota", "nameEn": "Trisrota (Bhramari)", "nameBn": "ত্রিস্রোতা (ভ্রামরী)",
+      "placeBn": "শালবাড়ি, জলপাইগুড়ি", "regionBn": "পশ্চিমবঙ্গ",
+      "bodyPartBn": "বাম পা", "shaktiBn": "ভ্রামরী", "bhairavaBn": "অম্বর (মতান্তরে ঈশ্বর)",
+      "lat": 26.50, "lon": 88.75, "coordStatus": "approx",
+      "status": "standard", "checked": "web-search",
+      "sources": ["https://greenmesg.org/bharatavarsha/scriptures/agamas/peetha_nirnaya_tantra/shakti_peethas/trisrota_shakti_peetha.php"]
+    },
+    {
+      "id": "kamakhya", "nameEn": "Kamakhya", "nameBn": "কামাখ্যা",
+      "placeBn": "নীলাচল পাহাড়, গুয়াহাটি", "regionBn": "অসম",
+      "bodyPartBn": "যোনি", "shaktiBn": "কামাখ্যা", "bhairavaBn": "উমানন্দ",
+      "lat": 26.166, "lon": 91.706, "coordStatus": "approx",
+      "status": "standard", "checked": "web-search",
+      "sources": ["https://en.wikipedia.org/wiki/Ambubachi_Mela"]
+    },
+    {
+      "id": "prayag", "nameEn": "Prayag (Alopi Devi)", "nameBn": "প্রয়াগ",
+      "placeBn": "অলোপী দেবী, প্রয়াগরাজ", "regionBn": "উত্তরপ্রদেশ",
+      "bodyPartBn": "হাতের আঙুল", "shaktiBn": "ললিতা", "bhairavaBn": "ভব",
+      "lat": 25.444, "lon": 81.867, "coordStatus": "approx",
+      "status": "standard", "checked": "pending",
+      "sources": ["pending: https://en.wikipedia.org/wiki/Shakta_pithas"]
+    },
+    {
+      "id": "jayanti", "nameEn": "Jayanti", "nameBn": "জয়ন্তী",
+      "placeBn": "জৈন্তাপুর, সিলেট", "regionBn": "বাংলাদেশ",
+      "bodyPartBn": "বাম জঙ্ঘা", "shaktiBn": "জয়ন্তী", "bhairavaBn": "ক্রমদীশ্বর",
+      "lat": 25.13, "lon": 92.12, "coordStatus": "approx",
+      "status": "disputed", "checked": "web-search",
+      "altLocations": [{ "placeBn": "নারতিয়াং, মেঘালয়", "lat": 25.579, "lon": 92.212 }],
+      "sources": ["https://www.esamskriti.com/essays/textfile/15_717_1532.txt"]
+    },
+    {
+      "id": "jogadya", "nameEn": "Jogadya (Kshirgram)", "nameBn": "যোগাদ্যা",
+      "placeBn": "ক্ষীরগ্রাম, পূর্ব বর্ধমান", "regionBn": "পশ্চিমবঙ্গ",
+      "bodyPartBn": "ডান পায়ের বুড়ো আঙুল", "shaktiBn": "যোগাদ্যা (ভূতধাত্রী)", "bhairavaBn": "ক্ষীরকণ্টক",
+      "lat": 23.45, "lon": 87.98, "coordStatus": "approx",
+      "status": "standard", "checked": "web-search",
+      "sources": ["https://en.wikipedia.org/wiki/Kshirgram", "https://greenmesg.org/bharatavarsha/scriptures/agamas/peetha_nirnaya_tantra/shakti_peethas/kshiragrama_shakti_peetha.php"]
+    },
+    {
+      "id": "kalighat", "nameEn": "Kalighat", "nameBn": "কালীঘাট",
+      "placeBn": "আদিগঙ্গার তীর, কলকাতা", "regionBn": "পশ্চিমবঙ্গ",
+      "bodyPartBn": "ডান পায়ের আঙুল", "shaktiBn": "কালিকা", "bhairavaBn": "নকুলেশ্বর",
+      "lat": 22.520, "lon": 88.342, "coordStatus": "approx",
+      "status": "standard", "checked": "web-search",
+      "sources": ["https://en.wikipedia.org/wiki/Kalighat_Temple", "https://greenmesg.org/bharatavarsha/pilgrimages/west_bengal/kalighat-kali.php"]
+    },
+    {
+      "id": "kiriteswari", "nameEn": "Kiriteswari", "nameBn": "কিরীটেশ্বরী",
+      "placeBn": "কিরীটকণা, মুর্শিদাবাদ", "regionBn": "পশ্চিমবঙ্গ",
+      "bodyPartBn": "কিরীট (মুকুট)", "shaktiBn": "বিমলা", "bhairavaBn": "সংবর্ত",
+      "lat": 24.21, "lon": 88.23, "coordStatus": "approx",
+      "status": "standard", "checked": "web-search",
+      "sources": ["https://curlytales.com/where-are-the-51-shakti-peethas-in-the-world-from-locations-to-why-each-is-a-shakti-peeth-all-about-it/amp/"]
+    },
+    {
+      "id": "vishalakshi", "nameEn": "Varanasi (Vishalakshi)", "nameBn": "বিশালাক্ষী",
+      "placeBn": "মণিকর্ণিকা ঘাটের কাছে, কাশী", "regionBn": "উত্তরপ্রদেশ",
+      "bodyPartBn": "কানের কুণ্ডল", "shaktiBn": "বিশালাক্ষী", "bhairavaBn": "কালভৈরব",
+      "lat": 25.310, "lon": 83.013, "coordStatus": "approx",
+      "status": "standard", "checked": "web-search",
+      "sources": ["https://en.wikipedia.org/wiki/Vishalakshi_Temple", "https://www.greenmesg.org/bharatavarsha/scriptures/agamas/peetha_nirnaya_tantra/shakti_peethas/varanasi_shakti_peetha.php"]
+    },
+    {
+      "id": "kanyashram", "nameEn": "Kanyashram", "nameBn": "কন্যাশ্রম",
+      "placeBn": "কন্যাকুমারী", "regionBn": "তামিলনাড়ু",
+      "bodyPartBn": "পৃষ্ঠ (পিঠ)", "shaktiBn": "সর্বাণী", "bhairavaBn": "নিমিষ",
+      "lat": 8.078, "lon": 77.555, "coordStatus": "approx",
+      "status": "disputed", "checked": "web-search",
+      "altLocations": [{ "placeBn": "কুমারীকুণ্ড, সীতাকুণ্ড (বাংলাদেশ)", "lat": 22.58, "lon": 91.70, "note": "D.C. Sircar; likely counted among Banglapedia's 7 Bangladesh peeths" }],
+      "sources": ["https://greenmesg.org/bharatavarsha/scriptures/agamas/peetha_nirnaya_tantra/shakti_peethas/kanyashrama_shakti_peetha.php", "https://en.bharatpedia.org/wiki/Kumarikunda_Shaktipeeth"]
+    },
+    {
+      "id": "kurukshetra", "nameEn": "Kurukshetra (Bhadrakali)", "nameBn": "কুরুক্ষেত্র",
+      "placeBn": "ভদ্রকালী মন্দির, থানেসর", "regionBn": "হরিয়ানা",
+      "bodyPartBn": "গুল্ফ (গোড়ালি)", "shaktiBn": "সাবিত্রী", "bhairavaBn": "স্থাণু",
+      "lat": 29.970, "lon": 76.832, "coordStatus": "approx",
+      "status": "standard", "checked": "pending",
+      "sources": ["pending: https://en.wikipedia.org/wiki/Shakta_pithas"]
+    },
+    {
+      "id": "manivedaka", "nameEn": "Manivedaka (Pushkar)", "nameBn": "মণিবেদক",
+      "placeBn": "পুষ্কর, আজমের", "regionBn": "রাজস্থান",
+      "bodyPartBn": "মণিবন্ধ (কবজি)", "shaktiBn": "গায়ত্রী", "bhairavaBn": "সর্বানন্দ",
+      "lat": 26.490, "lon": 74.551, "coordStatus": "approx",
+      "status": "standard", "checked": "pending",
+      "sources": ["pending: https://en.wikipedia.org/wiki/Shakta_pithas"]
+    },
+    {
+      "id": "shrishail", "nameEn": "Shri Shail (Shrihatta)", "nameBn": "শ্রীশৈল",
+      "placeBn": "জৈনপুর, সিলেট", "regionBn": "বাংলাদেশ",
+      "bodyPartBn": "গ্রীবা", "shaktiBn": "মহালক্ষ্মী", "bhairavaBn": "সম্বরানন্দ",
+      "lat": 24.92, "lon": 91.89, "coordStatus": "approx",
+      "status": "standard", "checked": "web-search",
+      "sources": ["https://en.wikipedia.org/wiki/Shri_Shail", "https://www.esamskriti.com/essays/textfile/15_717_1532.txt"]
+    },
+    {
+      "id": "kankalitala", "nameEn": "Kanchi (Kankalitala)", "nameBn": "কঙ্কালীতলা",
+      "placeBn": "বোলপুরের কাছে, বীরভূম", "regionBn": "পশ্চিমবঙ্গ",
+      "bodyPartBn": "কাঁকাল (কোমর)", "bodyPartDisputed": true,
+      "shaktiBn": "দেবগর্ভা", "bhairavaBn": "রুরু",
+      "lat": 23.71, "lon": 87.74, "coordStatus": "approx",
+      "status": "disputed", "checked": "web-search",
+      "note": "Waist vs skeleton/bone.",
+      "sources": ["https://www.esamskriti.com/essays/textfile/15_717_1532.txt"]
+    },
+    {
+      "id": "kalmadhav", "nameEn": "Kalamadhava", "nameBn": "কালমাধব",
+      "placeBn": "অমরকণ্টক (মতভেদ)", "regionBn": "মধ্যপ্রদেশ",
+      "bodyPartBn": "বাম নিতম্ব", "shaktiBn": "কালী", "bhairavaBn": "অসিতাঙ্গ",
+      "lat": 22.680, "lon": 81.740, "coordStatus": "approx",
+      "status": "disputed", "checked": "pending",
+      "note": "Location uncertain; Amarkantak is a common identification. Offset slightly from 'shona' so the dots don't overlap.",
+      "sources": ["pending: https://en.wikipedia.org/wiki/Shakta_pithas"]
+    },
+    {
+      "id": "shona", "nameEn": "Shona", "nameBn": "শোণ",
+      "placeBn": "অমরকণ্টক (মতান্তরে সাসারাম)", "regionBn": "মধ্যপ্রদেশ",
+      "bodyPartBn": "ডান নিতম্ব", "shaktiBn": "নর্মদা (শোণাক্ষী)", "bhairavaBn": "ভদ্রসেন",
+      "lat": 22.668, "lon": 81.753, "coordStatus": "approx",
+      "status": "disputed", "checked": "pending",
+      "altLocations": [{ "placeBn": "তারাচণ্ডী, সাসারাম (বিহার)", "lat": null, "lon": null }],
+      "sources": ["pending: https://en.wikipedia.org/wiki/Shakta_pithas"]
+    },
+    {
+      "id": "ramgiri", "nameEn": "Ramagiri", "nameBn": "রামগিরি",
+      "placeBn": "চিত্রকূট (মতান্তরে মাইহার)", "regionBn": "উত্তরপ্রদেশ",
+      "bodyPartBn": "ডান স্তন", "shaktiBn": "শিবানী", "bhairavaBn": "চণ্ড",
+      "lat": 25.170, "lon": 80.870, "coordStatus": "approx",
+      "status": "disputed", "checked": "pending",
+      "altLocations": [{ "placeBn": "শারদা মন্দির, মাইহার (মধ্যপ্রদেশ)", "lat": 24.263, "lon": 80.762 }],
+      "sources": ["pending: https://en.wikipedia.org/wiki/Shakta_pithas"]
+    },
+    {
+      "id": "vrindavan", "nameEn": "Vrindavan (Katyayani)", "nameBn": "বৃন্দাবন",
+      "placeBn": "কাত্যায়নী মন্দির, বৃন্দাবন", "regionBn": "উত্তরপ্রদেশ",
+      "bodyPartBn": "কেশগুচ্ছ", "shaktiBn": "উমা", "bhairavaBn": "ভূতেশ",
+      "lat": 27.580, "lon": 77.696, "coordStatus": "approx",
+      "status": "standard", "checked": "pending",
+      "sources": ["pending: https://en.wikipedia.org/wiki/Shakta_pithas"]
+    },
+    {
+      "id": "shuchi", "nameEn": "Shuchi (Suchindram)", "nameBn": "শুচি",
+      "placeBn": "শুচীন্দ্রম, কন্যাকুমারী জেলা", "regionBn": "তামিলনাড়ু",
+      "bodyPartBn": "ঊর্ধ্ব দন্তপাটি", "shaktiBn": "নারায়ণী", "bhairavaBn": "সংহার",
+      "lat": 8.155, "lon": 77.467, "coordStatus": "approx",
+      "status": "standard", "checked": "pending",
+      "sources": ["pending: https://en.wikipedia.org/wiki/Shakta_pithas"]
+    },
+    {
+      "id": "panchasagar", "nameEn": "Panchasagara", "nameBn": "পঞ্চসাগর",
+      "placeBn": "স্থান অনির্ণীত", "regionBn": "—",
+      "bodyPartBn": "নিম্ন দন্তপাটি", "shaktiBn": "বারাহী", "bhairavaBn": "মহারুদ্র",
+      "lat": null, "lon": null, "coordStatus": null,
+      "status": "disputed", "checked": "pending",
+      "altLocations": [{ "placeBn": "বারাণসীর কাছে", "lat": null, "lon": null }, { "placeBn": "লোহাঘাট, উত্তরাখণ্ড", "lat": null, "lon": null }],
+      "sources": ["pending: https://en.wikipedia.org/wiki/Shakta_pithas"]
+    },
+    {
+      "id": "karatoya", "nameEn": "Karatoyatata (Bhabanipur)", "nameBn": "করতোয়াতট (ভবানীপুর)",
+      "placeBn": "ভবানীপুর, শেরপুর, বগুড়া", "regionBn": "বাংলাদেশ",
+      "bodyPartBn": "বাম তল্প", "bodyPartDisputed": true,
+      "shaktiBn": "অপর্ণা", "bhairavaBn": "বামন",
+      "lat": 24.66, "lon": 89.42, "coordStatus": "approx",
+      "status": "disputed", "checked": "web-search",
+      "note": "Body part varies between lists (left anklet / left rib / 'talpa').",
+      "sources": ["https://greenmesg.org/bharatavarsha/sacred_geography/regions/lower_ganga_plain.php"]
+    },
+    {
+      "id": "shriparvat", "nameEn": "Shriparvata", "nameBn": "শ্রীপর্বত",
+      "placeBn": "শ্রীশৈলম (মতান্তরে লাদাখ)", "regionBn": "অন্ধ্রপ্রদেশ",
+      "bodyPartBn": "ডান গুল্ফ", "bodyPartDisputed": true,
+      "shaktiBn": "শ্রীসুন্দরী", "bhairavaBn": "সুন্দরানন্দ",
+      "lat": 16.074, "lon": 78.868, "coordStatus": "approx",
+      "status": "disputed", "checked": "pending",
+      "altLocations": [{ "placeBn": "লাদাখ", "lat": null, "lon": null }],
+      "sources": ["pending: https://en.wikipedia.org/wiki/Shakta_pithas"]
+    },
+    {
+      "id": "vibhash", "nameEn": "Vibhasha (Bargabhima)", "nameBn": "বিভাস (বর্গভীমা)",
+      "placeBn": "তমলুক, পূর্ব মেদিনীপুর", "regionBn": "পশ্চিমবঙ্গ",
+      "bodyPartBn": "বাম গোড়ালি", "shaktiBn": "কপালিনী (ভীমরূপা)", "bhairavaBn": "সর্বানন্দ",
+      "lat": 22.30, "lon": 87.92, "coordStatus": "approx",
+      "status": "standard", "checked": "web-search",
+      "sources": ["https://en.wikipedia.org/wiki/Bargabhima_Temple", "https://greenmesg.org/bharatavarsha/scriptures/agamas/peetha_nirnaya_tantra/shakti_peethas/vibhashaka_shakti_peetha.php"]
+    },
+    {
+      "id": "prabhas", "nameEn": "Prabhasa", "nameBn": "প্রভাস",
+      "placeBn": "প্রভাস পাটন (সোমনাথ)", "regionBn": "গুজরাত",
+      "bodyPartBn": "উদর", "shaktiBn": "চন্দ্রভাগা", "bhairavaBn": "বক্রতুণ্ড",
+      "lat": 20.888, "lon": 70.401, "coordStatus": "approx",
+      "status": "standard", "checked": "pending",
+      "sources": ["pending: https://en.wikipedia.org/wiki/Shakta_pithas"]
+    },
+    {
+      "id": "bhairavparvat", "nameEn": "Bhairavaparvata", "nameBn": "ভৈরবপর্বত",
+      "placeBn": "উজ্জয়িনী (মতান্তরে গিরনার)", "regionBn": "মধ্যপ্রদেশ",
+      "bodyPartBn": "ঊর্ধ্ব ওষ্ঠ", "shaktiBn": "অবন্তী", "bhairavaBn": "লম্বকর্ণ",
+      "lat": 23.205, "lon": 75.769, "coordStatus": "approx",
+      "status": "disputed", "checked": "pending",
+      "altLocations": [{ "placeBn": "গিরনার, গুজরাত", "lat": 21.529, "lon": 70.528 }],
+      "sources": ["pending: https://en.wikipedia.org/wiki/Shakta_pithas"]
+    },
+    {
+      "id": "janasthan", "nameEn": "Janasthana (Nashik)", "nameBn": "জনস্থান",
+      "placeBn": "নাশিক", "regionBn": "মহারাষ্ট্র",
+      "bodyPartBn": "চিবুক", "shaktiBn": "ভ্রামরী", "bhairavaBn": "বিকৃতাক্ষ",
+      "lat": 19.998, "lon": 73.790, "coordStatus": "approx",
+      "status": "standard", "checked": "pending",
+      "sources": ["pending: https://en.wikipedia.org/wiki/Shakta_pithas"]
+    },
+    {
+      "id": "godavari", "nameEn": "Godavaritira", "nameBn": "গোদাবরীতীর",
+      "placeBn": "রাজমহেন্দ্রবরম (মতভেদ)", "regionBn": "অন্ধ্রপ্রদেশ",
+      "bodyPartBn": "গণ্ড (গাল)", "shaktiBn": "বিশ্বেশী (রাকিণী)", "bhairavaBn": "দণ্ডপাণি (বৎসনাভ)",
+      "lat": 16.990, "lon": 81.780, "coordStatus": "approx",
+      "status": "disputed", "checked": "pending",
+      "sources": ["pending: https://en.wikipedia.org/wiki/Shakta_pithas"]
+    },
+    {
+      "id": "ratnavali", "nameEn": "Ratnavali", "nameBn": "রত্নাবলী",
+      "placeBn": "খানাকুল, হুগলি (মতভেদ)", "regionBn": "পশ্চিমবঙ্গ",
+      "bodyPartBn": "ডান স্কন্ধ", "shaktiBn": "কুমারী", "bhairavaBn": "শিব",
+      "lat": 22.72, "lon": 87.87, "coordStatus": "approx",
+      "status": "disputed", "checked": "pending",
+      "note": "Brief: 'claimed on some lists — on-screen only'. Not named in narration.",
+      "sources": ["pending: https://en.banglapedia.org/index.php/Sakta-pitha"]
+    },
+    {
+      "id": "mithila", "nameEn": "Mithila", "nameBn": "মিথিলা",
+      "placeBn": "জনকপুর (মতভেদ)", "regionBn": "নেপাল",
+      "bodyPartBn": "বাম স্কন্ধ", "shaktiBn": "উমা (মহাদেবী)", "bhairavaBn": "মহোদর",
+      "lat": 26.729, "lon": 85.926, "coordStatus": "approx",
+      "status": "disputed", "checked": "pending",
+      "note": "Identified variously with Janakpur (Nepal) or sites in north Bihar.",
+      "sources": ["pending: https://en.wikipedia.org/wiki/Shakta_pithas"]
+    },
+    {
+      "id": "nalhati", "nameEn": "Nalhati", "nameBn": "নলহাটি",
+      "placeBn": "নলাটেশ্বরী, নলহাটি, বীরভূম", "regionBn": "পশ্চিমবঙ্গ",
+      "bodyPartBn": "নলা", "bodyPartDisputed": true,
+      "shaktiBn": "কালিকা (শেফালিকা)", "bhairavaBn": "যোগেশ",
+      "lat": 24.30, "lon": 87.82, "coordStatus": "approx",
+      "status": "disputed", "checked": "web-search",
+      "note": "Meaning of নলা disputed (throat/vocal pipe, tubular bone, nose bone) — keep the Bengali word.",
+      "sources": ["https://www.esamskriti.com/essays/textfile/15_717_1532.txt"]
+    },
+    {
+      "id": "karnat", "nameEn": "Karnata", "nameBn": "কর্ণাট",
+      "placeBn": "স্থান অনির্ণীত", "regionBn": "—",
+      "bodyPartBn": "কর্ণযুগল", "shaktiBn": "জয়দুর্গা", "bhairavaBn": "অভীরু",
+      "lat": null, "lon": null, "coordStatus": null,
+      "status": "disputed", "checked": "pending",
+      "sources": ["pending: https://en.wikipedia.org/wiki/Shakta_pithas"]
+    },
+    {
+      "id": "bakreshwar", "nameEn": "Bakreshwar", "nameBn": "বক্রেশ্বর",
+      "placeBn": "বক্রেশ্বর, বীরভূম", "regionBn": "পশ্চিমবঙ্গ",
+      "bodyPartBn": "ভ্রূমধ্য", "shaktiBn": "মহিষমর্দিনী", "bhairavaBn": "বক্রনাথ",
+      "lat": 23.88, "lon": 87.37, "coordStatus": "approx",
+      "status": "standard", "checked": "web-search",
+      "note": "One list gives 'mind' (মন).",
+      "sources": ["https://www.esamskriti.com/essays/textfile/15_717_1532.txt"]
+    },
+    {
+      "id": "jeshore", "nameEn": "Yashor (Jeshoreshwari)", "nameBn": "যশোরেশ্বরী",
+      "placeBn": "ঈশ্বরীপুর, শ্যামনগর, সাতক্ষীরা", "regionBn": "বাংলাদেশ",
+      "bodyPartBn": "করতল ও পদতল", "bodyPartDisputed": true,
+      "shaktiBn": "যশোরেশ্বরী", "bhairavaBn": "চণ্ড",
+      "lat": 22.33, "lon": 89.10, "coordStatus": "approx",
+      "status": "disputed", "checked": "web-search",
+      "note": "Body part conflicts — don't state (brief).",
+      "sources": ["https://www.esamskriti.com/essays/textfile/15_717_1532.txt"]
+    },
+    {
+      "id": "attahas", "nameEn": "Attahas (Phullara)", "nameBn": "অট্টহাস (ফুল্লরা)",
+      "placeBn": "লাভপুর, বীরভূম", "regionBn": "পশ্চিমবঙ্গ",
+      "bodyPartBn": "অধর (ঠোঁট)", "shaktiBn": "ফুল্লরা", "bhairavaBn": "বিশ্বেশ",
+      "lat": 23.82, "lon": 87.80, "coordStatus": "approx",
+      "status": "disputed", "checked": "web-search",
+      "altLocations": [{ "placeBn": "দক্ষিণডিহি, কেতুগ্রাম (পূর্ব বর্ধমান)", "lat": 23.66, "lon": 88.03 }],
+      "sources": ["https://www.esamskriti.com/essays/textfile/15_717_1532.txt", "https://en.wikipedia.org/wiki/Attahas,_Katwa"]
+    },
+    {
+      "id": "nandipur", "nameEn": "Nandipur (Nandikeshwari)", "nameBn": "নন্দীকেশ্বরী",
+      "placeBn": "সাঁইথিয়া, বীরভূম", "regionBn": "পশ্চিমবঙ্গ",
+      "bodyPartBn": "কণ্ঠহার", "shaktiBn": "নন্দিনী", "bhairavaBn": "নন্দীকেশ্বর",
+      "lat": 23.95, "lon": 87.68, "coordStatus": "approx",
+      "status": "standard", "checked": "web-search",
+      "sources": ["https://www.esamskriti.com/essays/textfile/15_717_1532.txt"]
+    },
+    {
+      "id": "lanka", "nameEn": "Lanka (Nainativu)", "nameBn": "ইন্দ্রাক্ষী (লঙ্কা)",
+      "placeBn": "নয়নাতিভু দ্বীপ, জাফনা", "regionBn": "শ্রীলঙ্কা",
+      "bodyPartBn": "নূপুর", "shaktiBn": "ইন্দ্রাক্ষী", "bhairavaBn": "রাক্ষসেশ্বর",
+      "lat": 9.611, "lon": 79.774, "coordStatus": "approx",
+      "status": "standard", "checked": "web-search",
+      "sources": ["https://en.wikipedia.org/wiki/Nainativu_Nagapooshani_Amman_Temple"]
+    },
+    {
+      "id": "virat", "nameEn": "Virata (Bairat)", "nameBn": "বিরাট",
+      "placeBn": "বৈরাট, জয়পুর", "regionBn": "রাজস্থান",
+      "bodyPartBn": "বাম পায়ের আঙুল", "shaktiBn": "অম্বিকা", "bhairavaBn": "অমৃতেশ্বর",
+      "lat": 27.446, "lon": 76.183, "coordStatus": "approx",
+      "status": "standard", "checked": "pending",
+      "sources": ["pending: https://en.wikipedia.org/wiki/Shakta_pithas"]
+    }
+  ],
+  "extra": [
+    {
+      "id": "tarapith", "nameEn": "Tarapith", "nameBn": "তারাপীঠ",
+      "placeBn": "তারাপীঠ, বীরভূম", "regionBn": "পশ্চিমবঙ্গ",
+      "bodyPartBn": "নয়নের তারা (প্রচলিত বিশ্বাস)", "shaktiBn": "তারা", "bhairavaBn": "—",
+      "lat": 24.114, "lon": 87.795, "coordStatus": "approx",
+      "status": "siddhapeeth", "checked": "web-search",
+      "note": "Not one of the 51 dots. Siddhapeeth; sadhana-ground of Bamakhyapa (1837–1911).",
+      "sources": ["https://en.wikipedia.org/wiki/Tarapith_temple"]
+    }
+  ]
+}
