@@ -68,6 +68,7 @@ If the voiced total ends up outside 9:00–10:00, follow "Duration control" in `
 | `npm run parse` | Re-parse `../SCRIPT_BN.md` after editing the narration |
 | `npm run sfx` | Re-synthesize the sound effects and music pad with ffmpeg |
 | `node tools/contact-sheet.mjs name scenes:S01,S02 3` | Render 3 stills per scene into a contact sheet |
+| `node tools/edge-check.mjs` | Quickly render the first/last frames of every scene to catch crashes before a long render |
 | `node tools/extras.mjs` | Write `out/captions.srt` and `out/youtube.md` (title, description, chapters, tags) |
 | `npx remotion still Thumbnail out/thumbnail.png` | 1280×720 thumbnail |
 

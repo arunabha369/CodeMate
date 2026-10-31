@@ -86,7 +86,8 @@ export const CrossSection: React.FC<XSProps> = ({variant, skyH = 300, bedY = 520
 };
 
 /** Horizontal tunnel tube. */
-export const Tube: React.FC<{x1: number; x2: number; y: number; h?: number; night?: boolean; glow?: number}> = ({x1, x2, y, h = 76, night = true, glow = 1}) => (
+export const Tube: React.FC<{x1: number; x2: number; y: number; h?: number; night?: boolean; glow?: number}> = ({x1, x2, y, h = 76, night = true, glow = 1}) =>
+  x2 - x1 < 70 ? null : (
   <g>
     <rect x={x1} y={y - h / 2 - 8} width={x2 - x1} height={h + 16} rx={h / 2} fill={night ? '#6B6F84' : C.concrete} />
     <rect x={x1 + 6} y={y - h / 2} width={x2 - x1 - 12} height={h} rx={h / 2 - 4} fill={night ? '#16152A' : '#3B3950'} />
