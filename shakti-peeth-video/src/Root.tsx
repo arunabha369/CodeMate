@@ -3,6 +3,7 @@ import { Composition } from "remotion";
 import "./fonts";
 import { Film, filmDuration } from "./Film";
 import { Showcase } from "./showcase/Showcase";
+import { Teaser, teaserDuration } from "./Teaser";
 
 const VIDEO = { width: 1920, height: 1080, fps: 30 } as const;
 
@@ -35,6 +36,8 @@ export const RemotionRoot: React.FC = () => (
       defaultProps={{ from: 1, to: 20, captions: false }}
       calculateMetadata={({ props }) => ({ durationInFrames: filmDuration(props) })}
     />
+    {/* Phase 8: vertical teaser for Shorts / Reels. */}
+    <Composition id="TeaserVertical" component={Teaser} width={1080} height={1920} fps={30} durationInFrames={teaserDuration()} />
     {/* Phase 5: component showcase. */}
     <Composition id="Showcase" component={Showcase} {...VIDEO} durationInFrames={300} defaultProps={{ demo: "map-full" }} />
   </>
