@@ -20,8 +20,8 @@ The project lives in `shakti-peeth-video/` inside the `arunabha369/CodeMate` rep
 
 ## Phase 1 outputs
 
-* `facts.md`: 63 claims checked. 3 are CONFLICT: S24 (Kalika → Bhagavata), S41 (the 64 attributed to the Brahmanda Purana) and S52 (Kanyashram location). CHANNEL_NAME is pending.
-* `script_changes.md`: 3 one-phrase fixes plus CHANNEL_NAME.
+* `facts.md`: 63 claims checked. 3 are CONFLICT: S24 (Kalika → Bhagavata), S41 (the 64 attributed to the Brahmanda Purana) and S52 (Kanyashram location). CHANNEL_NAME = The Bong Mindset.
+* `script_changes.md`: 3 one-phrase fixes plus the channel name (S67; TTS copy দ্য বং মাইন্ডসেট).
 * `src/data/peeths.json`: a **draft** with 51 entries plus Tarapith (siddhapeeth).
   * 26 entries were checked by web search and 25 are `pending`, taken from the standard Pithanirnaya list.
   * **Every lat/lon is an approximate placeholder** (`coordStatus: "approx"`). Replace them with Wikidata P625.
@@ -31,7 +31,7 @@ The project lives in `shakti-peeth-video/` inside the `arunabha369/CodeMate` rep
 ## Waiting on the user
 
 1. Approval of script_changes.md and peeths.json (the structure and the dispute handling).
-2. CHANNEL_NAME (it goes in S67 and the teaser end card).
+2. ~~CHANNEL_NAME~~ ✅ **The Bong Mindset** (received 2026-10-31).
 3. **Network allowlist.** The environment's network policy blocks these hosts. The user can allow them in the cloud environment settings: Network access → Allowed domains.
    * Phase 1 completion: `en.wikipedia.org`, `www.wikidata.org`, `query.wikidata.org`, `en.banglapedia.org`
    * Phase 3: `commons.wikimedia.org`, `upload.wikimedia.org`, `collectionapi.metmuseum.org`, `images.metmuseum.org`, `openaccess-api.clevelandart.org`, `openaccess-cdn.clevelandart.org`, `api.artic.edu`, `www.artic.edu`, `api.pexels.com`, `images.pexels.com`, `videos.pexels.com`, `pixabay.com`, `cdn.pixabay.com`

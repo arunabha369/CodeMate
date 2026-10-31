@@ -92,7 +92,7 @@ Status key: **VERIFIED** = the sources agree with the script line as written · 
 | 60 | S63 | Parvati (Uma) reborn as the daughter of Himalaya and Mena (মেনকা) | standard | VERIFIED | মেনকা is the Bengali Agomoni usage |
 | 61 | S64 | Uma visits her father's home every autumn as Durga | Bengali Agomoni tradition | VERIFIED | presented as tradition |
 | 62 | S66 | Kali Puja 2026: Sunday, 8 November | [Haindavam](https://haindavam.org/festivals/kali_puja/2026-11-08); [BankBazaar](https://www.bankbazaar.com/indian-holiday/kali-puja-holiday.html); [HappyFares](https://www.happyfares.in/blog/?p=12580) | VERIFIED | One site (astrosight) says 20 October, which is an outlier. Note that this is **8 days after today**, which matters if the video has to go out before Kali Puja |
-| 63 | S67 | CHANNEL_NAME | — | **PENDING** | Not filled in the brief. Waiting for your answer |
+| 63 | S67 | CHANNEL_NAME | user reply, 2026-10-31 | DONE | **The Bong Mindset**. TTS copy: দ্য বং মাইন্ডসেট |
 
 ## Also checked, no issue
 

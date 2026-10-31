@@ -40,11 +40,18 @@ This lists only the lines I want to change. Every other line stays word for word
 
 ---
 
-## 4. S67 — channel name (pending)
+## 4. S67 — channel name (filled in)
 
 **Now:** `…ফলো করুন CHANNEL_NAME। জয় মা।`
 
-The brief still has the placeholder `<your page name>`. I'll put in your page name once you send it. The same name goes in the Phase 8 teaser end card.
+**New narration (on screen and captions):**
+> আপনি কোন কোন সতীপীঠে গেছেন? কমেন্টে লিখুন। আর এমন আরও গল্প শুনতে ফলো করুন The Bong Mindset। জয় মা।
+
+**ttsText:** `…ফলো করুন দ্য বং মাইন্ডসেট। জয় মা।`
+
+**Why:** You gave the channel name. On screen it stays in English, as you wrote it. The TTS copy spells it in Bengali letters, because the Bengali voice can stumble over English words mid-sentence. If you record S67 yourself, the TTS copy doesn't matter.
+
+**Phase 8 teaser end card:** "পুরো কাহিনি দেখুন The Bong Mindset-এ"
 
 ---
 

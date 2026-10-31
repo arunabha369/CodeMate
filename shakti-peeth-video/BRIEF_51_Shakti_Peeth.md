@@ -1,7 +1,7 @@
 # BRIEF — ৫১ সতীপীঠ
 
 PROJECT: ৫১ সতীপীঠ — সতীর কাহিনি থেকে কালীঘাট, কামাখ্যা, হিংলাজ
-CHANNEL_NAME: <your page name>
+CHANNEL_NAME: The Bong Mindset
 
 You are building a complete 9–10 minute Bengali documentary-style video about the legend of Sati and the 51 Shakti Peethas (সতীপীঠ), using Remotion. The full narration script is already written (see SCRIPT below). Your job: verify it, build the peeth data and map, source licensed paintings/photos/B-roll, generate the voiceover, build rich motion graphics, and render. Work through the phases in order. Keep PROGRESS.md updated after every step so the work can resume in a new session.
 
