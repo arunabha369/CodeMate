@@ -1,0 +1,6 @@
+node_modules
+out
+*.log
+# the repository root ignores public/, but this project needs its fonts, sfx and music
+!public/
+!public/**

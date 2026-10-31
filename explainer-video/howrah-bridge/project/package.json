@@ -1,0 +1,32 @@
+{
+  "name": "howrah-bridge-explainer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Bengali animated explainer: হাওড়া ব্রিজ কীভাবে তৈরি হলো (Remotion)",
+  "scripts": {
+    "studio": "remotion studio",
+    "parse": "node tools/parse-script.mjs",
+    "sfx": "bash tools/make-sfx.sh",
+    "vo": "python3 tools/make_vo.py",
+    "render": "remotion render Main out/final.mp4 --codec=h264 --crf=18 --audio-bitrate=320k",
+    "preview": "remotion render Main out/preview.mp4 --scale=0.5 --crf=26",
+    "stills": "node tools/contact-sheet.mjs",
+    "photos": "node tools/fetch-photos.mjs",
+    "board": "node tools/board.mjs board S01@0.55,S08@0.6,S10@0.9,S19@0.85,S23@0.55,S27@0.75,S35@0.8,S44@0.6,S54@0.7 3 0.5"
+  },
+  "dependencies": {
+    "@fontsource/hind-siliguri": "^5.3.0",
+    "@fontsource/oswald": "^5.3.0",
+    "@remotion/cli": "4.0.539",
+    "lucide-react": "^1.66.0",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "remotion": "4.0.539"
+  },
+  "devDependencies": {
+    "@remotion/bundler": "^4.0.539",
+    "@remotion/renderer": "^4.0.539",
+    "@types/react": "19.1.0",
+    "typescript": "5.8.3"
+  }
+}
