@@ -1,7 +1,7 @@
 {
   "fps": 30,
   "transitionFrames": 18,
-  "totalFrames": 17352,
+  "totalFrames": 17514,
   "scenes": [
     {
       "id": "S01",
@@ -39,9 +39,9 @@
       "id": "S05",
       "audioSec": 7.64,
       "estimated": true,
-      "leadInFrames": 45,
+      "leadInFrames": 63,
       "audioFrames": 230,
-      "frames": 314
+      "frames": 332
     },
     {
       "id": "S06",
@@ -95,9 +95,9 @@
       "id": "S12",
       "audioSec": 3.81,
       "estimated": true,
-      "leadInFrames": 45,
+      "leadInFrames": 63,
       "audioFrames": 115,
-      "frames": 199
+      "frames": 217
     },
     {
       "id": "S13",
@@ -167,9 +167,9 @@
       "id": "S21",
       "audioSec": 7.87,
       "estimated": true,
-      "leadInFrames": 45,
+      "leadInFrames": 63,
       "audioFrames": 237,
-      "frames": 321
+      "frames": 339
     },
     {
       "id": "S22",
@@ -199,9 +199,9 @@
       "id": "S25",
       "audioSec": 7.39,
       "estimated": true,
-      "leadInFrames": 45,
+      "leadInFrames": 63,
       "audioFrames": 222,
-      "frames": 306
+      "frames": 324
     },
     {
       "id": "S26",
@@ -239,9 +239,9 @@
       "id": "S30",
       "audioSec": 7.87,
       "estimated": true,
-      "leadInFrames": 45,
+      "leadInFrames": 63,
       "audioFrames": 237,
-      "frames": 321
+      "frames": 339
     },
     {
       "id": "S31",
@@ -303,9 +303,9 @@
       "id": "S38",
       "audioSec": 5.96,
       "estimated": true,
-      "leadInFrames": 45,
+      "leadInFrames": 63,
       "audioFrames": 179,
-      "frames": 263
+      "frames": 281
     },
     {
       "id": "S39",
@@ -351,9 +351,9 @@
       "id": "S44",
       "audioSec": 4.29,
       "estimated": true,
-      "leadInFrames": 45,
+      "leadInFrames": 63,
       "audioFrames": 129,
-      "frames": 213
+      "frames": 231
     },
     {
       "id": "S45",
@@ -447,9 +447,9 @@
       "id": "S56",
       "audioSec": 5.49,
       "estimated": true,
-      "leadInFrames": 45,
+      "leadInFrames": 63,
       "audioFrames": 165,
-      "frames": 249
+      "frames": 267
     },
     {
       "id": "S57",
@@ -503,9 +503,9 @@
       "id": "S63",
       "audioSec": 10.02,
       "estimated": true,
-      "leadInFrames": 45,
+      "leadInFrames": 63,
       "audioFrames": 301,
-      "frames": 385
+      "frames": 403
     },
     {
       "id": "S64",

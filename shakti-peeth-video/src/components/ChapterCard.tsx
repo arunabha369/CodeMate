@@ -16,13 +16,15 @@ export const ChapterCard: React.FC<{
   title: string;
   variant?: "night" | "red" | "gold";
   durationInFrames?: number;
-}> = ({ number, title, variant = "night", durationInFrames = 45 }) => {
-  const frame = useCurrentFrame();
+  /** Frames held in black first (covers the incoming crossfade = dip to black). */
+  blackFrames?: number;
+}> = ({ number, title, variant = "night", durationInFrames = 45, blackFrames = 0 }) => {
+  const frame = useCurrentFrame() - blackFrames;
   const { fps } = useVideoConfig();
   const bg = variant === "gold" ? "gold" : "night";
   const pal = palettes[bg];
-  const fromBlack = interpolate(frame, [0, 8], [1, 0], { extrapolateRight: "clamp" });
-  const out = interpolate(frame, [durationInFrames - 10, durationInFrames], [1, 0], {
+  const fromBlack = interpolate(frame, [0, 8], [1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const out = interpolate(frame, [durationInFrames - blackFrames - 10, durationInFrames - blackFrames], [1, 0], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
@@ -31,7 +33,7 @@ export const ChapterCard: React.FC<{
   return (
     <AbsoluteFill style={{ opacity: out }}>
       <Background variant={bg} red={variant === "red"} />
-      <Alpana drawFrom={0} drawFrames={30} color={variant === "red" ? colors.sindoor : colors.gold} />
+      <Alpana drawFrom={blackFrames} drawFrames={30} color={variant === "red" ? colors.sindoor : colors.gold} />
       <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
         <div
           style={{
@@ -68,7 +70,7 @@ export const ChapterCard: React.FC<{
         </svg>
       </AbsoluteFill>
       <svg width={1920} height={1080} style={{ position: "absolute", inset: 0 }}>
-        <Diya x={960} y={930} size={0.8} litAt={10} seed="chapter" />
+        <Diya x={960} y={930} size={0.8} litAt={blackFrames + 10} seed="chapter" />
       </svg>
       <AbsoluteFill style={{ backgroundColor: colors.black, opacity: fromBlack }} />
     </AbsoluteFill>

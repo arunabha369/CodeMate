@@ -6,7 +6,8 @@ replaces estimates with real audio — just re-run this script).
 
 Timing rules (brief, Phase 4):
   frames = leadIn + ceil((audio + 0.7 + tailHold) × 30) + transition overlap
-  - chapter-opening scenes: +1.5 s lead-in for the ChapterCard (audio starts after it)
+  - chapter-opening scenes: +1.5 s ChapterCard (+ the 18-frame crossfade held in black,
+    so the previous scene dips to black); the audio starts after the card
   - other extraHoldSec from storyboard.json is held after the audio (S24 +1.5 s silence, S35 +2 s, …)
   - every scene gets +18 frames so the next crossfade never cuts its audio
 
@@ -44,8 +45,9 @@ for s in sb["scenes"]:
         sec = words / WORDS_PER_SEC + SENTENCE_PAUSE * max(0, sentences - 1)
         estimated = True
     chapter_open = "ChapterCard" in s["components"]
-    lead_in = 1.5 if chapter_open else 0.0
-    tail = max(0.0, s.get("extraHoldSec", 0) - lead_in)
+    # ChapterCard: 1.5 s visible, plus the crossfade it spends in black (dip to black).
+    lead_in = 1.5 + TRANSITION / FPS if chapter_open else 0.0
+    tail = max(0.0, s.get("extraHoldSec", 0) - (1.5 if chapter_open else 0.0))
     lead_frames = round(lead_in * FPS)
     audio_frames = math.ceil(sec * FPS)
     frames = lead_frames + math.ceil((sec + PAD + tail) * FPS) + TRANSITION

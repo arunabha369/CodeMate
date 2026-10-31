@@ -3,7 +3,9 @@ import { AbsoluteFill, Sequence, interpolate, useCurrentFrame } from "remotion";
 import { ChapterCard } from "../components/ChapterCard";
 import { motion } from "../theme";
 
-export const CARD_FRAMES = Math.round(motion.chapterCardSec * motion.fps); // 45
+/** Frames the card spends in black while the previous scene crossfades out (dip to black). */
+export const CARD_BLACK = motion.crossfadeFrames; // 18
+export const CARD_FRAMES = Math.round(motion.chapterCardSec * motion.fps) + CARD_BLACK; // 63
 /** Content starts under the card so the card can fade straight into it. */
 export const CONTENT_FROM = CARD_FRAMES - 12;
 
@@ -19,7 +21,7 @@ export const WithChapterCard: React.FC<{
       {children}
     </Sequence>
     <Sequence durationInFrames={CARD_FRAMES} layout="absolute-fill">
-      <ChapterCard number={number} title={title} variant={variant} durationInFrames={CARD_FRAMES} />
+      <ChapterCard number={number} title={title} variant={variant} durationInFrames={CARD_FRAMES} blackFrames={CARD_BLACK} />
     </Sequence>
   </AbsoluteFill>
 );
