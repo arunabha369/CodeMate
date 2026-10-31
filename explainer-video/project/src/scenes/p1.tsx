@@ -111,8 +111,8 @@ const MiniBridge: React.FC<{f: number}> = ({f}) => (
 
 export const S09: React.FC<SceneProps> = ({cue, world}) => {
   const f = useCurrentFrame();
-  const a = cue('ব্রিজে', -6);
-  const b = cue('ফেরিঘাটে', -6);
+  const a = Math.min(cue('ব্রিজে', -6), 14);
+  const b = Math.min(cue('ফেরিঘাটে', -6), 24);
   const d = cue('দূরত্ব', -4);
   return (
     <>
@@ -133,8 +133,8 @@ export const S09: React.FC<SceneProps> = ({cue, world}) => {
           <Clock size={28} color={C.red} style={{marginLeft: 10}} />
         </div>
       </IconCard>
-      <Chip at={a + 20} x={830} y={300} text="ধীর" tone="red" size={26} />
-      <Chip at={b + 20} x={1450} y={300} text="ভিড়" tone="red" size={26} />
+      <Chip at={cue('ব্রিজে', 10)} x={830} y={300} text="ধীর" tone="red" size={26} />
+      <Chip at={cue('ফেরিঘাটে', 10)} x={1450} y={300} text="ভিড়" tone="red" size={26} />
       <Chip at={d} x={760} y={760} text="দূরত্ব: সামান্য" tone="green" size={32} />
       <Chip at={cue('সময় লেগে', -2)} x={1160} y={760} text="সময়: অনেকটা" tone="red" size={32} />
     </>
@@ -143,7 +143,7 @@ export const S09: React.FC<SceneProps> = ({cue, world}) => {
 
 export const S10: React.FC<SceneProps> = ({cue, world}) => {
   const f = useCurrentFrame();
-  const y0 = cue('উনিশশো', -20);
+  const y0 = 6;
   const ns = prog(f, cue('উত্তর থেকে'), 40);
   const e = enter(f, cue('তবে', -10), 18, 30, 10);
   return (

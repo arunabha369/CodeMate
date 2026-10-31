@@ -28,7 +28,7 @@ export const S19: React.FC<SceneProps> = ({cue, world}) => {
 
 export const S20: React.FC<SceneProps> = ({cue, world}) => {
   const f = useCurrentFrame();
-  const a = cue('দুটো যন্ত্র', -10);
+  const a = Math.min(cue('দুটো যন্ত্র', -10), 8);
   const x1 = interpolate(f, [a, a + 40], [1950, 480], {...clamp, easing: easeInOut});
   const x2 = interpolate(f, [a + 10, a + 50], [1950, 560], {...clamp, easing: easeInOut});
   return (
