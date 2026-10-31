@@ -1,0 +1,32 @@
+{
+  "name": "shakti-peeth-video",
+  "version": "1.0.0",
+  "private": true,
+  "description": "৫১ সতীপীঠ — Bengali documentary video (Remotion)",
+  "scripts": {
+    "studio": "remotion studio",
+    "render": "remotion render ShaktiPeeth out/final.mp4 --codec=h264 --crf=18",
+    "still": "remotion still",
+    "tsc": "tsc --noEmit",
+    "check:storyboard": "python3 -I scripts/check_storyboard.py"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.539",
+    "@remotion/google-fonts": "4.0.539",
+    "@remotion/transitions": "4.0.539",
+    "d3-geo": "^3.1.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "remotion": "4.0.539",
+    "topojson-client": "^3.1.0",
+    "world-atlas": "^2.0.2"
+  },
+  "devDependencies": {
+    "@types/d3-geo": "^3.1.0",
+    "@types/geojson": "^7946.0.14",
+    "@types/react": "^19.0.0",
+    "@types/topojson-client": "^3.1.5",
+    "@types/topojson-specification": "^1.0.5",
+    "typescript": "^5.6.0"
+  }
+}

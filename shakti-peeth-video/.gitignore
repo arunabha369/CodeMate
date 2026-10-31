@@ -5,3 +5,8 @@ out/
 *.log
 # Remotion caches
 .remotion/
+# The CodeMate root .gitignore ignores every public/ folder. Re-include
+# public/ here but keep media out of git; only the small font files are tracked.
+!public/
+public/*
+!public/fonts/
