@@ -25,6 +25,8 @@ export const colors = {
   shaktiWarm: "#F6D9B8",
   bhairavaAsh: "#D9DFE6",
   bhairavaInk: "#22344F",
+  // drawn figures (no faces, never deities)
+  silhouette: "#3A2C40",
   // text
   cream: "#FFF4E2",
   ink: "#2A1810",

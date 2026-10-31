@@ -1,4 +1,5 @@
 import React from "react";
+import { colors } from "../theme";
 
 /** Simple line icons (original drawings). Size is the bounding box in px. */
 type IconProps = { size?: number; color: string; strokeWidth?: number };
@@ -39,5 +40,46 @@ export const TempleIcon: React.FC<IconProps> = ({ size = 60, color, strokeWidth 
     <line x1={0} y1={-30} x2={0} y2={-36} />
     <path d="M -24 26 L 24 26" />
     <path d="M -6 26 L -6 12 Q 0 6 6 12 L 6 26" />
+  </svg>
+);
+
+/** Ash: a shallow bowl with three curls of smoke. */
+export const AshIcon: React.FC<IconProps> = ({ size = 160, color, strokeWidth = 3 }) => (
+  <svg width={size} height={size} viewBox="-60 -60 120 120" fill="none" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
+    <path d="M -40 20 Q 0 50 40 20 Z" />
+    <path d="M -46 20 L 46 20" />
+    <path d="M -18 10 C -26 -6 -10 -14 -18 -30 C -24 -42 -14 -48 -16 -54" />
+    <path d="M 0 8 C -8 -10 8 -18 0 -36" />
+    <path d="M 18 10 C 26 -6 10 -14 18 -30" />
+  </svg>
+);
+
+/** Snake: a coiled serpent with raised hood (simple line drawing). */
+export const SnakeIcon: React.FC<IconProps> = ({ size = 160, color, strokeWidth = 3 }) => (
+  <svg width={size} height={size} viewBox="-60 -60 120 120" fill="none" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
+    <ellipse cx={0} cy={30} rx={40} ry={12} />
+    <path d="M -30 26 C -40 10 30 6 26 -6 C 22 -18 -18 -14 -10 -30" />
+    <path d="M -10 -30 C -20 -40 -16 -54 0 -54 C 16 -54 20 -40 10 -30 C 6 -26 -6 -26 -10 -30 Z" />
+    <circle cx={-4} cy={-44} r={1.5} fill={color} />
+    <circle cx={4} cy={-44} r={1.5} fill={color} />
+  </svg>
+);
+
+/** Cremation ground: crossed logs with a flame. */
+export const PyreIcon: React.FC<IconProps> = ({ size = 160, color, strokeWidth = 3 }) => (
+  <svg width={size} height={size} viewBox="-60 -60 120 120" fill="none" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
+    <path d="M -46 42 L 40 18" />
+    <path d="M -40 18 L 46 42" />
+    <path d="M -44 30 L 44 30" />
+    <path d="M 0 22 C -22 6 -16 -20 -2 -44 C 0 -26 18 -22 16 -4 C 22 -14 22 -22 20 -26 C 30 -8 22 14 0 22 Z" />
+  </svg>
+);
+
+/** Invitation: folded letter with a wax seal. */
+export const InviteIcon: React.FC<IconProps & { seal?: string }> = ({ size = 60, color, strokeWidth = 3, seal }) => (
+  <svg width={size} height={size * 0.72} viewBox="-50 -36 100 72" fill="none" stroke={color} strokeWidth={strokeWidth} strokeLinejoin="round">
+    <rect x={-46} y={-32} width={92} height={64} rx={6} fill={colors.ivory} />
+    <path d="M -46 -32 L 0 6 L 46 -32" />
+    <circle cx={0} cy={8} r={9} fill={seal ?? color} stroke="none" />
   </svg>
 );

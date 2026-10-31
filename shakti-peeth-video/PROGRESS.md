@@ -14,7 +14,7 @@ The project lives in `shakti-peeth-video/` inside the `arunabha369/CodeMate` rep
 | 3 Assets | ⛔ blocked by the network |
 | 4 Voiceover | ⛔ blocked by the network (edge-tts endpoint) |
 | 5 Design system + components | ✅ theme, 19 components + helpers, showcase stills checked |
-| 6 Scenes | ⏳ next. It can start with placeholders for media, but needs audio durations for final timing |
+| 6 Scenes | 🟡 Chapters 0–2 (S01–S20) built; preview rendered → STOPPED for user feedback (brief checkpoint). S21–S67 show as labelled pending cards |
 | 7 Finish | ⏳ |
 | 8 Teaser | ⏳ |
 
@@ -60,6 +60,29 @@ At the user's OK, Phases 2 and 5 ran before 3–4 because the network blocked th
   * A test MP4 render (h264, 30 fps) works.
 * `showcase_preview.png`: a 3×3 overview of key stills.
 
+## Phase 6 so far
+
+* `scripts/build_durations.py` → `src/data/durations.json`.
+  * Uses ffprobe on `public/audio/scene-XX.mp3` when the file exists. Otherwise it **estimates** at 2.1 words/s.
+  * Applies the brief's timing rules: +0.7 s; +1.5 s ChapterCard lead-in, during which the audio waits; S24/S35 holds; +18 frames per crossfade.
+  * Current estimate: **9.6 min** total, 2:42 for S01–S20.
+* `src/lib/timing.ts`: `cue(id, phrase)` returns the frame where a phrase is spoken, estimated from its position in the line. Visual beats use it, so they follow the real audio once it exists.
+* `src/data/assets.json` is the asset registry. Phase 3 fills `file`/`credit`, and scenes switch from placeholders to real media automatically.
+* `src/Film.tsx`:
+  * TransitionSeries with 18-frame fades; chapter openers fade into a ChapterCard that starts from black (the dip to black).
+  * One `<Audio>` per scene when the file exists.
+  * Music bed when `public/music/bg.mp3` exists: 0.07, 0.15 on chapter cards, 0.02 in S24, 2 s fades.
+  * Optional captions.
+* Compositions:
+  * `ShaktiPeeth` (main, no captions)
+  * `ShaktiPeethCaptions` (FB version)
+  * `PreviewCh0to2` (S01–S20, captions on because there's no voice yet)
+  * `Showcase`
+* `src/scenes/S01.tsx … S20.tsx`, plus `shared.tsx` (WithChapterCard, FadeAt, SourceKicker) and `PendingScene.tsx`.
+* New drawn components: Kailash, YajnaFire; icons AshIcon, SnakeIcon, PyreIcon, InviteIcon.
+* `node scripts/scene_stills.mjs <from> <to> [fractions…]` renders stills from the film timeline to out/stills/scenes/.
+* Preview: `npx remotion render PreviewCh0to2 out/preview_ch0-2.mp4 --scale=0.5 --codec=h264 --crf=23`.
+
 ## Commands
 
 ```
@@ -79,7 +102,7 @@ npm run studio                      # Remotion Studio
    * Voice: `speech.platform.bing.com` (edge-tts)
 2. PEXELS_API_KEY and PIXABAY_API_KEY, as environment secrets or in `.env` (gitignored).
 3. public/music/bg.mp3, and optional SFX in public/sfx/.
-4. Feedback on the look (showcase_preview.png / out/stills).
+4. Feedback on the chapters 0–2 preview (out/preview_ch0-2.mp4) before building S21–S67.
 
 ## Next steps
 
@@ -87,7 +110,7 @@ npm run studio                      # Remotion Studio
    * Run a Wikidata SPARQL query for P625 coordinates and replace every `approx` value.
    * Confirm the Banglapedia 14 + 7 lists and re-check the `pending` entries.
    * Then Phase 3 (assets), then Phase 4 (TTS, durations.json).
-2. Phase 6 can start now with placeholder media and estimated durations. Build chapters 0–2, render a preview at `--scale=0.5`, then STOP for feedback, as the brief says.
+2. After the user's feedback on chapters 0–2: apply it to the theme and components, then build S21–S67 in batches of about 10 scenes, checking a still from each scene.
 
 ## Notes
 

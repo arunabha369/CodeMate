@@ -1,0 +1,77 @@
+{
+  "_note": "Phase 3 fills these: file = path under public/, plus credit/licence. Empty file → placeholder on screen. Every entry must also be logged in assets/credits.json.",
+  "assets": {
+    "met-2000-313": {
+      "what": "Met 2000.313 'Shiva Carries the Corpse of Sati' (Kalighat, c.1865–75)",
+      "file": null,
+      "credit": null,
+      "licence": null
+    },
+    "court-miniature": {
+      "what": "Court-scene miniature (royal assembly), PD",
+      "file": null,
+      "credit": null,
+      "licence": null
+    },
+    "ravi-varma-sati": {
+      "what": "Raja Ravi Varma Press print of Sati/Parvati, PD (optional)",
+      "file": null,
+      "credit": null,
+      "licence": null
+    },
+    "shiva-painting": {
+      "what": "Shiva painting (Kalighat pat or Pahari), PD",
+      "file": null,
+      "credit": null,
+      "licence": null
+    },
+    "mahavidya-paintings": {
+      "what": "PD Mahavidya paintings, one per slot (optional)",
+      "file": null,
+      "credit": null,
+      "licence": null
+    },
+    "photo-kalighat": {
+      "what": "Kalighat Kali temple exterior",
+      "file": null,
+      "credit": null,
+      "licence": null
+    },
+    "photo-kamakhya": {
+      "what": "Kamakhya temple exterior",
+      "file": null,
+      "credit": null,
+      "licence": null
+    },
+    "photo-hinglaj": {
+      "what": "Hinglaj gorge / cave",
+      "file": null,
+      "credit": null,
+      "licence": null
+    },
+    "photo-nainativu": {
+      "what": "Nainativu Nagapooshani temple",
+      "file": null,
+      "credit": null,
+      "licence": null
+    },
+    "photo-manasarovar": {
+      "what": "Lake Manasarovar",
+      "file": null,
+      "credit": null,
+      "licence": null
+    },
+    "broll-havan": {
+      "what": "havan / yajna fire close-up",
+      "file": null,
+      "credit": null,
+      "licence": null
+    },
+    "broll-diya": {
+      "what": "single diya flame, dark background",
+      "file": null,
+      "credit": null,
+      "licence": null
+    }
+  }
+}

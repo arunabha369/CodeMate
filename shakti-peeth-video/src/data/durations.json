@@ -1,0 +1,543 @@
+{
+  "fps": 30,
+  "transitionFrames": 18,
+  "totalFrames": 17352,
+  "scenes": [
+    {
+      "id": "S01",
+      "audioSec": 7.17,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 215,
+      "frames": 254
+    },
+    {
+      "id": "S02",
+      "audioSec": 7.39,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 222,
+      "frames": 261
+    },
+    {
+      "id": "S03",
+      "audioSec": 7.14,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 215,
+      "frames": 254
+    },
+    {
+      "id": "S04",
+      "audioSec": 9.77,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 294,
+      "frames": 333
+    },
+    {
+      "id": "S05",
+      "audioSec": 7.64,
+      "estimated": true,
+      "leadInFrames": 45,
+      "audioFrames": 230,
+      "frames": 314
+    },
+    {
+      "id": "S06",
+      "audioSec": 5.01,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 151,
+      "frames": 190
+    },
+    {
+      "id": "S07",
+      "audioSec": 5.49,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 165,
+      "frames": 204
+    },
+    {
+      "id": "S08",
+      "audioSec": 4.76,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 143,
+      "frames": 182
+    },
+    {
+      "id": "S09",
+      "audioSec": 9.3,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 279,
+      "frames": 318
+    },
+    {
+      "id": "S10",
+      "audioSec": 12.4,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 373,
+      "frames": 412
+    },
+    {
+      "id": "S11",
+      "audioSec": 6.92,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 208,
+      "frames": 247
+    },
+    {
+      "id": "S12",
+      "audioSec": 3.81,
+      "estimated": true,
+      "leadInFrames": 45,
+      "audioFrames": 115,
+      "frames": 199
+    },
+    {
+      "id": "S13",
+      "audioSec": 8.12,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 244,
+      "frames": 283
+    },
+    {
+      "id": "S14",
+      "audioSec": 8.35,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 251,
+      "frames": 290
+    },
+    {
+      "id": "S15",
+      "audioSec": 6.21,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 187,
+      "frames": 226
+    },
+    {
+      "id": "S16",
+      "audioSec": 4.76,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 143,
+      "frames": 182
+    },
+    {
+      "id": "S17",
+      "audioSec": 13.58,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 408,
+      "frames": 447
+    },
+    {
+      "id": "S18",
+      "audioSec": 7.39,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 222,
+      "frames": 291
+    },
+    {
+      "id": "S19",
+      "audioSec": 4.29,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 129,
+      "frames": 168
+    },
+    {
+      "id": "S20",
+      "audioSec": 4.06,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 122,
+      "frames": 161
+    },
+    {
+      "id": "S21",
+      "audioSec": 7.87,
+      "estimated": true,
+      "leadInFrames": 45,
+      "audioFrames": 237,
+      "frames": 321
+    },
+    {
+      "id": "S22",
+      "audioSec": 6.69,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 201,
+      "frames": 240
+    },
+    {
+      "id": "S23",
+      "audioSec": 9.77,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 294,
+      "frames": 363
+    },
+    {
+      "id": "S24",
+      "audioSec": 6.44,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 194,
+      "frames": 278
+    },
+    {
+      "id": "S25",
+      "audioSec": 7.39,
+      "estimated": true,
+      "leadInFrames": 45,
+      "audioFrames": 222,
+      "frames": 306
+    },
+    {
+      "id": "S26",
+      "audioSec": 6.92,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 208,
+      "frames": 247
+    },
+    {
+      "id": "S27",
+      "audioSec": 6.44,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 194,
+      "frames": 233
+    },
+    {
+      "id": "S28",
+      "audioSec": 10.02,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 301,
+      "frames": 340
+    },
+    {
+      "id": "S29",
+      "audioSec": 4.76,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 143,
+      "frames": 182
+    },
+    {
+      "id": "S30",
+      "audioSec": 7.87,
+      "estimated": true,
+      "leadInFrames": 45,
+      "audioFrames": 237,
+      "frames": 321
+    },
+    {
+      "id": "S31",
+      "audioSec": 5.74,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 173,
+      "frames": 212
+    },
+    {
+      "id": "S32",
+      "audioSec": 7.39,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 222,
+      "frames": 261
+    },
+    {
+      "id": "S33",
+      "audioSec": 7.17,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 215,
+      "frames": 254
+    },
+    {
+      "id": "S34",
+      "audioSec": 6.92,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 208,
+      "frames": 247
+    },
+    {
+      "id": "S35",
+      "audioSec": 5.96,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 179,
+      "frames": 278
+    },
+    {
+      "id": "S36",
+      "audioSec": 5.49,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 165,
+      "frames": 204
+    },
+    {
+      "id": "S37",
+      "audioSec": 8.82,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 265,
+      "frames": 304
+    },
+    {
+      "id": "S38",
+      "audioSec": 5.96,
+      "estimated": true,
+      "leadInFrames": 45,
+      "audioFrames": 179,
+      "frames": 263
+    },
+    {
+      "id": "S39",
+      "audioSec": 7.39,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 222,
+      "frames": 261
+    },
+    {
+      "id": "S40",
+      "audioSec": 6.44,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 194,
+      "frames": 233
+    },
+    {
+      "id": "S41",
+      "audioSec": 8.37,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 252,
+      "frames": 291
+    },
+    {
+      "id": "S42",
+      "audioSec": 5.24,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 158,
+      "frames": 197
+    },
+    {
+      "id": "S43",
+      "audioSec": 8.35,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 251,
+      "frames": 350
+    },
+    {
+      "id": "S44",
+      "audioSec": 4.29,
+      "estimated": true,
+      "leadInFrames": 45,
+      "audioFrames": 129,
+      "frames": 213
+    },
+    {
+      "id": "S45",
+      "audioSec": 5.01,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 151,
+      "frames": 190
+    },
+    {
+      "id": "S46",
+      "audioSec": 7.87,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 237,
+      "frames": 276
+    },
+    {
+      "id": "S47",
+      "audioSec": 11.45,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 344,
+      "frames": 383
+    },
+    {
+      "id": "S48",
+      "audioSec": 9.07,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 273,
+      "frames": 312
+    },
+    {
+      "id": "S49",
+      "audioSec": 9.07,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 273,
+      "frames": 312
+    },
+    {
+      "id": "S50",
+      "audioSec": 9.55,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 287,
+      "frames": 326
+    },
+    {
+      "id": "S51",
+      "audioSec": 8.6,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 258,
+      "frames": 297
+    },
+    {
+      "id": "S52",
+      "audioSec": 6.44,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 194,
+      "frames": 233
+    },
+    {
+      "id": "S53",
+      "audioSec": 10.73,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 322,
+      "frames": 361
+    },
+    {
+      "id": "S54",
+      "audioSec": 6.92,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 208,
+      "frames": 247
+    },
+    {
+      "id": "S55",
+      "audioSec": 8.37,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 252,
+      "frames": 291
+    },
+    {
+      "id": "S56",
+      "audioSec": 5.49,
+      "estimated": true,
+      "leadInFrames": 45,
+      "audioFrames": 165,
+      "frames": 249
+    },
+    {
+      "id": "S57",
+      "audioSec": 9.07,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 273,
+      "frames": 312
+    },
+    {
+      "id": "S58",
+      "audioSec": 7.42,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 223,
+      "frames": 262
+    },
+    {
+      "id": "S59",
+      "audioSec": 6.44,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 194,
+      "frames": 233
+    },
+    {
+      "id": "S60",
+      "audioSec": 8.6,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 258,
+      "frames": 297
+    },
+    {
+      "id": "S61",
+      "audioSec": 8.12,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 244,
+      "frames": 283
+    },
+    {
+      "id": "S62",
+      "audioSec": 12.65,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 380,
+      "frames": 419
+    },
+    {
+      "id": "S63",
+      "audioSec": 10.02,
+      "estimated": true,
+      "leadInFrames": 45,
+      "audioFrames": 301,
+      "frames": 385
+    },
+    {
+      "id": "S64",
+      "audioSec": 7.87,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 237,
+      "frames": 276
+    },
+    {
+      "id": "S65",
+      "audioSec": 8.6,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 258,
+      "frames": 357
+    },
+    {
+      "id": "S66",
+      "audioSec": 7.39,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 222,
+      "frames": 261
+    },
+    {
+      "id": "S67",
+      "audioSec": 9.8,
+      "estimated": true,
+      "leadInFrames": 0,
+      "audioFrames": 294,
+      "frames": 363
+    }
+  ]
+}

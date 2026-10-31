@@ -44,7 +44,7 @@ export const MahavidyaRing: React.FC<{
           y = y + (center.y - y) * focus;
           scale = 1 + 1.3 * focus;
         } else if (focus > 0) {
-          dim = 1 - 0.85 * focus;
+          dim = 1 - 0.92 * focus;
         }
         const ring = isKali ? colors.sindoor : colors.gold;
         const img = images[name];

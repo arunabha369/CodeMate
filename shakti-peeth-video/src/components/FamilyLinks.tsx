@@ -3,7 +3,7 @@ import { interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 import { calm } from "../lib/anim";
 import { BgVariant, colors, fonts, palettes } from "../theme";
 
-export type FamilyNode = { label: string; sub?: string; at: number };
+export type FamilyNode = { label: string; sub?: string; at: number; /** frame the sub-label appears (default: with the node) */ subAt?: number };
 
 /**
  * Text-node family tree drawn as a vertical chain (ব্রহ্মা → দক্ষ → সতী),
@@ -46,7 +46,11 @@ export const FamilyLinks: React.FC<{
         }}
       >
         <div style={{ fontFamily: fonts.heading, fontSize: 58, lineHeight: 1.2, color: pal.text }}>{n.label}</div>
-        {n.sub ? <div style={{ fontFamily: fonts.body, fontSize: 30, color: pal.highlight }}>{n.sub}</div> : null}
+        {n.sub ? (
+          <div style={{ fontFamily: fonts.body, fontSize: 30, color: pal.highlight, opacity: n.subAt !== undefined ? calm(frame, fps, n.subAt) : 1 }}>
+            {n.sub}
+          </div>
+        ) : null}
       </div>
     );
   };

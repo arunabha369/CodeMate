@@ -29,7 +29,7 @@ export const Diya: React.FC<{
       : 0;
 
   return (
-    <g transform={`translate(${x} ${y}) scale(${size})`}>
+    <g transform={`translate(${x} ${y}) scale(${size})`} opacity={interpolate(frame, [litAt - 10, litAt], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })}>
       <defs>
         <radialGradient id={`glow-${seed}`}>
           <stop offset="0%" stopColor={colors.diya} stopOpacity={0.55} />

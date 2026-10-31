@@ -114,8 +114,11 @@ export const PeethMap: React.FC<{
   labels?: string[];
   /** Label the highlighted dots (default true). Set false for dense overviews (S56). */
   labelHighlights?: boolean;
+  /** Replace a dot's label, e.g. the place name the narration uses ("নয়নাতিভু" for Lanka). */
+  labelText?: Record<string, string>;
   labelSize?: number;
-  rainIn?: { start: number; perDot: number };
+  /** Dots arrive one by one; `fall` = drop distance in px (0 = fade in place). */
+  rainIn?: { start: number; perDot: number; fall?: number };
   thread?: { start: number; duration: number };
   /** Dots morph into tiny temple icons from this frame. */
   templesAt?: number;
@@ -138,6 +141,7 @@ export const PeethMap: React.FC<{
   highlightAt,
   labels = [],
   labelHighlights = true,
+  labelText = {},
   labelSize = 30,
   rainIn,
   thread,
@@ -279,7 +283,7 @@ export const PeethMap: React.FC<{
     const pt = screenPts[visible.findIndex((p) => p.id === id)];
     const isHi = highlight.includes(id);
     const size = isHi ? labelSize : labelSize * 0.8;
-    const text = shortName(byId(id).nameBn);
+    const text = labelText[id] ?? shortName(byId(id).nameBn);
     const w = text.length * size * 0.5;
     const h = size * 1.15;
     const off = 14 * dotScale;
@@ -370,9 +374,9 @@ export const PeethMap: React.FC<{
           if (rainIn) {
             const t0 = rainIn.start + rainRank[p.id] * rainIn.perDot;
             const fall = interpolate(frame, [t0, t0 + 18], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.in(Easing.quad) });
-            yy = y - (1 - fall) * 300;
+            yy = y - (1 - fall) * (rainIn.fall ?? 300);
             o *= frame < t0 ? 0 : interpolate(frame, [t0, t0 + 4], [0, 1], { extrapolateRight: "clamp" });
-            ripple = frame >= t0 + 18 ? interpolate(frame, [t0 + 18, t0 + 42], [0, 1], { extrapolateRight: "clamp" }) : 0;
+            ripple = (rainIn.fall ?? 300) > 0 && frame >= t0 + 18 ? interpolate(frame, [t0 + 18, t0 + 42], [0, 1], { extrapolateRight: "clamp" }) : 0;
           }
           const tw = twinkle ? 0.75 + 0.25 * Math.sin(frame / 9 + random(`tw-${p.id}`) * 6) : 1;
           const r = (4.5 + 3.5 * hi) * dotScale;
