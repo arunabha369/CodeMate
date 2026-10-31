@@ -1,0 +1,30 @@
+{
+  "name": "ganga-metro-explainer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Bengali animated explainer: গঙ্গার নিচে মেট্রো (Remotion)",
+  "scripts": {
+    "studio": "remotion studio",
+    "parse": "node tools/parse-script.mjs",
+    "sfx": "bash tools/make-sfx.sh",
+    "vo": "python3 tools/make_vo.py",
+    "render": "remotion render Main out/final.mp4 --codec=h264 --crf=18 --audio-bitrate=320k",
+    "preview": "remotion render Main out/preview.mp4 --scale=0.5 --crf=26",
+    "stills": "node tools/contact-sheet.mjs"
+  },
+  "dependencies": {
+    "@fontsource/hind-siliguri": "^5.3.0",
+    "@fontsource/oswald": "^5.3.0",
+    "@remotion/cli": "4.0.539",
+    "lucide-react": "^1.66.0",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "remotion": "4.0.539"
+  },
+  "devDependencies": {
+    "@remotion/bundler": "^4.0.539",
+    "@remotion/renderer": "^4.0.539",
+    "@types/react": "19.1.0",
+    "typescript": "5.8.3"
+  }
+}
