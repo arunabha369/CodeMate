@@ -11,9 +11,9 @@ The brief is BRIEF_51_Shakti_Peeth.md. The project lives in `shakti-peeth-video/
 | 3 Assets | ⛔ **Blocked by the network.** `scripts/fetch_assets.py` is ready, see ASSETS.md. Scenes show placeholders or drawn fallbacks |
 | 4 Voiceover | ✅ **Offline Bengali voice** for all 67 scenes. Durations come from the real audio: **9.3 min** |
 | 5 Design system | ✅ + Remotion-skill polish |
-| 6 Scenes | ✅ All 67 scenes built. The full film renders with voice, music and SFX |
-| 7 Finish | ⏳ After assets: 1080p render, captions version, SRT, thumbnail, description |
-| 8 Teaser | ⏳ |
+| 6 Scenes | ✅ All 67 scenes built. `out/preview_full_halfres.mp4` (9:20, 960×540, AAC, -17.7 LUFS) rendered in 20 min |
+| 7 Finish | 🟡 Done: `out/subtitles.srt`, `out/youtube_description.md` (`scripts/make_docs.py`), `out/thumbnail.png` (Still "Thumbnail"; it shows the drawn chakra until Met 2000.313 is sourced). Still to do after assets: 1080p `final.mp4` and `final_captions.mp4` (composition ShaktiPeethCaptions) |
+| 8 Teaser | ✅ `TeaserVertical` 1080×1920, 51.5 s → `out/teaser_vertical.mp4` |
 
 ## Audio
 
