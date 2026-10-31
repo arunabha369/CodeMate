@@ -10,7 +10,7 @@ const DEMOS = {
   "map-full": 60, "map-wb": 60, "map-birbhum": 60, "map-bd": 60, "map-rain": 70, "map-thread": 80,
   "map-temples": 40, "map-cracks": 30, "photo-inset": 40, grid: 120, ring: 80,
   "ring-kali": 60, chakra: 20, counts: 60, "count-single": 40, dialogue: 90,
-  quote: 80, lowerthird: 40, stat: 60, "diya-out": 30, "broll-captions": 120,
+  quote: 80, lowerthird: 40, stat: 60, "diya-out": 30, "broll-captions": 120, lightleak: 150,
 };
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const only = process.argv.slice(2);
@@ -21,8 +21,8 @@ fs.mkdirSync(path.join(root, "out/stills"), { recursive: true });
 for (const [demo, frame] of Object.entries(DEMOS)) {
   if (only.length && !only.includes(demo)) continue;
   const inputProps = { demo };
-  const composition = await selectComposition({ serveUrl, id: "Showcase", inputProps, browserExecutable });
+  const composition = await selectComposition({ serveUrl, id: "Showcase", inputProps, browserExecutable, chromiumOptions: { gl: "swiftshader" } });
   const output = path.join(root, `out/stills/${demo}.png`);
-  await renderStill({ composition, serveUrl, output, frame, inputProps, browserExecutable, overwrite: true });
+  await renderStill({ composition, serveUrl, output, frame, inputProps, browserExecutable, overwrite: true, chromiumOptions: { gl: "swiftshader" } });
   console.log("rendered", demo);
 }

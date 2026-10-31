@@ -10,3 +10,7 @@ out/
 !public/
 public/*
 !public/fonts/
+
+# Offline TTS model (108 MB, MIT-licensed upstream; re-download with scripts/tts_offline.py --fetch)
+tools/
+!public/textures/

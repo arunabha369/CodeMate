@@ -19,9 +19,58 @@ import { S17 } from "./S17";
 import { S18 } from "./S18";
 import { S19 } from "./S19";
 import { S20 } from "./S20";
+import { S21 } from "./S21";
+import { S22 } from "./S22";
+import { S23 } from "./S23";
+import { S24 } from "./S24";
+import { S25 } from "./S25";
+import { S26 } from "./S26";
+import { S27 } from "./S27";
+import { S28 } from "./S28";
+import { S29 } from "./S29";
+import { S30 } from "./S30";
+import { S31 } from "./S31";
+import { S32 } from "./S32";
+import { S33 } from "./S33";
+import { S34 } from "./S34";
+import { S35 } from "./S35";
+import { S36 } from "./S36";
+import { S37 } from "./S37";
+import { S38 } from "./S38";
+import { S39 } from "./S39";
+import { S40 } from "./S40";
+import { S41 } from "./S41";
+import { S42 } from "./S42";
+import { S43 } from "./S43";
+import { S44 } from "./S44";
+import { S45 } from "./S45";
+import { S46 } from "./S46";
+import { S47 } from "./S47";
+import { S48 } from "./S48";
+import { S49 } from "./S49";
+import { S50 } from "./S50";
+import { S51 } from "./S51";
+import { S52 } from "./S52";
+import { S53 } from "./S53";
+import { S54 } from "./S54";
+import { S55 } from "./S55";
+import { S56 } from "./S56";
+import { S57 } from "./S57";
+import { S58 } from "./S58";
+import { S59 } from "./S59";
+import { S60 } from "./S60";
+import { S61 } from "./S61";
+import { S62 } from "./S62";
+import { S63 } from "./S63";
+import { S64 } from "./S64";
+import { S65 } from "./S65";
+import { S66 } from "./S66";
+import { S67 } from "./S67";
 
 /** Built scenes by id. Missing ids render as PendingScene. */
 export const SCENES: Record<string, React.FC> = {
   S01, S02, S03, S04, S05, S06, S07, S08, S09, S10,
   S11, S12, S13, S14, S15, S16, S17, S18, S19, S20,
+  S21, S22, S23, S24, S25, S26, S27, S28, S29, S30, S31, S32, S33, S34, S35, S36, S37,
+  S38, S39, S40, S41, S42, S43, S44, S45, S46, S47, S48, S49, S50, S51, S52, S53, S54, S55, S56, S57, S58, S59, S60, S61, S62, S63, S64, S65, S66, S67,
 };

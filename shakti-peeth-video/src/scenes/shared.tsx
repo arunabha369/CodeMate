@@ -1,6 +1,7 @@
 import React from "react";
 import { AbsoluteFill, Sequence, interpolate, useCurrentFrame } from "remotion";
 import { ChapterCard } from "../components/ChapterCard";
+import { LightLeak } from "../components/LightLeak";
 import { motion } from "../theme";
 
 /** Frames the card spends in black while the previous scene crossfades out (dip to black). */
@@ -22,6 +23,9 @@ export const WithChapterCard: React.FC<{
     </Sequence>
     <Sequence durationInFrames={CARD_FRAMES} layout="absolute-fill">
       <ChapterCard number={number} title={title} variant={variant} durationInFrames={CARD_FRAMES} blackFrames={CARD_BLACK} />
+    </Sequence>
+    <Sequence from={CARD_BLACK - 2} durationInFrames={44} layout="absolute-fill">
+      <LightLeak seed={number} hueShift={variant === "red" ? 340 : 0} opacity={0.4} peak={0.3} />
     </Sequence>
   </AbsoluteFill>
 );
@@ -46,6 +50,45 @@ export const SourceKicker: React.FC<{ text: string; color: string; font: string;
   const o = interpolate(frame, [at, at + 14], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   return (
     <div style={{ position: "absolute", left: 80, top: 70, fontFamily: font, fontSize: 34, letterSpacing: 2, color, opacity: o }}>
+      {text}
+    </div>
+  );
+};
+
+/** Small rounded text chip (e.g. "আষাঢ় · ৩ দিন", "অনেকের বিশ্বাস"). */
+export const Chip: React.FC<{
+  text: string;
+  at: number;
+  x: number;
+  y: number;
+  dark?: boolean;
+  dashed?: boolean;
+  size?: number;
+  font: string;
+  color: string;
+  border: string;
+  bgColor: string;
+}> = ({ text, at, x, y, dashed = false, size = 34, font, color, border, bgColor }) => {
+  const frame = useCurrentFrame();
+  const o = interpolate(frame, [at, at + 12], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  return (
+    <div
+      style={{
+        position: "absolute",
+        left: x,
+        top: y,
+        padding: "10px 26px 12px",
+        borderRadius: 999,
+        border: `2px ${dashed ? "dashed" : "solid"} ${border}`,
+        background: bgColor,
+        fontFamily: font,
+        fontSize: size,
+        color,
+        opacity: o,
+        scale: 0.85 + 0.15 * o,
+        whiteSpace: "nowrap",
+      }}
+    >
       {text}
     </div>
   );

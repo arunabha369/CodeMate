@@ -65,7 +65,7 @@ export const QuoteCard: React.FC<{
             extrapolateRight: "clamp",
           });
           return (
-            <span key={i} style={{ opacity: o, display: "inline-block", transform: `translateY(${(1 - o) * 12}px)` }}>
+            <span key={i} style={{ opacity: o, display: "inline-block", filter: `blur(${(1 - o) * 8}px)`, translate: `0px ${(1 - o) * 14}px` }}>
               {w}
               {i < ws.length - 1 ? " " : ""}
             </span>

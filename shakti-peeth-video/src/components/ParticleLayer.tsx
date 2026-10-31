@@ -2,7 +2,7 @@ import React from "react";
 import { AbsoluteFill, random, useCurrentFrame } from "remotion";
 import { colors } from "../theme";
 
-export type ParticleKind = "embers" | "sparks" | "petals" | "snow";
+export type ParticleKind = "embers" | "sparks" | "petals" | "snow" | "bokeh";
 
 /**
  * Deterministic particle field. Every particle's path is a pure function of
@@ -23,6 +23,11 @@ export const ParticleLayer: React.FC<{
     <AbsoluteFill style={{ opacity, pointerEvents: "none" }}>
       <svg width={1920} height={1080}>
         <defs>
+          <radialGradient id={`bokeh-${seed}`}>
+            <stop offset="0%" stopColor={colors.diya} stopOpacity={0.9} />
+            <stop offset="70%" stopColor={colors.gold} stopOpacity={0.5} />
+            <stop offset="100%" stopColor={colors.gold} stopOpacity={0} />
+          </radialGradient>
           <radialGradient id={`ember-${seed}`}>
             <stop offset="0%" stopColor="#FFE2A8" />
             <stop offset="45%" stopColor={colors.diya} />
@@ -31,6 +36,14 @@ export const ParticleLayer: React.FC<{
         </defs>
         {Array.from({ length: count }).map((_, i) => {
           const r = (k: string) => random(`${seed}-${k}-${i}`);
+          if (kind === "bokeh") {
+            // Large, soft, out-of-focus lights drifting slowly: depth for night scenes.
+            const x = r("x") * 1920 + Math.sin(frame / (90 + r("p") * 60) + r("ph") * 6) * 60;
+            const y = r("y") * 1080 + Math.cos(frame / (120 + r("q") * 60) + r("ph") * 6) * 40;
+            const size = 24 + r("s") * 60;
+            const a = 0.05 + 0.08 * r("a") + 0.03 * Math.sin(frame / 40 + i);
+            return <circle key={i} cx={x} cy={y} r={size} fill={`url(#bokeh-${seed})`} opacity={a} />;
+          }
           if (kind === "embers") {
             const life = 120 + r("life") * 120;
             const t = ((frame + r("off") * life) % life) / life;

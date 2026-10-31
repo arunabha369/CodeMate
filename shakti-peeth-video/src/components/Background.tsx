@@ -2,6 +2,7 @@ import React from "react";
 import { AbsoluteFill, random, useCurrentFrame } from "remotion";
 import { BgVariant, colors } from "../theme";
 import { LotusMotif } from "./Alpana";
+import { ParticleLayer } from "./ParticleLayer";
 
 const Stars: React.FC<{ count?: number; seed?: string }> = ({ count = 160, seed = "stars" }) => {
   const frame = useCurrentFrame();
@@ -39,13 +40,16 @@ export const Background: React.FC<{
   red?: boolean;
   stars?: boolean;
   diyaGlow?: boolean;
-}> = ({ variant, red = false, stars = true, diyaGlow = true }) => {
+  /** Soft out-of-focus lights for depth (night only). */
+  bokeh?: boolean;
+}> = ({ variant, red = false, stars = true, diyaGlow = true, bokeh = true }) => {
   if (variant === "night") {
     const top = colors.night0;
     const bottom = red ? colors.nightRed : colors.night1;
     return (
       <AbsoluteFill style={{ background: `linear-gradient(180deg, ${top} 0%, ${bottom} 100%)` }}>
         {stars ? <Stars /> : null}
+        {bokeh ? <ParticleLayer kind="bokeh" count={14} seed="bg-bokeh" /> : null}
         {diyaGlow ? (
           <AbsoluteFill
             style={{

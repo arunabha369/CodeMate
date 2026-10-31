@@ -17,8 +17,8 @@ const scenes = durations.scenes.slice(from - 1, to);
 const shell = "/opt/pw-browsers/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell";
 const browserExecutable = fs.existsSync(shell) ? shell : null;
 const serveUrl = await bundle({ entryPoint: path.join(root, "src/index.ts") });
-const inputProps = { from, to, captions: true };
-const composition = await selectComposition({ serveUrl, id: "ShaktiPeeth", inputProps, browserExecutable });
+const inputProps = { from, to, captions: false };
+const composition = await selectComposition({ serveUrl, id: "ShaktiPeeth", inputProps, browserExecutable, chromiumOptions: { gl: "swiftshader" } });
 const outDir = path.join(root, "out/stills/scenes");
 fs.mkdirSync(outDir, { recursive: true });
 let start = 0;
@@ -26,7 +26,7 @@ for (const s of scenes) {
   for (const f of fractions) {
     const frame = Math.min(composition.durationInFrames - 1, start + Math.round(s.frames * f));
     const output = path.join(outDir, `${s.id}-${Math.round(f * 100)}.png`);
-    await renderStill({ composition, serveUrl, output, frame, inputProps, browserExecutable, overwrite: true, scale: 0.5 });
+    await renderStill({ composition, serveUrl, output, frame, inputProps, browserExecutable, overwrite: true, chromiumOptions: { gl: "swiftshader" }, scale: 0.5 });
   }
   console.log("still", s.id);
   start += s.frames - T;

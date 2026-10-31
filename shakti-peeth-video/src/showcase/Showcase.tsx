@@ -21,6 +21,7 @@ import { QuoteCard } from "../components/QuoteCard";
 import { ShaktiBhairavaCard } from "../components/ShaktiBhairavaCard";
 import { StatCounter } from "../components/StatCounter";
 import { LOCATED } from "../lib/peeths";
+import { LightLeak } from "../components/LightLeak";
 import { layout } from "../theme";
 
 export type ShowcaseProps = { demo: string };
@@ -242,6 +243,16 @@ export const Showcase: React.FC<ShowcaseProps> = ({ demo }) => {
             text="শুরু করা যাক কলকাতা দিয়ে। আদিগঙ্গার তীরে কালীঘাট, যেখানে পড়েছিল মায়ের ডান পায়ের আঙুল। শক্তি কালিকা, ভৈরব নকুলেশ্বর।"
             durationInFrames={300}
           />
+        </AbsoluteFill>
+      );
+    case "lightleak":
+      return (
+        <AbsoluteFill>
+          <Background variant="night" />
+          <Center>
+            <Headline text="৫১ সতীপীঠ" highlight="৫১" highlightColor="sindoor" />
+          </Center>
+          <LightLeak seed={3} />
         </AbsoluteFill>
       );
     default:

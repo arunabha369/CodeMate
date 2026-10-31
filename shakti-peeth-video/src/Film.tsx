@@ -1,11 +1,15 @@
 import React from "react";
-import { AbsoluteFill, Audio, Sequence, getStaticFiles, interpolate, staticFile } from "remotion";
+import { AbsoluteFill, Sequence, getStaticFiles, interpolate, staticFile } from "remotion";
+import { Audio } from "@remotion/media";
 import { TransitionSeries, linearTiming } from "@remotion/transitions";
 import { fade } from "@remotion/transitions/fade";
+import { CameraDrift } from "./components/CameraDrift";
 import { CaptionLayer } from "./components/CaptionLayer";
+import { FilmFinish } from "./components/FilmFinish";
+import { SFX } from "./data/sfx";
 import { SCENES } from "./scenes";
 import { PendingScene } from "./scenes/PendingScene";
-import { SCENE_IDS, TRANSITION_FRAMES, sceneTiming } from "./lib/timing";
+import { SCENE_IDS, TRANSITION_FRAMES, cue, sceneTiming } from "./lib/timing";
 import { colors } from "./theme";
 
 export type FilmProps = {
@@ -66,12 +70,21 @@ export const Film: React.FC<FilmProps> = ({ from, to, captions }) => {
     }
     items.push(
       <TransitionSeries.Sequence key={id} durationInFrames={t.frames}>
-        {Scene ? <Scene /> : <PendingScene id={id} />}
+        <CameraDrift durationInFrames={t.frames} seed={id}>
+          {Scene ? <Scene /> : <PendingScene id={id} />}
+        </CameraDrift>
         {files.has(audio) ? (
-          <Sequence from={t.leadInFrames}>
+          <Sequence from={t.leadInFrames} name={`voice ${id}`}>
             <Audio src={staticFile(audio)} />
           </Sequence>
         ) : null}
+        {(SFX[id] ?? [])
+          .filter((fx) => files.has(fx.file))
+          .map((fx, k) => (
+            <Sequence key={k} from={Math.max(0, (fx.phrase ? cue(id, fx.phrase) : 0) + (fx.offset ?? 0))} name={`sfx ${fx.file}`}>
+              <Audio src={staticFile(fx.file)} volume={fx.volume} />
+            </Sequence>
+          ))}
         {captions ? <CaptionLayer text={t.narration} durationInFrames={t.leadInFrames + t.audioFrames} leadIn={t.leadInFrames} /> : null}
       </TransitionSeries.Sequence>,
     );
@@ -80,6 +93,7 @@ export const Film: React.FC<FilmProps> = ({ from, to, captions }) => {
   return (
     <AbsoluteFill style={{ backgroundColor: colors.black }}>
       <TransitionSeries>{items}</TransitionSeries>
+      <FilmFinish />
       {files.has(MUSIC) ? <Audio src={staticFile(MUSIC)} loop volume={musicVolume} /> : null}
     </AbsoluteFill>
   );

@@ -26,13 +26,13 @@ export const RemotionRoot: React.FC = () => (
       defaultProps={{ from: 1, to: 67, captions: true }}
       calculateMetadata={({ props }) => ({ durationInFrames: filmDuration(props) })}
     />
-    {/* Phase 6 checkpoint: chapters 0–2 (S01–S20), captions on because there is no voice yet. */}
+    {/* Phase 6 checkpoint: chapters 0–2 (S01–S20), with voice, music and finish. */}
     <Composition
       id="PreviewCh0to2"
       component={Film}
       {...VIDEO}
       durationInFrames={filmDuration({ from: 1, to: 20 })}
-      defaultProps={{ from: 1, to: 20, captions: true }}
+      defaultProps={{ from: 1, to: 20, captions: false }}
       calculateMetadata={({ props }) => ({ durationInFrames: filmDuration(props) })}
     />
     {/* Phase 5: component showcase. */}

@@ -83,3 +83,44 @@ export const InviteIcon: React.FC<IconProps & { seal?: string }> = ({ size = 60,
     <circle cx={0} cy={8} r={9} fill={seal ?? color} stroke="none" />
   </svg>
 );
+
+/** Gold crown (Daksha's) — the only depiction of his fall (no head is ever shown). */
+export const CrownIcon: React.FC<IconProps & { fill?: string }> = ({ size = 220, color, strokeWidth = 3, fill }) => (
+  <svg width={size} height={size * 0.75} viewBox="-60 -45 120 90" stroke={color} strokeWidth={strokeWidth} strokeLinejoin="round">
+    <path d="M -48 30 L -52 -18 L -28 4 L -12 -32 L 0 -6 L 12 -32 L 28 4 L 52 -18 L 48 30 Z" fill={fill ?? "none"} />
+    <path d="M -48 30 L 48 30 L 46 40 L -46 40 Z" fill={fill ?? "none"} />
+    <circle cx={0} cy={18} r={6} fill={colors.sindoor} stroke="none" />
+    <circle cx={-26} cy={20} r={4} fill={colors.vishnu} stroke="none" />
+    <circle cx={26} cy={20} r={4} fill={colors.vishnu} stroke="none" />
+    <circle cx={-52} cy={-20} r={4} fill={colors.ivory} stroke="none" />
+    <circle cx={0} cy={-34} r={4} fill={colors.ivory} stroke="none" />
+    <circle cx={52} cy={-20} r={4} fill={colors.ivory} stroke="none" />
+  </svg>
+);
+
+/** Goat head, simple line art; `progress` draws the strokes on. */
+export const GoatIcon: React.FC<IconProps & { progress?: number }> = ({ size = 220, color, strokeWidth = 3, progress = 1 }) => {
+  const L = 400;
+  const dash = { strokeDasharray: L, strokeDashoffset: L * (1 - progress) };
+  return (
+    <svg width={size} height={size} viewBox="-60 -60 120 120" fill="none" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
+      <path d="M -14 -30 C -30 -50 -50 -46 -48 -28 C -46 -20 -36 -22 -30 -26" style={dash} />
+      <path d="M 14 -30 C 30 -50 50 -46 48 -28 C 46 -20 36 -22 30 -26" style={dash} />
+      <path d="M -16 -26 C -22 -6 -16 22 -6 40 C -2 46 2 46 6 40 C 16 22 22 -6 16 -26 C 10 -32 -10 -32 -16 -26 Z" style={dash} />
+      <path d="M -18 -18 L -40 -10 L -22 -6" style={dash} />
+      <path d="M 18 -18 L 40 -10 L 22 -6" style={dash} />
+      <circle cx={-8} cy={-8} r={2.5} fill={color} stroke="none" opacity={progress} />
+      <circle cx={8} cy={-8} r={2.5} fill={color} stroke="none" opacity={progress} />
+      <path d="M -4 46 L 0 58 L 4 46" style={dash} />
+    </svg>
+  );
+};
+
+/** Yajna vessel (kalash), for the scattered offerings in S27. */
+export const KalashIcon: React.FC<IconProps> = ({ size = 90, color, strokeWidth = 3 }) => (
+  <svg width={size} height={size} viewBox="-40 -50 80 100" fill={colors.goldDeep} stroke={color} strokeWidth={strokeWidth} strokeLinejoin="round">
+    <path d="M -14 -26 L 14 -26 L 10 -16 C 32 -8 34 26 16 38 L -16 38 C -34 26 -32 -8 -10 -16 Z" />
+    <path d="M -18 -30 L 18 -30" fill="none" />
+    <path d="M -8 -30 C -14 -46 -2 -46 0 -40 C 2 -46 14 -46 8 -30" fill="none" />
+  </svg>
+);

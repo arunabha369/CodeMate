@@ -2,8 +2,9 @@ import React from "react";
 import { Easing, interpolate, useCurrentFrame } from "remotion";
 import { colors } from "../theme";
 
-/** Original drawn Sudarshana chakra: toothed rim, rings, twelve spokes, hub. */
-const Chakra: React.FC<{ r: number; rotation: number; opacity?: number }> = ({ r, rotation, opacity = 1 }) => {
+/** Original drawn Sudarshana chakra: toothed rim, rings, twelve spokes, hub.
+ * Needs the `chakraGold` gradient in the same SVG (see ChakraDefs). */
+export const Chakra: React.FC<{ r: number; rotation: number; opacity?: number }> = ({ r, rotation, opacity = 1 }) => {
   const teeth = 24;
   const rimOuter = r;
   const rimInner = r * 0.78;
@@ -41,6 +42,16 @@ const Chakra: React.FC<{ r: number; rotation: number; opacity?: number }> = ({ r
     </g>
   );
 };
+
+export const ChakraDefs: React.FC = () => (
+  <defs>
+    <radialGradient id="chakraGold">
+      <stop offset="0%" stopColor="#FFF1B8" />
+      <stop offset="60%" stopColor={colors.gold} />
+      <stop offset="100%" stopColor={colors.goldDeep} />
+    </radialGradient>
+  </defs>
+);
 
 /**
  * The chakra flies in spinning with a motion-blur trail and a light streak,
