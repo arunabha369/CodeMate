@@ -8,7 +8,7 @@
 | `project/` | The Remotion project, built on the engine in `../project`. It has the new archive world, camera, photo cards and the parametric bridge drawing. See `project/README.md`. |
 | `style-board.png` | The 3×3 style board: 9 representative scenes. |
 
-Status: **the full film is built and rendered without narration**: on-screen Bengali captions, music and sound effects. About 11 minutes.
+Status: **the full film is rendered with the ElevenLabs narration** (voice: Ashwat), Bengali captions, music and sound effects. 10:29, mastered to -14 LUFS.
 
 - The video, thumbnail, subtitles and YouTube kit are in `deliverables/`. The MP4 itself is too big for git, so it's sent separately.
 - To add a voice later, put `S01.mp3 … S65.mp3` in `project/public/vo/` (lines: `VOICE_LINES.md`), then run the commands below. The whole film re-times to the voice.
