@@ -12,7 +12,8 @@ Engines
                       bn-BD-PradeepNeural (male, Bangladesh), bn-BD-NabanitaNeural (female, Bangladesh)
   azure       Azure Speech (official). Needs AZURE_SPEECH_KEY and AZURE_SPEECH_REGION.
   elevenlabs  ElevenLabs. Needs ELEVENLABS_API_KEY and --voice <voice_id>. Use a model that supports Bengali.
-  files       Use your own recordings already saved as public/vo/S01.mp3 … S65.mp3 (just measures them).
+  files       Use your own recordings/ElevenLabs clips saved as public/vo/S01.mp3 … S65.mp3 (.wav/.m4a also work).
+              Silence is trimmed once (originals kept in public/vo/originals/), then durations are measured.
 
 Examples
   python3 tools/make_vo.py --engine edge
@@ -148,8 +149,18 @@ def main():
             continue
         if args.engine == "files":
             if not out.exists():
-                print(f"  skip {sid}: {out} not found")
-                continue
+                other = next((VO_DIR / f"{sid}{ext}" for ext in (".wav", ".m4a", ".ogg", ".flac") if (VO_DIR / f"{sid}{ext}").exists()), None)
+                if not other:
+                    print(f"  skip {sid}: {out} not found")
+                    continue
+                subprocess.check_call(["ffmpeg", "-y", "-loglevel", "error", "-i", str(other), "-ac", "1", "-ar", "44100", "-b:a", "192k", str(out)])
+            if not args.no_trim:
+                # keep the untouched original once, then trim leading/trailing silence
+                keep = VO_DIR / "originals" / out.name
+                if not keep.exists():
+                    keep.parent.mkdir(parents=True, exist_ok=True)
+                    keep.write_bytes(out.read_bytes())
+                    trim_silence(out)
         else:
             print(f"  {sid}: generating…", flush=True)
             if args.engine == "edge":
