@@ -291,15 +291,15 @@ export const S29: React.FC<SceneProps> = ({s, cue, world}) => {
       <Camera
         keys={[
           {f: 0, x: 880, y: 560, z: 1.0},
-          {f: Math.round(s.dur * 0.35), x: 880, y: 520, z: 1.25},
+          {f: Math.round(s.dur * 0.35), x: 880, y: 480, z: 1.2},
           {f: tilt + 4, x: 880, y: 660, z: 1.05},
           {f: s.dur + 12, x: 880, y: 660, z: 1.02},
         ]}
       >
         <Layer>
-          <CaissonSection frame={f} groundY={GROUND} bottomY={BOTTOM} cx={880} w={640} h={260} sink={sink} lifts={3} />
+          <CaissonSection frame={f} groundY={GROUND} bottomY={BOTTOM} cx={880} w={640} h={260} sink={sink} lifts={2} />
           {[0, 1, 2, 3].map((i) => (
-            <Person key={i} x={640 + i * 160} y={GROUND - 70 + sink - 3 * 60} scale={0.2} pose={i % 2 ? 'point' : 'stand'} color={C.ink} />
+            <Person key={i} x={640 + i * 160} y={GROUND - 70 + sink - 2 * 60} scale={0.2} pose={i % 2 ? 'point' : 'stand'} color={C.ink} />
           ))}
           {ghost > 0 && (
             <g opacity={ghost * 0.55} transform={`translate(${shake} 0) rotate(4 880 ${GROUND + sink + 190})`}>

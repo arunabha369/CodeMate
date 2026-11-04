@@ -26,46 +26,45 @@ const mmss = (frames) => {
   return `${Math.floor(t / 60)}:${String(t % 60).padStart(2, '0')}`;
 };
 const chapters = [
-  ['S01', 'নদীর নিচে ট্রেন?'],
-  ['S05', 'আসল প্রশ্ন'],
-  ['S07', 'দুই শহর, মাঝখানে নদী'],
-  ['S13', 'ভেজা বালির পরীক্ষা'],
-  ['S19', 'টানেল বোরিং মেশিন'],
-  ['S28', 'খুঁড়তে খুঁড়তেই দেয়াল'],
-  ['S34', '2017: গঙ্গা পারাপার'],
-  ['S40', 'দেশের সবচেয়ে গভীর স্টেশন'],
-  ['S42', 'আসল বিপদ: বউবাজার'],
-  ['S49', 'অবশেষে খুলল'],
-  ['S52', 'এক কথায়'],
+  ['S01', 'দুই পাড়ের দুটো হাত'],
+  ['S06', 'ব্রিজের আগে: ভাসমান সেতু'],
+  ['S13', 'নদীতে খুঁটি চলবে না · ক্যান্টিলিভার'],
+  ['S24', 'মাটির নিচের লড়াই: কেসন'],
+  ['S33', 'যুদ্ধ আর টাটার ইস্পাত'],
+  ['S41', 'শূন্যে লোহা জোড়া'],
+  ['S49', 'মাঝখানে মিলন'],
+  ['S54', 'অন্ধকার শহর, নিঃশব্দ উদ্বোধন'],
+  ['S59', 'রবীন্দ্র সেতু'],
+  ['S62', 'এক কথায়'],
 ].map(([id, title]) => `${mmss(TIMELINE.find((s) => s.id === id).start)} ${title}`);
 
-const md = `# YouTube upload kit
+const md = `# YouTube upload kit: হাওড়া ব্রিজ কীভাবে তৈরি হলো
 
 ## Title options
-1. গঙ্গার নিচে মেট্রো: নদীর তলা দিয়ে ট্রেন চলে কীভাবে?
-2. মাথার ওপর আস্ত নদী, তবু একফোঁটা জল নেই! কলকাতার আন্ডারওয়াটার মেট্রোর রহস্য
-3. ৩০ টন চাপ সামলে নদীর নিচে সুড়ঙ্গ — কীভাবে বানানো হলো ভারতের প্রথম আন্ডারওয়াটার মেট্রো?
+1. হাওড়া ব্রিজ কীভাবে তৈরি হলো? নদীতে একটাও খুঁটি ছাড়া!
+2. যুদ্ধের মধ্যে, নরম কাদার ওপর: হাওড়া ব্রিজ তৈরির আসল গল্প
+3. দুই পাড় থেকে দুটো লোহার হাত — কীভাবে মিলল গঙ্গার মাঝখানে?
 
 ## Description
-এই মুহূর্তে কলকাতার একটা ট্রেনের মাথার ওপর দিয়ে বয়ে যাচ্ছে আস্ত গঙ্গা — অথচ ভেতরে একফোঁটা জল নেই। কীভাবে নদীর নিচে খোঁড়া হলো ৫২০ মিটার লম্বা সুড়ঙ্গ? কী এই টানেল বোরিং মেশিন "প্রেরণা" আর "রচনা"? আর কেন সবচেয়ে বড় বিপদটা ঘটেছিল নদীতে নয়, বউবাজারের নিচে?
+দুই পাড় থেকে দুটো লোহার হাত এগিয়ে আসছে গঙ্গার মাঝখানের দিকে — নিচে নদীতে একটাও খুঁটি নেই। কীভাবে তৈরি হয়েছিল হাওড়া ব্রিজ? ভাসমান পন্টুন সেতু থেকে শুরু করে মাটির ৩০ মিটার নিচে কেসন, যুদ্ধের মধ্যে টাটার "টিসক্রম" ইস্পাত, ক্রিপার ক্রেন, আর ১৯৪৩-এর সেই নিঃশব্দ উদ্বোধন — অ্যানিমেশনে পুরো গল্প।
 
-অ্যানিমেশনে দেখুন ভারতের প্রথম নদীর নিচের মেট্রোর পুরো গল্প।
-
-এরপর কোন জিনিস কীভাবে কাজ করে জানতে চান? কমেন্টে লিখে জানান।
+পরের ভিডিও কোন স্থাপত্য নিয়ে চান? কমেন্টে লিখে জানান।
 
 ### Chapters
 ${chapters.join('\n')}
 
 ### Sources
-- Wikipedia — East–West Metro Tunnel; Howrah metro station; Green Line (Kolkata Metro)
-- railway-technology.com — East-West Metro underground twin tunnels
-- The Week (Apr 2023) — "A 45-second ride"
-- themetrorailguy.com — TBM S640 completes 2nd tunnel under Hooghly (Jun 2017)
-- JICA / Embassy of Japan — Esplanade–Sealdah inauguration (22 Aug 2025)
-- The Quint, The Statesman — Bowbazar 2019
+- Wikipedia — Howrah Bridge; Bombing of Calcutta; Bradford Leslie
+- Braithwaite, Burn & Jessop Construction Co. — bbjconst.com/howrah-bridge.html
+- Tata Steel press release (2018) — "Kolkata celebrates 75 years of Howrah Bridge"
+- Structurae — Howrah Bridge; The Constructor — Howrah Bridge case study
+- Graces Guide — Howrah Pontoon Bridge; FIBIS wiki — Howrah Floating Bridge and Howrah Bridge
+- The Quint, The News Minute (75th anniversary, 2018)
+
+All illustrations and animation are original. Numbers marked "~" are approximate; sources differ slightly on some figures.
 
 ## Tags
-কলকাতা মেট্রো, আন্ডারওয়াটার মেট্রো, গঙ্গার নিচে মেট্রো, হাওড়া মেট্রো, ইস্ট ওয়েস্ট মেট্রো, টানেল বোরিং মেশিন, বউবাজার, বাংলা এক্সপ্লেনার, কীভাবে কাজ করে, Kolkata underwater metro, Howrah Maidan metro, East West Metro Kolkata, tunnel boring machine, Hooghly tunnel, Bengali explainer
+হাওড়া ব্রিজ, রবীন্দ্র সেতু, হাওড়া ব্রিজ কীভাবে তৈরি, কলকাতা, ক্যান্টিলিভার সেতু, বাংলা এক্সপ্লেনার, কলকাতার ইতিহাস, টাটা স্টিল, Howrah Bridge, Rabindra Setu, Howrah Bridge construction, cantilever bridge, Kolkata history, Tata Steel Tiscrom, Bengali documentary
 
 Length: ${mmss(TOTAL_FRAMES)}
 `;

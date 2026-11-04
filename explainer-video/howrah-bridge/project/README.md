@@ -3,7 +3,7 @@
 Built on the engine from `../../project` (the metro film), with a new archive world, a camera system,
 real-photo cards and the parametric `<HowrahBridge>` hero (`src/hero/HowrahBridge.tsx`).
 
-Status: **checkpoint D (style board)**. 9 representative scenes are built; the rest come after your OK.
+Status: **all 65 scenes built**. The film renders without narration (captions, music, SFX) until voice files are added to `public/vo/`.
 
 ## Commands
 

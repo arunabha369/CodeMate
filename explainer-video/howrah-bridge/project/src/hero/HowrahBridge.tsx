@@ -228,10 +228,27 @@ export const HowrahBridge: React.FC<HowrahBridgeProps> = (props) => {
       }
     }
     // deck slab (road) under the bottom chord, with a thin lit edge
+    // the road only exists under steel that has been built: from each bridge end to the open edge
     if (parts.deck > 0 && !membersOnly) {
-      const w = G.half * 2 * parts.deck;
-      els.push(<rect key="deck" x={-w / 2} y={0} width={w} height={2.6} fill={col.deck} />);
-      els.push(<rect key="deckedge" x={-w / 2} y={0} width={w} height={0.5} fill={theme === 'night' ? '#8E92C8' : member} opacity={0.7} />);
+      const front =
+        parts.suspended > 0
+          ? G.tip * (1 - parts.suspended)
+          : parts.cantilever > 0
+            ? G.tower - (G.tower - G.tip) * parts.cantilever
+            : parts.anchor > 0
+              ? G.anchorEnd - (G.anchorEnd - G.tower) * parts.anchor
+              : G.anchorEnd;
+      for (const side of [-1, 1] as const) {
+        if (only && side !== only) continue;
+        const a = Math.min(side * front, side * G.half);
+        const len = G.half - front;
+        if (len <= 0) continue;
+        els.push(<rect key={`deck${side}`} x={a} y={0} width={len} height={2.6} fill={col.deck} />);
+        els.push(<rect key={`deckedge${side}`} x={a} y={0} width={len} height={0.5} fill={theme === 'night' ? '#8E92C8' : member} opacity={0.7} />);
+      }
+      if (front <= 0.01 && !only) {
+        els.push(<rect key="deckmid" x={-1} y={0} width={2} height={2.6} fill={col.deck} />);
+      }
     }
     // towers: grow from the pier upward
     if (parts.towers > 0 && !membersOnly) {
