@@ -71,3 +71,13 @@ export const RulerExperiment: React.FC<{edgeX?: number; topY?: number; len?: num
     </g>
   );
 };
+
+/** Small side-view book icon (top-left origin). */
+export const BookIcon: React.FC<{w: number; h: number}> = ({w, h}) => (
+  <g>
+    <rect x={0} y={0} width={w} height={h} rx={h * 0.12} fill="#1F4F86" />
+    <rect x={w * 0.05} y={h * 0.14} width={w * 0.95} height={h * 0.72} fill="#F4EEDD" />
+    <rect x={0} y={0} width={w} height={h * 0.14} rx={h * 0.06} fill="#2F6FB5" />
+    <rect x={0} y={h * 0.86} width={w} height={h * 0.14} rx={h * 0.06} fill="#2F6FB5" />
+  </g>
+);

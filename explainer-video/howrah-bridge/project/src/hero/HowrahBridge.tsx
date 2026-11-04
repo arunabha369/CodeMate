@@ -149,6 +149,11 @@ export type HowrahBridgeProps = {
   depth?: boolean;
   /** panel density; default picks 'lo' below 3 px/m */
   detail?: 'hi' | 'lo';
+  /** override the highlight colour */
+  hiColor?: string;
+  /** draw the monolith caissons under the main towers (0..1 = how far they have been sunk) */
+  caissons?: number;
+  caissonGlow?: number;
 };
 
 const FULL: Required<BridgeParts> = {piers: 1, towers: 1, anchor: 1, cantilever: 1, suspended: 1, deck: 1, lights: 0};
@@ -178,7 +183,8 @@ export const HowrahBridge: React.FC<HowrahBridgeProps> = (props) => {
   const vex = props.vex ?? 1.35;
   const f = useCurrentFrame();
   const parts = {...FULL, ...(props.parts ?? {})};
-  const col = themeColors(theme);
+  const col0 = themeColors(theme);
+  const col = props.hiColor ? {...col0, memberHi: props.hiColor} : col0;
   const member = props.color ?? col.member;
   const his: Part[] = highlight ? (Array.isArray(highlight) ? highlight : [highlight]) : [];
   const sw = {chord: Math.max(2.8, s * 1.15), vert: Math.max(1.4, s * 0.5), diag: Math.max(1.6, s * 0.56), tower: Math.max(4, s * 2.1)};
@@ -191,6 +197,25 @@ export const HowrahBridge: React.FC<HowrahBridgeProps> = (props) => {
 
   const body = (forReflection: boolean, membersOnly = false) => {
     const els: React.ReactNode[] = [];
+    // monolith caissons: Howrah side (left, ~26.5 m) and Kolkata side (right, ~31.4 m) below ground
+    if ((props.caissons ?? 0) > 0 && !membersOnly && !forReflection) {
+      for (const side of [-1, 1] as const) {
+        if (only && side !== only) continue;
+        const depth = (side === 1 ? 31.4 : 26.5) * (props.caissons ?? 0);
+        const cw = 25;
+        const top = G.ground;
+        const glow = props.caissonGlow ?? 0;
+        els.push(
+          <g key={`cs${side}`}>
+            {glow > 0 && <rect x={side * G.tower - cw / 2 - 3} y={top - 1} width={cw + 6} height={depth / vex + 2} fill={C.amber} opacity={0.25 * glow} />}
+            <rect x={side * G.tower - cw / 2} y={top} width={cw} height={depth / vex} fill={theme === 'night' ? '#4A4B72' : C.concrete} />
+            {[1, 2, 3, 4, 5, 6].map((k) => (
+              <rect key={k} x={side * G.tower - cw / 2 + (k * cw) / 7 - 0.9} y={top + 0.5} width={1.8} height={depth / vex - 1.2} fill={theme === 'night' ? '#35365A' : C.concreteLight} />
+            ))}
+          </g>,
+        );
+      }
+    }
     // piers (caisson tops) under the towers and anchor ends
     if (parts.piers > 0 && !membersOnly) {
       for (const side of [1, -1] as const) {
