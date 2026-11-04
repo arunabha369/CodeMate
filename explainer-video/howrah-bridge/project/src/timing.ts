@@ -1,5 +1,6 @@
 import {SCRIPT, ScriptScene, Bg} from './script.generated';
 import voDurations from './vo-durations.json';
+import voSentences from './vo-sentences.json';
 import {FPS} from './theme';
 
 /** Frames before the narration starts in each scene. */
@@ -12,6 +13,19 @@ export const OVERLAP = 12;
 export const END_HOLD = 3 * FPS;
 
 const VO = voDurations as Record<string, number>;
+/** Per scene: [startSec, endSec, charStart, charEnd] for each sentence, measured from the real voice-over. */
+const SENT = voSentences as unknown as Record<string, [number, number, number, number][]>;
+
+/** Seconds into the scene's VO at which character `idx` of its narration is spoken. */
+const charToSec = (id: string, vo: string, voSec: number, idx: number) => {
+  const rows = SENT[id];
+  if (!rows || !rows.length) return (idx / vo.length) * voSec;
+  for (const [a, b, i, e] of rows) {
+    if (idx < i) return a; // in the gap before this sentence
+    if (idx <= e) return a + ((idx - i) / Math.max(1, e - i)) * (b - a);
+  }
+  return rows[rows.length - 1][1];
+};
 
 /**
  * Placeholder speech estimate, used only until the real voice-over exists (~132 wpm, the usual pace of
@@ -82,13 +96,14 @@ const build = (): SceneTiming[] => {
     let dur = Math.max(3 * FPS, LEAD_IN + voFrames + LEAD_OUT);
     if (index === SCRIPT.length - 1) dur += END_HOLD;
     const texts = chunkVo(s.vo);
-    const total = texts.reduce((a, c) => a + c.length, 0);
-    let acc = 0;
+    let pos = 0;
     const chunks = texts.map((text) => {
-      const from = LEAD_IN + Math.round((acc / total) * voFrames);
-      acc += text.length;
-      const to = LEAD_IN + Math.round((acc / total) * voFrames);
-      return {text, from, to};
+      const i = Math.max(pos, s.vo.indexOf(text.split(' ')[0], pos));
+      const e = i + text.length;
+      pos = e;
+      const from = LEAD_IN + Math.round(charToSec(s.id, s.vo, voSec, i) * FPS);
+      const to = LEAD_IN + Math.round(charToSec(s.id, s.vo, voSec, e) * FPS);
+      return {text, from, to: Math.max(to, from + 12)};
     });
     const st: SceneTiming = {...s, index, start: t, dur, voFrames, hasAudio, chunks};
     t += dur;
@@ -114,5 +129,6 @@ export const cueOf = (s: SceneTiming) => (phrase: string, offset = 0) => {
     // Fail loudly in development so cues never silently drift.
     throw new Error(`Cue "${phrase}" not found in ${s.id}`);
   }
-  return Math.round(LEAD_IN + (i / s.vo.length) * s.voFrames) + offset;
+  const voSec = s.voFrames / FPS;
+  return Math.round(LEAD_IN + charToSec(s.id, s.vo, voSec, i) * FPS) + offset;
 };
