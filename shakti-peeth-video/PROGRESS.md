@@ -8,7 +8,7 @@ The brief is BRIEF_51_Shakti_Peeth.md. The project lives in `shakti-peeth-video/
 |---|---|
 | 1 Verify + peeth data | ✅ Approved: 3 script fixes, channel **The Bong Mindset**. peeths.json coordinates are still approximate (needs Wikidata) |
 | 2 Storyboard | ✅ `storyboard.json` (67 scenes, rule checks pass) |
-| 3 Assets | ⛔ **Blocked by the network.** `scripts/fetch_assets.py` is ready, see ASSETS.md. Scenes show placeholders or drawn fallbacks |
+| 3 Assets | 🟡 **10 real Pexels clips** (2026-11-05), fetched through the user's vidIQ connector with the user's OK: search costs 1 credit, import is free, and the files are served from storage.googleapis.com. They're used in S12, S19, S32, S51 (Kashi, Puri), S52 (Kanyakumari), S63 (Himalaya), S64 (kash) and S66 (diyas). Raw files are in the session scratchpad; processed files are in `public/broll/` (not in git). Credits are in `assets/credits.json`. Temple photos and museum paintings are **still blocked** (Commons and museum hosts), so `scripts/fetch_assets.py` is waiting on the allowlist. See ASSETS.md |
 | 4 Voiceover | ✅ **Offline Bengali voice** for all 67 scenes. Durations come from the real audio: **9.3 min** |
 | 5 Design system | ✅ + Remotion-skill polish |
 | 6 Scenes | ✅ All 67 scenes built. `out/preview_full_halfres.mp4` (9:20, 960×540, AAC, -17.7 LUFS) rendered in 20 min |

@@ -17,8 +17,8 @@ export const S12: React.FC = () => {
   return (
     <WithChapterCard number={2} title="দক্ষযজ্ঞ">
       <AbsoluteFill>
-        {b.src ? <BrollClip src={b.src} label={b.label} warm /> : <Background variant="night" />}
-        <YajnaFire y={900} scale={1.15} intensity={b.src ? 0 : 1} />
+        {b.src ? <BrollClip src={b.src} label={b.label} warm vignette="dark" vignetteStrength={0.7} /> : <Background variant="night" />}
+        {b.src ? null : <YajnaFire y={900} scale={1.15} />}
         <ParticleLayer kind="embers" count={60} />
         <div style={{ position: "absolute", left: 0, right: 0, top: 150, display: "flex", justifyContent: "center" }}>
           <Headline text="এক বিশাল যজ্ঞ" highlight="যজ্ঞ" start={cue(ID, "বিশাল যজ্ঞের", -8) - CONTENT_FROM} size={88} />

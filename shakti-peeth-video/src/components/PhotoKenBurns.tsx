@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill, Img, interpolate, staticFile, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Img, OffthreadVideo, interpolate, staticFile, useCurrentFrame } from "remotion";
 import { colors, fonts, motion } from "../theme";
 import { MediaPlaceholder } from "./MediaPlaceholder";
 
@@ -7,7 +7,7 @@ export type Box = { x: number; y: number; w: number; h: number };
 
 /**
  * Photo with Ken Burns (1.00 → 1.08 plus a slight pan toward a focal point).
- * `src` is a path under public/ (e.g. "photos/kalighat.jpg"); without it a
+ * `src` is a path under public/ (e.g. "photos/kalighat.jpg", or a .mp4 clip); without it a
  * placeholder is shown. Optional caption and credit line.
  */
 export const PhotoKenBurns: React.FC<{
@@ -35,7 +35,20 @@ export const PhotoKenBurns: React.FC<{
     : { position: "absolute", inset: 0 };
   return (
     <div style={{ ...frameStyle, overflow: "hidden", borderRadius: radius, opacity: appear, boxShadow: box ? "0 18px 50px rgba(0,0,0,0.55)" : undefined }}>
-      {src ? (
+      {src && /\.(mp4|webm|mov)$/i.test(src) ? (
+        // A licensed video clip in a photo slot: plays muted, with the same Ken Burns move.
+        <OffthreadVideo
+          src={staticFile(src)}
+          muted
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            transform: `translate(${panX}px, ${panY}px) scale(${scale})`,
+            transformOrigin: `${focal.x * 100}% ${focal.y * 100}%`,
+          }}
+        />
+      ) : src ? (
         <Img
           src={staticFile(src)}
           style={{

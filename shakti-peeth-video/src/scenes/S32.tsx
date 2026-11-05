@@ -59,7 +59,7 @@ export const S32: React.FC = () => {
       {storm.src && sea.src ? (
         <>
           <Sequence durationInFrames={half + 10} layout="absolute-fill">
-            <BrollClip src={storm.src} label={storm.label} vignette="red" vignetteStrength={pulse} />
+            <BrollClip src={storm.src} label={storm.label} trimStart={90} vignette="red" vignetteStrength={pulse} />
           </Sequence>
           <Sequence from={half} layout="absolute-fill">
             <BrollClip src={sea.src} label={sea.label} vignette="red" vignetteStrength={pulse} />

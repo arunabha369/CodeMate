@@ -1,6 +1,7 @@
 import React from "react";
 import { AbsoluteFill, interpolate, useCurrentFrame } from "remotion";
 import { Background } from "../components/Background";
+import { BrollClip } from "../components/BrollClip";
 import { Headline } from "../components/Headline";
 import { Kailash } from "../components/Kailash";
 import { PaintingFrame } from "../components/PaintingFrame";
@@ -16,12 +17,19 @@ const Content: React.FC = () => {
   const frame = useCurrentFrame();
   const t = sceneTiming(ID);
   const art = asset("parvati-painting");
+  const hills = asset("broll-himalaya");
   const dawn = interpolate(frame, [0, 120], [0, 1], { extrapolateRight: "clamp" });
   return (
     <AbsoluteFill>
-      <Background variant="night" />
+      {hills.src ? (
+        <BrollClip src={hills.src} label={hills.label} warm legibility="bottom" />
+      ) : (
+        <>
+          <Background variant="night" />
+          <Kailash moon={false} glow={dawn} x={art.src ? 300 : 0} />
+        </>
+      )}
       <AbsoluteFill style={{ background: `linear-gradient(180deg, transparent 30%, rgba(240,138,36,${0.35 * dawn}) 100%)` }} />
-      <Kailash moon={false} glow={dawn} x={art.src ? 300 : 0} />
       <ParticleLayer kind="snow" count={40} opacity={0.6} />
       {art.src ? <PaintingFrame src={art.src} label={art.label} credit={art.credit} bg="night" durationInFrames={t.frames} box={{ x: 120, y: 140, w: 520, h: 680 }} start={c("পার্বতী", -10)} /> : null}
       <div style={{ position: "absolute", left: 0, right: 0, top: 110, display: "flex", justifyContent: "center" }}>

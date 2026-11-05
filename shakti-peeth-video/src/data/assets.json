@@ -62,16 +62,16 @@
       "licence": null
     },
     "broll-havan": {
-      "what": "havan / yajna fire close-up",
-      "file": null,
-      "credit": null,
-      "licence": null
+      "what": "havan fire (atmosphere)",
+      "file": "broll/broll-havan.mp4",
+      "credit": "ভিডিও: Pabitra Sarkar · Pexels",
+      "licence": "Pexels License"
     },
     "broll-diya": {
-      "what": "single diya flame, dark background",
-      "file": null,
-      "credit": null,
-      "licence": null
+      "what": "single diya flame",
+      "file": "broll/broll-diya.mp4",
+      "credit": "ভিডিও: Jyoti Pur · Pexels",
+      "licence": "Pexels License"
     },
     "virabhadra-painting": {
       "what": "Public-domain Virabhadra painting (optional)",
@@ -86,16 +86,16 @@
       "licence": null
     },
     "broll-storm": {
-      "what": "storm clouds (B-roll)",
-      "file": null,
-      "credit": null,
-      "licence": null
+      "what": "storm clouds, lightning",
+      "file": "broll/broll-storm.mp4",
+      "credit": "ভিডিও: Stefano Barbieri · Pexels",
+      "licence": "Pexels License"
     },
     "broll-sea": {
-      "what": "rough sea (B-roll)",
-      "file": null,
-      "credit": null,
-      "licence": null
+      "what": "rough sea",
+      "file": "broll/broll-sea.mp4",
+      "credit": "ভিডিও: Peggy Johnson Philip Waikoloa · Pexels",
+      "licence": "Pexels License"
     },
     "photo-kamakhya-domes": {
       "what": "Kamakhya temple domes / shikhara",
@@ -134,10 +134,10 @@
       "licence": null
     },
     "broll-kanyakumari": {
-      "what": "Kanyakumari sea / land's end (B-roll or photo)",
-      "file": null,
-      "credit": null,
-      "licence": null
+      "what": "Kanyakumari: Vivekananda Rock Memorial and Thiruvalluvar statue",
+      "file": "broll/broll-kanyakumari.mp4",
+      "credit": "ভিডিও: Antony · Pexels",
+      "licence": "Pexels License"
     },
     "photo-guhyeshwari": {
       "what": "Guhyeshwari temple, Kathmandu",
@@ -236,16 +236,34 @@
       "licence": null
     },
     "broll-kash": {
-      "what": "kash flowers (kashphool) in wind",
-      "file": null,
-      "credit": null,
-      "licence": null
+      "what": "tall white-plumed grass in wind (kash-like)",
+      "file": "broll/broll-kash.mp4",
+      "credit": "ভিডিও: Nitesh Kamboj · Pexels",
+      "licence": "Pexels License"
     },
     "broll-diyas": {
-      "what": "rows of diyas being lit",
-      "file": null,
-      "credit": null,
-      "licence": null
+      "what": "rows of diyas lit for Diwali",
+      "file": "broll/broll-diyas.mp4",
+      "credit": "ভিডিও: Mohit Jain · Pexels",
+      "licence": "Pexels License"
+    },
+    "broll-himalaya": {
+      "what": "Himalaya (Machhapuchhre) — generic Himalaya, not Kailash",
+      "file": "broll/broll-himalaya.mp4",
+      "credit": "ভিডিও: Nishess Shakya · Pexels",
+      "licence": "Pexels License"
+    },
+    "clip-puri": {
+      "what": "Puri: Jagannath temple entrance, Aruna Stambha",
+      "file": "broll/clip-puri.mp4",
+      "credit": "ভিডিও: Dhiren Behera · Pexels",
+      "licence": "Pexels License"
+    },
+    "clip-kashi": {
+      "what": "Kashi: evening Ganga aarti at the Varanasi ghats",
+      "file": "broll/clip-kashi.mp4",
+      "credit": "ভিডিও: Sahil Singh Raahee · Pexels",
+      "licence": "Pexels License"
     }
   }
 }
