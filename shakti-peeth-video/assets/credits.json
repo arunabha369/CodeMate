@@ -88,5 +88,13 @@
     "licence": "Pexels License",
     "licence_url": "https://www.pexels.com/license/",
     "note": "Found via vidIQ stock B-roll search; trimmed, scaled to 1080p30, audio removed."
+  },
+  {
+    "key": "met-2000-313",
+    "file": "art/met-2000-313.jpg",
+    "source": "https://www.metmuseum.org/art/collection/search/55034",
+    "author": "Unknown artist, Shiva Carries the Corpse of Sati (ca. 1865–75), The Metropolitan Museum of Art",
+    "licence": "Public Domain (CC0)",
+    "licence_url": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access"
   }
 ]

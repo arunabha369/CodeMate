@@ -3,9 +3,9 @@
   "assets": {
     "met-2000-313": {
       "what": "Met 2000.313 'Shiva Carries the Corpse of Sati' (Kalighat, c.1865–75)",
-      "file": null,
-      "credit": null,
-      "licence": null
+      "file": "art/met-2000-313.jpg",
+      "credit": "Unknown artist, Shiva Carries the Corpse of Sati (ca. 1865–75), The Metropolitan Museum of Art",
+      "licence": "Public Domain (CC0)"
     },
     "court-miniature": {
       "what": "Court-scene miniature (royal assembly), PD",

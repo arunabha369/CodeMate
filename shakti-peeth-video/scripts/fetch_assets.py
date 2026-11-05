@@ -24,12 +24,15 @@ import re
 import subprocess
 import sys
 import urllib.parse
+import time
+import urllib.error
 import urllib.request
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 REG = ROOT / "src" / "data" / "assets.json"
 CREDITS = ROOT / "assets" / "credits.json"
-UA = "ShaktiPeethDoc/1.0 (The Bong Mindset; educational documentary; contact via channel)"
+# Wikimedia and AIC ask for a descriptive client name with a contact URL (no personal email).
+UA = "ShaktiPeethDoc/1.0 (https://github.com/arunabha369/CodeMate; educational documentary) python-urllib"
 ALLOWED_COMMONS = re.compile(r"^(cc0|public domain|pd.*|cc[- ]by(-sa)?[- ]?[0-9.]*( [a-z]+)?)$", re.I)
 BLOCKED = re.compile(r"\b(nc|nd)\b", re.I)
 
@@ -79,9 +82,17 @@ PLAN: dict[str, list[tuple[str, str]]] = {
 
 
 def get_json(url: str, headers: dict | None = None) -> dict:
-    req = urllib.request.Request(url, headers={"User-Agent": UA, **(headers or {})})
-    with urllib.request.urlopen(req, timeout=60) as r:
-        return json.loads(r.read().decode("utf-8"))
+    """GET JSON politely: a pause between calls, backoff on 429 (rate limit)."""
+    for wait in (0, 5, 15, 40):
+        time.sleep(1 + wait)
+        req = urllib.request.Request(url, headers={"User-Agent": UA, "AIC-User-Agent": UA, **(headers or {})})
+        try:
+            with urllib.request.urlopen(req, timeout=60) as r:
+                return json.loads(r.read().decode("utf-8"))
+        except urllib.error.HTTPError as e:
+            if e.code != 429:
+                raise
+    raise RuntimeError(f"rate-limited: {url[:80]}")
 
 
 def download(url: str, dest: pathlib.Path, headers: dict | None = None) -> None:
@@ -93,9 +104,18 @@ def download(url: str, dest: pathlib.Path, headers: dict | None = None) -> None:
 
 def met(query: str | None = None, object_id: str | None = None):
     base = "https://collectionapi.metmuseum.org/public/collection/v1"
-    ids = [object_id] if object_id else (get_json(f"{base}/search?hasImages=true&q={urllib.parse.quote(query)}").get("objectIDs") or [])[:25]
+    if object_id:
+        ids = [object_id]
+    else:
+        try:
+            ids = (get_json(f"{base}/search?hasImages=true&q={urllib.parse.quote(query)}").get("objectIDs") or [])[:25]
+        except urllib.error.HTTPError:
+            return None  # search endpoint retired (410); use AIC / Commons instead
     for oid in ids:
-        o = get_json(f"{base}/objects/{oid}")
+        try:
+            o = get_json(f"{base}/objects/{oid}")
+        except urllib.error.HTTPError:
+            continue
         if o.get("isPublicDomain") and o.get("primaryImage"):
             return {"url": o["primaryImage"], "source": o.get("objectURL"), "author": f"{o.get('artistDisplayName') or 'Unknown artist'}, {o.get('title')} ({o.get('objectDate')}), The Metropolitan Museum of Art", "licence": "Public Domain (CC0)", "licence_url": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access", "ext": ".jpg"}
     return None
@@ -204,10 +224,16 @@ def main(only: list[str]) -> None:
             continue
         folder = "broll" if hit.get("video") else ("art" if not key.startswith("photo") else "photos")
         dest = ROOT / "public" / folder / f"{key}{hit['ext']}"
-        download(hit["url"], dest)
-        dest = finish(dest, bool(hit.get("video")))
+        try:
+            download(hit["url"], dest)
+            dest = finish(dest, bool(hit.get("video")))
+        except Exception as e:
+            missing.append(key)
+            print(f"MISSING {key}: download failed: {e}")
+            continue
         rel = dest.relative_to(ROOT / "public").as_posix()
         entry.update({"file": rel, "credit": hit["author"], "licence": hit["licence"]})
+        credits = [c for c in credits if c.get("key") != key]
         credits.append({"key": key, "file": rel, "source": hit["source"], "author": hit["author"], "licence": hit["licence"], "licence_url": hit["licence_url"]})
         print(f"OK {key} <- {hit['source']} [{hit['licence']}]")
     REG.write_text(json.dumps(reg, ensure_ascii=False, indent=2) + "\n")
