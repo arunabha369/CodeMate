@@ -45,21 +45,24 @@ export const Thumbnail: React.FC = () => {
           <div style={{ fontFamily: fonts.heading, fontSize: 300, lineHeight: 1, color: colors.sindoor, textShadow: "0 6px 0 rgba(0,0,0,0.6), 0 0 60px rgba(193,18,31,0.6)" }}>৫১</div>
           <div style={{ fontFamily: fonts.heading, fontSize: 120, lineHeight: 1.15, color: colors.cream, textShadow: "0 6px 24px rgba(0,0,0,0.95)" }}>সতীপীঠ</div>
         </div>
+        {/* The question sits in the right column so it never covers the painting. */}
         <div
           style={{
             position: "absolute",
-            left: 60,
+            left: 720,
             right: 60,
-            bottom: 70,
-            textAlign: "center",
+            bottom: 80,
+            textAlign: "right",
             fontFamily: fonts.heading,
-            fontSize: 96,
-            lineHeight: 1.2,
+            fontSize: 100,
+            lineHeight: 1.22,
             color: colors.gold,
             textShadow: "0 6px 0 rgba(0,0,0,0.85), 0 0 30px rgba(0,0,0,0.9)",
           }}
         >
-          সতীর দেহ কোথায় কোথায় পড়েছিল?
+          সতীর দেহ
+          <br />
+          কোথায় কোথায় পড়েছিল?
         </div>
       </div>
     </AbsoluteFill>
