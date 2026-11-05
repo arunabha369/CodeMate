@@ -1,73 +1,85 @@
-"""Replace approximate peeth coordinates with Wikipedia/Wikidata coordinates.
+"""Replace approximate peeth coordinates with Wikidata P625 coordinates.
 
-Looks up each peeth's English Wikipedia article (temple, or the town where no
-temple article exists) and takes its coordinates. A result is accepted only
-if it is within MAX_DEG of the existing estimate (guards against a wrong
-article); otherwise it is reported for manual review.
+Reads assets/wikidata_places.json (written by scripts/wikidata_places.py) and,
+for each peeth, takes the coordinate of the Wikidata item behind the English
+Wikipedia article in TITLES (the temple, or the town where no temple item
+exists). A coordinate is accepted only if it lies within MAX_DEG of the earlier
+estimate (guards against a wrong article); otherwise it is reported for review.
+peeths.json is edited line by line so its hand formatting is kept.
 Usage: python3 -I scripts/fix_coords.py
 """
 import json
 import math
 import pathlib
-import time
-import urllib.parse
-import urllib.request
+import re
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-UA = "ShaktiPeethDoc/1.0 (https://github.com/arunabha369/CodeMate; educational documentary) python-urllib"
 MAX_DEG = 1.5
 TITLES = {
     "hinglaj": "Hinglaj Mata Temple", "karavira": "Mahalakshmi Temple, Kolhapur", "sugandha": "Sugandha Shaktipeeth",
     "kashmir": "Amarnath Temple", "jwalamukhi": "Jawalamukhi", "jalandhar": "Devi Talab Mandir", "vaidyanath": "Baidyanath Temple",
-    "guhyeshwari": "Guhyeshwari Temple", "manas": "Lake Manasarovar", "vimala": "Vimala Temple", "gandaki": "Muktinath Temple",
+    "guhyeshwari": "Guhyeshwari Temple", "manas": "Lake Manasarovar", "vimala": "Vimala Temple", "gandaki": "Muktinath",
     "bahula": "Ketugram", "ujani": "Kogram", "tripura": "Tripura Sundari Temple", "chattal": "Chandranath Temple",
     "trisrota": "Jalpaiguri", "kamakhya": "Kamakhya Temple", "prayag": "Alopi Devi Mandir", "jayanti": "Jaintiapur Upazila",
-    "jogadya": "Kshirgram", "kalighat": "Kalighat Kali Temple", "kiriteswari": "Kiriteswari Temple", "vishalakshi": "Vishalakshi Temple",
-    "kanyashram": "Bhagavathy Amman Temple", "kurukshetra": "Thanesar", "manivedaka": "Pushkar", "shrishail": "Shri Shail",
+    "jogadya": "Kshirgram", "kalighat": "Kalighat Temple", "kiriteswari": "Kiriteswari Temple", "vishalakshi": "Vishalakshi Temple",
+    "kanyashram": "Kanyakumari", "kurukshetra": "Thanesar", "manivedaka": "Pushkar", "shrishail": "Shri Shail",
     "kankalitala": "Kankalitala", "kalmadhav": "Amarkantak", "shona": "Amarkantak", "ramgiri": "Chitrakoot Dham",
     "vrindavan": "Vrindavan", "shuchi": "Thanumalayan Temple", "karatoya": "Sherpur Upazila, Bogra", "shriparvat": "Srisailam",
-    "vibhash": "Bargabhima Temple", "prabhas": "Somnath temple", "bhairavparvat": "Ujjain", "janasthan": "Nashik",
-    "godavari": "Rajahmundry", "ratnavali": "Khanakul", "mithila": "Janakpur", "nalhati": "Nalhati", "bakreshwar": "Bakreshwar",
+    "vibhash": "Bargabhima Temple", "prabhas": "Somnath Temple", "bhairavparvat": "Ujjain", "janasthan": "Nashik",
+    "godavari": "Rajamahendravaram", "ratnavali": "Khanakul", "mithila": "Janakpur", "nalhati": "Nalhati", "bakreshwar": "Bakreshwar",
     "jeshore": "Jeshoreshwari Kali Temple", "attahas": "Labhpur", "nandipur": "Sainthia", "lanka": "Nainativu Nagapooshani Amman Temple",
-    "virat": "Viratnagar", "tarapith": "Tarapith temple",
+    "virat": "Viratnagar", "tarapith": "Tarapith",
+}
+# Items that are a town, lake or district rather than the shrine itself: the dot sits at the item's
+# coordinate, which is close to (not exactly at) the temple.
+NOT_SHRINE = {
+    "jwalamukhi", "manas", "gandaki", "bahula", "ujani", "trisrota", "jayanti", "jogadya", "kanyashram", "kurukshetra",
+    "manivedaka", "shrishail", "kankalitala", "kalmadhav", "shona", "ramgiri", "vrindavan", "shriparvat", "bhairavparvat",
+    "janasthan", "godavari", "ratnavali", "mithila", "nalhati", "bakreshwar", "attahas", "nandipur", "virat", "tarapith",
 }
 
-titles = sorted(set(TITLES.values()))
-coords = {}
-for i in range(0, len(titles), 45):
-    q = urllib.parse.urlencode({"action": "query", "format": "json", "prop": "coordinates", "redirects": 1, "titles": "|".join(titles[i:i + 45])})
-    req = urllib.request.Request("https://en.wikipedia.org/w/api.php?" + q, headers={"User-Agent": UA})
-    d = json.loads(urllib.request.urlopen(req, timeout=60).read())
-    redir = {r["from"]: r["to"] for r in d["query"].get("redirects", []) + d["query"].get("normalized", [])}
-    for page in d["query"]["pages"].values():
-        c = (page.get("coordinates") or [None])[0]
-        if c:
-            coords[page["title"]] = (c["lat"], c["lon"])
-    for frm, to in redir.items():
-        if to in coords:
-            coords[frm] = coords[to]
-    time.sleep(1)
 
-path = ROOT / "src/data/peeths.json"
-data = json.loads(path.read_text())
-updated, review, none = [], [], []
-for p in data["peeths"] + data["extra"]:
-    t = TITLES.get(p["id"])
-    if not t or p.get("lat") is None:
-        continue
-    c = coords.get(t)
-    if not c:
-        none.append(p["id"])
-        continue
-    dist = math.hypot(c[0] - p["lat"], c[1] - p["lon"])
-    if dist > MAX_DEG:
-        review.append(f"{p['id']} ({t}: {c[0]:.3f},{c[1]:.3f} is {dist:.1f}° from estimate)")
-        continue
-    if p["id"] == "kalmadhav":  # shares Amarkantak with Shona; keep a small offset so the dots don't overlap
-        c = (c[0] + 0.012, c[1] - 0.013)
-    p["lat"], p["lon"] = round(c[0], 4), round(c[1], 4)
-    p["coordStatus"] = f"wikipedia: {t}"
-    updated.append(p["id"])
-data["_meta"]["fields"]["coordStatus"] = "wikipedia: <article> = coordinates from that English Wikipedia article (Wikidata P625), checked within 1.5° of the earlier estimate · approx = estimate, still to verify · null = location unidentified"
-path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n")
-print(f"updated {len(updated)}; no coordinates: {none}; review: {review}")
+def main():
+    places = json.loads((ROOT / "assets/wikidata_places.json").read_text())["places"]
+    path = ROOT / "src/data/peeths.json"
+    text = path.read_text()
+    data = json.loads(text)
+    updated, review, none = [], [], []
+    for p in data["peeths"] + data["extra"]:
+        t = TITLES.get(p["id"])
+        if not t or p.get("lat") is None:
+            continue
+        e = places.get(t)
+        if not e or not e.get("coord"):
+            none.append(f"{p['id']} ({t})")
+            continue
+        lat, lon = e["coord"]
+        dist = math.hypot(lat - p["lat"], lon - p["lon"])
+        if dist > MAX_DEG:
+            review.append(f"{p['id']} ({t}: {lat:.3f},{lon:.3f} is {dist:.1f}° from estimate)")
+            continue
+        if p["id"] == "kalmadhav":  # shares Amarkantak with Shona; keep a small offset so the dots don't overlap
+            lat, lon = lat + 0.012, lon - 0.013
+        kind = "near" if p["id"] in NOT_SHRINE else "shrine"
+        status = f"wikidata {e['item']} {t} ({kind})"
+        # Edit the one "lat/lon/coordStatus" line that follows this entry's id.
+        pat = re.compile(r'("id": "' + re.escape(p["id"]) + r'".*?)"lat": [-\d.]+, "lon": [-\d.]+, "coordStatus": "[^"]*"', re.S)
+        text, n = pat.subn(lambda m: f'{m.group(1)}"lat": {lat:.4f}, "lon": {lon:.4f}, "coordStatus": "{status}"', text, count=1)
+        if n:
+            updated.append(p["id"])
+    old_field = re.search(r'"coordStatus": "(approx = [^"]*)"', text)
+    if old_field:
+        text = text.replace(old_field.group(1), (
+            "wikidata <Q-id> <enwiki title> (shrine|near) = Wikidata P625 coordinate of that item, checked within 1.5° of the "
+            "earlier estimate; 'near' = the item is the town, lake or district, so the dot is close to but not exactly at the "
+            "shrine · approx = estimate, no Wikidata coordinate found · null = location unidentified (shown in the "
+            "'স্থান অনির্ণীত' tray, not on the map)"))
+    # Wikidata and Wikipedia are reachable now; drop the old "blocked" note.
+    text = re.sub(r'\},\n    "blockedSources": \[[^\]]*\]', "}", text)
+    json.loads(text)  # still valid JSON
+    path.write_text(text)
+    print(f"updated {len(updated)}; no coordinates: {none}; review: {review}")
+
+
+if __name__ == "__main__":
+    main()

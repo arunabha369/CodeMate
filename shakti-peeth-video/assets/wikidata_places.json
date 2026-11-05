@@ -1,0 +1,459 @@
+{
+ "_meta": {
+  "source": "Wikidata Query Service (query.wikidata.org), English Wikipedia sitelink -> item, P18 image, P625 coordinate",
+  "queried": "2026-11-05",
+  "script": "scripts/wikidata_places.py"
+ },
+ "places": {
+  "Alopi Devi Mandir": {
+   "item": "Q4734624",
+   "img": null,
+   "coord": null
+  },
+  "Amarkantak": {
+   "item": "Q588826",
+   "img": "A Hindu temple, Amarkantak Madhya Pradesh India.jpg",
+   "coord": [
+    22.675085,
+    81.759567
+   ]
+  },
+  "Amarnath Temple": {
+   "item": "Q455167",
+   "img": "Cave Temple of Lord Amarnath.jpg",
+   "coord": [
+    34.21666667,
+    75.51666667
+   ]
+  },
+  "Ambubachi Mela": {
+   "item": "Q195517",
+   "img": "Kamakhya Temple, Guwahati.jpg",
+   "coord": null
+  },
+  "Attahas, Katwa": {
+   "item": "Q15193724",
+   "img": "Attohas Mandir, Bardhaman.jpg",
+   "coord": [
+    23.71950833,
+    88.02530278
+   ]
+  },
+  "Baidyanath Temple": {
+   "item": "Q1089897",
+   "img": "Temples at Deorgag, Santal Parhanas, Bihar - William Hodges, 1782 - BL Foster 396.jpg",
+   "coord": [
+    24.4925,
+    86.7
+   ]
+  },
+  "Bakreshwar": {
+   "item": "Q3350684",
+   "img": "Bakreswar Temples and Hot spring 12.jpg",
+   "coord": [
+    23.88014,
+    87.37108
+   ]
+  },
+  "Bargabhima Temple": {
+   "item": "Q64343304",
+   "img": "Bargabhima temple at Tamluk town under Purba Medinipur district in West Bengal 01.jpg",
+   "coord": [
+    22.290022222,
+    87.923852777
+   ]
+  },
+  "Biraja Temple": {
+   "item": "Q4915588",
+   "img": "Front view from left side of Viraja(also named as Biraja) Temple as per list of State Protected Monuments in Odisha. Serial Number S-OR-105.jpg",
+   "coord": [
+    20.83376389,
+    86.33814444
+   ]
+  },
+  "Bolpur": {
+   "item": "Q858304",
+   "img": "208787 watermarked.jpg",
+   "coord": [
+    23.66205,
+    87.69727
+   ]
+  },
+  "Chandranath Temple": {
+   "item": "Q857380",
+   "img": "Chandranath Temple 2019-01-16 (27).jpg",
+   "coord": [
+    22.6335365,
+    91.6843799
+   ]
+  },
+  "Chitrakoot Dham": {
+   "item": "Q2341590",
+   "img": null,
+   "coord": [
+    25.2,
+    80.9
+   ]
+  },
+  "Daksheswar Mahadev Temple": {
+   "item": "Q5210076",
+   "img": "Daksheshwar Mahadev temple, Kankhal3.JPG",
+   "coord": [
+    29.92186667,
+    78.14584444
+   ]
+  },
+  "Devi Talab Mandir": {
+   "item": "Q26258391",
+   "img": "Devi talab jal.jpg",
+   "coord": [
+    31.34361111,
+    75.58305556
+   ]
+  },
+  "Guhyeshwari Temple": {
+   "item": "Q5615319",
+   "img": "Pashupatinath-oberer Zugang-10-Guhyeshvari-2013-gje.jpg",
+   "coord": [
+    27.71111111,
+    85.35333333
+   ]
+  },
+  "Hinglaj Mata Temple": {
+   "item": "Q2722882",
+   "img": "Nani ki Mandir2.jpg",
+   "coord": [
+    25.51388889,
+    65.51527778
+   ]
+  },
+  "Jaintiapur Upazila": {
+   "item": "Q6124105",
+   "img": null,
+   "coord": [
+    25.125,
+    92.1167
+   ]
+  },
+  "Jalpaiguri": {
+   "item": "Q1949125",
+   "img": "Cityscapejal.jpg",
+   "coord": [
+    26.516666666,
+    88.733333333
+   ]
+  },
+  "Janakpur": {
+   "item": "Q378649",
+   "img": "Janak Chowk,Janakpur-September 22, 2016-7602.jpg",
+   "coord": [
+    26.712222222,
+    85.921666666
+   ]
+  },
+  "Jawalamukhi": {
+   "item": "Q2286867",
+   "img": "Jawala Ji Temple.jpg",
+   "coord": [
+    31.874444444,
+    76.32
+   ]
+  },
+  "Jeshoreshwari Kali Temple": {
+   "item": "Q856631",
+   "img": null,
+   "coord": [
+    22.3062,
+    89.1128
+   ]
+  },
+  "Kalighat": {
+   "item": "Q960803",
+   "img": null,
+   "coord": [
+    22.52027778,
+    88.34208333
+   ]
+  },
+  "Kalighat Temple": {
+   "item": "Q535970",
+   "img": "Kalighat Temple Kolkata India - panoramio.jpg",
+   "coord": [
+    22.52027778,
+    88.34208333
+   ]
+  },
+  "Kamakhya Temple": {
+   "item": "Q3629418",
+   "img": "The Kamakhya Temple, 2025.jpg",
+   "coord": [
+    26.166426,
+    91.705509
+   ]
+  },
+  "Kankalitala": {
+   "item": "Q14220201",
+   "img": "Kankalitala Temple complex, Birbhum, West Bengal 05.jpg",
+   "coord": [
+    23.714688,
+    87.722815
+   ]
+  },
+  "Kanyakumari": {
+   "item": "Q222267",
+   "img": "Kanyakumari Church 1.JPG",
+   "coord": [
+    8.091111111,
+    77.541666666
+   ]
+  },
+  "Ketugram": {
+   "item": "Q31213603",
+   "img": null,
+   "coord": [
+    23.69566,
+    88.0414
+   ]
+  },
+  "Khanakul": {
+   "item": "Q31213596",
+   "img": null,
+   "coord": [
+    22.70674,
+    87.849
+   ]
+  },
+  "Kiriteswari Temple": {
+   "item": "Q30133007",
+   "img": "Kiriteswari Temple.jpg",
+   "coord": [
+    24.2,
+    88.218611111
+   ]
+  },
+  "Kogram": {
+   "item": "Q18343582",
+   "img": null,
+   "coord": [
+    23.5389,
+    87.8981
+   ]
+  },
+  "Kshirgram": {
+   "item": "Q48727419",
+   "img": null,
+   "coord": [
+    23.5141,
+    88.0273
+   ]
+  },
+  "Labhpur": {
+   "item": "Q6467020",
+   "img": "Katwa to Ahmedpur Narrow gaugue railway 06.jpg",
+   "coord": [
+    23.83,
+    87.82
+   ]
+  },
+  "Lake Manasarovar": {
+   "item": "Q233627",
+   "img": "Mansarovar.jpg",
+   "coord": [
+    30.666666666,
+    81.5
+   ]
+  },
+  "Mahalakshmi Temple, Kolhapur": {
+   "item": "Q3595240",
+   "img": "Mahalaxmi Temple, Kolhapur.jpg",
+   "coord": [
+    16.7,
+    74.23333333
+   ]
+  },
+  "Maihar": {
+   "item": "Q747140",
+   "img": "Sharada Temple Maihar.JPG",
+   "coord": [
+    24.27,
+    80.75
+   ]
+  },
+  "Muktinath": {
+   "item": "Q1025465",
+   "img": "Muktinath Temple (1).jpg",
+   "coord": [
+    28.816667,
+    83.870833
+   ]
+  },
+  "Nainativu Nagapooshani Amman Temple": {
+   "item": "Q6959710",
+   "img": "MAIN NAGAPOOSHANI TEMPLE.jpg",
+   "coord": [
+    9.61905556,
+    79.77427778
+   ]
+  },
+  "Nalhati": {
+   "item": "Q6960882",
+   "img": null,
+   "coord": [
+    24.3,
+    87.82
+   ]
+  },
+  "Nashik": {
+   "item": "Q200235",
+   "img": "Gandhi Talav Godavari Nashik Maharashtra (cropped).jpg",
+   "coord": [
+    20.0,
+    73.783333333
+   ]
+  },
+  "Pushkar": {
+   "item": "Q749170",
+   "img": "Pushkar, India, Panoramic view of Pushkar.jpg",
+   "coord": [
+    26.490277777,
+    74.554166666
+   ]
+  },
+  "Rajamahendravaram": {
+   "item": "Q1639492",
+   "img": "Rail Cum Road Bridge on Godavari at Rajahmundry.jpg",
+   "coord": [
+    16.983333333,
+    81.783333333
+   ]
+  },
+  "Sainthia": {
+   "item": "Q740450",
+   "img": "Statue of horses in Sainthia.jpg",
+   "coord": [
+    23.95,
+    87.67
+   ]
+  },
+  "Shri Shail": {
+   "item": "Q857688",
+   "img": null,
+   "coord": [
+    24.865,
+    91.8756
+   ]
+  },
+  "Shyamnagar Upazila": {
+   "item": "Q3347673",
+   "img": null,
+   "coord": [
+    22.3306,
+    89.1028
+   ]
+  },
+  "Sitakunda Upazila": {
+   "item": "Q3346765",
+   "img": "Fishing boat on Bay of Bengal.JPG",
+   "coord": [
+    22.616666666,
+    91.661666666
+   ]
+  },
+  "Somnath Temple": {
+   "item": "Q1143887",
+   "img": "Somanath mandir (cropped).jpg",
+   "coord": [
+    20.888027777,
+    70.401388888
+   ]
+  },
+  "Srisailam": {
+   "item": "Q2269015",
+   "img": "APSS303 Srisailam town zoom view from welcome center2.jpg",
+   "coord": [
+    16.074,
+    78.868
+   ]
+  },
+  "Tarapith": {
+   "item": "Q7685490",
+   "img": null,
+   "coord": [
+    24.11,
+    87.8
+   ]
+  },
+  "Tarapith temple": {
+   "item": "Q131549574",
+   "img": null,
+   "coord": [
+    24.11,
+    87.8
+   ]
+  },
+  "Thanesar": {
+   "item": "Q2088448",
+   "img": null,
+   "coord": [
+    29.968834,
+    76.824909
+   ]
+  },
+  "Thanumalayan Temple": {
+   "item": "Q7710646",
+   "img": "SUCHINDAM (3).jpg",
+   "coord": [
+    8.1548,
+    77.4651
+   ]
+  },
+  "Tripura Sundari Temple": {
+   "item": "Q7843873",
+   "img": "TRIPURESHWARI TEMPLE.jpg",
+   "coord": [
+    23.508888888,
+    91.498055555
+   ]
+  },
+  "Ujjain": {
+   "item": "Q200119",
+   "img": "Mahakaleshwar Temple, Ujjain.jpg",
+   "coord": [
+    23.182777777,
+    75.777222222
+   ]
+  },
+  "Vimala Temple": {
+   "item": "Q83009",
+   "img": "Minor temples in Jagannath Puri.jpg",
+   "coord": [
+    19.8047,
+    85.8183
+   ]
+  },
+  "Viratnagar": {
+   "item": "Q2544533",
+   "img": "City of Bairat-Viratnagar.jpg",
+   "coord": [
+    27.45,
+    76.18
+   ]
+  },
+  "Vishalakshi Temple": {
+   "item": "Q7935940",
+   "img": "காசி விசாலாட்சி கோயில்.jpg",
+   "coord": [
+    25.309963,
+    83.011901
+   ]
+  },
+  "Vrindavan": {
+   "item": "Q688281",
+   "img": "Bhaktivedanta Swami Marg - Vrindaban 2013-02-24 6736.JPG",
+   "coord": [
+    27.572777777,
+    77.693333333
+   ]
+  }
+ }
+}
