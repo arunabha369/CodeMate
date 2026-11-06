@@ -338,5 +338,15 @@
     "licence": "CC BY-SA 4.0",
     "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
     "note": "Only exterior on Commons: 720x450 original, shown upscaled in a half-width box. The uploader claims own work (CC BY-SA 4.0) but the filename looks like a website slider image, so confirm provenance before publishing; if in doubt, remove the file and S59 falls back to the diya card."
+  },
+  {
+    "key": "photo-fullara",
+    "file": "photos/photo-fullara.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Fullara_(28_May_2023).jpg",
+    "commons_file": "Fullara (28 May 2023).jpg",
+    "author": "ছবি: Sbb1413 · CC BY 4.0 · Wikimedia Commons",
+    "licence": "CC BY 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by/4.0",
+    "note": "1920 px Commons thumbnail (2400 px cap), no other edits; shown with the credit on screen"
   }
 ]

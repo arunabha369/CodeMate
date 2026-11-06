@@ -1,6 +1,6 @@
 # ASSETS.md — media per scene
 
-**36 of 45 slots filled.** Filled clips are Pexels-licensed B-roll found through the user's vidIQ connector (credits in `assets/credits.json`).
+**37 of 45 slots filled.** Filled clips are Pexels-licensed B-roll found through the user's vidIQ connector (credits in `assets/credits.json`).
 Temple photos and public-domain paintings still need Wikimedia Commons and the museum open-access hosts, which this session's network policy blocks.
 Once those hosts are allowed, run `python3 scripts/fetch_assets.py` to fill the rest. You can also put your own photos in `public/own/` and point a slot's `file` at them.
 Generic B-roll is atmosphere only. A clip is captioned as a place only when it really shows that place (Kanyakumari, Puri, Kashi).
@@ -41,7 +41,7 @@ Generic B-roll is atmosphere only. A clip is captioned as a place only when it r
 | `photo-nalhati` | Nalhati (Nalateshwari) temple | S58 | ✅ `photos/photo-nalhati.jpg` — ছবি: Pinakpani · CC BY 4.0 · Wikimedia Commons |
 | `photo-kankalitala` | Kankalitala temple | S58 | ✅ `photos/photo-kankalitala.jpg` — ছবি: Pinakpani · CC BY-SA 4.0 · Wikimedia Commons |
 | `photo-nandikeshwari` | Nandikeshwari temple, Sainthia | S59 | ✅ `photos/photo-nandikeshwari.jpg` — ছবি: Indraprakashinfo · CC BY-SA 4.0 · Wikimedia Commons |
-| `photo-fullara` | Fullara (Attahas) temple, Labhpur | S59 | ⛔ missing (network) |
+| `photo-fullara` | Fullara (Attahas) temple, Labhpur | S59 | ✅ `photos/photo-fullara.jpg` — ছবি: Sbb1413 · CC BY 4.0 · Wikimedia Commons |
 | `photo-kiriteswari` | Kiriteswari temple, Murshidabad | S61 | ✅ `photos/photo-kiriteswari.jpg` — ছবি: Pinakpani · CC BY-SA 4.0 · Wikimedia Commons |
 | `photo-bargabhima` | Bargabhima temple, Tamluk | S61 | ✅ `photos/photo-bargabhima.jpg` — ছবি: Amitabha Gupta · CC BY 4.0 · Wikimedia Commons |
 | `photo-bhramari` | Bhramari Devi, Jalpaiguri (optional) | S61 | ⛔ missing (network) |
