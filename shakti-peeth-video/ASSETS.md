@@ -1,6 +1,6 @@
 # ASSETS.md — media per scene
 
-**33 of 45 slots filled.** Filled clips are Pexels-licensed B-roll found through the user's vidIQ connector (credits in `assets/credits.json`).
+**34 of 45 slots filled.** Filled clips are Pexels-licensed B-roll found through the user's vidIQ connector (credits in `assets/credits.json`).
 Temple photos and public-domain paintings still need Wikimedia Commons and the museum open-access hosts, which this session's network policy blocks.
 Once those hosts are allowed, run `python3 scripts/fetch_assets.py` to fill the rest. You can also put your own photos in `public/own/` and point a slot's `file` at them.
 Generic B-roll is atmosphere only. A clip is captioned as a place only when it really shows that place (Kanyakumari, Puri, Kashi).
@@ -38,7 +38,7 @@ Generic B-roll is atmosphere only. A clip is captioned as a place only when it r
 | `photo-shrishail` | Shri Shail, Sylhet (optional) | S55 | ⛔ missing (network) |
 | `kalighat-pat` | A Kalighat pat painting, PD (optional) | S57 | ✅ `art/kalighat-pat.jpg` — Shiva Bearing Aloft the Body of His Sati (c. 1890, Eastern India, Bengal, Kolkata, Kalighat), The Cleveland Museum of Art |
 | `photo-bakreshwar` | Bakreshwar temple | S58 | ✅ `photos/photo-bakreshwar.jpg` — ছবি: Pinakpani · CC BY-SA 4.0 · Wikimedia Commons |
-| `photo-nalhati` | Nalhati (Nalateshwari) temple | S58 | ⛔ missing (network) |
+| `photo-nalhati` | Nalhati (Nalateshwari) temple | S58 | ✅ `photos/photo-nalhati.jpg` — ছবি: Pinakpani · CC BY 4.0 · Wikimedia Commons |
 | `photo-kankalitala` | Kankalitala temple | S58 | ✅ `photos/photo-kankalitala.jpg` — ছবি: Pinakpani · CC BY-SA 4.0 · Wikimedia Commons |
 | `photo-nandikeshwari` | Nandikeshwari temple, Sainthia | S59 | ⛔ missing (network) |
 | `photo-fullara` | Fullara (Attahas) temple, Labhpur | S59 | ⛔ missing (network) |
