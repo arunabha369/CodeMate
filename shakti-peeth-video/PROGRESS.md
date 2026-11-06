@@ -2,13 +2,13 @@
 
 The brief is BRIEF_51_Shakti_Peeth.md. The project lives in `shakti-peeth-video/` inside the `arunabha369/CodeMate` repo, on branch `claude/upbeat-cerf-urudsl`.
 
-## Status (2026-10-31)
+## Status (2026-11-06)
 
 | Phase | State |
 |---|---|
-| 1 Verify + peeth data | ✅ Approved: 3 script fixes, channel **The Bong Mindset**. peeths.json coordinates are still approximate (needs Wikidata) |
+| 1 Verify + peeth data | ✅ Approved: 3 script fixes, channel **The Bong Mindset**. 47 of 50 mapped peeths now use Wikidata P625 coordinates (`scripts/wikidata_places.py` → `assets/wikidata_places.json` → `scripts/fix_coords.py`); Sugandha, Prayag and Bhabanipur have no Wikidata coordinate and stay as estimates |
 | 2 Storyboard | ✅ `storyboard.json` (67 scenes, rule checks pass) |
-| 3 Assets | 🟡 **10 real Pexels clips** (2026-11-05), fetched through the user's vidIQ connector with the user's OK: search costs 1 credit, import is free, and the files are served from storage.googleapis.com. They're used in S12, S19, S32, S51 (Kashi, Puri), S52 (Kanyakumari), S63 (Himalaya), S64 (kash) and S66 (diyas). Raw files are in the session scratchpad; processed files are in `public/broll/` (not in git). Credits are in `assets/credits.json`. Temple photos and museum paintings are **still blocked** (Commons and museum hosts), so `scripts/fetch_assets.py` is waiting on the allowlist. See ASSETS.md |
+| 3 Assets | 🟢 **Real media in place.** 10 Pexels clips (via the user's vidIQ connector), the Met 2000.313 painting, 4 Cleveland Museum CC0 paintings (S05 court scene, S07 Shiva, S57 Kalighat pat, S63 Parvati) and 18 Wikimedia Commons temple photos (CC BY / CC BY-SA, subjects checked by eye). Every photo shows its credit on screen; all are logged in `assets/credits.json` and ASSETS.md. Peeths with no free photo yet show a symbolic diya card (`SymbolCard`), not a placeholder. Media files are in `public/` (not in git); `scripts/fetch_assets.py` re-downloads every pinned pick |
 | 4 Voiceover | ✅ **Offline Bengali voice** for all 67 scenes. Durations come from the real audio: **9.3 min** |
 | 5 Design system | ✅ + Remotion-skill polish |
 | 6 Scenes | ✅ All 67 scenes built. `out/preview_full_halfres.mp4` (9:20, 960×540, AAC, -17.7 LUFS) rendered in 20 min |
@@ -57,7 +57,7 @@ Render speed here is about 0.17 s per frame at half scale (≈50 min for the who
 
 ## Waiting on the user
 
-1. **Network allowlist.** This is the only thing blocking real images. In the cloud environment settings (Network access → Allowed domains), allow:
+1. ~~Network allowlist~~ Done (2026-11-05). Note: Wikimedia rate-limits this shared IP heavily (HTTP 429), so Commons fetches go one request every ~45 s. The hosts that were allowed:
    * `commons.wikimedia.org`, `upload.wikimedia.org`
    * `collectionapi.metmuseum.org`, `images.metmuseum.org`
    * `api.artic.edu`, `www.artic.edu`
