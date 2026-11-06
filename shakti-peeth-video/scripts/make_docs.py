@@ -5,6 +5,7 @@ scene starts and caption chunking as the Film / CaptionLayer.
 Usage: python3 -I scripts/make_docs.py
 """
 import json
+import urllib.parse
 import pathlib
 import re
 
@@ -84,7 +85,32 @@ for c in sb["chapters"]:
     bn = str(c["chapter"]).translate(str.maketrans("0123456789", "০১২৩৪৫৬৭৮৯"))
     title = "শুরু" if c["chapter"] == 0 else f"অধ্যায় {bn} — {c['title']}"
     chapters.append(f"{yt(f)} {title}")
-media_credits = [f"- {v['what']}: {v['credit']} — {v['licence']}" for v in assets.values() if v.get("file")]
+# Credits from assets/credits.json. Wikimedia Commons photos (CC BY / BY-SA) get one line each with
+# creator, licence and source link, as those licences ask. CC0/PD museum works and Pexels clips need no
+# attribution, so they are grouped to keep the description under YouTube's 5000-character limit.
+credit_log = {c["key"]: c for c in json.loads((ROOT / "assets/credits.json").read_text())}
+used = [credit_log[k] for k, v in assets.items() if v.get("file") and k in credit_log]
+seen, museums, pexels, commons = set(), {}, [], []
+for c in used:
+    src = c.get("source") or ""
+    if src in seen:
+        continue
+    seen.add(src)
+    if "metmuseum.org" in src:
+        museums.setdefault("The Metropolitan Museum of Art", []).append("2000.313" if c["key"] == "met-2000-313" else src.rsplit("/", 1)[-1])
+    elif "clevelandart.org" in src:
+        museums.setdefault("The Cleveland Museum of Art", []).append(src.rsplit("/", 1)[-1])
+    elif "pexels.com" in src:
+        pexels.append(c["author"].removeprefix("ভিডিও: ").split(" · ")[0].removesuffix(" (Pexels)"))
+    else:
+        who = c["author"].removeprefix("ছবি: ").split(" · ")[0]
+        commons.append(f"- {who} ({c['licence']}): {urllib.parse.unquote(src)}")
+media_credits = [f"- চিত্রকলা: {m} (Open Access, CC0) — {', '.join(ids)}" for m, ids in museums.items()]
+if pexels:
+    media_credits.append(f"- ভিডিও (Pexels License): {', '.join(dict.fromkeys(pexels))}")
+if commons:
+    media_credits.append("- মন্দিরের ছবি, Wikimedia Commons:")
+    media_credits += ["  " + line for line in commons]
 desc = f"""# ৫১ সতীপীঠ — সতীর কাহিনি থেকে কালীঘাট, কামাখ্যা, হিংলাজ
 
 দক্ষযজ্ঞ, সতীর দেহত্যাগ, শিবের প্রলয়নৃত্য আর বিষ্ণুর সুদর্শন চক্র — পুরাণ, তন্ত্র ও প্রচলিত বিশ্বাস অবলম্বনে ৫১ সতীপীঠের পুরো কাহিনি।
