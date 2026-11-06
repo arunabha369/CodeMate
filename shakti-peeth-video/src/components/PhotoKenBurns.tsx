@@ -1,14 +1,14 @@
 import React from "react";
 import { AbsoluteFill, Img, OffthreadVideo, interpolate, staticFile, useCurrentFrame } from "remotion";
 import { colors, fonts, motion } from "../theme";
-import { MediaPlaceholder } from "./MediaPlaceholder";
+import { SymbolCard } from "./SymbolCard";
 
 export type Box = { x: number; y: number; w: number; h: number };
 
 /**
  * Photo with Ken Burns (1.00 → 1.08 plus a slight pan toward a focal point).
  * `src` is a path under public/ (e.g. "photos/kalighat.jpg", or a .mp4 clip); without it a
- * placeholder is shown. Optional caption and credit line.
+ * symbolic diya card is shown. Optional caption and credit line.
  */
 export const PhotoKenBurns: React.FC<{
   src?: string;
@@ -60,7 +60,8 @@ export const PhotoKenBurns: React.FC<{
           }}
         />
       ) : (
-        <MediaPlaceholder kind="ছবি" label={label} />
+        // No free-licence photo yet: a symbolic diya card (ASSETS.md lists what is still missing).
+        <SymbolCard seed={label} />
       )}
       {caption || credit ? (
         <AbsoluteFill
