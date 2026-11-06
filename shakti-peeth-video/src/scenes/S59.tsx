@@ -26,10 +26,10 @@ export const S59: React.FC = () => {
     <AbsoluteFill>
       <Background variant="gold" />
       <In at={nAt}>
-        <PhotoKenBurns src={n.src} label={n.label} durationInFrames={t.frames} start={nAt} box={{ x: 80, y: 130, w: 860, h: 640 }} radius={20} caption="নন্দীকেশ্বরী · সাঁইথিয়া · কণ্ঠহার" />
+        <PhotoKenBurns src={n.src} label={n.label} durationInFrames={t.frames} start={nAt} box={{ x: 80, y: 130, w: 860, h: 640 }} radius={20} caption="নন্দীকেশ্বরী · সাঁইথিয়া · কণ্ঠহার" credit={n.credit || undefined} />
       </In>
       <In at={fAt}>
-        <PhotoKenBurns src={f.src} label={f.label} durationInFrames={t.frames} start={fAt} box={{ x: 980, y: 130, w: 860, h: 640 }} radius={20} caption="ফুল্লরা · অট্টহাস, লাভপুর · অধর" />
+        <PhotoKenBurns src={f.src} label={f.label} durationInFrames={t.frames} start={fAt} box={{ x: 980, y: 130, w: 860, h: 640 }} radius={20} caption="ফুল্লরা · অট্টহাস, লাভপুর · অধর" credit={f.credit || undefined} />
       </In>
       <Chip text="অট্টহাসের স্থান নিয়ে মতভেদ আছে" at={cue(ID, "অধর", 0)} x={980} y={820} dashed font={fonts.body} size={32} color={colors.ink} border={colors.goldDeep} bgColor="rgba(247,239,221,0.95)" />
     </AbsoluteFill>

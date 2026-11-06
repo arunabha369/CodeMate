@@ -9,9 +9,9 @@ import { cue, sceneTiming } from "../lib/timing";
 
 const ID = "S51";
 const HOPS: Array<[string, string, string, string]> = [
-  // Kashi / Puri cards show real footage of the city and the Jagannath temple entrance,
-  // captioned as such (not as the Vishalakshi or Vimala shrines themselves).
-  ["vishalakshi", "কাশীতে", "clip-kashi", "কাশী · গঙ্গা আরতি"],
+  // Kashi: the Vishalakshi temple itself (Commons). Puri: real footage of the Jagannath temple
+  // entrance, captioned as such (not as the Vimala shrine inside the complex).
+  ["vishalakshi", "কাশীতে", "photo-vishalakshi", "বিশালাক্ষী মন্দির · কাশী"],
   ["vimala", "পুরীর", "clip-puri", "পুরী · জগন্নাথ মন্দির চত্বর"],
   ["tripura", "ত্রিপুরার", "photo-tripura", "ত্রিপুরাসুন্দরী · উদয়পুর"],
 ];

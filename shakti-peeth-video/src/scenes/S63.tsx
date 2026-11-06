@@ -32,8 +32,9 @@ const Content: React.FC = () => {
       <AbsoluteFill style={{ background: `linear-gradient(180deg, transparent 30%, rgba(240,138,36,${0.35 * dawn}) 100%)` }} />
       <ParticleLayer kind="snow" count={40} opacity={0.6} />
       {art.src ? <PaintingFrame src={art.src} label={art.label} credit={art.credit} bg="night" durationInFrames={t.frames} box={{ x: 120, y: 140, w: 520, h: 680 }} start={c("পার্বতী", -10)} /> : null}
-      <div style={{ position: "absolute", left: 0, right: 0, top: 110, display: "flex", justifyContent: "center" }}>
-        <Headline text="পার্বতী · বাংলার আদরের উমা" highlight="উমা" size={80} start={c("নাম পার্বতী", -8)} />
+      {/* With the painting on the left, the headline centres in the space to its right. */}
+      <div style={{ position: "absolute", left: art.src ? 680 : 0, right: art.src ? 40 : 0, top: 110, display: "flex", justifyContent: "center" }}>
+        <Headline text="পার্বতী · বাংলার আদরের উমা" highlight="উমা" size={art.src ? 72 : 80} start={c("নাম পার্বতী", -8)} />
       </div>
     </AbsoluteFill>
   );

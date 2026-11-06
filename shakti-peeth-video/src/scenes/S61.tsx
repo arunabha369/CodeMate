@@ -34,7 +34,7 @@ export const S61: React.FC = () => {
         const end = i < STOPS.length - 1 ? at[i + 1] + 10 : t.frames;
         return (
           <Sequence key={id} from={at[i]} durationInFrames={end - at[i]} layout="absolute-fill">
-            <PhotoKenBurns src={a.src} label={a.label} durationInFrames={end - at[i]} box={{ x: 80, y: 150, w: 960, h: 680 }} radius={20} caption={caption} />
+            <PhotoKenBurns src={a.src} label={a.label} durationInFrames={end - at[i]} box={{ x: 80, y: 150, w: 960, h: 680 }} radius={20} caption={caption} credit={a.credit || undefined} />
           </Sequence>
         );
       })}

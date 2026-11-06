@@ -9,9 +9,9 @@
     },
     "court-miniature": {
       "what": "Court-scene miniature (royal assembly), PD",
-      "file": null,
-      "credit": null,
-      "licence": null
+      "file": "art/court-miniature.jpg",
+      "credit": "Shishupala arguing with Rukmini’s father, Bhishmaka, from a Rukmini Haran (c. 1800, Northern India, Pahari kingdoms), The Cleveland Museum of Art",
+      "licence": "CC0"
     },
     "ravi-varma-sati": {
       "what": "Raja Ravi Varma Press print of Sati/Parvati, PD (optional)",
@@ -21,9 +21,9 @@
     },
     "shiva-painting": {
       "what": "Shiva painting (Kalighat pat or Pahari), PD",
-      "file": null,
-      "credit": null,
-      "licence": null
+      "file": "art/shiva-painting.jpg",
+      "credit": "Shiva Seated on a Throne in a Landscape (c. 1755, Northern India, Pahari kingdoms), The Cleveland Museum of Art",
+      "licence": "CC0"
     },
     "mahavidya-paintings": {
       "what": "PD Mahavidya paintings, one per slot (optional)",
@@ -32,34 +32,40 @@
       "licence": null
     },
     "photo-kalighat": {
-      "what": "Kalighat Kali temple exterior",
-      "file": null,
-      "credit": null,
-      "licence": null
+      "what": "Kalighat Kali temple exterior (street side)",
+      "file": "photos/photo-kalighat.jpg",
+      "credit": "ছবি: Hiroki Ogawa · CC BY 3.0 · Wikimedia Commons",
+      "licence": "CC BY 3.0"
+    },
+    "photo-kalighat-dome": {
+      "what": "Kalighat temple dome (close-up)",
+      "file": "photos/photo-kalighat-dome.jpg",
+      "credit": "ছবি: Bernard Gagnon · CC BY-SA 3.0 · Wikimedia Commons",
+      "licence": "CC BY-SA 3.0"
     },
     "photo-kamakhya": {
       "what": "Kamakhya temple exterior",
-      "file": null,
-      "credit": null,
-      "licence": null
+      "file": "photos/photo-kamakhya.jpg",
+      "credit": "ছবি: JyotiPN · CC BY-SA 4.0 · Wikimedia Commons",
+      "licence": "CC BY-SA 4.0"
     },
     "photo-hinglaj": {
       "what": "Hinglaj gorge / cave",
-      "file": null,
-      "credit": null,
-      "licence": null
+      "file": "photos/photo-hinglaj.jpg",
+      "credit": "ছবি: Bilal Mirza · CC BY-SA 3.0 · Wikimedia Commons",
+      "licence": "CC BY-SA 3.0"
     },
     "photo-nainativu": {
       "what": "Nainativu Nagapooshani temple",
-      "file": null,
-      "credit": null,
-      "licence": null
+      "file": "photos/photo-nainativu.jpg",
+      "credit": "ছবি: Wikinamaste · CC BY-SA 3.0 · Wikimedia Commons",
+      "licence": "CC BY-SA 3.0"
     },
     "photo-manasarovar": {
       "what": "Lake Manasarovar",
-      "file": null,
-      "credit": null,
-      "licence": null
+      "file": "photos/photo-manasarovar.jpg",
+      "credit": "ছবি: Prateek (Greatestprateek) · CC BY-SA 2.5 in · Wikimedia Commons",
+      "licence": "CC BY-SA 2.5 in"
     },
     "broll-havan": {
       "what": "havan fire (atmosphere)",
@@ -81,9 +87,9 @@
     },
     "photo-daksheswar": {
       "what": "Daksheswar Mahadev temple, Kankhal (Commons)",
-      "file": null,
-      "credit": null,
-      "licence": null
+      "file": "photos/photo-daksheswar.jpg",
+      "credit": "ছবি: World8115 · CC BY-SA 3.0 · Wikimedia Commons",
+      "licence": "CC BY-SA 3.0"
     },
     "broll-storm": {
       "what": "storm clouds, lightning",
@@ -99,27 +105,27 @@
     },
     "photo-kamakhya-domes": {
       "what": "Kamakhya temple domes / shikhara",
-      "file": null,
-      "credit": null,
-      "licence": null
+      "file": "photos/photo-kamakhya-domes.jpg",
+      "credit": "ছবি: JyotiPN · CC BY-SA 4.0 · Wikimedia Commons",
+      "licence": "CC BY-SA 4.0"
     },
     "photo-ambubachi": {
       "what": "Ambubachi Mela crowd (Commons)",
-      "file": null,
-      "credit": null,
-      "licence": null
+      "file": "photos/photo-ambubachi.jpg",
+      "credit": "ছবি: Kunal Dalui · CC BY-SA 3.0 · Wikimedia Commons",
+      "licence": "CC BY-SA 3.0"
     },
     "photo-jwalamukhi": {
       "what": "Jwalamukhi temple, Kangra (exterior)",
-      "file": null,
-      "credit": null,
-      "licence": null
+      "file": "photos/photo-jwalamukhi.jpg",
+      "credit": "ছবি: Pdogra2011 · CC BY-SA 3.0 · Wikimedia Commons",
+      "licence": "CC BY-SA 3.0"
     },
     "photo-vishalakshi": {
       "what": "Vishalakshi temple, Varanasi",
-      "file": null,
-      "credit": null,
-      "licence": null
+      "file": "photos/photo-vishalakshi.jpg",
+      "credit": "ছবি: Kailash PL · CC BY-SA 4.0 · Wikimedia Commons",
+      "licence": "CC BY-SA 4.0"
     },
     "photo-vimala": {
       "what": "Vimala temple, Puri (or Jagannath complex exterior)",
@@ -129,9 +135,9 @@
     },
     "photo-tripura": {
       "what": "Tripura Sundari temple, Udaipur",
-      "file": null,
-      "credit": null,
-      "licence": null
+      "file": "photos/photo-tripura.jpg",
+      "credit": "ছবি: ARKA SENGUPTA · CC BY-SA 4.0 · Wikimedia Commons",
+      "licence": "CC BY-SA 4.0"
     },
     "broll-kanyakumari": {
       "what": "Kanyakumari: Vivekananda Rock Memorial and Thiruvalluvar statue",
@@ -141,15 +147,15 @@
     },
     "photo-guhyeshwari": {
       "what": "Guhyeshwari temple, Kathmandu",
-      "file": null,
-      "credit": null,
-      "licence": null
+      "file": "photos/photo-guhyeshwari.jpg",
+      "credit": "ছবি: Gerd Eichmann · CC BY-SA 4.0 · Wikimedia Commons",
+      "licence": "CC BY-SA 4.0"
     },
     "photo-chandranath": {
       "what": "Chandranath temple, Sitakunda",
-      "file": null,
-      "credit": null,
-      "licence": null
+      "file": "photos/photo-chandranath.jpg",
+      "credit": "ছবি: Shahidul Hasan Roman · CC BY-SA 4.0 · Wikimedia Commons",
+      "licence": "CC BY-SA 4.0"
     },
     "photo-sugandha": {
       "what": "Sugandha Shaktipeeth, Shikarpur",
@@ -171,15 +177,15 @@
     },
     "kalighat-pat": {
       "what": "A Kalighat pat painting, PD (optional)",
-      "file": null,
-      "credit": null,
-      "licence": null
+      "file": "art/kalighat-pat.jpg",
+      "credit": "Shiva Bearing Aloft the Body of His Sati (c. 1890, Eastern India, Bengal, Kolkata, Kalighat), The Cleveland Museum of Art",
+      "licence": "CC0"
     },
     "photo-bakreshwar": {
       "what": "Bakreshwar temple",
-      "file": null,
-      "credit": null,
-      "licence": null
+      "file": "photos/photo-bakreshwar.jpg",
+      "credit": "ছবি: Pinakpani · CC BY-SA 4.0 · Wikimedia Commons",
+      "licence": "CC BY-SA 4.0"
     },
     "photo-nalhati": {
       "what": "Nalhati (Nalateshwari) temple",
@@ -189,9 +195,9 @@
     },
     "photo-kankalitala": {
       "what": "Kankalitala temple",
-      "file": null,
-      "credit": null,
-      "licence": null
+      "file": "photos/photo-kankalitala.jpg",
+      "credit": "ছবি: Pinakpani · CC BY-SA 4.0 · Wikimedia Commons",
+      "licence": "CC BY-SA 4.0"
     },
     "photo-nandikeshwari": {
       "what": "Nandikeshwari temple, Sainthia",
@@ -207,15 +213,15 @@
     },
     "photo-kiriteswari": {
       "what": "Kiriteswari temple, Murshidabad",
-      "file": null,
-      "credit": null,
-      "licence": null
+      "file": "photos/photo-kiriteswari.jpg",
+      "credit": "ছবি: Pinakpani · CC BY-SA 4.0 · Wikimedia Commons",
+      "licence": "CC BY-SA 4.0"
     },
     "photo-bargabhima": {
       "what": "Bargabhima temple, Tamluk",
-      "file": null,
-      "credit": null,
-      "licence": null
+      "file": "photos/photo-bargabhima.jpg",
+      "credit": "ছবি: Amitabha Gupta · CC BY 4.0 · Wikimedia Commons",
+      "licence": "CC BY 4.0"
     },
     "photo-bhramari": {
       "what": "Bhramari Devi, Jalpaiguri (optional)",
@@ -231,9 +237,9 @@
     },
     "parvati-painting": {
       "what": "Public-domain Parvati painting",
-      "file": null,
-      "credit": null,
-      "licence": null
+      "file": "art/parvati-painting.jpg",
+      "credit": "Parvati Placing a Wedding Garland on Shiva (recto), from a Kalighat album (c. 1890, Eastern India, Bengal, Kolkata, Kalighat), The Cleveland Museum of Art",
+      "licence": "CC0"
     },
     "broll-kash": {
       "what": "tall white-plumed grass in wind (kash-like)",

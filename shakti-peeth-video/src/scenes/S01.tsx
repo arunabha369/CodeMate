@@ -44,7 +44,7 @@ export const S01: React.FC = () => {
         return (
           <Sequence key={id} from={at[i]} durationInFrames={FLASH} layout="absolute-fill">
             <FlashFade>
-              <PhotoKenBurns src={a.src} label={a.label} durationInFrames={FLASH} box={{ x: 1380, y: 90, w: 460, h: 320 }} radius={18} caption={caption} />
+              <PhotoKenBurns src={a.src} label={a.label} durationInFrames={FLASH} box={{ x: 1380, y: 90, w: 460, h: 320 }} radius={18} caption={caption} credit={a.credit || undefined} />
             </FlashFade>
           </Sequence>
         );

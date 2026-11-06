@@ -14,7 +14,7 @@ export const S39: React.FC = () => (
     <ShaktiBhairavaCard
       leftAt={-60}
       rightAt={cue(ID, "শিবের এক রূপ", -8)}
-      example={{ place: "কালীঘাট", shakti: "কালিকা", bhairava: "নকুলেশ্বর", photo: asset("photo-kalighat").src, at: cue(ID, "বিশ্বাস", -6) }}
+      example={{ place: "কালীঘাট", shakti: "কালিকা", bhairava: "নকুলেশ্বর", photo: asset("photo-kalighat-dome").src, credit: asset("photo-kalighat-dome").credit || undefined, at: cue(ID, "বিশ্বাস", -6) }}
     />
   </AbsoluteFill>
 );

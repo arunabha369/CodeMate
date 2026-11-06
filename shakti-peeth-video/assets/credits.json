@@ -96,5 +96,217 @@
     "author": "Unknown artist, Shiva Carries the Corpse of Sati (ca. 1865–75), The Metropolitan Museum of Art",
     "licence": "Public Domain (CC0)",
     "licence_url": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access"
+  },
+  {
+    "key": "court-miniature",
+    "file": "art/court-miniature.jpg",
+    "source": "https://clevelandart.org/art/1984.66",
+    "author": "Shishupala arguing with Rukmini’s father, Bhishmaka, from a Rukmini Haran (c. 1800, Northern India, Pahari kingdoms), The Cleveland Museum of Art",
+    "licence": "CC0",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  {
+    "key": "shiva-painting",
+    "file": "art/shiva-painting.jpg",
+    "source": "https://clevelandart.org/art/2018.113",
+    "author": "Shiva Seated on a Throne in a Landscape (c. 1755, Northern India, Pahari kingdoms), The Cleveland Museum of Art",
+    "licence": "CC0",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  {
+    "key": "kalighat-pat",
+    "file": "art/kalighat-pat.jpg",
+    "source": "https://clevelandart.org/art/2003.131",
+    "author": "Shiva Bearing Aloft the Body of His Sati (c. 1890, Eastern India, Bengal, Kolkata, Kalighat), The Cleveland Museum of Art",
+    "licence": "CC0",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  {
+    "key": "parvati-painting",
+    "file": "art/parvati-painting.jpg",
+    "source": "https://clevelandart.org/art/2003.108.a",
+    "author": "Parvati Placing a Wedding Garland on Shiva (recto), from a Kalighat album (c. 1890, Eastern India, Bengal, Kolkata, Kalighat), The Cleveland Museum of Art",
+    "licence": "CC0",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  {
+    "key": "photo-kamakhya",
+    "file": "photos/photo-kamakhya.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:The_Kamakhya_Temple,_2025.jpg",
+    "commons_file": "The Kamakhya Temple, 2025.jpg",
+    "author": "ছবি: JyotiPN · CC BY-SA 4.0 · Wikimedia Commons",
+    "licence": "CC BY-SA 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "note": "1920 px Commons thumbnail (2400 px cap), no other edits; shown with the credit on screen"
+  },
+  {
+    "key": "photo-kamakhya-domes",
+    "file": "photos/photo-kamakhya-domes.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:The_Kamakhya_Temple,_2025.jpg",
+    "commons_file": "The Kamakhya Temple, 2025.jpg",
+    "author": "ছবি: JyotiPN · CC BY-SA 4.0 · Wikimedia Commons",
+    "licence": "CC BY-SA 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "note": "1920 px Commons thumbnail (2400 px cap), no other edits; shown with the credit on screen"
+  },
+  {
+    "key": "photo-ambubachi",
+    "file": "photos/photo-ambubachi.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Kamakhya_Temple,_Guwahati.jpg",
+    "commons_file": "Kamakhya Temple, Guwahati.jpg",
+    "author": "ছবি: Kunal Dalui · CC BY-SA 3.0 · Wikimedia Commons",
+    "licence": "CC BY-SA 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/3.0",
+    "note": "1920 px Commons thumbnail (2400 px cap), no other edits; shown with the credit on screen"
+  },
+  {
+    "key": "photo-hinglaj",
+    "file": "photos/photo-hinglaj.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Nani_ki_Mandir2.jpg",
+    "commons_file": "Nani ki Mandir2.jpg",
+    "author": "ছবি: Bilal Mirza · CC BY-SA 3.0 · Wikimedia Commons",
+    "licence": "CC BY-SA 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/3.0",
+    "note": "1920 px Commons thumbnail (2400 px cap), no other edits; shown with the credit on screen"
+  },
+  {
+    "key": "photo-nainativu",
+    "file": "photos/photo-nainativu.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:MAIN_NAGAPOOSHANI_TEMPLE.jpg",
+    "commons_file": "MAIN NAGAPOOSHANI TEMPLE.jpg",
+    "author": "ছবি: Wikinamaste · CC BY-SA 3.0 · Wikimedia Commons",
+    "licence": "CC BY-SA 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/3.0",
+    "note": "1920 px Commons thumbnail (2400 px cap), no other edits; shown with the credit on screen"
+  },
+  {
+    "key": "photo-manasarovar",
+    "file": "photos/photo-manasarovar.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Mansarovar.jpg",
+    "commons_file": "Mansarovar.jpg",
+    "author": "ছবি: Prateek (Greatestprateek) · CC BY-SA 2.5 in · Wikimedia Commons",
+    "licence": "CC BY-SA 2.5 in",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/2.5/in/deed.en",
+    "note": "1920 px Commons thumbnail (2400 px cap), no other edits; shown with the credit on screen"
+  },
+  {
+    "key": "photo-daksheswar",
+    "file": "photos/photo-daksheswar.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Daksheshwar_Mahadev_temple,_Kankhal3.JPG",
+    "commons_file": "Daksheshwar Mahadev temple, Kankhal3.JPG",
+    "author": "ছবি: World8115 · CC BY-SA 3.0 · Wikimedia Commons",
+    "licence": "CC BY-SA 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/3.0",
+    "note": "1920 px Commons thumbnail (2400 px cap), no other edits; shown with the credit on screen"
+  },
+  {
+    "key": "photo-jwalamukhi",
+    "file": "photos/photo-jwalamukhi.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Jawala_Ji_Temple.jpg",
+    "commons_file": "Jawala Ji Temple.jpg",
+    "author": "ছবি: Pdogra2011 · CC BY-SA 3.0 · Wikimedia Commons",
+    "licence": "CC BY-SA 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/3.0",
+    "note": "1920 px Commons thumbnail (2400 px cap), no other edits; shown with the credit on screen"
+  },
+  {
+    "key": "photo-tripura",
+    "file": "photos/photo-tripura.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:TRIPURESHWARI_TEMPLE.jpg",
+    "commons_file": "TRIPURESHWARI TEMPLE.jpg",
+    "author": "ছবি: ARKA SENGUPTA · CC BY-SA 4.0 · Wikimedia Commons",
+    "licence": "CC BY-SA 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "note": "1920 px Commons thumbnail (2400 px cap), no other edits; shown with the credit on screen"
+  },
+  {
+    "key": "photo-guhyeshwari",
+    "file": "photos/photo-guhyeshwari.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Pashupatinath-oberer_Zugang-10-Guhyeshvari-2013-gje.jpg",
+    "commons_file": "Pashupatinath-oberer Zugang-10-Guhyeshvari-2013-gje.jpg",
+    "author": "ছবি: Gerd Eichmann · CC BY-SA 4.0 · Wikimedia Commons",
+    "licence": "CC BY-SA 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "note": "1920 px Commons thumbnail (2400 px cap), no other edits; shown with the credit on screen"
+  },
+  {
+    "key": "photo-chandranath",
+    "file": "photos/photo-chandranath.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Chandranath_Temple_2019-01-16_(27).jpg",
+    "commons_file": "Chandranath Temple 2019-01-16 (27).jpg",
+    "author": "ছবি: Shahidul Hasan Roman · CC BY-SA 4.0 · Wikimedia Commons",
+    "licence": "CC BY-SA 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "note": "1920 px Commons thumbnail (2400 px cap), no other edits; shown with the credit on screen"
+  },
+  {
+    "key": "photo-bakreshwar",
+    "file": "photos/photo-bakreshwar.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Bakreswar_Temples_and_Hot_spring_12.jpg",
+    "commons_file": "Bakreswar Temples and Hot spring 12.jpg",
+    "author": "ছবি: Pinakpani · CC BY-SA 4.0 · Wikimedia Commons",
+    "licence": "CC BY-SA 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "note": "1920 px Commons thumbnail (2400 px cap), no other edits; shown with the credit on screen"
+  },
+  {
+    "key": "photo-kankalitala",
+    "file": "photos/photo-kankalitala.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Kankalitala_Temple_complex,_Birbhum,_West_Bengal_05.jpg",
+    "commons_file": "Kankalitala Temple complex, Birbhum, West Bengal 05.jpg",
+    "author": "ছবি: Pinakpani · CC BY-SA 4.0 · Wikimedia Commons",
+    "licence": "CC BY-SA 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "note": "1920 px Commons thumbnail (2400 px cap), no other edits; shown with the credit on screen"
+  },
+  {
+    "key": "photo-kiriteswari",
+    "file": "photos/photo-kiriteswari.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Kiriteswari_Temple.jpg",
+    "commons_file": "Kiriteswari Temple.jpg",
+    "author": "ছবি: Pinakpani · CC BY-SA 4.0 · Wikimedia Commons",
+    "licence": "CC BY-SA 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "note": "1920 px Commons thumbnail (2400 px cap), no other edits; shown with the credit on screen"
+  },
+  {
+    "key": "photo-vishalakshi",
+    "file": "photos/photo-vishalakshi.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:%E0%AE%95%E0%AE%BE%E0%AE%9A%E0%AE%BF_%E0%AE%B5%E0%AE%BF%E0%AE%9A%E0%AE%BE%E0%AE%B2%E0%AE%BE%E0%AE%9F%E0%AF%8D%E0%AE%9A%E0%AE%BF_%E0%AE%95%E0%AF%8B%E0%AE%AF%E0%AE%BF%E0%AE%B2%E0%AF%8D.jpg",
+    "commons_file": "காசி விசாலாட்சி கோயில்.jpg",
+    "author": "ছবি: Kailash PL · CC BY-SA 4.0 · Wikimedia Commons",
+    "licence": "CC BY-SA 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "note": "1920 px Commons thumbnail (2400 px cap), no other edits; shown with the credit on screen"
+  },
+  {
+    "key": "photo-kalighat",
+    "file": "photos/photo-kalighat.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Kalighat_Temple_Kolkata_India_-_panoramio.jpg",
+    "commons_file": "Kalighat Temple Kolkata India - panoramio.jpg",
+    "author": "ছবি: Hiroki Ogawa · CC BY 3.0 · Wikimedia Commons",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0",
+    "note": "1920 px Commons thumbnail (2400 px cap), no other edits; shown with the credit on screen"
+  },
+  {
+    "key": "photo-bargabhima",
+    "file": "photos/photo-bargabhima.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Bargabhima_temple_at_Tamluk_town_under_Purba_Medinipur_district_in_West_Bengal_01.jpg",
+    "commons_file": "Bargabhima temple at Tamluk town under Purba Medinipur district in West Bengal 01.jpg",
+    "author": "ছবি: Amitabha Gupta · CC BY 4.0 · Wikimedia Commons",
+    "licence": "CC BY 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by/4.0",
+    "note": "1920 px Commons thumbnail (2400 px cap), no other edits; shown with the credit on screen"
+  },
+  {
+    "key": "photo-kalighat-dome",
+    "file": "photos/photo-kalighat-dome.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Kalighat_Kali_Temple.jpg",
+    "commons_file": "Kalighat Kali Temple.jpg",
+    "author": "ছবি: Bernard Gagnon · CC BY-SA 3.0 · Wikimedia Commons",
+    "licence": "CC BY-SA 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/3.0",
+    "note": "1920 px Commons thumbnail (2400 px cap), no other edits; shown with the credit on screen"
   }
 ]

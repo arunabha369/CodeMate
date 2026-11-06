@@ -32,43 +32,48 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 REG = ROOT / "src" / "data" / "assets.json"
 CREDITS = ROOT / "assets" / "credits.json"
 # Wikimedia and AIC ask for a descriptive client name with a contact URL (no personal email).
-UA = "ShaktiPeethDoc/1.0 (https://github.com/arunabha369/CodeMate; educational documentary) python-urllib"
+UA = "ShaktiPeethDoc/1.0 (https://github.com/arunabha369/CodeMate; educational documentary)"
 ALLOWED_COMMONS = re.compile(r"^(cc0|public domain|pd.*|cc[- ]by(-sa)?[- ]?[0-9.]*( [a-z]+)?)$", re.I)
 BLOCKED = re.compile(r"\b(nc|nd)\b", re.I)
 
 # key -> ordered list of (source, query). First acceptable hit wins.
+# ("commons-file", name) pins a Commons file whose subject was checked by eye (2026-11-05/06): the
+# Wikidata P18 image of the temple's item where it showed the temple, otherwise a named file.
 PLAN: dict[str, list[tuple[str, str]]] = {
     "met-2000-313": [("met-id", "55034")],
-    "court-miniature": [("met", "court assembly Pahari painting"), ("aic", "Pahari court scene"), ("commons", "Pahari painting royal court")],
+    # Paintings below were picked by eye from Cleveland's CC0 collection (2026-11-06); the id pins the exact object.
+    "court-miniature": [("cleveland-id", "1984.66"), ("met", "court assembly Pahari painting"), ("aic", "Pahari court scene"), ("commons", "Pahari painting royal court")],
     "ravi-varma-sati": [("commons", "Raja Ravi Varma Press Sati"), ("commons", "Ravi Varma Parvati lithograph")],
-    "shiva-painting": [("met", "Shiva Kalighat"), ("aic", "Shiva painting India"), ("commons", "Kalighat painting Shiva")],
+    "shiva-painting": [("cleveland-id", "2018.113"), ("met", "Shiva Kalighat"), ("aic", "Shiva painting India"), ("commons", "Kalighat painting Shiva")],
     "virabhadra-painting": [("met", "Virabhadra"), ("cleveland", "Virabhadra"), ("commons", "Virabhadra painting")],
-    "parvati-painting": [("met", "Parvati painting"), ("aic", "Parvati"), ("commons", "Raja Ravi Varma Parvati")],
-    "kalighat-pat": [("met", "Kalighat painting"), ("commons", "Kalighat painting")],
-    "photo-kalighat": [("commons", "Kalighat Kali Temple")],
-    "photo-kamakhya": [("commons", "Kamakhya Temple")],
-    "photo-kamakhya-domes": [("commons", "Kamakhya Temple dome")],
-    "photo-ambubachi": [("commons", "Ambubachi Mela")],
-    "photo-hinglaj": [("commons", "Hinglaj Mata")],
-    "photo-nainativu": [("commons", "Nainativu Nagapooshani Amman")],
-    "photo-manasarovar": [("commons", "Lake Manasarovar")],
-    "photo-daksheswar": [("commons", "Daksheswar Mahadev Kankhal")],
-    "photo-jwalamukhi": [("commons", "Jwalamukhi Temple")],
-    "photo-vishalakshi": [("commons", "Vishalakshi Temple")],
+    "parvati-painting": [("cleveland-id", "2003.108.a"), ("met", "Parvati painting"), ("aic", "Parvati"), ("commons", "Raja Ravi Varma Parvati")],
+    # Not the Kalighat-album Kali leaf (2003.110.a): it shows a severed head, and the brief says no gore.
+    "kalighat-pat": [("cleveland-id", "2003.131"), ("met", "Kalighat painting"), ("commons", "Kalighat painting")],
+    "photo-kalighat": [("commons-file", "Kalighat Temple Kolkata India - panoramio.jpg"), ("commons", "Kalighat Kali Temple")],
+    "photo-kalighat-dome": [("commons-file", "Kalighat Kali Temple.jpg")],
+    "photo-kamakhya": [("commons-file", "The Kamakhya Temple, 2025.jpg"), ("commons", "Kamakhya Temple")],
+    "photo-kamakhya-domes": [("commons-file", "The Kamakhya Temple, 2025.jpg"), ("commons", "Kamakhya Temple dome")],
+    "photo-ambubachi": [("commons-file", "Kamakhya Temple, Guwahati.jpg"), ("commons", "Ambubachi Mela")],
+    "photo-hinglaj": [("commons-file", "Nani ki Mandir2.jpg"), ("commons", "Hinglaj Mata")],
+    "photo-nainativu": [("commons-file", "MAIN NAGAPOOSHANI TEMPLE.jpg"), ("commons", "Nainativu Nagapooshani Amman")],
+    "photo-manasarovar": [("commons-file", "Mansarovar.jpg"), ("commons", "Lake Manasarovar")],
+    "photo-daksheswar": [("commons-file", "Daksheshwar Mahadev temple, Kankhal3.JPG"), ("commons", "Daksheswar Mahadev Kankhal")],
+    "photo-jwalamukhi": [("commons-file", "Jawala Ji Temple.jpg"), ("commons", "Jwalamukhi Temple")],
+    "photo-vishalakshi": [("commons-file", "காசி விசாலாட்சி கோயில்.jpg"), ("commons", "Vishalakshi Temple")],
     "photo-vimala": [("commons", "Vimala Temple Puri")],
-    "photo-tripura": [("commons", "Tripura Sundari Temple Udaipur")],
-    "photo-guhyeshwari": [("commons", "Guhyeshwari")],
-    "photo-chandranath": [("commons", "Chandranath Temple Sitakunda")],
+    "photo-tripura": [("commons-file", "TRIPURESHWARI TEMPLE.jpg"), ("commons", "Tripura Sundari Temple Udaipur")],
+    "photo-guhyeshwari": [("commons-file", "Pashupatinath-oberer Zugang-10-Guhyeshvari-2013-gje.jpg"), ("commons", "Guhyeshwari")],
+    "photo-chandranath": [("commons-file", "Chandranath Temple 2019-01-16 (27).jpg"), ("commons", "Chandranath Temple Sitakunda")],
     "photo-sugandha": [("commons", "Sugandha Shaktipeeth")],
     "photo-jeshoreshwari": [("commons", "Jeshoreshwari")],
     "photo-shrishail": [("commons", "Shri Shail Sylhet")],
-    "photo-bakreshwar": [("commons", "Bakreshwar")],
+    "photo-bakreshwar": [("commons-file", "Bakreswar Temples and Hot spring 12.jpg"), ("commons", "Bakreshwar")],
     "photo-nalhati": [("commons", "Nalhati Nalateshwari")],
-    "photo-kankalitala": [("commons", "Kankalitala")],
+    "photo-kankalitala": [("commons-file", "Kankalitala Temple complex, Birbhum, West Bengal 05.jpg"), ("commons", "Kankalitala")],
     "photo-nandikeshwari": [("commons", "Nandikeshwari Sainthia")],
     "photo-fullara": [("commons", "Fullara Labhpur")],
-    "photo-kiriteswari": [("commons", "Kiriteswari")],
-    "photo-bargabhima": [("commons", "Bargabhima Tamluk")],
+    "photo-kiriteswari": [("commons-file", "Kiriteswari Temple.jpg"), ("commons", "Kiriteswari")],
+    "photo-bargabhima": [("commons-file", "Bargabhima temple at Tamluk town under Purba Medinipur district in West Bengal 01.jpg"), ("commons", "Bargabhima Tamluk")],
     "photo-bhramari": [("commons", "Bhramari Devi Jalpaiguri")],
     "photo-tarapith": [("commons", "Tarapith")],
     "broll-havan": [("pexels-video", "havan fire"), ("pixabay-video", "fire ritual")],
@@ -129,13 +134,25 @@ def aic(query: str):
     return None
 
 
+def _cleveland_hit(a: dict):
+    img = (a.get("images") or {}).get("print") or (a.get("images") or {}).get("web") or {}
+    if a.get("share_license_status") != "CC0" or not img.get("url"):
+        return None
+    culture = ", ".join(a.get("culture") or [])
+    return {"url": img["url"], "source": a.get("url"), "author": f"{a.get('title')} ({a.get('creation_date')}, {culture}), The Cleveland Museum of Art", "licence": "CC0", "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/", "ext": ".jpg"}
+
+
 def cleveland(query: str):
     d = get_json(f"https://openaccess-api.clevelandart.org/api/artworks/?q={urllib.parse.quote(query)}&cc0=1&has_image=1&limit=20")
     for a in d.get("data", []):
-        img = (a.get("images") or {}).get("web") or {}
-        if img.get("url"):
-            return {"url": img["url"], "source": a.get("url"), "author": f"{a.get('title')} ({a.get('creation_date')}), Cleveland Museum of Art", "licence": "CC0", "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/", "ext": ".jpg"}
+        hit = _cleveland_hit(a)
+        if hit:
+            return hit
     return None
+
+
+def cleveland_id(accession: str):
+    return _cleveland_hit(get_json(f"https://openaccess-api.clevelandart.org/api/artworks/{urllib.parse.quote(accession)}")["data"])
 
 
 def commons(query: str):
@@ -155,7 +172,24 @@ def commons(query: str):
         if ii.get("width", 0) < 1200:
             continue
         artist = re.sub(r"<[^>]+>", "", (meta.get("Artist") or {}).get("value", "Unknown")).strip()
-        return {"url": ii.get("thumburl") or ii["url"], "source": ii.get("descriptionurl"), "author": f"{artist} (Wikimedia Commons)", "licence": lic, "licence_url": (meta.get("LicenseUrl") or {}).get("value", ""), "ext": ".jpg"}
+        return {"url": ii.get("thumburl") or ii["url"], "source": ii.get("descriptionurl"), "author": f"ছবি: {artist} · {lic} · Wikimedia Commons", "licence": lic, "licence_url": (meta.get("LicenseUrl") or {}).get("value", ""), "ext": ".jpg"}
+    return None
+
+
+def commons_file(name: str):
+    """One named Commons file (picked by eye; see the PLAN comment), as a 1920 px thumbnail.
+    Wikimedia asks bulk clients to fetch standard thumbnail sizes rather than originals."""
+    params = {"action": "query", "format": "json", "titles": f"File:{name}", "prop": "imageinfo",
+              "iiprop": "url|extmetadata|size", "iiurlwidth": "1920"}
+    d = get_json("https://commons.wikimedia.org/w/api.php?" + urllib.parse.urlencode(params))
+    for p in (d.get("query") or {}).get("pages", {}).values():
+        ii = (p.get("imageinfo") or [{}])[0]
+        meta = ii.get("extmetadata") or {}
+        lic = (meta.get("LicenseShortName") or {}).get("value", "")
+        if not lic or BLOCKED.search(lic) or not ALLOWED_COMMONS.match(lic.strip()):
+            return None
+        artist = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", (meta.get("Artist") or {}).get("value", "Unknown"))).strip()
+        return {"url": ii.get("thumburl") or ii["url"], "source": ii.get("descriptionurl"), "author": f"ছবি: {artist} · {lic} · Wikimedia Commons", "licence": lic, "licence_url": (meta.get("LicenseUrl") or {}).get("value", ""), "ext": ".jpg"}
     return None
 
 
@@ -183,7 +217,7 @@ def pixabay_video(query: str):
     return None
 
 
-SOURCES = {"met": met, "aic": aic, "cleveland": cleveland, "commons": commons, "pexels-video": pexels_video, "pixabay-video": pixabay_video}
+SOURCES = {"met": met, "aic": aic, "cleveland": cleveland, "cleveland-id": cleveland_id, "commons": commons, "commons-file": commons_file, "pexels-video": pexels_video, "pixabay-video": pixabay_video}
 
 
 def finish(path: pathlib.Path, video: bool) -> pathlib.Path:
@@ -194,6 +228,10 @@ def finish(path: pathlib.Path, video: bool) -> pathlib.Path:
                                "-c:v", "libx264", "-crf", "18", "-pix_fmt", "yuv420p", str(out)])
         path.unlink()
         return out
+    # Museum prints can be 3400 px or more: cap the long side at 2400 px (plenty for a 1080p frame).
+    small = path.with_name(path.stem + "-s.jpg")
+    subprocess.check_call(["ffmpeg", "-loglevel", "error", "-y", "-i", str(path), "-vf", "scale='min(2400,iw)':'min(2400,ih)':force_original_aspect_ratio=decrease", "-q:v", "2", str(small)])
+    small.replace(path)
     # Gentle lanczos upscale only if small; never AI enhancement.
     w = int(subprocess.check_output(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries", "stream=width", "-of", "csv=p=0", str(path)]).strip() or 0)
     if 0 < w < 1600:

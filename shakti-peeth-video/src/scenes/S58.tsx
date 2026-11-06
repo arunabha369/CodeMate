@@ -45,7 +45,7 @@ export const S58: React.FC = () => {
         const a = asset(key);
         return (
           <Slide key={id} at={at[i]}>
-            <PhotoKenBurns src={a.src} label={a.label} durationInFrames={t.frames - at[i]} start={at[i]} box={{ x: 1100, y: 70 + i * 315, w: 740, h: 290 }} radius={18} caption={caption} />
+            <PhotoKenBurns src={a.src} label={a.label} durationInFrames={t.frames - at[i]} start={at[i]} box={{ x: 1100, y: 70 + i * 315, w: 740, h: 290 }} radius={18} caption={caption} credit={a.credit || undefined} />
           </Slide>
         );
       })}

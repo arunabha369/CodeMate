@@ -11,7 +11,7 @@ import { PhotoKenBurns } from "./PhotoKenBurns";
 export const ShaktiBhairavaCard: React.FC<{
   leftAt?: number;
   rightAt?: number;
-  example?: { place: string; shakti: string; bhairava: string; photo?: string; at: number };
+  example?: { place: string; shakti: string; bhairava: string; photo?: string; credit?: string; at: number };
 }> = ({ leftAt = 0, rightAt, example }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -88,6 +88,11 @@ export const ShaktiBhairavaCard: React.FC<{
             — শক্তি <span style={{ color: colors.sindoor, fontWeight: 600 }}>{example.shakti}</span> · ভৈরব{" "}
             <span style={{ color: colors.bhairavaInk, fontWeight: 600 }}>{example.bhairava}</span>
           </div>
+        </div>
+      ) : null}
+      {example?.credit ? (
+        <div style={{ position: "absolute", left: 960 - 560, width: 1120, top: top + H + 50 + 160, textAlign: "center", fontFamily: fonts.body, fontSize: 18, color: colors.muted, opacity: ex }}>
+          {example.credit}
         </div>
       ) : null}
     </div>
