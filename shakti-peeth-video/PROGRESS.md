@@ -77,5 +77,14 @@ Render speed here is about 0.17 s per frame at half scale (≈50 min for the who
 
 ## Known gaps
 
+* **Peeth photos with no usable free photo on Commons** (searched 2026-11-06); these show the symbolic diya card:
+  * Sugandha and Shri Shail: no hits.
+  * Jeshoreshwari: only press photos of a 2021 prime-ministerial visit, left out (politics in a devotional film).
+  * Vimala: S51 uses real Puri footage captioned as the Jagannath temple complex instead.
+  * A Shri Shail search returned the Dhakeshwari temple (Dhaka), rejected (brief: never pass off a different temple).
+* **Check before publishing:** the Nandikeshwari gate photo (`Slider-134.jpg`, CC BY-SA 4.0) has a web-slider style filename, so its own-work claim is uncertain (see its note in `assets/credits.json`). Deleting `public/photos/photo-nandikeshwari.jpg` and clearing its `file` in `src/data/assets.json` brings back the diya card.
+* Bhramari's photo is the twin banyan in the temple courtyard, captioned as such (no temple-building photo on Commons).
+* Optional paintings not found as free images: Ravi Varma Sati (S06 now just shows the family tree), Virabhadra (S26), Mahavidya set.
+
 * peeths.json has 13 West Bengal dots against the narration's "চোদ্দোটা". The 14th needs the Banglapedia table.
 * I can't listen to audio in this environment. The offline voice was checked by waveform and spectrogram (natural speech structure, about -17 LUFS), not by ear, so listen for mispronunciations.
