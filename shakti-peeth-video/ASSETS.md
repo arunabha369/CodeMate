@@ -1,6 +1,6 @@
 # ASSETS.md — media per scene
 
-**37 of 45 slots filled.** Filled clips are Pexels-licensed B-roll found through the user's vidIQ connector (credits in `assets/credits.json`).
+**38 of 45 slots filled.** Filled clips are Pexels-licensed B-roll found through the user's vidIQ connector (credits in `assets/credits.json`).
 Temple photos and public-domain paintings still need Wikimedia Commons and the museum open-access hosts, which this session's network policy blocks.
 Once those hosts are allowed, run `python3 scripts/fetch_assets.py` to fill the rest. You can also put your own photos in `public/own/` and point a slot's `file` at them.
 Generic B-roll is atmosphere only. A clip is captioned as a place only when it really shows that place (Kanyakumari, Puri, Kashi).
@@ -44,7 +44,7 @@ Generic B-roll is atmosphere only. A clip is captioned as a place only when it r
 | `photo-fullara` | Fullara (Attahas) temple, Labhpur | S59 | ✅ `photos/photo-fullara.jpg` — ছবি: Sbb1413 · CC BY 4.0 · Wikimedia Commons |
 | `photo-kiriteswari` | Kiriteswari temple, Murshidabad | S61 | ✅ `photos/photo-kiriteswari.jpg` — ছবি: Pinakpani · CC BY-SA 4.0 · Wikimedia Commons |
 | `photo-bargabhima` | Bargabhima temple, Tamluk | S61 | ✅ `photos/photo-bargabhima.jpg` — ছবি: Amitabha Gupta · CC BY 4.0 · Wikimedia Commons |
-| `photo-bhramari` | Bhramari Devi, Jalpaiguri (optional) | S61 | ⛔ missing (network) |
+| `photo-bhramari` | Bhramari Devi temple, Jalpaiguri: the twin banyan in the temple courtyard | S61 | ✅ `photos/photo-bhramari.jpg` — ছবি: SayandeepDutta · CC BY 4.0 · Wikimedia Commons |
 | `photo-tarapith` | Tarapith temple | S62 | ✅ `photos/photo-tarapith.jpg` — ছবি: Pinakpani · CC BY-SA 4.0 · Wikimedia Commons |
 | `parvati-painting` | Public-domain Parvati painting | S63 | ✅ `art/parvati-painting.jpg` — Parvati Placing a Wedding Garland on Shiva (recto), from a Kalighat album (c. 1890, Eastern India, Bengal, Kolkata, Kalighat), The Cleveland Museum of Art |
 | `broll-kash` | tall white-plumed grass in wind (kash-like) | S64 | ✅ `broll/broll-kash.mp4` — ভিডিও: Nitesh Kamboj · Pexels |

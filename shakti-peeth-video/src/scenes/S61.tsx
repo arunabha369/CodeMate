@@ -10,7 +10,7 @@ const ID = "S61";
 const STOPS: Array<[string, string, string, string, string]> = [
   ["kiriteswari", "মুর্শিদাবাদে", "photo-kiriteswari", "কিরীটেশ্বরী · মুর্শিদাবাদ · কিরীট (মুকুট)", "কিরীটেশ্বরী"],
   ["vibhash", "তমলুকে", "photo-bargabhima", "বর্গভীমা · তমলুক · বাম গোড়ালি", "তমলুক"],
-  ["trisrota", "জলপাইগুড়িতে", "photo-bhramari", "ভ্রামরী · জলপাইগুড়ি · বাম পা", "জলপাইগুড়ি"],
+  ["trisrota", "জলপাইগুড়িতে", "photo-bhramari", "ভ্রামরী মন্দির প্রাঙ্গণ · জলপাইগুড়ি · বাম পা", "জলপাইগুড়ি"],
 ];
 
 /** Photo on the left changes at each name; West Bengal mini-map on the right lights the dots in order. */

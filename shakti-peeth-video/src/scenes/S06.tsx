@@ -21,11 +21,12 @@ export const S06: React.FC = () => {
           { label: "দক্ষ", sub: "প্রজাপতি", at: 0 },
           { label: "সতী", sub: "দাক্ষায়ণী", at: cue(ID, "কন্যা সতী", -4), subAt: cue(ID, "দাক্ষায়ণী", -4) },
         ]}
-        x={560}
+        x={art.src ? 560 : 960}
         top={210}
         step={290}
       />
-      <PaintingFrame src={art.src} label={art.label} credit={art.credit} durationInFrames={t.frames} box={{ x: 1000, y: 110, w: 800, h: 800 }} />
+      {/* Optional (brief: 'Ravi Varma Press print if PD'): without it the family tree stands alone, centred. */}
+      {art.src ? <PaintingFrame src={art.src} label={art.label} credit={art.credit} durationInFrames={t.frames} box={{ x: 1000, y: 110, w: 800, h: 800 }} /> : null}
     </AbsoluteFill>
   );
 };

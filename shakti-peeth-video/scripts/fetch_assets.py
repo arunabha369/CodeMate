@@ -74,7 +74,7 @@ PLAN: dict[str, list[tuple[str, str]]] = {
     "photo-fullara": [("commons-file", "Fullara (28 May 2023).jpg"), ("commons", "Fullara Labhpur")],
     "photo-kiriteswari": [("commons-file", "Kiriteswari Temple.jpg"), ("commons", "Kiriteswari")],
     "photo-bargabhima": [("commons-file", "Bargabhima temple at Tamluk town under Purba Medinipur district in West Bengal 01.jpg"), ("commons", "Bargabhima Tamluk")],
-    "photo-bhramari": [("commons", "Bhramari Devi Jalpaiguri")],
+    "photo-bhramari": [("commons-file", "Jora Banyan tree in Bhramari Devi Temple.jpg"), ("commons", "Bhramari Devi Jalpaiguri")],
     "photo-tarapith": [("commons-file", "Tarapith Kali temple at Tarapith 02.jpg"), ("commons", "Tarapith")],
     "broll-havan": [("pexels-video", "havan fire"), ("pixabay-video", "fire ritual")],
     "broll-diya": [("pexels-video", "diya"), ("pixabay-video", "diya lamp")],
