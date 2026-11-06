@@ -21,7 +21,9 @@ export const PhotoKenBurns: React.FC<{
   credit?: string;
   start?: number;
   zoomOut?: boolean;
-}> = ({ src, label, durationInFrames, focal = { x: 0.5, y: 0.45 }, box, radius = 0, caption, credit, start = 0, zoomOut = false }) => {
+  /** CSS object-position for the crop, e.g. "50% 15%" to keep the top of a tall subject. */
+  position?: string;
+}> = ({ src, label, durationInFrames, focal = { x: 0.5, y: 0.45 }, box, radius = 0, caption, credit, start = 0, zoomOut = false, position }) => {
   const frame = useCurrentFrame() - start;
   const p = interpolate(frame, [0, durationInFrames], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   const [a, b] = zoomOut ? [motion.kenBurnsTo, motion.kenBurnsFrom] : [motion.kenBurnsFrom, motion.kenBurnsTo];
@@ -44,6 +46,7 @@ export const PhotoKenBurns: React.FC<{
             width: "100%",
             height: "100%",
             objectFit: "cover",
+            objectPosition: position,
             transform: `translate(${panX}px, ${panY}px) scale(${scale})`,
             transformOrigin: `${focal.x * 100}% ${focal.y * 100}%`,
           }}
@@ -55,6 +58,7 @@ export const PhotoKenBurns: React.FC<{
             width: "100%",
             height: "100%",
             objectFit: "cover",
+            objectPosition: position,
             transform: `translate(${panX}px, ${panY}px) scale(${scale})`,
             transformOrigin: `${focal.x * 100}% ${focal.y * 100}%`,
           }}

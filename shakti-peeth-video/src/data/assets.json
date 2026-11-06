@@ -231,9 +231,9 @@
     },
     "photo-tarapith": {
       "what": "Tarapith temple",
-      "file": null,
-      "credit": null,
-      "licence": null
+      "file": "photos/photo-tarapith.jpg",
+      "credit": "ছবি: Pinakpani · CC BY-SA 4.0 · Wikimedia Commons",
+      "licence": "CC BY-SA 4.0"
     },
     "parvati-painting": {
       "what": "Public-domain Parvati painting",
