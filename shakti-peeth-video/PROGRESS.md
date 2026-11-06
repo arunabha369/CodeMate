@@ -11,9 +11,9 @@ The brief is BRIEF_51_Shakti_Peeth.md. The project lives in `shakti-peeth-video/
 | 3 Assets | 🟢 **Real media in place.** 10 Pexels clips (via the user's vidIQ connector), the Met 2000.313 painting, 4 Cleveland Museum CC0 paintings (S05 court scene, S07 Shiva, S57 Kalighat pat, S63 Parvati) and 18 Wikimedia Commons temple photos (CC BY / CC BY-SA, subjects checked by eye). Every photo shows its credit on screen; all are logged in `assets/credits.json` and ASSETS.md. Peeths with no free photo yet show a symbolic diya card (`SymbolCard`), not a placeholder. Media files are in `public/` (not in git); `scripts/fetch_assets.py` re-downloads every pinned pick |
 | 4 Voiceover | ✅ **Offline Bengali voice** for all 67 scenes. Durations come from the real audio: **9.3 min** |
 | 5 Design system | ✅ + Remotion-skill polish |
-| 6 Scenes | ✅ All 67 scenes built. `out/preview_full_halfres.mp4` (9:20, 960×540, AAC, -17.7 LUFS) rendered in 20 min |
-| 7 Finish | 🟡 Done: `out/subtitles.srt`, `out/youtube_description.md` (`scripts/make_docs.py`), `out/thumbnail.png` (Still "Thumbnail"; it shows the drawn chakra until Met 2000.313 is sourced). Still to do after assets: 1080p `final.mp4` and `final_captions.mp4` (composition ShaktiPeethCaptions) |
-| 8 Teaser | ✅ `TeaserVertical` 1080×1920, 51.5 s → `out/teaser_vertical.mp4` |
+| 6 Scenes | ✅ All 67 scenes built. Latest preview `out/preview_full_halfres_v4.mp4` (9:20, 960×540, AAC, -17.7 LUFS) with all real media |
+| 7 Finish | 🟡 Done: `out/subtitles.srt`, `out/youtube_description.md` (full credits, about 4,350 characters), `out/thumbnail.png` (Met 2000.313). Still to do once v4 is approved: 1080p `final.mp4` and `final_captions.mp4` (each about 2–3 h to render here) |
+| 8 Teaser | ✅ `TeaserVertical` 1080×1920, 51.5 s → `out/teaser_vertical.mp4` (re-rendered 2026-11-06 with the real Kalighat photo and painting) |
 
 ## Audio
 
