@@ -70,7 +70,7 @@ PLAN: dict[str, list[tuple[str, str]]] = {
     "photo-bakreshwar": [("commons-file", "Bakreswar Temples and Hot spring 12.jpg"), ("commons", "Bakreshwar")],
     "photo-nalhati": [("commons-file", "Nalateswari Temple at Nalhati, Birbhum 01.jpg"), ("commons", "Nalhati Nalateshwari")],
     "photo-kankalitala": [("commons-file", "Kankalitala Temple complex, Birbhum, West Bengal 05.jpg"), ("commons", "Kankalitala")],
-    "photo-nandikeshwari": [("commons", "Nandikeshwari Sainthia")],
+    "photo-nandikeshwari": [("commons-file", "Slider-134.jpg"), ("commons", "Nandikeshwari Sainthia")],
     "photo-fullara": [("commons", "Fullara Labhpur")],
     "photo-kiriteswari": [("commons-file", "Kiriteswari Temple.jpg"), ("commons", "Kiriteswari")],
     "photo-bargabhima": [("commons-file", "Bargabhima temple at Tamluk town under Purba Medinipur district in West Bengal 01.jpg"), ("commons", "Bargabhima Tamluk")],
