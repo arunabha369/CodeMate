@@ -4,6 +4,8 @@ import { Audio } from "@remotion/media";
 import { TransitionSeries, linearTiming } from "@remotion/transitions";
 import { fade } from "@remotion/transitions/fade";
 import { CameraDrift } from "./components/CameraDrift";
+import { BackdropContext } from "./components/SceneBackdrop";
+import { BACKDROPS } from "./data/backdrops";
 import { CaptionLayer } from "./components/CaptionLayer";
 import { FilmFinish } from "./components/FilmFinish";
 import { SFX } from "./data/sfx";
@@ -70,9 +72,11 @@ export const Film: React.FC<FilmProps> = ({ from, to, captions }) => {
     }
     items.push(
       <TransitionSeries.Sequence key={id} durationInFrames={t.frames}>
-        <CameraDrift durationInFrames={t.frames} seed={id}>
-          {Scene ? <Scene /> : <PendingScene id={id} />}
-        </CameraDrift>
+        <BackdropContext.Provider value={BACKDROPS[id] ?? null}>
+          <CameraDrift durationInFrames={t.frames} seed={id}>
+            {Scene ? <Scene /> : <PendingScene id={id} />}
+          </CameraDrift>
+        </BackdropContext.Provider>
         {files.has(audio) ? (
           <Sequence from={t.leadInFrames} name={`voice ${id}`}>
             <Audio src={staticFile(audio)} />

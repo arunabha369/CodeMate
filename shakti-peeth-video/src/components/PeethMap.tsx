@@ -9,6 +9,7 @@ import { LOCATED, Peeth, UNLOCATED, byId } from "../lib/peeths";
 import { shortName } from "../lib/bn";
 import { colors, fonts, palettes } from "../theme";
 import { Box } from "./PhotoKenBurns";
+import { useBackdrop } from "./SceneBackdrop";
 
 /*
  * HERO map. Borderless: one land path from Natural Earth (world-atlas
@@ -157,6 +158,8 @@ export const PeethMap: React.FC<{
 }) => {
   const frame = useCurrentFrame();
   const pal = palettes[variant];
+  // Over a scene backdrop the land is slightly see-through, so the image reads behind the map.
+  const backdrop = useBackdrop();
   const night = variant === "night";
 
   // Base projection: the brief's lon 60–100 / lat 4–38 frame fitted into the box.
@@ -333,7 +336,7 @@ export const PeethMap: React.FC<{
         {/* land + coastline glow */}
         <g transform={groupTransform}>
           <path d={landPath} fill="none" stroke={pal.coast} strokeWidth={night ? 7 : 4} opacity={night ? 0.35 : 0.2} filter="url(#mapGlow)" vectorEffect="non-scaling-stroke" />
-          <path d={landPath} fill={pal.land} stroke={pal.coast} strokeWidth={1.6} strokeLinejoin="round" vectorEffect="non-scaling-stroke" />
+          <path d={landPath} fill={pal.land} fillOpacity={backdrop ? 0.72 : 1} stroke={pal.coast} strokeWidth={1.6} strokeLinejoin="round" vectorEffect="non-scaling-stroke" />
         </g>
         {cracksEl}
         {threadEl}

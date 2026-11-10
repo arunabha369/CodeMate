@@ -49,6 +49,18 @@ PLAN: dict[str, list[tuple[str, str]]] = {
     "parvati-painting": [("cleveland-id", "2003.108.a"), ("met", "Parvati painting"), ("aic", "Parvati"), ("commons", "Raja Ravi Varma Parvati")],
     # Not the Kalighat-album Kali leaf (2003.110.a): it shows a severed head, and the brief says no gore.
     "kalighat-pat": [("cleveland-id", "2003.131"), ("met", "Kalighat painting"), ("commons", "Kalighat painting")],
+    # Scene backdrops (SceneBackdrop), Cleveland CC0, checked by eye 2026-11-10.
+    "art-nataraja": [("cleveland-id", "1930.331")],
+    "art-bagalamukhi": [("cleveland-id", "2018.200")],
+    "art-vishnu-garuda": [("cleveland-id", "1990.38")],
+    "art-shiva-devi": [("cleveland-id", "1952.587")],
+    "art-annapurna-shiva": [("cleveland-id", "2003.162")],
+    "art-yajna-fire": [("cleveland-id", "1990.40")],
+    "art-kailash-folio": [("cleveland-id", "2018.175.b")],
+    "art-lakshmi-sarasvati": [("cleveland-id", "2003.150.b")],
+    "art-durga-kalighat": [("cleveland-id", "2003.157.b")],
+    "art-divine-couple": [("cleveland-id", "1997.118")],
+    "art-shiva-ascetic": [("cleveland-id", "1960.48")],
     "photo-kalighat": [("commons-file", "Kalighat Temple Kolkata India - panoramio.jpg"), ("commons", "Kalighat Kali Temple")],
     "photo-kalighat-dome": [("commons-file", "Kalighat Kali Temple.jpg")],
     "photo-kamakhya": [("commons-file", "The Kamakhya Temple, 2025.jpg"), ("commons", "Kamakhya Temple")],

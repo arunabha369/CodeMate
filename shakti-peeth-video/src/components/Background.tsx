@@ -3,6 +3,7 @@ import { AbsoluteFill, random, useCurrentFrame } from "remotion";
 import { BgVariant, colors } from "../theme";
 import { LotusMotif } from "./Alpana";
 import { ParticleLayer } from "./ParticleLayer";
+import { SceneBackdrop } from "./SceneBackdrop";
 
 const Stars: React.FC<{ count?: number; seed?: string }> = ({ count = 160, seed = "stars" }) => {
   const frame = useCurrentFrame();
@@ -48,6 +49,7 @@ export const Background: React.FC<{
     const bottom = red ? colors.nightRed : colors.night1;
     return (
       <AbsoluteFill style={{ background: `linear-gradient(180deg, ${top} 0%, ${bottom} 100%)` }}>
+        <SceneBackdrop variant="night" red={red} />
         {stars ? <Stars /> : null}
         {bokeh ? <ParticleLayer kind="bokeh" count={14} seed="bg-bokeh" /> : null}
         {diyaGlow ? (
@@ -63,6 +65,7 @@ export const Background: React.FC<{
   if (variant === "parchment") {
     return (
       <AbsoluteFill style={{ backgroundColor: colors.parchment }}>
+        <SceneBackdrop variant="parchment" />
         <Fibre />
         <AbsoluteFill
           style={{
@@ -75,6 +78,7 @@ export const Background: React.FC<{
   // gold
   return (
     <AbsoluteFill style={{ backgroundColor: colors.ivory }}>
+      <SceneBackdrop variant="gold" />
       <Fibre opacity={0.16} />
       <AbsoluteFill
         style={{

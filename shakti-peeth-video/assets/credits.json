@@ -358,5 +358,93 @@
     "licence": "CC BY 4.0",
     "licence_url": "https://creativecommons.org/licenses/by/4.0",
     "note": "1920 px Commons thumbnail (2400 px cap), no other edits; shown with the credit on screen"
+  },
+  {
+    "key": "art-nataraja",
+    "file": "art/art-nataraja.jpg",
+    "source": "https://clevelandart.org/art/1930.331",
+    "author": "Nataraja, Shiva as the Lord of Dance (1000s, South India, Tamil Nadu, Chola period (900–1200s)), The Cleveland Museum of Art",
+    "licence": "CC0",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  {
+    "key": "art-bagalamukhi",
+    "file": "art/art-bagalamukhi.jpg",
+    "source": "https://clevelandart.org/art/2018.200",
+    "author": "Bagalamukhi, the eighth Mahavidya, from a Dashamahavidya series (c. 1725, Northwestern India, Rajasthan, Rajput Kingdom of Sirohi; or Northern Deccan, Aurangabad), The Cleveland Museum of Art",
+    "licence": "CC0",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  {
+    "key": "art-vishnu-garuda",
+    "file": "art/art-vishnu-garuda.jpg",
+    "source": "https://clevelandart.org/art/1990.38",
+    "author": "Vishnu and Lakshmi on Garuda (c. 1750\r\n, India, Rajasthan, Bundi school, 18th century), The Cleveland Museum of Art",
+    "licence": "CC0",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  {
+    "key": "art-shiva-devi",
+    "file": "art/art-shiva-devi.jpg",
+    "source": "https://clevelandart.org/art/1952.587",
+    "author": "Shiva and Devi on Gajasura's hide (c. 1675–80, Northern India, Pahari kingdoms), The Cleveland Museum of Art",
+    "licence": "CC0",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  {
+    "key": "art-annapurna-shiva",
+    "file": "art/art-annapurna-shiva.jpg",
+    "source": "https://clevelandart.org/art/2003.162",
+    "author": "Annapurna and Shiva (c. 1890, Eastern India, Bengal, Kolkata, Kalighat), The Cleveland Museum of Art",
+    "licence": "CC0",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  {
+    "key": "art-yajna-fire",
+    "file": "art/art-yajna-fire.jpg",
+    "source": "https://clevelandart.org/art/1990.40",
+    "author": "Sacrificial Fire, from the \"Tula Ram\" Bhagavata Purana (c. 1720, Western India, Gujarat, Surat), The Cleveland Museum of Art",
+    "licence": "CC0",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  {
+    "key": "art-kailash-folio",
+    "file": "art/art-kailash-folio.jpg",
+    "source": "https://clevelandart.org/art/2018.175.b",
+    "author": "Shiva and His Followers Return to Mount Kailash (verso), from a Romance of Chandrabhanu and Lavanyavati of Upendra Bhanja (1670–1740) (1700s, Eastern India, Odisha (formerly Orissa)), The Cleveland Museum of Art",
+    "licence": "CC0",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  {
+    "key": "art-lakshmi-sarasvati",
+    "file": "art/art-lakshmi-sarasvati.jpg",
+    "source": "https://clevelandart.org/art/2003.150.b",
+    "author": "Goddesses Lakshmi and Sarasvati (verso), from a Kalighat album (c. 1890, Eastern India, Bengal, Kolkata, Kalighat), The Cleveland Museum of Art",
+    "licence": "CC0",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  {
+    "key": "art-durga-kalighat",
+    "file": "art/art-durga-kalighat.jpg",
+    "source": "https://clevelandart.org/art/2003.157.b",
+    "author": "Durga (verso), from a Kalighat album (c. 1890, Eastern India, Bengal, Kolkata, Kalighat), The Cleveland Museum of Art",
+    "licence": "CC0",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  {
+    "key": "art-divine-couple",
+    "file": "art/art-divine-couple.jpg",
+    "source": "https://clevelandart.org/art/1997.118",
+    "author": "Divine couple seated in a lotus blossom (early 1800s, Northern India, Pahari Region, Himachal Pradesh, Rajput Kingdom of Kangra), The Cleveland Museum of Art",
+    "licence": "CC0",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  {
+    "key": "art-shiva-ascetic",
+    "file": "art/art-shiva-ascetic.jpg",
+    "source": "https://clevelandart.org/art/1960.48",
+    "author": "Shiva under trees (c. 1780, Northern India, Pahari kingdoms), The Cleveland Museum of Art",
+    "licence": "CC0",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/"
   }
 ]

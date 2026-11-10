@@ -1,6 +1,6 @@
 # ASSETS.md — media per scene
 
-**38 of 45 slots filled.** Filled clips are Pexels-licensed B-roll found through the user's vidIQ connector (credits in `assets/credits.json`).
+**49 of 56 slots filled.** Filled clips are Pexels-licensed B-roll found through the user's vidIQ connector (credits in `assets/credits.json`).
 Temple photos and public-domain paintings still need Wikimedia Commons and the museum open-access hosts, which this session's network policy blocks.
 Once those hosts are allowed, run `python3 scripts/fetch_assets.py` to fill the rest. You can also put your own photos in `public/own/` and point a slot's `file` at them.
 Generic B-roll is atmosphere only. A clip is captioned as a place only when it really shows that place (Kanyakumari, Puri, Kashi).
@@ -52,3 +52,15 @@ Generic B-roll is atmosphere only. A clip is captioned as a place only when it r
 | `broll-himalaya` | Himalaya (Machhapuchhre) — generic Himalaya, not Kailash | S63 | ✅ `broll/broll-himalaya.mp4` — ভিডিও: Nishess Shakya · Pexels |
 | `clip-puri` | Puri: Jagannath temple entrance, Aruna Stambha | S51 | ✅ `broll/clip-puri.mp4` — ভিডিও: Dhiren Behera · Pexels |
 | `clip-kashi` | Kashi: evening Ganga aarti at the Varanasi ghats | — | ✅ `broll/clip-kashi.mp4` — ভিডিও: Sahil Singh Raahee · Pexels |
+| `art-nataraja` | Nataraja, Shiva as Lord of Dance (Chola bronze), CC0 | — | ✅ `art/art-nataraja.jpg` — Nataraja, Shiva as the Lord of Dance (1000s, South India, Tamil Nadu, Chola period (900–1200s)), The Cleveland Museum of Art |
+| `art-bagalamukhi` | Bagalamukhi, eighth Mahavidya (Dashamahavidya series), CC0 | — | ✅ `art/art-bagalamukhi.jpg` — Bagalamukhi, the eighth Mahavidya, from a Dashamahavidya series (c. 1725, Northwestern India, Rajasthan, Rajput Kingdom of Sirohi; or Northern Deccan, Aurangabad), The Cleveland Museum of Art |
+| `art-vishnu-garuda` | Vishnu and Lakshmi on Garuda (Bundi), CC0 | — | ✅ `art/art-vishnu-garuda.jpg` — Vishnu and Lakshmi on Garuda (c. 1750
+, India, Rajasthan, Bundi school, 18th century), The Cleveland Museum of Art |
+| `art-shiva-devi` | Shiva and Devi on Gajasura's hide (Pahari), CC0 | — | ✅ `art/art-shiva-devi.jpg` — Shiva and Devi on Gajasura's hide (c. 1675–80, Northern India, Pahari kingdoms), The Cleveland Museum of Art |
+| `art-annapurna-shiva` | Annapurna and Shiva (Kalighat), CC0 | — | ✅ `art/art-annapurna-shiva.jpg` — Annapurna and Shiva (c. 1890, Eastern India, Bengal, Kolkata, Kalighat), The Cleveland Museum of Art |
+| `art-yajna-fire` | Sacrificial Fire, Tula Ram Bhagavata Purana, CC0 | — | ✅ `art/art-yajna-fire.jpg` — Sacrificial Fire, from the "Tula Ram" Bhagavata Purana (c. 1720, Western India, Gujarat, Surat), The Cleveland Museum of Art |
+| `art-kailash-folio` | Shiva and followers return to Mount Kailash (Odisha palm-leaf folio), CC0 | — | ✅ `art/art-kailash-folio.jpg` — Shiva and His Followers Return to Mount Kailash (verso), from a Romance of Chandrabhanu and Lavanyavati of Upendra Bhanja (1670–1740) (1700s, Eastern India, Odisha (formerly Orissa)), The Cleveland Museum of Art |
+| `art-lakshmi-sarasvati` | Goddesses Lakshmi and Sarasvati (Kalighat), CC0 | — | ✅ `art/art-lakshmi-sarasvati.jpg` — Goddesses Lakshmi and Sarasvati (verso), from a Kalighat album (c. 1890, Eastern India, Bengal, Kolkata, Kalighat), The Cleveland Museum of Art |
+| `art-durga-kalighat` | Durga (Kalighat), CC0 | — | ✅ `art/art-durga-kalighat.jpg` — Durga (verso), from a Kalighat album (c. 1890, Eastern India, Bengal, Kolkata, Kalighat), The Cleveland Museum of Art |
+| `art-divine-couple` | Divine couple seated in a lotus blossom (Pahari), CC0 | — | ✅ `art/art-divine-couple.jpg` — Divine couple seated in a lotus blossom (early 1800s, Northern India, Pahari Region, Himachal Pradesh, Rajput Kingdom of Kangra), The Cleveland Museum of Art |
+| `art-shiva-ascetic` | Shiva under trees (Pahari), CC0 | — | ✅ `art/art-shiva-ascetic.jpg` — Shiva under trees (c. 1780, Northern India, Pahari kingdoms), The Cleveland Museum of Art |
