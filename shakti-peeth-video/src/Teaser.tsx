@@ -5,6 +5,8 @@ import { TransitionSeries, linearTiming } from "@remotion/transitions";
 import { fade } from "@remotion/transitions/fade";
 import { toCaptionChunks } from "./components/CaptionLayer";
 import { DiyaRow } from "./components/DiyaRow";
+import { BackdropContext } from "./components/SceneBackdrop";
+import { BACKDROPS } from "./data/backdrops";
 import { FilmFinish } from "./components/FilmFinish";
 import { SFX } from "./data/sfx";
 import { calm } from "./lib/anim";
@@ -67,11 +69,13 @@ const Reframe: React.FC<{ id: string }> = ({ id }) => {
     </div>
   );
   return (
+    <BackdropContext.Provider value={BACKDROPS[id] ?? null}>
     <AbsoluteFill style={{ backgroundColor: colors.night0, overflow: "hidden" }}>
       {box({ left: -1166, top: 0, scale: 1920 / 1080, filter: "blur(28px) brightness(0.45)" })}
       {box({ left: 0, top: SCENE_TOP, scale: SCALE, boxShadow: "0 30px 80px rgba(0,0,0,0.7)" })}
       <VerticalCaption id={id} />
     </AbsoluteFill>
+    </BackdropContext.Provider>
   );
 };
 
