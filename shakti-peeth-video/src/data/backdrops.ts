@@ -1,4 +1,5 @@
 import type { BackdropSpec } from "../components/SceneBackdrop";
+import { cue } from "../lib/timing";
 
 /**
  * A real image under every motion-graphics scene (keys from src/data/assets.json; all
@@ -49,7 +50,8 @@ export const BACKDROPS: Record<string, BackdropSpec> = {
   S49: { keys: ["photo-hinglaj"] },
   S54: { keys: ["photo-chandranath"], strength: 0.55 },
   S56: { keys: BENGAL.slice(0, 4), strength: 0.5 },
-  S60: { keys: ["broll-kash"], strength: 0.5 },
+  // S60: the Bahula temple while Bahula is narrated, then the Bengal kash field (no photo of Jogadya/Ujani).
+  S60: { keys: ["photo-bahula", "broll-kash"], switchAt: [cue("S60", "ক্ষীরগ্রামের", -12)], strength: 0.5 },
   S65: { keys: [...ALL_PEETHS.slice(0, 3), ...BENGAL.slice(1, 3)] },
   S67: { keys: ["broll-diyas"] },
 };

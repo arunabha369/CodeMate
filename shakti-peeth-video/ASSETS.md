@@ -1,6 +1,6 @@
 # ASSETS.md — media per scene
 
-**49 of 56 slots filled.** Filled clips are Pexels-licensed B-roll found through the user's vidIQ connector (credits in `assets/credits.json`).
+**50 of 57 slots filled.** Filled clips are Pexels-licensed B-roll found through the user's vidIQ connector (credits in `assets/credits.json`).
 Temple photos and public-domain paintings still need Wikimedia Commons and the museum open-access hosts, which this session's network policy blocks.
 Once those hosts are allowed, run `python3 scripts/fetch_assets.py` to fill the rest. You can also put your own photos in `public/own/` and point a slot's `file` at them.
 Generic B-roll is atmosphere only. A clip is captioned as a place only when it really shows that place (Kanyakumari, Puri, Kashi).
@@ -64,3 +64,4 @@ Generic B-roll is atmosphere only. A clip is captioned as a place only when it r
 | `art-durga-kalighat` | Durga (Kalighat), CC0 | — | ✅ `art/art-durga-kalighat.jpg` — Durga (verso), from a Kalighat album (c. 1890, Eastern India, Bengal, Kolkata, Kalighat), The Cleveland Museum of Art |
 | `art-divine-couple` | Divine couple seated in a lotus blossom (Pahari), CC0 | — | ✅ `art/art-divine-couple.jpg` — Divine couple seated in a lotus blossom (early 1800s, Northern India, Pahari Region, Himachal Pradesh, Rajput Kingdom of Kangra), The Cleveland Museum of Art |
 | `art-shiva-ascetic` | Shiva under trees (Pahari), CC0 | — | ✅ `art/art-shiva-ascetic.jpg` — Shiva under trees (c. 1780, Northern India, Pahari kingdoms), The Cleveland Museum of Art |
+| `photo-bahula` | Bahula Shaktipeeth temple, Ketugram | — | ✅ `photos/photo-bahula.jpg` — ছবি: Romam1988 · CC BY-SA 4.0 · Wikimedia Commons |

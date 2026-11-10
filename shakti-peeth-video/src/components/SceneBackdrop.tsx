@@ -19,6 +19,8 @@ export type BackdropSpec = {
   strength?: number;
   /** Set where an overlay already fills the bottom-right corner. */
   creditLeft?: boolean;
+  /** Frames (scene-relative) where key 2, 3, … take over; default: equal shares. */
+  switchAt?: number[];
 };
 
 export const BackdropContext = createContext<BackdropSpec | null>(null);
@@ -89,13 +91,15 @@ export const SceneBackdrop: React.FC<{ variant: BgVariant; red?: boolean }> = ({
   if (!spec || spec.keys.length === 0) return null;
   const light = variant !== "night";
   const n = spec.keys.length;
-  const len = Math.max(30, Math.floor(durationInFrames / n));
+  const even = Math.max(30, Math.floor(durationInFrames / n));
+  const starts = spec.keys.map((_, i) => (i === 0 ? 0 : spec.switchAt?.[i - 1] ?? i * even));
+  const lens = starts.map((st, i) => (i < n - 1 ? starts[i + 1] - st : durationInFrames - st));
   const strength = spec.strength ?? (light ? 0.3 : 0.62);
   return (
     <AbsoluteFill>
       <AbsoluteFill style={{ opacity: strength, mixBlendMode: light ? "multiply" : "normal" }}>
         {spec.keys.map((k, i) => (
-          <Layer key={k + i} k={k} i={i} from={i * len} len={len} total={n} position={spec.position} light={light} part="image" />
+          <Layer key={k + i} k={k} i={i} from={starts[i]} len={lens[i]} total={n} position={spec.position} light={light} part="image" />
         ))}
       </AbsoluteFill>
       {light ? (
@@ -109,7 +113,7 @@ export const SceneBackdrop: React.FC<{ variant: BgVariant; red?: boolean }> = ({
         />
       )}
       {spec.keys.map((k, i) => (
-        <Layer key={"c" + k + i} k={k} i={i} from={i * len} len={len} total={n} light={light} creditLeft={spec.creditLeft} part="credit" />
+        <Layer key={"c" + k + i} k={k} i={i} from={starts[i]} len={lens[i]} total={n} light={light} creditLeft={spec.creditLeft} part="credit" />
       ))}
     </AbsoluteFill>
   );
