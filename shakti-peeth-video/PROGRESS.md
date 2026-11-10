@@ -2,7 +2,7 @@
 
 The brief is BRIEF_51_Shakti_Peeth.md. The project lives in `shakti-peeth-video/` inside the `arunabha369/CodeMate` repo, on branch `claude/upbeat-cerf-urudsl`.
 
-## Status (2026-11-06)
+## Status (2026-11-10)
 
 | Phase | State |
 |---|---|
@@ -11,9 +11,14 @@ The brief is BRIEF_51_Shakti_Peeth.md. The project lives in `shakti-peeth-video/
 | 3 Assets | 🟢 **Real media in place.** 10 Pexels clips (via the user's vidIQ connector), the Met 2000.313 painting, 4 Cleveland Museum CC0 paintings (S05 court scene, S07 Shiva, S57 Kalighat pat, S63 Parvati) and 18 Wikimedia Commons temple photos (CC BY / CC BY-SA, subjects checked by eye). Every photo shows its credit on screen; all are logged in `assets/credits.json` and ASSETS.md. Peeths with no free photo yet show a symbolic diya card (`SymbolCard`), not a placeholder. Media files are in `public/` (not in git); `scripts/fetch_assets.py` re-downloads every pinned pick |
 | 4 Voiceover | ✅ **Offline Bengali voice** for all 67 scenes. Durations come from the real audio: **9.3 min** |
 | 5 Design system | ✅ + Remotion-skill polish |
-| 6 Scenes | ✅ All 67 scenes built. Latest preview `out/preview_full_halfres_v4.mp4` (9:20, 960×540, AAC, -17.7 LUFS) with all real media |
+| 6 Scenes | ✅ All 67 scenes built. **Every motion-graphics scene now has a real image underneath** (`SceneBackdrop` + `src/data/backdrops.ts`: Ken Burns, cue-timed slideshows, on-screen credit); S24 stays diya-only per the brief. `out/final.mp4` is the 1080p render with the offline voice |
 | 7 Finish | 🟡 Done: `out/subtitles.srt`, `out/youtube_description.md` (full credits, about 4,350 characters), `out/thumbnail.png` (Met 2000.313). Still to do once v4 is approved: 1080p `final.mp4` and `final_captions.mp4` (each about 2–3 h to render here) |
 | 8 Teaser | ✅ `TeaserVertical` 1080×1920, 51.5 s → `out/teaser_vertical.mp4` (re-rendered 2026-11-06 with the real Kalighat photo and painting) |
+
+## ElevenLabs voice (next step)
+
+1. Generate one clip per block in `ELEVENLABS_SCRIPT.md` and save them as `public/audio/recorded/scene-01.mp3` … `scene-67.mp3`.
+2. Run `bash scripts/render_all.sh`. It loudness-matches the clips (`scripts/use_recordings.py`), re-times every scene to the new audio (`scripts/build_durations.py`; on-screen cues follow the narration proportionally), regenerates the SRT and description, and renders `final.mp4`, `final_captions.mp4`, the teaser and the thumbnail. Use `--quick` for a half-size preview first.
 
 ## Audio
 
