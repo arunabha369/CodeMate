@@ -12,7 +12,7 @@ The brief is BRIEF_51_Shakti_Peeth.md. The project lives in `shakti-peeth-video/
 | 4 Voiceover | ✅ **Offline Bengali voice** for all 67 scenes. Durations come from the real audio: **9.3 min** |
 | 5 Design system | ✅ + Remotion-skill polish |
 | 6 Scenes | ✅ All 67 scenes built. **Every motion-graphics scene now has a real image underneath** (`SceneBackdrop` + `src/data/backdrops.ts`: Ken Burns, cue-timed slideshows, on-screen credit); S24 stays diya-only per the brief. `out/final.mp4` is the 1080p render with the offline voice |
-| 7 Finish | 🟡 Done: `out/subtitles.srt`, `out/youtube_description.md` (full credits, about 4,350 characters), `out/thumbnail.png` (Met 2000.313). Still to do once v4 is approved: 1080p `final.mp4` and `final_captions.mp4` (each about 2–3 h to render here) |
+| 7 Finish | ✅ With the offline stand-in voice: `out/final.mp4` and `out/final_captions.mp4` (1080p, 9:20, about 820 MB each; `*_share.mp4` are about 200 MB copies), `out/subtitles.srt`, `out/youtube_description.md` (full credits, under 5000 characters), `out/thumbnail.png`. Re-render all of them after the ElevenLabs voice with `bash scripts/render_all.sh` (about 3 h here) |
 | 8 Teaser | ✅ `TeaserVertical` 1080×1920, 51.5 s → `out/teaser_vertical.mp4` (re-rendered 2026-11-06 with the real Kalighat photo and painting) |
 
 ## ElevenLabs voice (next step)
