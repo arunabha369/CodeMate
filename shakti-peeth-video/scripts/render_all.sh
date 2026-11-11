@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
-# One command after you drop your ElevenLabs files into public/audio/recorded/ (scene-01.mp3 … scene-67.mp3):
+# One command after you drop your ElevenLabs files into public/audio/recorded/
+# (part-1.mp3 … part-3.mp3 from ELEVENLABS_PARTS.md, and/or scene-01.mp3 … scene-67.mp3):
 # re-time every scene to the new audio and render all deliverables into out/.
 #   bash scripts/render_all.sh            # final.mp4, final_captions.mp4, teaser, thumbnail, SRT, description
 #   bash scripts/render_all.sh --quick    # half-size preview only (about 50 min faster)
 set -euo pipefail
 cd "$(dirname "$0")/.."
+if ls public/audio/recorded/part-* >/dev/null 2>&1; then python3 -I scripts/split_recording.py; fi
 python3 -I scripts/use_recordings.py
 python3 -I scripts/build_durations.py
 python3 -I scripts/make_docs.py
