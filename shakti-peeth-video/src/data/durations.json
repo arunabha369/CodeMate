@@ -1,58 +1,66 @@
 {
   "fps": 30,
   "transitionFrames": 18,
-  "totalFrames": 16812,
+  "totalFrames": 18107,
   "scenes": [
     {
       "id": "S01",
-      "audioSec": 8.07,
+      "audioSec": 9.2,
       "estimated": false,
       "leadInFrames": 0,
-      "audioFrames": 243,
-      "frames": 282
+      "audioFrames": 276,
+      "frames": 315
     },
     {
       "id": "S02",
-      "audioSec": 6.9,
+      "audioSec": 7.5,
       "estimated": false,
       "leadInFrames": 0,
-      "audioFrames": 207,
-      "frames": 246
+      "audioFrames": 225,
+      "frames": 264
     },
     {
       "id": "S03",
-      "audioSec": 6.84,
+      "audioSec": 7.5,
       "estimated": false,
       "leadInFrames": 0,
-      "audioFrames": 206,
-      "frames": 245
+      "audioFrames": 225,
+      "frames": 264
     },
     {
       "id": "S04",
-      "audioSec": 8.72,
+      "audioSec": 9.48,
       "estimated": false,
       "leadInFrames": 0,
-      "audioFrames": 262,
-      "frames": 301
+      "audioFrames": 285,
+      "frames": 324
     },
     {
       "id": "S05",
-      "audioSec": 7.58,
+      "audioSec": 8.02,
       "estimated": false,
       "leadInFrames": 63,
-      "audioFrames": 228,
-      "frames": 330
+      "audioFrames": 241,
+      "frames": 343
     },
     {
       "id": "S06",
-      "audioSec": 3.94,
+      "audioSec": 4.88,
       "estimated": false,
       "leadInFrames": 0,
-      "audioFrames": 119,
-      "frames": 158
+      "audioFrames": 147,
+      "frames": 186
     },
     {
       "id": "S07",
+      "audioSec": 5.49,
+      "estimated": false,
+      "leadInFrames": 0,
+      "audioFrames": 165,
+      "frames": 204
+    },
+    {
+      "id": "S08",
       "audioSec": 4.44,
       "estimated": false,
       "leadInFrames": 0,
@@ -60,52 +68,44 @@
       "frames": 173
     },
     {
-      "id": "S08",
-      "audioSec": 4.47,
-      "estimated": false,
-      "leadInFrames": 0,
-      "audioFrames": 135,
-      "frames": 174
-    },
-    {
       "id": "S09",
-      "audioSec": 8.25,
+      "audioSec": 8.8,
       "estimated": false,
       "leadInFrames": 0,
-      "audioFrames": 248,
-      "frames": 287
+      "audioFrames": 265,
+      "frames": 304
     },
     {
       "id": "S10",
-      "audioSec": 11.31,
+      "audioSec": 12.15,
       "estimated": false,
       "leadInFrames": 0,
-      "audioFrames": 340,
-      "frames": 379
+      "audioFrames": 365,
+      "frames": 404
     },
     {
       "id": "S11",
-      "audioSec": 5.51,
+      "audioSec": 6.03,
       "estimated": false,
       "leadInFrames": 0,
-      "audioFrames": 166,
-      "frames": 205
+      "audioFrames": 182,
+      "frames": 221
     },
     {
       "id": "S12",
-      "audioSec": 3.92,
+      "audioSec": 3.6,
       "estimated": false,
       "leadInFrames": 63,
-      "audioFrames": 118,
-      "frames": 220
+      "audioFrames": 109,
+      "frames": 211
     },
     {
       "id": "S13",
-      "audioSec": 6.45,
+      "audioSec": 8.2,
       "estimated": false,
       "leadInFrames": 0,
-      "audioFrames": 194,
-      "frames": 233
+      "audioFrames": 247,
+      "frames": 286
     },
     {
       "id": "S14",
@@ -117,366 +117,182 @@
     },
     {
       "id": "S15",
-      "audioSec": 5.51,
+      "audioSec": 6.5,
       "estimated": false,
       "leadInFrames": 0,
-      "audioFrames": 166,
-      "frames": 205
+      "audioFrames": 196,
+      "frames": 235
     },
     {
       "id": "S16",
-      "audioSec": 4.05,
+      "audioSec": 4.0,
       "estimated": false,
       "leadInFrames": 0,
-      "audioFrames": 122,
-      "frames": 161
+      "audioFrames": 120,
+      "frames": 159
     },
     {
       "id": "S17",
-      "audioSec": 11.15,
+      "audioSec": 12.7,
       "estimated": false,
       "leadInFrames": 0,
-      "audioFrames": 335,
-      "frames": 374
+      "audioFrames": 381,
+      "frames": 420
     },
     {
       "id": "S18",
-      "audioSec": 9.48,
+      "audioSec": 11.47,
       "estimated": false,
       "leadInFrames": 0,
-      "audioFrames": 285,
-      "frames": 354
+      "audioFrames": 345,
+      "frames": 414
     },
     {
       "id": "S19",
-      "audioSec": 3.74,
+      "audioSec": 3.87,
       "estimated": false,
       "leadInFrames": 0,
-      "audioFrames": 113,
-      "frames": 152
+      "audioFrames": 116,
+      "frames": 155
     },
     {
       "id": "S20",
-      "audioSec": 3.94,
+      "audioSec": 3.81,
       "estimated": false,
       "leadInFrames": 0,
-      "audioFrames": 119,
-      "frames": 158
+      "audioFrames": 115,
+      "frames": 154
     },
     {
       "id": "S21",
-      "audioSec": 7.0,
+      "audioSec": 7.55,
       "estimated": false,
       "leadInFrames": 63,
-      "audioFrames": 211,
-      "frames": 313
+      "audioFrames": 227,
+      "frames": 329
     },
     {
       "id": "S22",
-      "audioSec": 5.75,
-      "estimated": false,
-      "leadInFrames": 0,
-      "audioFrames": 173,
-      "frames": 212
-    },
-    {
-      "id": "S23",
-      "audioSec": 7.76,
-      "estimated": false,
-      "leadInFrames": 0,
-      "audioFrames": 233,
-      "frames": 302
-    },
-    {
-      "id": "S24",
-      "audioSec": 6.16,
+      "audioSec": 6.14,
       "estimated": false,
       "leadInFrames": 0,
       "audioFrames": 185,
-      "frames": 269
+      "frames": 224
+    },
+    {
+      "id": "S23",
+      "audioSec": 8.07,
+      "estimated": false,
+      "leadInFrames": 0,
+      "audioFrames": 243,
+      "frames": 312
+    },
+    {
+      "id": "S24",
+      "audioSec": 7.0,
+      "estimated": false,
+      "leadInFrames": 0,
+      "audioFrames": 211,
+      "frames": 295
     },
     {
       "id": "S25",
-      "audioSec": 6.22,
+      "audioSec": 7.16,
       "estimated": false,
       "leadInFrames": 63,
-      "audioFrames": 187,
-      "frames": 289
+      "audioFrames": 215,
+      "frames": 317
     },
     {
       "id": "S26",
-      "audioSec": 6.87,
+      "audioSec": 7.58,
       "estimated": false,
       "leadInFrames": 0,
-      "audioFrames": 207,
-      "frames": 246
+      "audioFrames": 228,
+      "frames": 267
     },
     {
       "id": "S27",
-      "audioSec": 6.01,
+      "audioSec": 5.96,
       "estimated": false,
       "leadInFrames": 0,
-      "audioFrames": 181,
-      "frames": 220
+      "audioFrames": 179,
+      "frames": 218
     },
     {
       "id": "S28",
-      "audioSec": 7.81,
+      "audioSec": 9.22,
       "estimated": false,
       "leadInFrames": 0,
-      "audioFrames": 235,
-      "frames": 274
+      "audioFrames": 277,
+      "frames": 316
     },
     {
       "id": "S29",
-      "audioSec": 5.28,
+      "audioSec": 5.64,
       "estimated": false,
       "leadInFrames": 0,
-      "audioFrames": 159,
-      "frames": 198
+      "audioFrames": 170,
+      "frames": 209
     },
     {
       "id": "S30",
-      "audioSec": 7.03,
+      "audioSec": 7.39,
       "estimated": false,
       "leadInFrames": 63,
-      "audioFrames": 211,
-      "frames": 313
+      "audioFrames": 222,
+      "frames": 324
     },
     {
       "id": "S31",
-      "audioSec": 5.46,
+      "audioSec": 6.19,
       "estimated": false,
       "leadInFrames": 0,
-      "audioFrames": 164,
-      "frames": 203
+      "audioFrames": 186,
+      "frames": 225
     },
     {
       "id": "S32",
-      "audioSec": 6.84,
+      "audioSec": 7.55,
       "estimated": false,
       "leadInFrames": 0,
-      "audioFrames": 206,
-      "frames": 245
+      "audioFrames": 227,
+      "frames": 266
     },
     {
       "id": "S33",
-      "audioSec": 5.83,
+      "audioSec": 6.14,
       "estimated": false,
       "leadInFrames": 0,
-      "audioFrames": 175,
-      "frames": 214
+      "audioFrames": 185,
+      "frames": 224
     },
     {
       "id": "S34",
-      "audioSec": 5.85,
+      "audioSec": 6.3,
       "estimated": false,
       "leadInFrames": 0,
-      "audioFrames": 176,
-      "frames": 215
+      "audioFrames": 189,
+      "frames": 228
     },
     {
       "id": "S35",
-      "audioSec": 5.9,
-      "estimated": false,
-      "leadInFrames": 0,
-      "audioFrames": 178,
-      "frames": 277
-    },
-    {
-      "id": "S36",
-      "audioSec": 4.23,
-      "estimated": false,
-      "leadInFrames": 0,
-      "audioFrames": 127,
-      "frames": 166
-    },
-    {
-      "id": "S37",
-      "audioSec": 9.46,
-      "estimated": false,
-      "leadInFrames": 0,
-      "audioFrames": 284,
-      "frames": 323
-    },
-    {
-      "id": "S38",
-      "audioSec": 4.65,
-      "estimated": false,
-      "leadInFrames": 63,
-      "audioFrames": 140,
-      "frames": 242
-    },
-    {
-      "id": "S39",
-      "audioSec": 5.88,
-      "estimated": false,
-      "leadInFrames": 0,
-      "audioFrames": 177,
-      "frames": 216
-    },
-    {
-      "id": "S40",
-      "audioSec": 5.36,
-      "estimated": false,
-      "leadInFrames": 0,
-      "audioFrames": 161,
-      "frames": 200
-    },
-    {
-      "id": "S41",
-      "audioSec": 8.36,
-      "estimated": false,
-      "leadInFrames": 0,
-      "audioFrames": 251,
-      "frames": 290
-    },
-    {
-      "id": "S42",
-      "audioSec": 6.35,
-      "estimated": false,
-      "leadInFrames": 0,
-      "audioFrames": 191,
-      "frames": 230
-    },
-    {
-      "id": "S43",
-      "audioSec": 8.39,
-      "estimated": false,
-      "leadInFrames": 0,
-      "audioFrames": 252,
-      "frames": 351
-    },
-    {
-      "id": "S44",
-      "audioSec": 4.23,
-      "estimated": false,
-      "leadInFrames": 63,
-      "audioFrames": 127,
-      "frames": 229
-    },
-    {
-      "id": "S45",
-      "audioSec": 5.46,
-      "estimated": false,
-      "leadInFrames": 0,
-      "audioFrames": 164,
-      "frames": 203
-    },
-    {
-      "id": "S46",
       "audioSec": 6.84,
       "estimated": false,
       "leadInFrames": 0,
       "audioFrames": 206,
-      "frames": 245
+      "frames": 305
     },
     {
-      "id": "S47",
-      "audioSec": 10.0,
+      "id": "S36",
+      "audioSec": 5.49,
       "estimated": false,
       "leadInFrames": 0,
-      "audioFrames": 301,
-      "frames": 340
+      "audioFrames": 165,
+      "frames": 204
     },
     {
-      "id": "S48",
-      "audioSec": 9.35,
-      "estimated": false,
-      "leadInFrames": 0,
-      "audioFrames": 281,
-      "frames": 320
-    },
-    {
-      "id": "S49",
-      "audioSec": 8.33,
-      "estimated": false,
-      "leadInFrames": 0,
-      "audioFrames": 250,
-      "frames": 289
-    },
-    {
-      "id": "S50",
-      "audioSec": 7.84,
-      "estimated": false,
-      "leadInFrames": 0,
-      "audioFrames": 236,
-      "frames": 275
-    },
-    {
-      "id": "S51",
-      "audioSec": 9.69,
-      "estimated": false,
-      "leadInFrames": 0,
-      "audioFrames": 291,
-      "frames": 330
-    },
-    {
-      "id": "S52",
-      "audioSec": 6.74,
-      "estimated": false,
-      "leadInFrames": 0,
-      "audioFrames": 203,
-      "frames": 242
-    },
-    {
-      "id": "S53",
-      "audioSec": 12.41,
-      "estimated": false,
-      "leadInFrames": 0,
-      "audioFrames": 373,
-      "frames": 412
-    },
-    {
-      "id": "S54",
-      "audioSec": 8.91,
-      "estimated": false,
-      "leadInFrames": 0,
-      "audioFrames": 268,
-      "frames": 307
-    },
-    {
-      "id": "S55",
-      "audioSec": 9.74,
-      "estimated": false,
-      "leadInFrames": 0,
-      "audioFrames": 293,
-      "frames": 332
-    },
-    {
-      "id": "S56",
-      "audioSec": 6.79,
-      "estimated": false,
-      "leadInFrames": 63,
-      "audioFrames": 204,
-      "frames": 306
-    },
-    {
-      "id": "S57",
-      "audioSec": 9.04,
-      "estimated": false,
-      "leadInFrames": 0,
-      "audioFrames": 272,
-      "frames": 311
-    },
-    {
-      "id": "S58",
-      "audioSec": 7.39,
-      "estimated": false,
-      "leadInFrames": 0,
-      "audioFrames": 222,
-      "frames": 261
-    },
-    {
-      "id": "S59",
-      "audioSec": 8.78,
-      "estimated": false,
-      "leadInFrames": 0,
-      "audioFrames": 264,
-      "frames": 303
-    },
-    {
-      "id": "S60",
+      "id": "S37",
       "audioSec": 9.72,
       "estimated": false,
       "leadInFrames": 0,
@@ -484,7 +300,175 @@
       "frames": 331
     },
     {
-      "id": "S61",
+      "id": "S38",
+      "audioSec": 5.3,
+      "estimated": false,
+      "leadInFrames": 63,
+      "audioFrames": 160,
+      "frames": 262
+    },
+    {
+      "id": "S39",
+      "audioSec": 7.26,
+      "estimated": false,
+      "leadInFrames": 0,
+      "audioFrames": 218,
+      "frames": 257
+    },
+    {
+      "id": "S40",
+      "audioSec": 5.75,
+      "estimated": false,
+      "leadInFrames": 0,
+      "audioFrames": 173,
+      "frames": 212
+    },
+    {
+      "id": "S41",
+      "audioSec": 9.46,
+      "estimated": false,
+      "leadInFrames": 0,
+      "audioFrames": 284,
+      "frames": 323
+    },
+    {
+      "id": "S42",
+      "audioSec": 5.75,
+      "estimated": false,
+      "leadInFrames": 0,
+      "audioFrames": 173,
+      "frames": 212
+    },
+    {
+      "id": "S43",
+      "audioSec": 8.96,
+      "estimated": false,
+      "leadInFrames": 0,
+      "audioFrames": 269,
+      "frames": 368
+    },
+    {
+      "id": "S44",
+      "audioSec": 4.1,
+      "estimated": false,
+      "leadInFrames": 63,
+      "audioFrames": 124,
+      "frames": 226
+    },
+    {
+      "id": "S45",
+      "audioSec": 5.93,
+      "estimated": false,
+      "leadInFrames": 0,
+      "audioFrames": 178,
+      "frames": 217
+    },
+    {
+      "id": "S46",
+      "audioSec": 7.13,
+      "estimated": false,
+      "leadInFrames": 0,
+      "audioFrames": 214,
+      "frames": 253
+    },
+    {
+      "id": "S47",
+      "audioSec": 10.63,
+      "estimated": false,
+      "leadInFrames": 0,
+      "audioFrames": 319,
+      "frames": 358
+    },
+    {
+      "id": "S48",
+      "audioSec": 10.37,
+      "estimated": false,
+      "leadInFrames": 0,
+      "audioFrames": 312,
+      "frames": 351
+    },
+    {
+      "id": "S49",
+      "audioSec": 8.8,
+      "estimated": false,
+      "leadInFrames": 0,
+      "audioFrames": 265,
+      "frames": 304
+    },
+    {
+      "id": "S50",
+      "audioSec": 8.39,
+      "estimated": false,
+      "leadInFrames": 0,
+      "audioFrames": 252,
+      "frames": 291
+    },
+    {
+      "id": "S51",
+      "audioSec": 10.5,
+      "estimated": false,
+      "leadInFrames": 0,
+      "audioFrames": 316,
+      "frames": 355
+    },
+    {
+      "id": "S52",
+      "audioSec": 7.58,
+      "estimated": false,
+      "leadInFrames": 0,
+      "audioFrames": 228,
+      "frames": 267
+    },
+    {
+      "id": "S53",
+      "audioSec": 12.38,
+      "estimated": false,
+      "leadInFrames": 0,
+      "audioFrames": 372,
+      "frames": 411
+    },
+    {
+      "id": "S54",
+      "audioSec": 9.22,
+      "estimated": false,
+      "leadInFrames": 0,
+      "audioFrames": 277,
+      "frames": 316
+    },
+    {
+      "id": "S55",
+      "audioSec": 11.47,
+      "estimated": false,
+      "leadInFrames": 0,
+      "audioFrames": 345,
+      "frames": 384
+    },
+    {
+      "id": "S56",
+      "audioSec": 6.32,
+      "estimated": false,
+      "leadInFrames": 63,
+      "audioFrames": 190,
+      "frames": 292
+    },
+    {
+      "id": "S57",
+      "audioSec": 9.35,
+      "estimated": false,
+      "leadInFrames": 0,
+      "audioFrames": 281,
+      "frames": 320
+    },
+    {
+      "id": "S58",
+      "audioSec": 8.83,
+      "estimated": false,
+      "leadInFrames": 0,
+      "audioFrames": 265,
+      "frames": 304
+    },
+    {
+      "id": "S59",
       "audioSec": 8.67,
       "estimated": false,
       "leadInFrames": 0,
@@ -492,52 +476,68 @@
       "frames": 300
     },
     {
-      "id": "S62",
-      "audioSec": 12.9,
+      "id": "S60",
+      "audioSec": 10.08,
       "estimated": false,
       "leadInFrames": 0,
-      "audioFrames": 388,
-      "frames": 427
-    },
-    {
-      "id": "S63",
-      "audioSec": 9.06,
-      "estimated": false,
-      "leadInFrames": 63,
-      "audioFrames": 272,
-      "frames": 374
-    },
-    {
-      "id": "S64",
-      "audioSec": 6.97,
-      "estimated": false,
-      "leadInFrames": 0,
-      "audioFrames": 210,
-      "frames": 249
-    },
-    {
-      "id": "S65",
-      "audioSec": 8.07,
-      "estimated": false,
-      "leadInFrames": 0,
-      "audioFrames": 243,
+      "audioFrames": 303,
       "frames": 342
     },
     {
-      "id": "S66",
-      "audioSec": 7.63,
+      "id": "S61",
+      "audioSec": 10.4,
+      "estimated": false,
+      "leadInFrames": 0,
+      "audioFrames": 312,
+      "frames": 351
+    },
+    {
+      "id": "S62",
+      "audioSec": 13.71,
+      "estimated": false,
+      "leadInFrames": 0,
+      "audioFrames": 412,
+      "frames": 451
+    },
+    {
+      "id": "S63",
+      "audioSec": 10.42,
+      "estimated": false,
+      "leadInFrames": 63,
+      "audioFrames": 313,
+      "frames": 415
+    },
+    {
+      "id": "S64",
+      "audioSec": 7.6,
       "estimated": false,
       "leadInFrames": 0,
       "audioFrames": 229,
       "frames": 268
     },
     {
-      "id": "S67",
-      "audioSec": 8.2,
+      "id": "S65",
+      "audioSec": 10.0,
       "estimated": false,
       "leadInFrames": 0,
-      "audioFrames": 247,
-      "frames": 316
+      "audioFrames": 301,
+      "frames": 400
+    },
+    {
+      "id": "S66",
+      "audioSec": 8.78,
+      "estimated": false,
+      "leadInFrames": 0,
+      "audioFrames": 264,
+      "frames": 303
+    },
+    {
+      "id": "S67",
+      "audioSec": 7.97,
+      "estimated": false,
+      "leadInFrames": 0,
+      "audioFrames": 240,
+      "frames": 309
     }
   ]
 }
