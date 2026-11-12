@@ -134,13 +134,13 @@ desc = f"""# ৫১ সতীপীঠ — সতীর কাহিনি থ�
 ## কৃতজ্ঞতা
 - মানচিত্র: Natural Earth (public domain), via world-atlas
 - ফন্ট: Tiro Bangla, Hind Siliguri (SIL Open Font License, Google Fonts)
-- কণ্ঠ: offline Bengali voice — comprehensive-bangla-tts (MIT) via sherpa-onnx (Apache-2.0)
+- কণ্ঠ: ElevenLabs (AI voice)
 - সংগীত ও শব্দ: original, created for this video
 {chr(10).join(media_credits) if media_credits else "- (ছবি ও ভিডিওর ক্রেডিট assets/credits.json থেকে যোগ হবে)"}
 - Made with Remotion
 
 ## Tags
-সতীপীঠ, ৫১ সতীপীঠ, শক্তিপীঠ, Shakti Peeth, 51 Shakti Peeth, Sati, Daksha Yajna, কালীঘাট, কামাখ্যা, হিংলাজ, তারাপীঠ, কালীপুজো, Kali Puja 2026, বাংলা পুরাণ, The Bong Mindset
+সতীপীঠ, ৫১ সতীপীঠ, শক্তিপীঠ, Shakti Peeth, 51 Shakti Peeth, Sati, Daksha Yajna, কালীঘাট, কামাখ্যা, হিংলাজ, তারাপীঠ, কালীপুজো, Kali Puja, বাংলা পুরাণ, The Bong Mindset
 """
 (out / "youtube_description.md").write_text(desc, encoding="utf-8")
 print(f"srt: {n - 1} cues · film {yt(total)} · chapters:")
