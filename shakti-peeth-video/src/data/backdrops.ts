@@ -13,7 +13,8 @@ const ALL_PEETHS = ["photo-kamakhya", "photo-hinglaj", "photo-jwalamukhi", "phot
 const BENGAL = ["photo-kalighat", "photo-tarapith", "photo-bakreshwar", "photo-kankalitala", "photo-kiriteswari", "photo-bargabhima", "photo-fullara", "photo-nalhati"];
 
 export const BACKDROPS: Record<string, BackdropSpec> = {
-  S02: { keys: ALL_PEETHS.slice(0, 4) },
+  // S02 is the hook's map burst: keep the photos faint so the dots and the count stay bright.
+  S02: { keys: ALL_PEETHS.slice(0, 4), strength: 0.3 },
   S04: { keys: ["kalighat-pat"], position: "50% 30%" },
   // S06: the brief asked for a Sati/Parvati print here; Parvati is Sati reborn.
   S06: { keys: ["parvati-painting"], position: "50% 30%" },

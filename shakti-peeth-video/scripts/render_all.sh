@@ -9,6 +9,7 @@ cd "$(dirname "$0")/.."
 if ls public/audio/recorded/part-* >/dev/null 2>&1; then python3 -I scripts/split_recording.py; fi
 python3 -I scripts/use_recordings.py
 python3 -I scripts/build_durations.py
+python3 -I scripts/hook_cues.py
 python3 -I scripts/make_docs.py
 npx tsc --noEmit
 if [[ "${1:-}" == "--quick" ]]; then

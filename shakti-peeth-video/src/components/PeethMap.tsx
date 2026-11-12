@@ -119,7 +119,9 @@ export const PeethMap: React.FC<{
   labelText?: Record<string, string>;
   labelSize?: number;
   /** Dots arrive one by one; `fall` = drop distance in px (0 = fade in place). */
-  rainIn?: { start: number; perDot: number; fall?: number };
+  rainIn?: { start: number; perDot: number; fall?: number; /** Each dot pops in with a bright expanding ring (hook). */ burst?: boolean };
+  /** Multiplies every dot's size (default 1). */
+  dotSize?: number;
   thread?: { start: number; duration: number };
   /** Dots morph into tiny temple icons from this frame. */
   templesAt?: number;
@@ -145,6 +147,7 @@ export const PeethMap: React.FC<{
   labelText = {},
   labelSize = 30,
   rainIn,
+  dotSize = 1,
   thread,
   templesAt,
   cracksAt,
@@ -374,22 +377,31 @@ export const PeethMap: React.FC<{
           let yy = y;
           let o = dotOpacity;
           let ripple = 0;
+          let pop = 1;
+          let burst = 0;
           if (rainIn) {
             const t0 = rainIn.start + rainRank[p.id] * rainIn.perDot;
             const fall = interpolate(frame, [t0, t0 + 18], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.in(Easing.quad) });
             yy = y - (1 - fall) * (rainIn.fall ?? 300);
             o *= frame < t0 ? 0 : interpolate(frame, [t0, t0 + 4], [0, 1], { extrapolateRight: "clamp" });
+            if (rainIn.burst && frame >= t0) {
+              burst = interpolate(frame, [t0, t0 + 22], [0, 1], { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) });
+              pop = 1 + 1.6 * Math.max(0, 1 - (frame - t0) / 10);
+            }
             ripple = (rainIn.fall ?? 300) > 0 && frame >= t0 + 18 ? interpolate(frame, [t0 + 18, t0 + 42], [0, 1], { extrapolateRight: "clamp" }) : 0;
           }
           const tw = twinkle ? 0.75 + 0.25 * Math.sin(frame / 9 + random(`tw-${p.id}`) * 6) : 1;
-          const r = (4.5 + 3.5 * hi) * dotScale;
+          const r = (4.5 + 3.5 * hi) * dotScale * dotSize * pop;
           const core = night ? (hi > 0 ? colors.cream : colors.gold) : hi > 0 ? colors.sindoor : colors.goldDeep;
           return (
             <g key={p.id} opacity={o}>
+              {burst > 0 && burst < 1 ? (
+                <circle cx={x} cy={yy} r={8 + burst * 58 * dotScale} fill="none" stroke={colors.diya} strokeWidth={3.5 * (1 - burst) + 0.5} opacity={1 - burst} />
+              ) : null}
               {ripple > 0 && ripple < 1 ? (
                 <circle cx={x} cy={yy} r={6 + ripple * 34} fill="none" stroke={colors.gold} strokeWidth={2} opacity={1 - ripple} />
               ) : null}
-              <circle cx={x} cy={yy} r={(14 + 10 * hi) * dotScale} fill="url(#dotGlow)" opacity={tw} />
+              <circle cx={x} cy={yy} r={(14 + 10 * hi) * dotScale * dotSize * (1 + 0.5 * (pop - 1))} fill="url(#dotGlow)" opacity={tw} />
               <g opacity={1 - temples}>
                 <circle cx={x} cy={yy} r={r} fill={core} />
                 {p.status === "disputed" ? (
